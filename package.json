@@ -18,5 +18,16 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/aware-diag-sapienza/d3-radviz.git"
+  },
+  "devDependencies": {
+    "eslint": "^6.7.1",
+    "rollup": "^1.27.5",
+    "rollup-plugin-terser": "^5.1.2",
+    "tape": "^4.11.0"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "lint": "eslint src",
+    "test": "tape 'test/**/*-test.js && lint'"
   }
 }
