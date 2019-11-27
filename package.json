@@ -1,0 +1,22 @@
+{
+  "name": "d3-radviz",
+  "version": "0.0.1",
+  "description": "Radviz visualization for multivariate data",
+  "keywords": [
+    "d3",
+    "d3-module",
+    "radviz"
+  ],
+  "author": "A.WA.RE Research Group (http://aware.diag.uniroma1.it/)",
+  "contributors": [
+    "Simone Lenti <lenti@diag.uniroma1.it>",
+    "Alessia Palleschi <palleschi@diag.uniroma1.it>"
+  ],
+  "license": "LGPL-3.0",
+  "private": true,
+  "homepage": "https://github.com/aware-diag-sapienza/d3-radviz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aware-diag-sapienza/d3-radviz.git"
+  }
+}
