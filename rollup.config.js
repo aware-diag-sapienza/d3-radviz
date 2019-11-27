@@ -1,7 +1,9 @@
 import {terser} from 'rollup-plugin-terser'
+import serve from 'rollup-plugin-serve'
+import livereload from 'rollup-plugin-livereload'
 import * as meta from './package.json'
 
-const shared_config = {
+const config = {
   input: 'src/index.js',
   external: Object.keys(meta.dependencies || {}).filter(key => /^d3-/.test(key)),
   output: {
@@ -16,21 +18,38 @@ const shared_config = {
   plugins: []
 }
 
-export default [
-  shared_config,
-  {
-    ...shared_config,
-    output: {
-      ...shared_config.output,
-      file: `dist/${meta.name}.min.js`
-    },
-    plugins: [
-      ...shared_config.plugins,
-      terser({
+export default 
+  process.env.NODE_ENV === 'production' ? 
+    [
+      config,
+      {
+        ...config,
         output: {
-          preamble: shared_config.output.banner
-        }
-      })
-    ]
-  }
-]
+          ...config.output,
+          file: `dist/${meta.name}.min.js`
+        },
+        plugins: [
+          ...config.plugins,
+          terser({
+            output: {
+              preamble: config.output.banner
+            }
+          })
+        ]
+      }
+    ] : 
+  process.env.NODE_ENV === 'development' ?
+    {
+      ...config,
+      plugins: [
+        ...config.plugins,
+        serve({
+          open: true,
+          contentBase: ['dev', 'dist', 'node_modules']
+        }),
+        livereload({
+          watch: ['dev', 'dist']
+        })
+      ]
+    } : 
+  config
