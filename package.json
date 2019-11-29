@@ -36,6 +36,9 @@
     "rollup-plugin-terser": "^5.1.2",
     "tape": "^4.11.0"
   },
+  "dependencies": {
+    "d3-selection": "^1.4.1"
+  },
   "scripts": {
     "start": "cross-env NODE_ENV=development rollup -c -w",
     "build": "cross-env NODE_ENV=production rollup -c",

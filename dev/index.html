@@ -7,11 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="normalize.css/normalize.css">
     <link rel="stylesheet" href="index.css">
+    <!-- AUX -->
+    <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+    <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
+    <!-- DEPENDENCIES -->
+    <script src="https://d3js.org/d3-selection.v1.min.js"></script>
+    <!-- RADVIZ -->
     <script src="d3-radviz.js"></script>
 </head>
 <body>
+    <div id="container"></div>
     <script>
-        document.body.innerHTML = `test ${d3.radviz()}`
+        const radviz = d3.radviz()
+        d3.csv('dataset.csv').then(dataset => {
+            radviz.data(dataset)
+            d3.select('#container').call(radviz)
+        })
     </script>
 </body>
 </html>
