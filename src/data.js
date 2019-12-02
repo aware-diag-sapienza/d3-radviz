@@ -9,7 +9,6 @@ const getDimensionValues = (dimension, entries) => {
 const minMaxNormalization = (values) => {
   const min = Math.min(...values)
   const max = Math.max(...values)
-  return values.map(v => (v-min)/(max-min))
   console.log("min",min,"max",max)
   let checkDivision = function(v,mi,ma){
     if ((v-mi) == 0||(ma-mi)==0) return 0;
