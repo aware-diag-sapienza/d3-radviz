@@ -16,9 +16,46 @@ export default function Radviz() {
   let margin_percentage = 15
   let level_grid = 10
   let radius = (SVG_SIDE- ((SVG_SIDE*(margin_percentage/100)*2)))/2
-  
   //
-  let updateData
+  let scale_x1=null
+  let scale_x2= null
+  //
+  let updateData = function() {
+    console.log('provoqui')
+    d3.select('#points-g').selectAll("circle.data_point")
+      .data(data.entries, (d,i) => i)
+      .join(
+        enter => enter.append("circle")
+        .attr('class', 'data_point')
+      .attr("id",  (d,i) => { return "p_" + i; })
+      .attr("r", '1')
+      .style("fill",'blue')
+      .style("opacity", 1)
+      .style("stroke", "black")
+      .style("stroke-width",  (d) => {
+        if (d.selected) {
+          return 1.5;
+        } else {
+          return 0.2;
+        }
+      })
+      .attr("cx",(d) => { return scale_x2(d.x2) })
+      .attr("cy",(d) => { return scale_x1(d.x1) }),
+        update => update
+          .call(update => update
+            .transition()
+            .duration(2000)
+            .attr("cx",(d) => { return scale_x2(d.x2) })
+            .attr("cy",(d) => { return scale_x1(d.x1) }),
+          ),
+        exit => exit
+          .call(exit => exit
+            .transition()
+            .duration(650)
+            .remove()
+          )
+      );
+  };
   //
   let dragstarted = function(d){
     d3.select(this).raise().classed("active", true);
@@ -35,9 +72,12 @@ export default function Radviz() {
       d.drag = false;
       let new_angle = dragendangle(d3.select(this).attr("cx"), d3.select(this).attr("cy"), d3.select(this).attr("id"), d);
       
-      data.angles = assignAnglestoDimensions(newOrderDimensions(new_angle,data.angles ))
+      data.angles = assignAnglestoDimensions(newOrderDimensions(new_angle,data.angles))
       d3.selectAll(".AP_points").remove();
       drawAnchorPoints(true)
+      calculatePointPosition()
+      d3.select('#points-g').selectAll("circle.data_point").data(data.entries, (d,i) => i)
+      updateData()
       
     }
   }
@@ -163,8 +203,65 @@ export default function Radviz() {
       
   }
   //
+  let initializeScale = function () {
+    console.log('inizializzo le scale', radius);
+    scale_x1 = d3.scaleLinear()
+      .domain([-1, 1])
+      .range([radius, -radius]);
+    scale_x2 = d3.scaleLinear()
+      .domain([-1, 1])
+      .range([-radius, radius]);
+  
+    
+    
+  }
+  //
+  let calculatePointPosition = function(){
+    data.entries.forEach(function (point){
+      let x_1_j = { 'denominator': 0, 'numerator': 0 };
+      let x_2_j = { 'denominator': 0, 'numerator': 0 };
+      data.angles.forEach(function(dim){
+        x_1_j.numerator = x_1_j.numerator + (point.dimensions[dim.value] * Math.cos(dim.start));
+        x_1_j.denominator = x_1_j.denominator + point.dimensions[dim.value];
+        x_2_j.numerator = x_2_j.numerator + (point.dimensions[dim.value] * Math.sin(dim.start));
+        x_2_j.denominator = x_2_j.denominator + point.dimensions[dim.value];
+      })
+      if ( x_1_j.numerator == 0 || x_1_j.denominator == 0){
+        point['x1'] = 0;
+      } else {
+        point['x1'] = x_1_j.numerator / x_1_j.denominator;
+      }
+      if (x_2_j.numerator == 0 || x_2_j.denominator == 0){
+        point['x2'] = 0;
+      } else {
+        point['x2'] = x_2_j.numerator / x_2_j.denominator;
+      }
+    })
+  }
+  //
   const drawPoints = function(){
-
+    
+        
+    d3.select('#points-g').selectAll("circle.data_point")
+      .data(data.entries, (d,i) => i)
+      .join(
+        enter => enter.append("circle")
+        .attr('class', 'data_point')
+      .attr("id",  (d,i) => { return "p_" + i; })
+      .attr("r", '1')
+      .style("fill",'blue')
+      .style("opacity", 1)
+      .style("stroke", "black")
+      .style("stroke-width",  (d) => {
+        if (d.selected) {
+          return 1.5;
+        } else {
+          return 0.2;
+        }
+      })
+      .attr("cx",(d) => { return scale_x2(d.x2) })
+      .attr("cy",(d) => { return scale_x1(d.x1) })
+      );
   }
   //
   const radviz = function(selection) {
@@ -223,7 +320,14 @@ export default function Radviz() {
         }
         drawAnchorPoints()
       
-      updateData = function() {}
+        const g_points = svg.append('g')
+        .attr('id', 'points-g')
+        .attr('height', SVG_SIDE-((SVG_SIDE*(margin_percentage/100)*2)))
+        .attr('width',SVG_SIDE-((SVG_SIDE*(margin_percentage/100)*2)))
+        .attr("transform", "translate(" + SVG_SIDE/2+ "," +SVG_SIDE/2 + ")")
+        calculatePointPosition(data.angles.map(d => d.value))
+        initializeScale()
+        drawPoints()
     })
   }
   //
@@ -248,7 +352,5 @@ export default function Radviz() {
     else level_grid = _
   }
   //
-
-  
   return radviz
 }

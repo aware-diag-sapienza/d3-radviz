@@ -16,7 +16,6 @@ const minMaxNormalization = (values) => {
     else return (v-mi)/(ma-mi)
   }
   return values.map(v => checkDivision(v,min,max))
-  //return values.map(v => (v-min)/(max-min))
 }
 
 export function checkData (data) {
@@ -49,15 +48,14 @@ export function loadDataset (dataset) {
   for (let i=0; i<dataset.length; i++) {
     let entry = {
       dimensions: {},
-      attributes: {}
+      attributes: {},
+      x1:0,
+      x2:0,
+      selected: false
     }
-    
     for (const d of data.dimensions) entry.dimensions[d.id] = d.values[i]
     for (const a of data.attributes) entry.attributes[a.id] = a.values[i]
-
     data.entries.push(entry)
-
-    
   }
 
   data.angles = assignAnglestoDimensions(data.dimensions.map((d)=>d.id))
