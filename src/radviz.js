@@ -19,17 +19,28 @@ export default function Radviz() {
   //
   let scale_x1 = null
   let scale_x2 = null
+  let r = 1
   let scale_color = d3.scaleSequential(d3.interpolateRdYlGn);
+  let scale_set = function (da) {
+    if (da >= 0 && da < 0.60)
+      return 0;
+    else if (da >= 0.60 && da < 0.75) {
+      return 1;
+    }
+    else if (da >= 0.75 ) {
+      return 2;
+    }
+  };
   //
   let updateData = function () {
-    calculateErrorE()
+    
     d3.select('#points-g').selectAll("circle.data_point")
       .data(data.entries, (d, i) => i)
       .join(
         enter => enter.append("circle")
           .attr('class', 'data_point')
           .attr("id", (d, i) => { return "p_" + i; })
-          .attr("r", '1')
+          .attr("r", r)
           .style("fill", (d)=> scale_color(d.errorE))
           .style("opacity", 1)
           .style("stroke", "black")
@@ -41,11 +52,23 @@ export default function Radviz() {
             }
           })
           .attr("cx", (d) => { return scale_x2(d.x2) })
-          .attr("cy", (d) => { return scale_x1(d.x1) }),
+          .attr("cy", (d) => { return scale_x1(d.x1) })
+          .on("contextmenu", function (d, i) {
+            d3.event.preventDefault();
+            d3.select('#points-g').selectAll("circle.data_point").style("stroke-width", 0.2)
+            d3.select(this).style("stroke-width", 0.5)
+            data.angles = assignAnglestoDimensions(calculateSinglePointHeuristic(d))
+            d3.selectAll(".AP_points").remove();
+            drawAnchorPoints(true)
+            calculatePointPosition()
+            d3.select('#points-g').selectAll("circle.data_point").data(data.entries, (d, i) => i)
+            updateData()
+          }),
         update => update
           .call(update => update
             .transition()
             .duration(2000)
+            .style("fill", (d)=> scale_color(d.errorE))
             .style("stroke-width", (d) => {
               if (d.selected) {
                 return 0.5;
@@ -98,7 +121,9 @@ export default function Radviz() {
       }
       errorE = E / (Z / 2)
       if (isNaN(errorE)) errorE = 0
+      console.log('prima',V.errorE)
       V.errorE = errorE
+      console.log('dopo',V.errorE)
     })
   }
   //
@@ -282,43 +307,36 @@ export default function Radviz() {
         point['x2'] = x_2_j.numerator / x_2_j.denominator;
       }
     })
-  }
-  //
-  const drawPoints = function () {
-
     calculateErrorE()
-    d3.select('#points-g').selectAll("circle.data_point")
-      .data(data.entries, (d, i) => i)
-      .join(
-        enter => enter.append("circle")
-          .attr('class', 'data_point')
-          .attr("id", (d, i) => { return "p_" + i; })
-          .attr("r", '1')
-          .style("fill", (d)=> scale_color(d.errorE))
-          .style("opacity", 1)
-          .style("stroke", "black")
-          .style("stroke-width", (d) => {
-            if (d.selected) {
-              return 0.5;
-            } else {
-              return 0.2;
-            }
-          })
-          .attr("cx", (d) => { return scale_x2(d.x2) })
-          .attr("cy", (d) => { return scale_x1(d.x1) })
-      ).on("contextmenu", function (d, i) {
-        d3.event.preventDefault();
-        d3.select('#points-g').selectAll("circle.data_point").style("stroke-width", 0.2)
-        d3.select(this).style("stroke-width", 0.5)
-        data.angles = assignAnglestoDimensions(calculateSinglePointHeuristic(d))
-        d3.selectAll(".AP_points").remove();
-        drawAnchorPoints(true)
-        calculatePointPosition()
-        d3.select('#points-g').selectAll("circle.data_point").data(data.entries, (d, i) => i)
-        updateData()
-      });
-    
   }
+let drawGrid = function (){
+      d3.selectAll(".grid").remove()
+     
+      let l
+      for (l = 0; l < level_grid; l++) {
+        const arc = d3.arc()
+          .innerRadius(function () {
+            if (l == 0) return 0;
+            else return ((((SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2))) / 2) * l) / level_grid)
+          })
+          .outerRadius(() => { if (l == 0) return ((SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2))) / 2) / level_grid; else return (((SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2))) / 2 * (l + 1)) / level_grid); })
+          .startAngle((d) => { return d.start; })
+          .endAngle((d) => { return d.end; })
+
+        d3.select('#grid-g').selectAll('mySlices')
+          .data(data.angles)
+          .enter()
+          .append('path')
+          .attr('id', (d) => { ; return 'area_' + (l + 1) + '_' + (d.index + 1) })
+          .attr('class', 'grid')
+          .attr('d', arc)
+          .attr('fill', 'white')
+          .attr("stroke", "black")
+          .style("stroke-opacity", 0.4)
+          .style("stroke-width", "0.25px")
+          .style("opacity", 0.7)
+      }
+}
   //
 
   let calculateSinglePointHeuristic = function (point) {
@@ -372,48 +390,23 @@ export default function Radviz() {
         .style('stroke', "black")
         .style('stroke-width', '0.5px')
         .style('fill', "white")
-
-
-      d3.selectAll(".grid").remove()
-      const g_grid = svg.append('g')
+      
+      svg.append('g')
         .attr('id', 'grid-g')
         .attr('height', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
         .attr('width', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
         .attr("transform", "translate(" + SVG_SIDE / 2 + "," + SVG_SIDE / 2 + ")")
-      let l
-      for (l = 0; l < level_grid; l++) {
-        const arc = d3.arc()
-          .innerRadius(function () {
-            if (l == 0) return 0;
-            else return ((((SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2))) / 2) * l) / level_grid)
-          })
-          .outerRadius(() => { if (l == 0) return ((SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2))) / 2) / level_grid; else return (((SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2))) / 2 * (l + 1)) / level_grid); })
-          .startAngle((d) => { return d.start; })
-          .endAngle((d) => { return d.end; })
-
-        g_grid.selectAll('mySlices')
-          .data(data.angles)
-          .enter()
-          .append('path')
-          .attr('id', (d) => { ; return 'area_' + (l + 1) + '_' + (d.index + 1) })
-          .attr('class', 'grid')
-          .attr('d', arc)
-          .attr('fill', 'white')
-          .attr("stroke", "black")
-          .style("stroke-opacity", 0.4)
-          .style("stroke-width", "0.25px")
-          .style("opacity", 0.7)
-      }
-      drawAnchorPoints()
-
-      const g_points = svg.append('g')
+      svg.append('g')
         .attr('id', 'points-g')
         .attr('height', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
         .attr('width', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
         .attr("transform", "translate(" + SVG_SIDE / 2 + "," + SVG_SIDE / 2 + ")")
-      calculatePointPosition(data.angles.map(d => d.value))
+
+      drawGrid()
+      drawAnchorPoints()
+      calculatePointPosition()
       initializeScale()
-      drawPoints()
+      updateData()
     })
   }
   //
@@ -438,11 +431,40 @@ export default function Radviz() {
     else level_grid = _
   }
   //
-  radviz.setScaleError = function(_){
-    if (!arguments.length) scale_color = d3.scaleSequential(d3.interpolateRdYlGn)
+  radviz.setScaleSequentialError = function(_){
+    if (!arguments.length) scale_color = ramp(d3.scaleSequential(d3.interpolateRdYlGn))
     else {scale_color = d3.scaleSequential(_)
     }
   }
   //
+  radviz.setScaleOrdinalError = function(_){
+    scale_color = d3.scaleSequentialQuantile(d3.interpolateYlOrRd).domain([0.25, 0.5, 0.75, 0.9])
+  }
+  //
+  radviz.increaseRadius = function(_){
+    if (r < 10) r = r+0.25
+    d3.select('#points-g').selectAll("circle.data_point").attr("r", r)
+  }
+  //
+  radviz.decreaseRadius = function(){
+    if (r > 0.25) r = r-0.25
+     d3.select('#points-g').selectAll("circle.data_point").attr("r", r)
+
+  }
+  //
+  radviz.increaseLevelGrid = function(){
+    if (level_grid < 20) 
+    {level_grid = level_grid+1
+    
+    drawGrid()}
+  }
+  //
+  radviz.decreaseLevelGrid = function(){
+    if (level_grid > 0) {
+      level_grid = level_grid-1
+      drawGrid()
+    }
+
+  }
   return radviz
 }

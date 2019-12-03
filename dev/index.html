@@ -11,10 +11,11 @@
     <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
     <!-- DEPENDENCIES -->
-    <script src="https://d3js.org/d3-selection.v1.min.js"></script>
+    
     <script src="https://d3js.org/d3-path.v1.min.js"></script>
     <script src="https://d3js.org/d3-shape.v1.min.js"></script>
     <script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+    <script src="https://d3js.org/d3-selection.v1.min.js"></script>
     <script src="https://d3js.org/d3-drag.v1.min.js"></script>
     <script src="https://d3js.org/d3-color.v1.min.js"></script>
     <script src="https://d3js.org/d3-ease.v1.min.js"></script>
@@ -31,13 +32,21 @@
     <script src="d3-radviz.js"></script>
 </head>
 <body style="width:400px;height:400px;">
-    <div id="container"></div>
+    <div id="container">
+    </div>
+    <button id = "radiusplus" onclick = "radviz.increaseRadius()" type="button" >Radius +</button>
+    <button id = "radiusminus" onclick = "radviz.decreaseRadius()" type="button" >Radius -</button>
+    <button id = "levelplus" onclick ="radviz.increaseLevelGrid()" type="button" >Level +</button>
+    <button id = "levelminus" onclick ="radviz.decreaseLevelGrid()" type="button" >Level -</button>
+    <button type="button" >Click Me!</button>
     <script>
         const radviz = d3.radviz()
-        d3.csv('dataset.csv').then(dataset => {
+        d3.csv('12-CSM.csv').then(dataset => {
             radviz.data(dataset)
-            radviz.setScaleError(d3.interpolateYlOrRd)
+            radviz.setScaleOrdinalError()
+            d3.select('#radiusplus').on('click',radviz.increaseRadius(true))
             d3.select('#container').call(radviz)
+            
         })
     </script>
 </body>
