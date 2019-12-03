@@ -4,21 +4,20 @@ export function meanDistance(set) {
       set[dimensionIndex][entryIndex]
     )
   ).map(valueDimensions => valueDimensions.reduce((sumValues, currentValue) => sumValues + currentValue))
-  const normalizedSet = set.map(dimensionValues => dimensionValues.map((entryValue, entryIndex) => entryValue / entriesSum[entryIndex]))
   console.log('set', set)
   console.log('entriesSum', entriesSum)
-  console.log('normalizedSet', normalizedSet)
   const dimensionsSum = set.map(dimension => dimension.reduce((a, b) => a + b, 0))
   const dimensionsByRank = dimensionsSum.map((sum, i) => ({i, sum})).sort((a,b) => a.sum <= b.sum ? 1 : -1).map(o => o.i)
+  const normalizedSet = set.map(dimensionValues => dimensionValues.map((entryValue, entryIndex) => entriesSum[entryIndex] > 0 ? entryValue / entriesSum[entryIndex] : 0))
   let availablePositions = [...new Array(set.length)].map((_, i) => i)
   const assignedPositions = []
   console.log('dimensionsSum', dimensionsSum)
   console.log('dimensionsByRank', dimensionsByRank)
+  console.log('normalizedSet', normalizedSet)
   console.log('availablePositions', availablePositions)
-  const pointsAssignedPositions = [...new Array(set[0].length)].map(_ => [0, 0])
+  console.log('--- END INIT ---')
+  let pointsAssignedPositions = [...new Array(set[0].length)].map(_ => [0, 0])
   const arrangement = [...new Array(set.length)].fill(null)
-  console.log('pointsAssignedPositions', pointsAssignedPositions)
-  console.log('arrangement', arrangement)
   for (const [rankIndex, dimensionIndex] of dimensionsByRank.entries()) {
     let currentPosition
     if (rankIndex === 0) {
@@ -28,7 +27,7 @@ export function meanDistance(set) {
       currentPosition = availablePositions[0]
     }
     else {
-      let currentDimensionValues = set[dimensionIndex]
+      let currentDimensionValues = normalizedSet[dimensionIndex]
       let othersDimensionsByRank = dimensionsByRank.slice(rankIndex + 1)
       let othersDimensionsValues = othersDimensionsByRank.map(otherDimensionIndex => normalizedSet[otherDimensionIndex])
       let othersMeanValues = othersDimensionsValues[0].map((_, entryIndex) => 
@@ -36,7 +35,7 @@ export function meanDistance(set) {
           othersDimensionsValues[otherDimensionIndex][entryIndex]
         )
       ).map(valueDimensions => valueDimensions.reduce((sumValues, currentValue) => 
-        sumValues + currentValue) / valueDimensions.length
+        sumValues + currentValue) / othersDimensionsByRank.length
       )
       console.log('currentDimensionValues', currentDimensionValues)
       console.log('othersDimensionsByRank', othersDimensionsByRank)
@@ -70,8 +69,8 @@ export function meanDistance(set) {
     }
     arrangement[currentPosition] = dimensionIndex
     assignedPositions.push(currentPosition)
-    availablePositions = availablePositions.filter(pos => pos !== currentPosition)
-    pointsAssignedPositions.map(([x1, x2], entryIndex) => [
+    availablePositions.splice(availablePositions.indexOf(currentPosition), 1)
+    pointsAssignedPositions = pointsAssignedPositions.map(([x1, x2], entryIndex) => [
       x1 + normalizedSet[dimensionIndex][entryIndex] * Math.cos(2 * Math.PI * currentPosition / set.length), 
       x2 + normalizedSet[dimensionIndex][entryIndex] * Math.sin(2 * Math.PI * currentPosition / set.length)
     ])
