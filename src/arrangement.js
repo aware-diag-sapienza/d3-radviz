@@ -79,4 +79,5 @@ export function meanDistance(set) {
     console.log('pointsAssignedPositions', pointsAssignedPositions)
     console.log('arrangement', arrangement)
   }
+  return arrangement
 }

@@ -71,12 +71,22 @@ export function assignAnglestoDimensions(dimensions){
       if (i == 0) {
         start_a = 0
         x2 = 0
-
+        x1 = Math.sin((Math.PI / 2)+ (start_a))
       } else {
         start_a = (((360 / dimensions.length) * Math.PI) / 180) * (i);
-        x2 = Math.cos((-Math.PI/2) + (start_a))
+        if (start_a == 1.5707963267948966){
+          x1 = 0
+        } else {
+          x1 = Math.sin((Math.PI / 2)+ (start_a))
+        }
+        if (start_a== 3.141592653589793) {
+          x2 = 0
+        }
+        else {
+          x2 = Math.cos((-Math.PI/2) + (start_a))
+        }
       }
-      x1 = Math.sin((Math.PI / 2)+ (start_a))
+      
       
       real_dimensions.push({
         'value': d,
