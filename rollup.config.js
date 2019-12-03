@@ -1,4 +1,5 @@
 import {terser} from 'rollup-plugin-terser'
+import strip from 'rollup-plugin-strip'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 import * as meta from './package.json'
@@ -21,7 +22,13 @@ const config = {
 export default 
   process.env.NODE_ENV === 'production' ? 
     [
-      config,
+      {
+        ...config,
+        plugins: [
+          ...config.plugins,
+          strip()
+        ]
+      },
       {
         ...config,
         output: {
@@ -30,6 +37,7 @@ export default
         },
         plugins: [
           ...config.plugins,
+          strip(),
           terser({
             output: {
               preamble: config.output.banner
