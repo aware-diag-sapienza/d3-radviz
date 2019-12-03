@@ -26,6 +26,7 @@
     <script src="https://d3js.org/d3-time.v1.min.js"></script>
     <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
     <script src="https://d3js.org/d3-scale.v3.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <!-- RADVIZ -->
     <script src="d3-radviz.js"></script>
 </head>
@@ -35,6 +36,7 @@
         const radviz = d3.radviz()
         d3.csv('dataset.csv').then(dataset => {
             radviz.data(dataset)
+            radviz.setScaleError(d3.interpolateYlOrRd)
             d3.select('#container').call(radviz)
         })
     </script>

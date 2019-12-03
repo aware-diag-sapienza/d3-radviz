@@ -50,7 +50,8 @@ export function loadDataset (dataset) {
       attributes: {},
       x1:0,
       x2:0,
-      selected: false
+      selected: false,
+      errorE:0
     }
     for (const d of data.dimensions) entry.dimensions[d.id] = d.values[i]
     for (const a of data.attributes) entry.attributes[a.id] = a.values[i]
@@ -66,16 +67,16 @@ export function assignAnglestoDimensions(dimensions){
   dimensions.forEach(function (d, i) {
       let start_a = -1;
       let end_a = (((360 / dimensions.length) * Math.PI) / 180) * (i + 1);
-      let y_value,x_value;
+      let x2,x1;
       if (i == 0) {
         start_a = 0
-        x_value = 0
+        x2 = 0
 
       } else {
         start_a = (((360 / dimensions.length) * Math.PI) / 180) * (i);
-        x_value = Math.cos(-Math.PI / 2 + (start_a))
+        x2 = Math.cos((-Math.PI/2) + (start_a))
       }
-      y_value = Math.sin(-Math.PI / 2 + (start_a))
+      x1 = Math.sin((Math.PI / 2)+ (start_a))
       
       real_dimensions.push({
         'value': d,
@@ -83,8 +84,8 @@ export function assignAnglestoDimensions(dimensions){
         'start': start_a,
         'end': end_a,
         'drag': false,
-        'x_value': x_value,
-        'y_value': y_value,
+        'x1': x1,
+        'x2': x2,
       })
     });
 
