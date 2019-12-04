@@ -25,6 +25,10 @@ export default function Radviz() {
   let mean_distance = 0
   let attribute_color = null
   let quality = true
+  let function_click = null
+  let function_mouse_over = null
+  let function_mouse_out = null
+  let function_context_menu = null
   //let scale_color = d3.scaleSequential(d3.interpolateYlOrRd);
   let scale_color = function(x) { 
     return d3.interpolateWarm(d3.scaleLinear().domain([0,1]).range([1,0])(x))
@@ -72,11 +76,23 @@ export default function Radviz() {
             calculatePointPosition()
             d3.select('#points-g').selectAll("circle.data_point").data(data.entries, (d, i) => i)
             updateData()
+            if (function_context_menu != null)
+              function_context_menu(d);
           })
           .on("click",function(d){
+            if (function_click != null)
+              function_click(d);
             console.log("x1",d.x1);
             console.log("x2",d.x2);
             console.log("errorE",d.errorE);
+          })
+          .on('mouseover', function(d){
+            if (function_mouse_over != null)
+              function_mouse_over(d);
+          })
+          .on('mouseout', function(d){
+            if (function_mouse_out != null)
+              function_mouse_out(d);
           }),
         update => update
           .call(update => update
@@ -516,7 +532,24 @@ let drawGrid = function (){
     console.log('quality',quality)
     updateData()
   }
-
+  //
+  radviz.setFunctionClick = function (ff){
+    function_click = ff
+  }
+  //
+  radviz.setFunctionMouseOver = function (ff){
+    function_mouse_over = ff
+  }
+  //
+  radviz.setFunctionMouseOut = function (ff){
+    function_mouse_out = ff
+  }
+  //
+  radviz.setFunctionContextMenu = function (ff){
+    function_context_menu= ff
+  }
+  //
+  
   //
   radviz.updateRadviz = function(order_dimensions){
     

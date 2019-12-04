@@ -51,6 +51,13 @@
             //radviz.setScaleOrdinalError()
             d3.select('#radiusplus').on('click',radviz.increaseRadius(true))
             const set = radviz.data().dimensions.map(d => d.values)
+            let prova = function(_){
+                console.log("sono riuscita a collegere la functione",_)
+            }
+            radviz.setFunctionClick(prova)
+            radviz.setFunctionMouseOver(prova)
+            radviz.setFunctionMouseOut(prova)
+            radviz.setFunctionContextMenu(prova)
             d3.select('#container').call(radviz)
             
         })
