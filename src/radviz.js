@@ -23,11 +23,17 @@ export default function Radviz() {
   let r = 1
   let mean_error_e = 0
   let mean_distance = 0
+  let attribute_color = null
+  let quality = true
   //let scale_color = d3.scaleSequential(d3.interpolateYlOrRd);
   let scale_color = function(x) { 
     return d3.interpolateWarm(d3.scaleLinear().domain([0,1]).range([1,0])(x))
     //return d3.interpolatePiYG(d3.scaleLinear().domain([0,1]).range([0.8,0.2])(x))
   }
+  //data.attributes.filter(function (pilot) {return pilot.id === attribute_color}).map(d => d.values)[0]
+  let scale_classification = d3.scaleOrdinal(d3.schemeCategory10).domain(new Set(data.attributes.filter(function (pilot) {return pilot.id === attribute_color}).map(d => d.values)[0]))//['a','b','c'])
+    
+  
   //
   let updateData = function () {
     
@@ -38,7 +44,13 @@ export default function Radviz() {
           .attr('class', 'data_point')
           .attr("id", (d, i) => { return "p_" + i; })
           .attr("r", r)
-          .style("fill", (d)=> scale_color(d.errorE))
+          .style("fill", function(d){
+            if (quality) return scale_color(d.errorE)
+            else if (attribute_color==null) return '#1f78b4';
+            else {
+              return scale_classification(d.attributes[attribute_color])
+            }
+            })
           .style("opacity", 1)
           .style("stroke", "black")
           .style("stroke-width", (d) => {
@@ -70,7 +82,13 @@ export default function Radviz() {
           .call(update => update
             .transition()
             .duration(2000)
-            .style("fill", (d)=> scale_color(d.errorE))
+            .style("fill", function(d){
+              if (quality) return scale_color(d.errorE)
+              else if (attribute_color==null) return '#1f78b4';
+              else {
+                return scale_classification(d.attributes[attribute_color])
+              }
+              })
             .style("stroke-width", (d) => {
               if (d.selected) {
                 return 0.5;
@@ -438,6 +456,14 @@ let drawGrid = function (){
     return radviz
   }
   //
+  radviz.setColorClassification = function (_) {
+    if (!arguments.length) return null
+    if (data.attributes.map((d)=>d.id).includes(_))
+      attribute_color = _
+       else 
+      attribute_color = null
+  }
+  //
   radviz.setMargin = function (_) {
     if (!arguments.length) margin_percentage = 0
     if (_ > 15) margin_percentage = 15
@@ -484,6 +510,12 @@ let drawGrid = function (){
       drawGrid()
     }
   }
+  //
+  radviz.setQuality = function(){
+    quality = !quality
+    console.log('quality',quality)
+    updateData()
+  }
 
   //
   radviz.updateRadviz = function(order_dimensions){
@@ -493,7 +525,11 @@ let drawGrid = function (){
       mapping_dimension = data.dimensions.map(d=>d.id)
     }
     else {
-    order_dimensions.forEach(function(num){
+      let new_order_dimensions = []
+   
+      new_order_dimensions = new_order_dimensions.concat(order_dimensions.slice(order_dimensions.indexOf(0)),order_dimensions.slice(0,order_dimensions.indexOf(0)).reverse())
+      
+    new_order_dimensions.forEach(function(num){
       console.log(num)
       mapping_dimension.push(data.dimensions[num].id)
     })

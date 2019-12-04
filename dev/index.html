@@ -31,7 +31,7 @@
     <!-- RADVIZ -->
     <script src="d3-radviz.js"></script>
 </head>
-<body style="width:400px;height:400px;">
+<body style="width:700px;height:700px;">
     <div id="container">
         <div id="menu1"></div>
     </div>
@@ -41,11 +41,13 @@
     <button id = "levelminus" onclick ="radviz.decreaseLevelGrid()" type="button" >Level -</button>
     <button id = "heuristic" onclick="radviz.updateRadviz(d3.meanDistance(radviz.data().dimensions.map(d => d.values)))" type="button" >Heuristic</button>
     <button id = "original" onclick="radviz.updateRadviz()" type="button" >Original</button>
+    <button id = "original" onclick="radviz.setQuality()" type="button" >Color</button>
     
     <script>
         const radviz = d3.radviz()
-        d3.csv('12-CSM.csv').then(dataset => {
+        d3.csv('dataset.csv').then(dataset => {
             radviz.data(dataset)
+            radviz.setColorClassification('D6')
             //radviz.setScaleOrdinalError()
             d3.select('#radiusplus').on('click',radviz.increaseRadius(true))
             const set = radviz.data().dimensions.map(d => d.values)
