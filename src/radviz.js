@@ -23,17 +23,11 @@ export default function Radviz() {
   let r = 1
   let mean_error_e = 0
   let mean_distance = 0
-  let scale_color = d3.scaleSequential(d3.interpolateRdYlGn);
-  let scale_set = function (da) {
-    if (da >= 0 && da < 0.60)
-      return 0;
-    else if (da >= 0.60 && da < 0.75) {
-      return 1;
-    }
-    else if (da >= 0.75 ) {
-      return 2;
-    }
-  };
+  //let scale_color = d3.scaleSequential(d3.interpolateYlOrRd);
+  let scale_color = function(x) { 
+    return d3.interpolateWarm(d3.scaleLinear().domain([0,1]).range([1,0])(x))
+    //return d3.interpolatePiYG(d3.scaleLinear().domain([0,1]).range([0.8,0.2])(x))
+  }
   //
   let updateData = function () {
     
@@ -70,6 +64,7 @@ export default function Radviz() {
           .on("click",function(d){
             console.log("x1",d.x1);
             console.log("x2",d.x2);
+            console.log("errorE",d.errorE);
           }),
         update => update
           .call(update => update
@@ -128,7 +123,7 @@ export default function Radviz() {
       console.log()
       for (let i = 0; i < A.length; i++) {
         for (let j = 0; j < A.length; j++) {
-          if (i > j) {
+          if (j>i) {
             if (V.dimensions[A[i]] > V.dimensions[A[j]]){
               E = E + Math.abs(V.dimensions[A[i]] - V.dimensions[A[j]])
               
@@ -139,7 +134,7 @@ export default function Radviz() {
       }
       errorE = E / (Z / 2)
       if (isNaN(errorE)) errorE = 0
-      
+      console.log(E,(Z / 2),errorE)
       V.errorE = errorE
       sum_error = sum_error + errorE
     })

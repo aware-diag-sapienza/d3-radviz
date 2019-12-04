@@ -46,10 +46,9 @@
         const radviz = d3.radviz()
         d3.csv('12-CSM.csv').then(dataset => {
             radviz.data(dataset)
-            radviz.setScaleOrdinalError()
+            //radviz.setScaleOrdinalError()
             d3.select('#radiusplus').on('click',radviz.increaseRadius(true))
             const set = radviz.data().dimensions.map(d => d.values)
-            //d3.select('#heuristic').on('click',radviz.updateRadviz(d3.meanDistance(radviz.data().dimensions.map(d => d.values))))
             d3.select('#container').call(radviz)
             
         })
