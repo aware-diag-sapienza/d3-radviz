@@ -33,10 +33,15 @@ export function loadDataset (dataset) {
     entries: [],
     dimensions: [],
     attributes: [],
+    original: [],
     angles:[]
   }
   Object.keys(dataset[0]).forEach(k => {
     let {numeric, values} = getDimensionValues(k, dataset)
+    data['original'].push({
+      id: k,
+      values:values
+    })
     data[numeric ? 'dimensions' : 'attributes'].push({
       id: k,
       values: numeric ? minMaxNormalization(values) : values
@@ -48,6 +53,7 @@ export function loadDataset (dataset) {
     let entry = {
       dimensions: {},
       attributes: {},
+      original:{},
       x1:0,
       x2:0,
       selected: false,
@@ -56,6 +62,7 @@ export function loadDataset (dataset) {
     }
     for (const d of data.dimensions) entry.dimensions[d.id] = d.values[i]
     for (const a of data.attributes) entry.attributes[a.id] = a.values[i]
+    for (const o of data.original) entry.original[o.id] = o.values[i]
     data.entries.push(entry)
   }
 

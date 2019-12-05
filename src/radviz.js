@@ -81,14 +81,14 @@ export default function Radviz() {
           })
           .on("click",function(d){
             if (function_click != null)
-              function_click(data.angles,d, d3.select(this));
+              function_click(data.angles,d,d3.select(this));
             console.log("x1",d.x1);
             console.log("x2",d.x2);
             console.log("errorE",d.errorE);
           })
           .on('mouseover', function(d){
             if (function_mouse_over != null)
-              function_mouse_over(d);
+              function_mouse_over(data.angles,d);
           })
           .on('mouseout', function(d){
             if (function_mouse_out != null)
