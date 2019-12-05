@@ -77,11 +77,11 @@ export default function Radviz() {
             d3.select('#points-g').selectAll("circle.data_point").data(data.entries, (d, i) => i)
             updateData()
             if (function_context_menu != null)
-              function_context_menu(d);
+              function_context_menu(data.angles);
           })
           .on("click",function(d){
             if (function_click != null)
-              function_click(d);
+              function_click(data.angle,d, d3.select(this));
             console.log("x1",d.x1);
             console.log("x2",d.x2);
             console.log("errorE",d.errorE);

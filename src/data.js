@@ -51,7 +51,8 @@ export function loadDataset (dataset) {
       x1:0,
       x2:0,
       selected: false,
-      errorE:0
+      errorE:0,
+      index:i
     }
     for (const d of data.dimensions) entry.dimensions[d.id] = d.values[i]
     for (const a of data.attributes) entry.attributes[a.id] = a.values[i]
