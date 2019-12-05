@@ -492,45 +492,49 @@ let drawGrid = function (){
     else level_grid = _
   }
   //
-  radviz.setScaleSequentialError = function(_){
-    if (!arguments.length) scale_color = ramp(d3.scaleSequential(d3.interpolateRdYlGn))
-    else {scale_color = d3.scaleSequential(_)
+  radviz.increaseRadius = function(_){
+    if (!arguments.length) return 
+    else {
+    if (r < 10) r = r+0.25
+    d3.select('#points-g').selectAll("circle.data_point").attr("r", r)
     }
   }
   //
-  radviz.setScaleOrdinalError = function(_){
-    scale_color = d3.scaleSequentialQuantile(d3.interpolateYlOrRd).domain([0.25, 0.5, 0.75, 0.9])
-  }
-  //
-  radviz.increaseRadius = function(_){
-    if (r < 10) r = r+0.25
-    d3.select('#points-g').selectAll("circle.data_point").attr("r", r)
-  }
-  //
-  radviz.decreaseRadius = function(){
+  radviz.decreaseRadius = function(_){
+    if (!arguments.length) return 
+    else{
     if (r > 0.25) r = r-0.25
      d3.select('#points-g').selectAll("circle.data_point").attr("r", r)
+    }
 
   }
   //
-  radviz.increaseLevelGrid = function(){
+  radviz.increaseLevelGrid = function(_){
+    if (!arguments.length) return 
+    else {
     if (level_grid < 20) 
     {level_grid = level_grid+1
     
     drawGrid()}
   }
+  }
   //
-  radviz.decreaseLevelGrid = function(){
+  radviz.decreaseLevelGrid = function(_){
+    if (!arguments.length) return 
+    else {
     if (level_grid > 0) {
       level_grid = level_grid-1
       drawGrid()
     }
   }
+  }
   //
-  radviz.setQuality = function(){
+  radviz.setQuality = function(_){
+    if (!arguments.length) return 
+    else {
     quality = !quality
-    console.log('quality',quality)
     updateData()
+    }
   }
   //
   radviz.setFunctionClick = function (ff){
@@ -559,7 +563,6 @@ let drawGrid = function (){
     }
     else {
       let new_order_dimensions = []
-   
       new_order_dimensions = new_order_dimensions.concat(order_dimensions.slice(order_dimensions.indexOf(0)),order_dimensions.slice(0,order_dimensions.indexOf(0)).reverse())
       
     new_order_dimensions.forEach(function(num){
@@ -575,6 +578,13 @@ let drawGrid = function (){
     calculatePointPosition()
     d3.select('#points-g').selectAll("circle.data_point").data(data.entries, (d, i) => i)
     updateData()
+  }
+  //
+  radviz.remove = function(bool){
+    if (!arguments.length) return 
+    else {
+     if (bool)d3.select('.radviz-svg').remove();
+  }
   }
   return radviz
 }
