@@ -149,12 +149,12 @@ export default function Radviz() {
         entry['value'] = distance2points(V, dimension)
         distances.push(entry)
       })
-      console.log('distancesbefore', distances.map(d=>d.id))
+      
       distances = distances.slice().sort((a, b) => d3.descending(a.value, b.value))
-      console.log('distancesafter', distances.map(d=>d.id))
+      
       
       let A = distances.map(d => d.id)
-      console.log()
+      
       for (let i = 0; i < A.length; i++) {
         for (let j = 0; j < A.length; j++) {
           if (j>i) {
@@ -168,7 +168,7 @@ export default function Radviz() {
       }
       errorE = E / (Z / 2)
       if (isNaN(errorE)) errorE = 0
-      console.log(E,(Z / 2),errorE)
+      
       V.errorE = errorE
       sum_error = sum_error + errorE
     })
@@ -492,49 +492,37 @@ let drawGrid = function (){
     else level_grid = _
   }
   //
-  radviz.increaseRadius = function(_){
-    if (!arguments.length) return 
-    else {
+  radviz.increaseRadius = function(){
     if (r < 10) r = r+0.25
     d3.select('#points-g').selectAll("circle.data_point").attr("r", r)
-    }
   }
   //
-  radviz.decreaseRadius = function(_){
+  radviz.decreaseRadius = function(){
     if (!arguments.length) return 
     else{
     if (r > 0.25) r = r-0.25
      d3.select('#points-g').selectAll("circle.data_point").attr("r", r)
     }
-
   }
   //
-  radviz.increaseLevelGrid = function(_){
-    if (!arguments.length) return 
-    else {
+  radviz.increaseLevelGrid = function(){
     if (level_grid < 20) 
     {level_grid = level_grid+1
     
     drawGrid()}
   }
-  }
   //
-  radviz.decreaseLevelGrid = function(_){
-    if (!arguments.length) return 
-    else {
+  radviz.decreaseLevelGrid = function(){
     if (level_grid > 0) {
       level_grid = level_grid-1
       drawGrid()
     }
   }
-  }
   //
-  radviz.setQuality = function(_){
-    if (!arguments.length) return 
-    else {
+  radviz.setQuality = function(){
     quality = !quality
+    console.log('quality',quality)
     updateData()
-    }
   }
   //
   radviz.setFunctionClick = function (ff){
