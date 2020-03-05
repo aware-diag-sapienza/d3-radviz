@@ -26,6 +26,7 @@ export default function Radviz() {
   let attribute_color = null
   let quality = true
   let function_click = null
+  let function_drag_end = null
   let function_mouse_over = null
   let function_mouse_out = null
   let function_context_menu = null
@@ -59,7 +60,7 @@ export default function Radviz() {
           .style("stroke", "black")
           .style("stroke-width", (d) => {
             if (d.selected) {
-              return 1.5;
+              return 0.5;
             } else {
               return 0.2;
             }
@@ -136,6 +137,7 @@ export default function Radviz() {
   }
   //
   let calculateErrorE = function () {
+    console.log('***DATA',data)
     
     let sum_error = 0
     data.entries.forEach(function (V, i) {
@@ -196,6 +198,8 @@ export default function Radviz() {
       calculatePointPosition()
       d3.select('#points-g').selectAll("circle.data_point").data(data.entries, (d, i) => i)
       updateData()
+      if (function_drag_end != null)
+        function_drag_end(data.angles);
 
     }
   }
@@ -308,12 +312,12 @@ export default function Radviz() {
       .enter().append("circle")
       .attr("class", "AP_points")
       .attr("id", (d) => { return "AP_" + d.value.replace(" ", "").replace(".", ""); })
-      .attr("r", '1.5')
+      .attr("r", '0.7')
       .style("fill", '#660000')
       .attr("cx", (d, i) => { return ((radius + 1) * Math.cos(-Math.PI / 2 + (d.start))) })
       .attr("cy", (d, i) => { return ((radius + 1) * Math.sin(-Math.PI / 2 + (d.start))) })
-      .on('mouseover', function () { d3.select(this).attr("r", '2') })
-      .on('mouseout', function () { d3.select(this).attr("r", '1.5') })
+      .on('mouseover', function () { d3.select(this).attr("r", '1.5') })
+      .on('mouseout', function () { d3.select(this).attr("r", '0.7') })
       .call(d3.drag()
         .on("start", dragstarted)
         .on("drag", dragged)
@@ -498,11 +502,10 @@ let drawGrid = function (){
   }
   //
   radviz.decreaseRadius = function(){
-    if (!arguments.length) return 
-    else{
+    
     if (r > 0.25) r = r-0.25
      d3.select('#points-g').selectAll("circle.data_point").attr("r", r)
-    }
+    
   }
   //
   radviz.increaseLevelGrid = function(){
@@ -523,6 +526,10 @@ let drawGrid = function (){
     quality = !quality
     console.log('quality',quality)
     updateData()
+  }
+  //
+  radviz.setFunctionDragEnd = function (ff){
+    function_drag_end = ff
   }
   //
   radviz.setFunctionClick = function (ff){
@@ -559,7 +566,6 @@ let drawGrid = function (){
     })
   }
     console.log(mapping_dimension)
-
     data.angles = assignAnglestoDimensions(mapping_dimension)
     d3.selectAll(".AP_points").remove();
     drawAnchorPoints(true)
@@ -572,6 +578,13 @@ let drawGrid = function (){
     if (!arguments.length) return 
     else {
      if (bool)d3.select('.radviz-svg').remove();
+  }
+  }
+
+  radviz.getAttrColor = function(){
+    if (!arguments.length) return 
+    else {
+     return attribute_color
   }
   }
   return radviz
