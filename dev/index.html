@@ -45,7 +45,7 @@
     
     <script>
         const radviz = d3.radviz()
-        d3.csv('11-winequality-red(quality).csv').then(dataset=>{//'12-CSM.csv').then(dataset => {
+        d3.csv('12-CSM.csv').then(dataset => {
             radviz.data(dataset)
             radviz.setColorClassification('quality')
             //radviz.setScaleOrdinalError()
