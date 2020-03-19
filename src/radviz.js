@@ -286,7 +286,7 @@ export default function Radviz() {
       d3.select('#grid-g').selectAll("text.label")
         .data(data.angles)
         .enter().append("text")
-        .attr("id", (d) => { console.log('prova',"T_" + d.value.replace(/ /g, "")); return "T_" + d.value.replace(/ /g, ""); })
+        .attr("id", (d) => { return "T_" + d.value.replace(/ /g, ""); })
         .attr("class", "attr_label")
         .attr("x", (d, i) => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (d.start))) })
         .attr("y", (d, i) => { return ((radius + 6) * Math.sin(-Math.PI / 2 + (d.start))) })
