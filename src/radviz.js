@@ -162,7 +162,6 @@ export default function Radviz() {
           if (j>i) {
             if (V.dimensions[A[i]] > V.dimensions[A[j]]){
               E = E + Math.abs(V.dimensions[A[i]] - V.dimensions[A[j]])
-              
             }
           }
           Z = Z + Math.abs(V.dimensions[A[i]] - V.dimensions[A[j]])
@@ -174,7 +173,8 @@ export default function Radviz() {
       V.errorE = errorE
       sum_error = sum_error + errorE
     })
-
+    
+    console.log('***ERROR',sum_error/data.entries.length)
     return sum_error/data.entries.length
   }
   //
@@ -234,7 +234,7 @@ export default function Radviz() {
     let i;
 
     for (i = 0; i < dimensions.length; i++) {
-      if (dimensions[i].value.replace(" ", "").replace(".", "") == dimension_changed) {
+      if (dimensions[i].value.replace(/ /g, "") == dimension_changed) {
         index_changed = i;
         founded = true;
 
@@ -286,7 +286,7 @@ export default function Radviz() {
       d3.select('#grid-g').selectAll("text.label")
         .data(data.angles)
         .enter().append("text")
-        .attr("id", (d) => { return "T_" + d.value.replace(" ", "").replace(".", ""); })
+        .attr("id", (d) => { console.log('prova',"T_" + d.value.replace(/ /g, "")); return "T_" + d.value.replace(/ /g, ""); })
         .attr("class", "attr_label")
         .attr("x", (d, i) => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (d.start))) })
         .attr("y", (d, i) => { return ((radius + 6) * Math.sin(-Math.PI / 2 + (d.start))) })
@@ -300,7 +300,7 @@ export default function Radviz() {
       data.angles.forEach(function (dimensione_ordinata) {
         if (dimensione_ordinata.value.length != 0) {
           let tdelay = d3.transition().duration(2000)
-          let label_text = dimensione_ordinata.value.replace(" ", "").replace(".", "")
+          let label_text = dimensione_ordinata.value.replace(/ /g, "");
           d3.select("#T_" + label_text).transition(tdelay)
             .attr("x", () => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (dimensione_ordinata.start))) })
             .attr("y", () => { return ((radius + 6) * Math.sin(-Math.PI / 2 + (dimensione_ordinata.start))) })
@@ -311,7 +311,7 @@ export default function Radviz() {
       .data(data.angles)
       .enter().append("circle")
       .attr("class", "AP_points")
-      .attr("id", (d) => { return "AP_" + d.value.replace(" ", "").replace(".", ""); })
+      .attr("id", (d) => { return "AP_" + d.value.replace(/ /g, ""); })
       .attr("r", '0.7')
       .style("fill", '#660000')
       .attr("cx", (d, i) => { return ((radius + 1) * Math.cos(-Math.PI / 2 + (d.start))) })
@@ -480,8 +480,9 @@ let drawGrid = function (){
     if (!arguments.length) return null
     if (data.attributes.map((d)=>d.id).includes(_))
       attribute_color = _
-       else 
+    else
       attribute_color = null
+    console.log(data.attributes, data.dimensions)
   }
   //
   radviz.setMargin = function (_) {

@@ -107,7 +107,6 @@ export function assignAnglestoDimensions(dimensions){
       })
     });
 
-    console.log("real",real_dimensions);
     return real_dimensions;
 }
 
