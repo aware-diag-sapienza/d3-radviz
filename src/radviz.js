@@ -99,11 +99,12 @@ export default function Radviz() {
                 update => update
                 .call(update => update
                     .transition()
-                    .duration(2000)
+                    .duration(1000)
                     .style("fill", function(d) {
                         if (quality) return scale_color(d.errorE)
                         else if (attribute_color == null) return '#1f78b4';
                         else {
+                            data.attributes
                             return scale_classification(d.attributes[attribute_color])
                         }
                     })
@@ -129,7 +130,7 @@ export default function Radviz() {
 
     //
     let updateResults = function() {
-            document.getElementById('menu1').innerHTML = ' <b>Error Effectiveness</b>: ' + mean_error_e.toFixed(4)
+            document.getElementById('menu1').innerHTML = ' <b>Effectiveness Error</b>: ' + mean_error_e.toFixed(4)
 
         }
         //
@@ -292,15 +293,18 @@ export default function Radviz() {
                     .attr("x", (d, i) => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (d.start))) })
                     .attr("y", (d, i) => { return ((radius + 6) * Math.sin(-Math.PI / 2 + (d.start))) })
                     .attr("fill", "black")
-                    .style("font-size", "4px")
+                    .style("font-size", "3px")
                     .attr("alignment-baseline", "middle")
                     .attr("text-anchor", "middle")
-                    .text((d, i) => { return d.value.substring(0, 6) });
+                    .text((d, i) => {
+                        if (d.value.includes(' ')) return d.value.substring(0, d.value.indexOf(' '));
+                        else return d.value;
+                    });
             } else {
                 console.log("nuovi", data.angles)
                 data.angles.forEach(function(dimensione_ordinata) {
                     if (dimensione_ordinata.value.length != 0) {
-                        let tdelay = d3.transition().duration(2000)
+                        let tdelay = d3.transition().duration(1000)
                         let label_text = dimensione_ordinata.value.replace(/ /g, "");
                         d3.select("#T_" + label_text).transition(tdelay)
                             .attr("x", () => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (dimensione_ordinata.start))) })
@@ -426,10 +430,9 @@ export default function Radviz() {
             }
         }
 
-        let first_dimension = prova.indexOf(data.dimensions[0].id)
-
-        console.log('prova-result', prova, result, first_dimension);
-        prova = prova.slice(first_dimension).concat(prova.slice(0, first_dimension))
+        //let first_dimension = prova.indexOf(data.dimensions[0].id)
+        //console.log('prova-result', prova, result, first_dimension);
+        //prova = prova.slice(first_dimension).concat(prova.slice(0, first_dimension))
         return prova
 
     }
@@ -567,7 +570,7 @@ export default function Radviz() {
                 mapping_dimension = data.dimensions.map(d => d.id)
             } else {
                 let new_order_dimensions = []
-                new_order_dimensions = new_order_dimensions.concat(order_dimensions.slice(order_dimensions.indexOf(0)), order_dimensions.slice(0, order_dimensions.indexOf(0)).reverse())
+                new_order_dimensions = order_dimensions; //new_order_dimensions.concat(order_dimensions.slice(order_dimensions.indexOf(0)), order_dimensions.slice(0, order_dimensions.indexOf(0)).reverse())
 
                 new_order_dimensions.forEach(function(num) {
                     console.log(num)
