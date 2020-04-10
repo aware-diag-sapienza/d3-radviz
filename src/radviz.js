@@ -599,5 +599,14 @@ export default function Radviz() {
             return attribute_color
         }
     }
+
+    radviz.addAttribute = function(name) {
+        let index_name = data.dimensions.map(d => d.id).indexOf(name)
+        delete data.dimensions[index_name]
+        data.attributes.push(data.dimensions[index_name])
+        console.log(data)
+        return data
+
+    }
     return radviz
 }

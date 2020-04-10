@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>d3-radviz</title>
@@ -11,7 +12,7 @@
     <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
     <!-- DEPENDENCIES -->
-    
+
     <script src="https://d3js.org/d3-path.v1.min.js"></script>
     <script src="https://d3js.org/d3-shape.v1.min.js"></script>
     <script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
@@ -31,33 +32,37 @@
     <!-- RADVIZ -->
     <script src="d3-radviz.js"></script>
 </head>
+
 <body style="width:700px;height:700px;">
     <div id="container">
         <div id="menu1"></div>
     </div>
-    <button id = "radiusplus" onclick = "radviz.increaseRadius()" type="button" >Radius +</button>
-    <button id = "radiusminus" onclick = "radviz.decreaseRadius()" type="button" >Radius -</button>
-    <button id = "levelplus" onclick ="radviz.increaseLevelGrid()" type="button" >Level +</button>
-    <button id = "levelminus" onclick ="radviz.decreaseLevelGrid()" type="button" >Level -</button>
-    <button id = "heuristic" onclick="radviz.updateRadviz(d3.meanDistance(radviz.data().dimensions.map(d => d.values)))" type="button" >Heuristic</button>
-    <button id = "original" onclick="radviz.updateRadviz()" type="button" >Original</button>
-    <button id = "original" onclick="radviz.setQuality()" type="button" >Color</button>
-    
+    <button id="radiusplus" onclick="radviz.increaseRadius()" type="button">Radius +</button>
+    <button id="radiusminus" onclick="radviz.decreaseRadius()" type="button">Radius -</button>
+    <button id="levelplus" onclick="radviz.increaseLevelGrid()" type="button">Level +</button>
+    <button id="levelminus" onclick="radviz.decreaseLevelGrid()" type="button">Level -</button>
+    <button id="heuristic" onclick="radviz.updateRadviz(d3.meanDistance(radviz.data().dimensions.map(d => d.values)))" type="button">Heuristic</button>
+    <button id="graziano" onclick="radviz.updateRadviz(d3.heuristicArrangement(radviz.data().dimensions.map(d => d.values)))" type="button">Graziano</button>
+    <button id="original" onclick="radviz.updateRadviz()" type="button">Original</button>
+    <button id="original" onclick="radviz.setQuality()" type="button">Color</button>
+
+
     <script>
         const radviz = d3.radviz()
         d3.csv('12-CSM.csv').then(dataset => {
             radviz.data(dataset)
             radviz.setColorClassification('quality')
-            //radviz.setScaleOrdinalError()
-            
+                //radviz.setScaleOrdinalError()
+
             const set = radviz.data().dimensions.map(d => d.values)
-            let prova = function(_){
-                console.log("sono riuscita a collegere la functione",_)
+            let prova = function(_) {
+                console.log("sono riuscita a collegere la functione", _)
             }
             radviz.setFunctionClick(prova)
             d3.select('#container').call(radviz)
-            
+
         })
     </script>
 </body>
+
 </html>
