@@ -1,6 +1,8 @@
 export { default as radviz }
 from './radviz'
-export { meanDistance as meanDistance }
+export { radvizDA as radvizDA }
 from './arrangement'
+/*
 export { heuristicArrangement as heuristicArrangement }
 from './heuristic'
+*/
