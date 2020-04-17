@@ -561,23 +561,28 @@ export default function Radviz() {
             function_context_menu = ff
         }
         //
-
     //
     radviz.updateRadviz = function(order_dimensions) {
-
             let mapping_dimension = []
             if (!arguments.length) {
                 mapping_dimension = data.dimensions.map(d => d.id)
             } else {
-                let new_order_dimensions = []
-                new_order_dimensions = order_dimensions; //new_order_dimensions.concat(order_dimensions.slice(order_dimensions.indexOf(0)), order_dimensions.slice(0, order_dimensions.indexOf(0)).reverse())
-
+                let new_order_dimensions = order_dimensions.slice();
+                ///new_order_dimensions[0] = 0, new_order_dimensions[1] < new_order_dimensions[n-1]
+                while(new_order_dimensions[0] != 0){
+                    let dim = new_order_dimensions.shift();
+                    new_order_dimensions.push(dim);
+                }
+                if(new_order_dimensions[1] > new_order_dimensions[new_order_dimensions.length-1]){
+                    let dim = new_order_dimensions.shift();
+                    new_order_dimensions.reverse();
+                    new_order_dimensions.unshift(dim);
+                }
                 new_order_dimensions.forEach(function(num) {
-                    console.log(num)
                     mapping_dimension.push(data.dimensions[num].id)
                 })
+                
             }
-            console.log(mapping_dimension)
             data.angles = assignAnglestoDimensions(mapping_dimension)
             d3.selectAll(".AP_points").remove();
             drawAnchorPoints(true)
