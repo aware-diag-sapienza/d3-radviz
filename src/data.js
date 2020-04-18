@@ -27,7 +27,9 @@ export function checkDataset(dataset) {
     return Array.isArray(dataset)
 }
 
-export function loadDataset(dataset) {
+export function loadDataset(dataset, name) {
+    let classification = null
+    if (arguments.length == 2) classification = name
     if (!checkDataset(dataset)) throw new TypeError('Invalid input')
     const data = {
         entries: [],
@@ -37,16 +39,24 @@ export function loadDataset(dataset) {
         angles: []
     }
     Object.keys(dataset[0]).forEach(k => {
-        let { numeric, values } = getDimensionValues(k, dataset)
+        let { numeric, values } = getDimensionValues(k, dataset);
         data['original'].push({
             id: k,
             values: values
-        })
-        data[numeric ? 'dimensions' : 'attributes'].push({
-            id: k,
-            values: numeric ? minMaxNormalization(values) : values
-        })
-    })
+        });
+        if (classification != k) {
+            data[numeric ? 'dimensions' : 'attributes'].push({
+                id: k,
+                values: numeric ? minMaxNormalization(values) : values
+            });
+        } else {
+            data['attributes'].push({
+                id: k,
+                values: values
+            });
+        }
+
+    });
     if (!data.dimensions.length) throw new Error('At least one numerical attribute is required')
 
     for (let i = 0; i < dataset.length; i++) {

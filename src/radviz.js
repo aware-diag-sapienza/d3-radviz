@@ -65,8 +65,8 @@ export default function Radviz() {
                         return 0.2;
                     }
                 })
-                .attr("cx", (d) => { return scale_x2(d.x2) })
-                .attr("cy", (d) => { return scale_x1(d.x1) })
+                .attr("cx", function(d) { return scale_x2(d.x2) })
+                .attr("cy", function(d) { return scale_x1(d.x1) })
                 .on("contextmenu", function(d, i) {
                     d3.event.preventDefault();
                     d3.select('#points-g').selectAll("circle.data_point").style("stroke-width", 0.2)
@@ -338,9 +338,6 @@ export default function Radviz() {
             scale_x2 = d3.scaleLinear()
                 .domain([-1, 1])
                 .range([-radius, radius]);
-
-
-
         }
         //
     let calculatePointPosition = function() {
@@ -478,10 +475,10 @@ export default function Radviz() {
             })
         }
         //
-    radviz.data = function(_) {
+    radviz.data = function(_, cl) {
             if (!arguments.length) return data
             if (checkData(_)) data = _
-            else if (checkDataset(_)) data = loadDataset(_)
+            else if (checkDataset(_)) data = loadDataset(_, cl)
             else throw new TypeError('Invalid data')
             if (typeof updateData === 'function') updateData()
             return radviz
