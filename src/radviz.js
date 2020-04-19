@@ -486,6 +486,7 @@ export default function Radviz() {
         //
     radviz.setColorClassification = function(_) {
             if (!arguments.length) return null
+            console.log('prova', data.attributes.map((d) => d.id).includes(_))
             if (data.attributes.map((d) => d.id).includes(_))
                 attribute_color = _
             else
@@ -558,7 +559,7 @@ export default function Radviz() {
             function_context_menu = ff
         }
         //
-    //
+        //
     radviz.updateRadviz = function(order_dimensions) {
             let mapping_dimension = []
             if (!arguments.length) {
@@ -566,11 +567,11 @@ export default function Radviz() {
             } else {
                 let new_order_dimensions = order_dimensions.slice();
                 ///new_order_dimensions[0] = 0, new_order_dimensions[1] < new_order_dimensions[n-1]
-                while(new_order_dimensions[0] != 0){
+                while (new_order_dimensions[0] != 0) {
                     let dim = new_order_dimensions.shift();
                     new_order_dimensions.push(dim);
                 }
-                if(new_order_dimensions[1] > new_order_dimensions[new_order_dimensions.length-1]){
+                if (new_order_dimensions[1] > new_order_dimensions[new_order_dimensions.length - 1]) {
                     let dim = new_order_dimensions.shift();
                     new_order_dimensions.reverse();
                     new_order_dimensions.unshift(dim);
@@ -578,7 +579,7 @@ export default function Radviz() {
                 new_order_dimensions.forEach(function(num) {
                     mapping_dimension.push(data.dimensions[num].id)
                 })
-                
+
             }
             data.angles = assignAnglestoDimensions(mapping_dimension)
             d3.selectAll(".AP_points").remove();

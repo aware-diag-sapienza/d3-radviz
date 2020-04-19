@@ -48,9 +48,9 @@
 
     <script>
         const radviz = d3.radviz()
-        d3.csv('data/05-user_modeling[UNS].csv').then(dataset => {
+        d3.csv('data/12-CSM.csv').then(dataset => {
             radviz.data(dataset, 'UNS')
-            radviz.setColorClassification('quality')
+            radviz.setColorClassification('UNS')
                 //radviz.setScaleOrdinalError()
 
             const set = radviz.data().dimensions.map(d => d.values)
