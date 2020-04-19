@@ -2,6 +2,9 @@
  
 This d3-radviz is a d3.js plugin that implements RadViz visualization. The dimension arrangement (DA) follows the heuristic described in the paper which minimizes the effectiveness error that degradate the visualization of the radviz. In addition, functions are provided to customize dimension arrangement, interaction and design of the visualization.
 
+[<img alt="radviz" src="https://github.com/aware-diag-sapienza/d3-radviz/blob/master/dev/d3-radviz.png" width="960">]
+
+Source: CSM Dataset se qualcuno deve linkarlo.
 ## Installing
 
 If you use NPM, `npm install d3-radviz`. Otherwise, download the [latest release](https://github.com/aware-diag-sapienza/d3-radviz/releases/latest).
@@ -23,9 +26,9 @@ The plug-in implemented creates Radviz visualization a rectangle per dataset in 
 API DOCUMENTATION
 
 
-[<img alt="Sankey diagram" src="https://raw.githubusercontent.com/d3/d3-sankey/master/img/energy.png" width="960">](https://observablehq.com/@d3/sankey-diagram)
 
-Source: Department of Energy & Climate Change, Tom Counsell.
+
+
 
 **For an interactive editor, see [Flow-o-Matic](https://observablehq.com/@mbostock/flow-o-matic).**
 
