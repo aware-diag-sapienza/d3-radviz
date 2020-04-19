@@ -2,7 +2,7 @@
  
 This d3-radviz is a d3.js plugin that implements RadViz visualization. The dimension arrangement (DA) follows the heuristic described in the paper which minimizes the effectiveness error that degradate the visualization of the radviz. In addition, functions are provided to customize dimension arrangement, interaction and design of the visualization.
 
-<img alt="radviz" src="https://github.com/aware-diag-sapienza/d3-radviz/dev/d3-radviz.png" width="960">
+<img alt="radviz" src="https://github.com/aware-diag-sapienza/d3-radviz/blob/master/dev/d3-radviz.png" width="960">
 
 Source: CSM Dataset se qualcuno deve linkarlo.
 ## Installing
