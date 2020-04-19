@@ -2,7 +2,7 @@
  
 This d3-radviz is a d3.js plugin that implements RadViz visualization. The dimension arrangement (DA) follows the heuristic described in the paper which minimizes the effectiveness error that degradate the visualization of the radviz. In addition, functions are provided to customize dimension arrangement, interaction and design of the visualization.
 
-<img alt="radviz" src="https://github.com/aware-diag-sapienza/d3-radviz/blob/master/dev/d3-radviz.png" width="960">
+<img alt="radviz" src="https://github.com/aware-diag-sapienza/d3-radviz/dev/d3-radviz.png" width="960">
 
 Source: CSM Dataset se qualcuno deve linkarlo.
 ## Installing
@@ -34,3 +34,22 @@ The plug-in implemented creates Radviz visualization a rectangle per dataset in 
 
 API DOCUMENTATION
 
+
+## API Reference
+
+<a href="#radviz" name="radviz">#</a> d3.<b>radviz</b>() [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
+
+Constructs a new radviz generator with the default settings.
+
+<a href="#radviz_update" name="radviz_update">#</a> <i>radviz</i>.<b>data</b>(<i>dataset,classification_attribute</i>) [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
+
+Uploads the *dataset* in the radviz adding the *classification_attributes* for the clusters. The *classification_attribute* is an optional input.
+By default the numeric values are saved as *dimensions*, contrary the not numeric values are saved as *attributes*.
+
+The *data* structure contains the following objects:
+
+* *radviz.data().angles* - the angles of the radviz visualization
+* *radviz.data().attributes* - the attributes of the dataset, so the not numeric values or the *classification_attribute* before passed. 
+* *radviz.data().dimensions* - the dimensions of the dataset, so the numeric values normalized with the min-max normalization.
+* *radviz.data().entries* - all the entries of the dataset.
+* *radviz.data().originale* - all dataset with the original values.
