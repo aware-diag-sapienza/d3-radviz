@@ -52,4 +52,4 @@ The *data* structure contains the following objects:
 * *radviz.data().attributes* - the attributes of the dataset, so the not numeric values or the *classification_attribute* before passed. 
 * *radviz.data().dimensions* - the dimensions of the dataset, so the numeric values normalized with the min-max normalization.
 * *radviz.data().entries* - all the entries of the dataset.
-* *radviz.data().originale* - all dataset with the original values.
+* *radviz.data().original* - all dataset with the original values.
