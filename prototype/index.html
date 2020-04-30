@@ -212,7 +212,7 @@
 
 
     <script>
-        const DATASET = "12-CSM.csv"
+        let DATASET = "12-CSM.csv"
 
         let ORIGINAL_CLASSIFIED = false
         let lista_datatsets = ['05-user_modeling(UNS)',
@@ -239,6 +239,14 @@
             '30-wdbc(b)'
         ]
         let classification_selected = null
+
+        let d3_radviz = d3.radviz()
+
+
+        let nd = ''
+        let name_attr = null
+        let dimensions_removed = []
+        let attr_removed = []
 
         $('#myModal').on('shown.bs.modal', function() {
             $('#myInput').trigger('focus')
@@ -401,13 +409,7 @@
 
         uploadMenu(lista_datatsets);
 
-        let d3_radviz = d3.radviz()
 
-
-        let nd = ''
-        let name_attr = null
-        let dimensions_removed = []
-        let attr_removed = []
         system.structure.gradientLegend();
 
         let DATASET_NAME = ''
