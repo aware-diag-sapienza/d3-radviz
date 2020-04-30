@@ -273,7 +273,7 @@
         */
 
 
-        uploadMenu(lista_datatsets);
+
 
         function information_hover() {
 
@@ -305,7 +305,7 @@
 
         }
 
-        const LABEL_DATASET = {
+        let LABEL_DATASET = {
             '05-user_modeling(UNS).csv': 'User Modeling',
             '07-ecoli(class).csv': 'Ecoli',
             '07-seeds_dataset(group).csv': 'Seeds dataset',
@@ -398,6 +398,8 @@
             system.settings.initializeDB();
 
         }
+
+        uploadMenu(lista_datatsets);
 
         let d3_radviz = d3.radviz()
 
