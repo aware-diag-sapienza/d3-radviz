@@ -1,1 +1,1050 @@
-Work in progress...
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+    <title>RadWidget</title>
+    <link rel="stylesheet" href="./web/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="./web/css/vendor/style-dark.css">
+    <link rel="stylesheet" href="./web/css/vendor/crosswidget.css">
+    <link rel="stylesheet" href="./web/css/prototype.css">
+</head>
+
+<body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Settings Panel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item data-menu"><a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Datasets</a></li>
+                            <li class="nav-item data-menu"><a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Upload your dataset</a></li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane p-4 fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                                <h6>Choose a default dataset</h6>
+                                <select class="custom-select mr-sm-2" id="select-dataset"></select>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 id="label-select-radviz-dim">Radviz dimensions</h6>
+                                        <div id="dimensions-list">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 id="label-select-radviz-classification">Classification dimension</h6>
+                                        <div id="classification-list">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-4 fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                                <h6>
+                                    Insert your dataset
+                                    <!--<i class="fas fa-info-circle" onmouseover="information_hover()" onmouseout="information_leave()"></i>-->
+                                </h6>
+                                <div class="btn btn-primary btn-sm float-left" id="choose-file-button" onclick="importPanel.__openPopup()">
+                                    <span>Choose file</span>
+                                </div>
+                                <div class="file-path-wrapper" id="name-dataset-uploaded">
+                                </div>
+                                <div id="uploaded-dataset-list">
+                                    <select class="custom-select mr-sm-2" id="uploaded-dataset">
+                                        <option value="" id = "u-d-attr0"></option>
+                                    </select>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 id="label-radviz-dim">Radviz dimensions</h6>
+                                        <div id="dimensions-list-uploaded">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 id="label-upload-radviz-classification">Classification dimension</h6>
+                                        <div id="classification-list-uploaded">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--IMPORT FILE PANEL -->
+                                <div id="import-panel">
+
+                                    <form enctype="multipart/form-data" , target="_blank">
+                                        <div id="import-container">
+                                            <div id="close-icon">
+                                                <button type="button" class="close" onclick="importPanel.__closePopup()" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <input id="import-file" type="file" name="file" />
+                                            <div id="import-icon"> <i class="fas fa-file-upload"></i> </div>
+                                            <div id="import-text">
+
+                                                <label id="import-choose-button" for="import-file">Choose a CSV file</label> or drag it here.
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END modal-->
+    <div class="left light" id="div-left">
+        <div id="menu">
+            <div id="menubutton">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+          <i class="fas fa-cog"></i>
+      </button>
+            </div>
+            <div id="menu1"></div>
+
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div>
+            </div>
+            <div id="number-progress"></div>
+
+
+        </div>
+        <div class="visualization">
+            <!--<div class="radviz" id = "rviz"></div>-->
+            <div id="container">
+            </div>
+            <div class="setting-legend">
+                <div class="values-legend" id="legend-value">
+
+                </div>
+                <div class="cluster-legend" id="legend-cluster"></div>
+
+            </div>
+        </div>
+        <div class="settings">
+            <hr>
+            <font size="4" style="color: #4b5158;"><b>Radius:</b> </font>
+            <button type="button" class="btn btn-secondary-circle" id="btn_radius_plus" onclick="d3_radviz.increaseRadius()"><i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-secondary-circle" id="btn_radius_minus" onclick="d3_radviz.decreaseRadius()"><i class="fas fa-minus"></i></button>
+            <font size="4" style="color: #4b5158;"><b>Level Grid:</b> </font>
+            <button type="button" class="btn btn-secondary-circle" id="btn_levelgrid_plus" onclick="d3_radviz.increaseLevelGrid()"><i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-secondary-circle" id="btn_levelgrid_minus" onclick="d3_radviz.decreaseLevelGrid()"><i class="fas fa-minus"></i></button>
+            <font size="4" style="color: #4b5158;"><b>Color:</b> </font>
+            <input name="color-quality" type="radio" id="effectiveness-radio" value="EffERROR" onclick="d3_radviz.setQuality()" checked>
+            <label for="effectiveness-radio ">Effectiveness Error</label>
+            <input name="color-quality" type="radio" id="cluster-radio" value="Clusters" onclick="d3_radviz.setQuality()">
+            <label for="cluster-radio">Clusters</label>
+            <br/>
+
+            <!--<button type="button" class="btn btn-secondary" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.maxMeanDistanceHeuristic(d3_radviz.data()))" type="button">Heuristic MeanDistance</button>-->
+
+            <button type="button" class="btn btn-secondary" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristic(d3_radviz.data()))" type="button">Heuristic</button>
+            <!--<button type="button" class="btn btn-secondary" id="heuristic-graziano-noopt" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristicNOOPT(d3_radviz.data()))" type="button">Heu NO-OPT</button>-->
+
+            <button type="button" class="btn btn-secondary" id="original" onclick="system.settings.updateRadviz(this.id)" type="button">Original</button>
+            <button type="button" class="btn btn-secondary" id="selected_heuristic" onclick="system.radviz.selectedHeuristic(this.id)">Selected</button>
+            <button type="button" class="btn btn-secondary" id="btn_min_disposition" onclick="system.radviz.updateDisposition(this.id,'min')">Minimum EE</button>
+            <button type="button" class="btn btn-secondary" id="btn_max_disposition" onclick="system.radviz.updateDisposition(this.id,'max')">Maximum EE</button>
+            <button type="button" class="btn btn-secondary" id="btn_levelgrid_minus" onclick="system.settings.resetVisualization()">Reset</button> <br>
+
+            <button type="button" class="btn btn-secondary" id="btn_dependent_da_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'dependent_da')">Dependent DA</button>
+            <button type="button" class="btn btn-secondary" id="btn_independent_da_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'independent_da')">Independent DA</button>
+            <button type="button" class="btn btn-secondary" id="btn_vizrank_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'vizrank')">VizRank</button>
+            <button type="button" class="btn btn-secondary" id="btn_radviz_pp_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'radviz_pp')">Radviz ++</button>
+            <!--<button type="button" class="btn btn-secondary" id="btn_distance_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'distance')">Distance</button>-->
+            <button type="button" class="btn btn-secondary" id="btn_t_statistic_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'t_statistic')">T statistic</button>
+
+
+
+
+        </div>
+    </div>
+    <div class="right light" id="div-right">
+        <div class="referencepoint" id="pointforce"></div>
+
+        <div class="radarpoints" id="radar"></div>
+
+    </div>
+
+    <script src="./web/js/uploadedfile.js"></script>
+    <script src="./web/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="./web/js/vendor/bootstrap.min.js"></script>
+    <script src="./web/js/vendor/popper.min.js"></script>
+    <script defer src="./web/js/vendor/js/brands.js"></script>
+    <script defer src="./web/js/vendor/js/solid.js"></script>
+    <script defer src="./web/js/vendor/js/fontawesome.js"></script>
+    <script src="./web/js/vendor/d3.v5.min.js"></script>
+    <script src="./web/js/vendor/d3-scale-chromatic.v1.min.js"></script>
+    <script src="./web/js/vendor/crossfilter.v2.min.js"></script>
+    <script src="./web/js/vendor/crosswidget.js"></script>
+
+
+    <script src="./web/js/optimization.js"></script>
+    <script src="./web/js/slider.js"></script>
+    <script src="./web/js/spring.js"></script>
+    <script src="./web/js/radar.js"></script>
+    <script src="./web/js/structure.js"></script>
+
+    <script src="./web/js/settings.js"></script>
+    <script src="./web/js/radviz.js"></script>
+
+    <script src="./web/js/data.js"></script>
+    <script src="./web/js/main.js"></script>
+    <script src="./web/js/vendor/d3-legend.js"></script>
+    <script src="./web/js/vendor/d3-radviz.js"></script>
+
+
+    <script>
+        const DATASET = "12-CSM.csv"
+
+        let ORIGINAL_CLASSIFIED = false
+        let lista_datatsets = ['05-user_modeling(UNS)',
+            '07-ecoli(class)',
+            '07-seeds_dataset(group)',
+            '08-diabetes(Diabetes)',
+            '08-shuttle(class)',
+            '09-BreastTissue(Class)',
+            '09-Live',
+            '09-breast-cancer-wisconsin(quality)',
+            '09-dataR2(Classification)',
+            '09-elnino',
+            '09-glass(Type)',
+            '10-cloud',
+            '10-slump_test',
+            '10-tripadvisor_review',
+            '11-forestfires',
+            '11-page-blocks',
+            '11-winequality-red(quality)',
+            '11-winequality-white(quality)',
+            '12-CSM',
+            '13-wine(Wine)',
+            '20-absenteeism_at_work(ID)',
+            '30-wdbc(b)'
+        ]
+        let classification_selected = null
+
+        $('#myModal').on('shown.bs.modal', function() {
+            $('#myInput').trigger('focus')
+        })
+
+        let div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        let fileNames = new Array();
+        /*
+        $.ajax({
+            url: "./data/",
+            success: function(data) {
+                $(data).find("ul li").each(function() {
+                    console.log('this', this);
+                });
+                $(data).find("li").each(function(i) {
+
+                    let index = $(this).index();
+                    let text = $(this).text();
+                    let extension = text.substr((text.lastIndexOf('.') + 1))
+                    if (extension == 'csv') {
+                        lista_datatsets.push(text);
+                    }
+                });
+                uploadMenu(lista_datatsets);
+
+            }
+
+        });
+        */
+
+        let lista_datatsets =
+            uploadMenu(lista_datatsets);
+
+        function information_hover() {
+
+
+            var div = d3.select(".tooltip")
+            console.log('HERE', div.style('opacity'), 'X', event.clientX, 'Y', event.clientY)
+            div.transition()
+                .duration(200)
+                .style("display", "block");
+            div.html("The dataset must contains only number for the dimensions that you want visualiza on the radviz. the classification attributes must be a caterogical data or a litteral data.")
+                .style("width", '50%')
+                .style("left", (event.clientX - 150) + "px")
+                .style("top", (event.clientY - 100) + "px")
+                .style("background", '#767E98')
+                .style("color", 'white')
+                .style("padding", '5px')
+            console.log("The dataset must contains only number for the dimensions that you want visualiza on the radviz. the classification attributes must be a caterogical data or a litteral data.")
+
+        }
+
+        function information_leave() {
+            console.log('leave');
+            var div = d3.select(".tooltip")
+            div.transition()
+                .duration(500)
+                .style("display", "none")
+
+
+
+        }
+
+        const LABEL_DATASET = {
+            '05-user_modeling(UNS).csv': 'User Modeling',
+            '07-ecoli(class).csv': 'Ecoli',
+            '07-seeds_dataset(group).csv': 'Seeds dataset',
+            '08-diabetes(Diabetes).csv': 'Pima Indians Diabetes',
+            '08-shuttle(class).csv': 'Shuttle',
+            '09-BreastTissue(Class).csv': 'Breast Tissue',
+            '09-Live.csv': 'Live',
+            '09-breast-cancer-wisconsin(quality).csv': 'Breast Cancer Wisconsin',
+            '09-dataR2(Classification).csv': 'Breast Cancer Coimbra',
+            '09-elnino.csv': 'El Nino',
+            '09-glass(Type).csv': 'Glass Identification',
+            '10-CASP.csv': 'PTS',
+            '10-cloud.csv': 'Cloud',
+            '10-slump_test.csv': 'Concrete Slump Test',
+            '10-tripadvisor_review.csv': 'Travel Reviews',
+            '11-forestfires.csv': 'Forest Fires',
+            '11-page-blocks.csv': 'Page Blocks Classification',
+            '11-winequality-red(quality).csv': 'Wine Quality Red',
+            '11-winequality-white(quality).csv': 'Wine Quality White',
+            '12-CSM.csv': 'CSM',
+            '13-wine(Wine).csv': 'Wine',
+            '20-absenteeism_at_work(ID).csv': 'Absenteeism at work',
+            '30-wdbc(b).csv': 'Breast Cancer Wisconsin (Diagnostic)'
+        }
+
+
+        function uploadMenu(lista) {
+
+            // here we upload the menu for the dimensions list
+
+            let selection_list = document.getElementById("select-dataset");
+            document.getElementById("label-select-radviz-dim").style.display = "block"
+            document.getElementById("label-select-radviz-classification").style.display = "block"
+            let optionnull = document.createElement("option");
+            let testo = ''
+            optionnull.text = testo
+            optionnull.id = "s-d-attr" + 0
+            optionnull.value = ''
+            selection_list.add(optionnull);
+            lista.forEach(function(l, i) {
+
+                let option = document.createElement("option");
+                let testo = ''
+                if (l.includes('(')) {
+                    let start = l.indexOf('-') + 1
+                    let end = l.indexOf('(') - 3
+                    testo = l.substr(start, end);
+                } else if (l.includes('-')) {
+                    let start = l.indexOf('-') + 1
+                    let end = l.indexOf('.') - 3
+                    testo = l.substr(start, end);
+                } else {
+                    let end = l.indexOf('.')
+                    testo = l.substr(0, end);
+                }
+
+                if (testo.includes('-')) {
+                    testo = testo.replace('-', ' ');
+                }
+                if (testo.includes('_')) {
+                    testo = testo.replace('_', ' ');
+                }
+                option.id = "s-d-attr" + (i + 1)
+                option.text = LABEL_DATASET[l]
+                option.value = l.substring(0, l.indexOf('.'))
+
+                if (l == DATASET) {
+                    option.selected = true;
+                }
+
+                selection_list.add(option);
+            })
+
+            $('#select-dataset').on('change', function() {
+                console.log('VALORE SELEZIONATO', this.value);
+                if (this.value != '') {
+                    system.settings.initializeDB(this.value)
+                    system.settings.selected_dataset_option = this.value
+
+                    document.getElementById("u-d-attr0").selected = true
+                    document.getElementById("label-radviz-dim").style.display = "none";
+                    document.getElementById("label-upload-radviz-classification").style.display = "none";
+                    d3.select("#ul-upload-menu").remove('*');
+                    d3.select("#ul-classification-upload").remove('*');
+                    console.log('HO CLICCATO IL DATASET')
+                }
+            });
+
+            // here we upload the menu for the classification list
+            system.settings.initializeDB();
+
+        }
+
+        let d3_radviz = d3.radviz()
+
+
+        let nd = ''
+        let name_attr = null
+        let dimensions_removed = []
+        let attr_removed = []
+        system.structure.gradientLegend();
+
+        let DATASET_NAME = ''
+        let newDataset = function(loadfile, nameDataset) {
+            d3_radviz = d3.radviz()
+
+            d3.csv(loadfile).then(dataset => {
+                DATASET_NAME = nameDataset
+                dimensions_removed = []
+                attr_removed = []
+
+                if (DATASET_NAME.indexOf('(') > 0) {
+                    name_attr = DATASET_NAME.substring(DATASET_NAME.indexOf('(') + 1, DATASET_NAME.indexOf(')'));
+                    ORIGINAL_CLASSIFIED = true
+                }
+
+                d3_radviz.data(dataset, name_attr)
+                if (d3_radviz.data().attributes.length != 0) {
+                    name_attr = d3_radviz.data().attributes[0].id
+                    d3_radviz.setColorClassification()
+                    d3_radviz.setColorClassification(name_attr)
+                    ORIGINAL_CLASSIFIED = true
+
+                } else if (DATASET_NAME.indexOf('(') > 0) {
+                    name_attr = DATASET_NAME.substring(DATASET_NAME.indexOf('(') + 1, DATASET_NAME.indexOf(')'));
+                    d3_radviz.setColorClassification(name_attr);
+                    ORIGINAL_CLASSIFIED = true
+
+                } else {
+                    ORIGINAL_CLASSIFIED = false
+                }
+
+                system.data.load("./data/" + nameDataset + ".csv", nameDataset);
+                system.structure.initializeForce();
+                system.structure.initializeRadar();
+                system.structure.initializeForceAxes(d3_radviz.data().angles);
+                system.structure.initializeRadarAxes(d3_radviz.data().angles);
+
+                let prova = function(_) {
+                    console.log("sono riuscita a collegere la functione", _)
+
+                }
+                let f_context_menu = function(_) {
+                    system.structure.initializeForceAxes(_);
+                    system.structure.initializeRadarAxes(_);
+                    system.radar.changeRadar(_);
+                }
+                let f_click = function(a, b, c) {
+                    system.radar.drawRadar(a, b, c);
+                    system.structure.uploadProgressBar();
+
+                }
+
+                let f_drag_end = function(a) {
+                    system.structure.initializeForceAxes(a);
+                    system.structure.initializeRadarAxes(a);
+                    system.radar.changeRadar(a);
+                    system.structure.drawboxplot(d3_radviz.data().entries.map(d => d.errorE));
+
+                }
+
+                let f_mouse_over = function(a, b) {
+                    system.spring.drawForce(a, b);
+
+                    var div = d3.select(".tooltip")
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9)
+
+                    .delay(500);
+                    div.html("(" + b.x1.toFixed(2) + "," + b.x2.toFixed(2) + ")<br> EE: " + b.errorE.toFixed(2))
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 50) + "px")
+                        .style("color", "white")
+                        .style("background", "black")
+                }
+
+                let f_mouse_out = function() {
+                    d3.selectAll(".lineforce").remove();
+                    var div = d3.select(".tooltip")
+                    div.transition()
+                        .duration(50)
+                        .style("opacity", 0);
+
+                }
+                d3_radviz.setFunctionClick(f_click)
+                d3_radviz.setFunctionMouseOver(f_mouse_over)
+                d3_radviz.setFunctionMouseOut(f_mouse_out)
+                d3_radviz.setFunctionDragEnd(f_drag_end)
+                d3_radviz.setFunctionContextMenu(f_context_menu)
+
+                system.structure.legenda_cluster(Array.from(new Set(d3_radviz.data().attributes.filter(function(pilot) {
+                    return pilot.id === name_attr
+                }).map(d => d.values)[0])))
+                const set = d3_radviz.data().dimensions.map(d => d.values)
+                d3.select('#container').call(d3_radviz);
+                system.structure.drawboxplot(d3_radviz.data().entries.map(d => d.errorE));
+                system.structure.uploadProgressBar();
+
+            })
+        }
+
+        let newDataset_upload = function(loadfile, nameDataset) {
+            d3_radviz = d3.radviz()
+                //d3.csv('./data/' + nameDataset + '.csv').then(dataset => {
+            console.log(loadfile, nameDataset)
+            let dataset = d3.csvParse(system.uploadedfile.readDataUploaded(nameDataset))
+                //d3.csvParse(loadfile, dataset => {
+            DATASET_NAME = nameDataset
+            dimensions_removed = []
+            name_attr = ''
+
+            d3_radviz.data(dataset)
+            if (d3_radviz.data().attributes.length != 0) {
+                name_attr = d3_radviz.data().attributes[0].id
+                d3_radviz.setColorClassification(name_attr)
+                ORIGINAL_CLASSIFIED = true
+            } else {
+                ORIGINAL_CLASSIFIED = false
+            }
+
+
+            system.data.load_upload(loadfile, nameDataset);
+            system.structure.initializeForce();
+            system.structure.initializeRadar();
+            system.structure.initializeForceAxes(d3_radviz.data().angles);
+            system.structure.initializeRadarAxes(d3_radviz.data().angles);
+
+            let f_context_menu = function(_) {
+                system.structure.initializeForceAxes(_);
+                system.structure.initializeRadarAxes(_);
+                system.radar.changeRadar(_);
+            }
+            let f_click = function(a, b, c) {
+                system.radar.drawRadar(a, b, c);
+                system.structure.uploadProgressBar();
+
+            }
+
+            let f_drag_end = function(a) {
+                system.structure.initializeForceAxes(a);
+                system.structure.initializeRadarAxes(a);
+                system.radar.changeRadar(a);
+                system.structure.drawboxplot(d3_radviz.data().entries.map(d => d.errorE));
+            }
+
+            let f_mouse_over = function(a, b) {
+                system.spring.drawForce(a, b);
+
+                var div = d3.select(".tooltip")
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9)
+
+                .delay(500);
+                div.html("(" + b.x1.toFixed(2) + "," + b.x2.toFixed(2) + ")<br> EE: " + b.errorE.toFixed(2))
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 50) + "px")
+                    .style("color", "white")
+                    .style("background", "black")
+            }
+
+            let f_mouse_out = function() {
+                d3.selectAll(".lineforce").remove();
+            }
+            d3_radviz.setFunctionClick(f_click)
+            d3_radviz.setFunctionMouseOver(f_mouse_over)
+            d3_radviz.setFunctionMouseOut(f_mouse_out)
+            d3_radviz.setFunctionDragEnd(f_drag_end)
+            d3_radviz.setFunctionContextMenu(f_context_menu)
+
+            system.structure.legenda_cluster(Array.from(new Set(d3_radviz.data().attributes.filter(function(pilot) {
+                return pilot.id === name_attr
+            }).map(d => d.values)[0])))
+            const set = d3_radviz.data().dimensions.map(d => d.values)
+            d3.select('#container').call(d3_radviz);
+            system.structure.drawboxplot(d3_radviz.data().entries.map(d => d.errorE));
+            system.structure.uploadProgressBar();
+        }
+
+        let choiceDimensionsNewDataset = function(d, dat, but) {
+
+            console.log(d.value, d.checked, dimensions_removed, but)
+
+            d3.csv(dat).then(currentdataset => {
+                // quindi diventa false, devo eliminare la voce dal resto.
+                if (but == 'check') {
+                    if (!d.checked) {
+                        if (dimensions_removed.indexOf(d.value) == -1) {
+                            dimensions_removed.push(d.value);
+                        }
+                    } else {
+                        console.log('   ELSE', d.value)
+                        let indx = dimensions_removed.indexOf(d.value)
+                        if (indx > -1)
+                            dimensions_removed.splice(indx, 1)
+                        else
+                            attr_removed = []
+
+                        let ind_clas = attr_removed.indexOf(d.value)
+                        if (ind_clas > -1) {
+                            attr_removed = []
+                        }
+
+
+                    }
+                    console.log('dim-rem', dimensions_removed)
+
+                }
+                if (but == 'radio') {
+                    console.log('attr_removed', attr_removed)
+
+                    if (attr_removed.indexOf(d.value) > -1) attr_removed = []
+                    else attr_removed = [d.value]
+
+                }
+
+
+                console.log(but)
+                if (but == 'check') {
+                    console.log("sono check, sono check")
+                    currentdataset.forEach(element => {
+                        dimensions_removed.forEach(dd => {
+                            delete currentdataset.columns[currentdataset.columns.indexOf(dd)]
+                            delete element[dd];
+                        })
+                    });
+
+                    if (DATASET_NAME.indexOf('(') != -1) {
+                        name_attr = DATASET_NAME.substring(DATASET_NAME.indexOf('(') + 1, DATASET_NAME.length - 1)
+
+                        d3_radviz.data(currentdataset, name_attr)
+                        d3_radviz.setColorClassification(name_attr)
+                        system.data.load(dat, DATASET_NAME);
+                    } else if (attr_removed != []) {
+                        name_attr = attr_removed[0]
+                        d3_radviz.data(currentdataset, name_attr)
+                        d3_radviz.setColorClassification(name_attr)
+                        system.data.load(dat, DATASET_NAME);
+
+                    } else if (d3_radviz.data().attributes.length != 0) {
+                        console.log("CURRENT DATASET", currentdataset)
+                        name_attr = d3_radviz.data().attributes[0].id
+                        d3_radviz.setColorClassification()
+                        d3_radviz.setColorClassification(name_attr)
+                        d3_radviz.data(currentdataset, name_attr)
+                        system.data.load(dat, DATASET_NAME);
+                    } else {
+                        d3_radviz.data(currentdataset)
+                        system.data.load(dat, DATASET_NAME);
+                    }
+
+                }
+                if (but == 'radio') {
+
+                    name_attr = d.value
+                    console.log('sono radio', but)
+                    d3_radviz.data(currentdataset, name_attr)
+                    d3_radviz.setColorClassification(name_attr)
+                    system.data.load(dat, DATASET_NAME);
+                }
+
+
+
+                system.structure.initializeForce();
+                system.structure.initializeRadar();
+                system.structure.initializeForceAxes(d3_radviz.data().angles);
+                system.structure.initializeRadarAxes(d3_radviz.data().angles);
+
+
+                let f_context_menu = function(_) {
+                    system.structure.initializeForceAxes(_);
+                    system.structure.initializeRadarAxes(_);
+                    system.radar.changeRadar(_);
+                }
+                let f_click = function(a, b, c) {
+                    system.radar.drawRadar(a, b, c);
+                    system.structure.uploadProgressBar();
+
+                }
+
+                let f_drag_end = function(a) {
+                    system.structure.initializeForceAxes(a);
+                    system.structure.initializeRadarAxes(a);
+                    system.radar.changeRadar(a);
+
+                }
+
+                let f_mouse_over = function(a, b) {
+                    system.spring.drawForce(a, b);
+
+                    var div = d3.select(".tooltip")
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9)
+
+                    .delay(500);
+                    div.html("(" + b.x1.toFixed(2) + "," + b.x2.toFixed(2) + ")<br> EE: " + b.errorE.toFixed(2))
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 50) + "px")
+                        .style("color", "white")
+                        .style("background", "black")
+                }
+
+                let f_mouse_out = function() {
+                    d3.selectAll(".lineforce").remove();
+                }
+                d3_radviz.setFunctionClick(f_click);
+                d3_radviz.setFunctionMouseOver(f_mouse_over);
+                d3_radviz.setFunctionMouseOut(f_mouse_out);
+                d3_radviz.setFunctionDragEnd(f_drag_end);
+                d3_radviz.setFunctionContextMenu(f_context_menu);
+
+                system.structure.legenda_cluster(Array.from(new Set(d3_radviz.data().attributes.filter(function(pilot) {
+                    return pilot.id === name_attr
+                }).map(d => d.values)[0])))
+                const set = d3_radviz.data().dimensions.map(d => d.values)
+                d3.select('#container').call(d3_radviz);
+                system.structure.uploadProgressBar();
+
+            })
+        }
+
+        let choiceDimensionsNewDataset_upload = function(d, dat, but) {
+            console.log(d, dat, but)
+
+            let dataset = d3.csvParse(system.uploadedfile.readDataUploaded(dat)) //d3.csvParse(dat)
+            console.log(dimensions_removed)
+
+
+            /*  vecchio choice Dimensions
+
+
+            if (!d.checked) { // quindi diventa false, devo eliminare la voce dal resto.
+                dimensions_removed.push(d.value);
+            } else {
+                let indx = dimensions_removed.indexOf(d.value)
+                dimensions_removed.splice(indx, 1)
+            }
+
+            dataset.forEach(element => {
+                dimensions_removed.forEach(dd => {
+                    delete element[dd];
+                })
+            });
+
+            if (but == 'radio') {
+
+                name_attr = d.value
+                console.log('sono radio', but)
+                d3_radviz.data(dataset, name_attr)
+                d3_radviz.setColorClassification(name_attr)
+                system.data.load(dat, DATASET_NAME);
+            }
+
+
+            
+                d3_radviz.data(dataset)
+
+            
+            */
+
+            if (but == 'check') {
+                if (!d.checked) {
+                    if (dimensions_removed.indexOf(d.value) == -1) {
+                        dimensions_removed.push(d.value);
+                    }
+                } else {
+                    console.log('   ELSE', d.value)
+                    let indx = dimensions_removed.indexOf(d.value)
+                    if (indx > -1)
+                        dimensions_removed.splice(indx, 1)
+                    else
+                        attr_removed = []
+
+                    let ind_clas = attr_removed.indexOf(d.value)
+                    if (ind_clas > -1) {
+                        attr_removed = []
+                    }
+
+
+                }
+                console.log('dim-rem', dimensions_removed)
+
+            }
+            if (but == 'radio') {
+                if (attr_removed.indexOf(d.value) > -1) attr_removed = []
+                else attr_removed = [d.value]
+
+            }
+
+
+            console.log(but)
+            if (but == 'check') {
+                console.log("sono check, sono check")
+                dataset.forEach(element => {
+                    dimensions_removed.forEach(dd => {
+                        delete dataset.columns[dataset.columns.indexOf(dd)]
+                        delete element[dd];
+                    })
+                });
+
+                if (attr_removed != []) {
+                    name_attr = attr_removed[0]
+                    d3_radviz.data(dataset, name_attr)
+                    d3_radviz.setColorClassification(name_attr)
+                    system.data.load(dat, DATASET_NAME);
+
+                } else if (d3_radviz.data().attributes.length != 0) {
+                    console.log("CURRENT DATASET", dataset)
+                    name_attr = d3_radviz.data().attributes[0].id
+                    d3_radviz.setColorClassification()
+                    d3_radviz.setColorClassification(name_attr)
+                    d3_radviz.data(dataset, name_attr)
+                    system.data.load(dat, DATASET_NAME);
+                } else {
+                    d3_radviz.data(dataset)
+                    system.data.load(dat, DATASET_NAME);
+                }
+
+            }
+            if (but == 'radio') {
+
+                name_attr = d.value
+                console.log('sono radio', but)
+                d3_radviz.data(dataset, name_attr)
+                d3_radviz.setColorClassification(name_attr)
+                system.data.load(dat, DATASET_NAME);
+            }
+
+
+            name_attr = DATASET_NAME.substring(DATASET_NAME.indexOf('(') + 1, DATASET_NAME.length - 1)
+            d3_radviz.setColorClassification(name_attr)
+            system.data.load_upload(dat, DATASET_NAME);
+            system.structure.initializeForce();
+            system.structure.initializeRadar();
+            system.structure.initializeForceAxes(d3_radviz.data().angles);
+            system.structure.initializeRadarAxes(d3_radviz.data().angles);
+
+
+            let f_context_menu = function(_) {
+                system.structure.initializeForceAxes(_);
+                system.structure.initializeRadarAxes(_);
+                system.radar.changeRadar(_);
+            }
+            let f_click = function(a, b, c) {
+                system.radar.drawRadar(a, b, c);
+                system.structure.uploadProgressBar();
+
+            }
+
+            let f_drag_end = function(a) {
+                system.structure.initializeForceAxes(a);
+                system.structure.initializeRadarAxes(a);
+                system.radar.changeRadar(a);
+
+            }
+
+            let f_mouse_over = function(a, b) {
+                system.spring.drawForce(a, b);
+
+                var div = d3.select(".tooltip")
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9)
+
+                .delay(500);
+                div.html("(" + b.x1.toFixed(2) + "," + b.x2.toFixed(2) + ")<br> EE: " + b.errorE.toFixed(2))
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 50) + "px")
+                    .style("color", "white")
+                    .style("background", "black")
+            }
+
+            let f_mouse_out = function() {
+                d3.selectAll(".lineforce").remove();
+            }
+            d3_radviz.setFunctionClick(f_click)
+            d3_radviz.setFunctionMouseOver(f_mouse_over)
+            d3_radviz.setFunctionMouseOut(f_mouse_out)
+            d3_radviz.setFunctionDragEnd(f_drag_end)
+            d3_radviz.setFunctionContextMenu(f_context_menu)
+
+            system.structure.legenda_cluster(Array.from(new Set(d3_radviz.data().attributes.filter(function(pilot) {
+                return pilot.id === name_attr
+            }).map(d => d.values)[0])))
+            const set = d3_radviz.data().dimensions.map(d => d.values)
+            d3.select('#container').call(d3_radviz);
+            system.structure.uploadProgressBar();
+            document.getElementById("btn_min_disposition").style.display = "none";
+            document.getElementById("btn_max_disposition").style.display = "none";
+            document.getElementById("btn_dependent_da_disposition").style.display = "none";
+            document.getElementById("btn_independent_da_disposition").style.display = "none";
+            document.getElementById("btn_vizrank_disposition").style.display = "none";
+            document.getElementById("btn_radviz_pp_disposition").style.display = "none";
+            //document.getElementById("btn_distance_disposition").style.display = "none";
+            document.getElementById("btn_t_statistic_disposition").style.display = "none";
+
+
+
+        }
+
+        function uploadListUploadedDataset(fileup) {
+
+            let selection_list = document.getElementById("uploaded-dataset");
+            let list_options = Array.from(document.querySelectorAll('#uploaded-dataset option')).map(d => d.value)
+            let testo = fileup
+            document.getElementById("label-radviz-dim").style.display = "block";
+            document.getElementById("label-upload-radviz-classification").style.display = "block";
+            //console.log(list_options, list_options.includes(testo), testo, fileup)
+            if (!list_options.includes(fileup)) {
+                let option = document.createElement("option");
+                option.id = "u-d-attr" + list_options.length
+                option.text = testo
+                option.value = fileup
+                option.selected = true;
+                selection_list.add(option);
+
+                $('#uploaded-dataset').on('change', function() {
+                    console.log('VALORE SELEZIONATO', this.value);
+                    if (this.value != '') {
+                        system.settings.initializeDBUploaded();
+                        system.settings.selected_dataset_option = this.value
+                            // devo annullare quello dell'altro tab, cosi che non si creino inconsistenze
+                        document.getElementById("s-d-attr0").selected = true
+                        document.getElementById("label-select-radviz-dim").style.display = "none"
+                        document.getElementById("label-select-radviz-classification").style.display = "none"
+                        d3.select("#dimensions-list").selectAll('ul').remove('*');
+                        d3.select("#classification-list").selectAll('ul').remove('*');
+
+                        system.structure.legenda_cluster(Array.from(new Set(d3_radviz.data().attributes.filter(function(pilot) {
+                            return pilot.id === name_attr
+                        }).map(d => d.values)[0])))
+
+                    }
+                });
+
+            }
+
+
+            //system.settings.initializeDB();
+
+        }
+
+
+        /********  IMPORT PANEL  ********/
+
+        class ImportPanel {
+            constructor(div) {
+                this.div = div;
+                this.form = this.div.select("form").attr("action", this.formUrl);
+                this.container = this.div.select("#import-container");
+                this.div.on("click", () => this.closePopup());
+                this.container.on("click", () => d3.event.stopPropagation());
+                this.onRead_fn = null;
+                $(this.form.node()).on("drag dragstart dragend dragover dragenter dragleave drop", (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    })
+                    .on("dragover dragenter", () => {
+                        this.container.classed("is-dragover", true);
+                    })
+                    .on("dragleave dragend drop", () => {
+                        this.container.classed("is-dragover", false);
+                    })
+                    .on("drop", (e) => {
+                        $(this.form.node()).find('input[type="file"]').prop("files", e.originalEvent.dataTransfer.files);
+                        this.__readFile();
+                    });
+                this.form.select("input").on("change", () => this.__readFile());
+            }
+            __openPopup() {
+                this.div
+                    .style("opacity", 0)
+                    .style("display", "block")
+                    .transition()
+                    .style("opacity", 1);
+                return this;
+            }
+            __closePopup() {
+                this.div
+                    .style("opacity", 1)
+                    .transition()
+                    .style("opacity", 0)
+                    .style("display", "none");
+                return this;
+            }
+            __readFile() {
+                this.__closePopup();
+                let file = new FormData($(this.form.node()).get(0)).get("file");
+                var reader = new FileReader();
+                reader.onload = ((f) => {
+                    return (e) => {
+                        let fileName = f.name;
+                        let fileContent = e.target.result;
+                        if (this.onRead_fn != null) this.onRead_fn(fileName, fileContent);
+                    };
+                })(file);
+                reader.readAsText(file);
+            }
+            onRead(fn) {
+                this.onRead_fn = fn;
+                return this;
+            }
+        }
+
+        /********  IMPORT PANEL END  ********/
+
+        let importPanel = new ImportPanel(d3.select("#import-panel"))
+            .onRead((fileName, fileContent) => { //eseguita quando il file è stato letto. chiude in automatico il popup
+                console.log(fileName.substring(fileName.length - 4))
+                if (fileName.substring(fileName.length - 4) == '.csv') {
+
+                    //$("#test-file").html(fileContent);
+                    $('#name-dataset-uploaded').html(fileName)
+                    system.uploadedfile.insertDataUploaded(fileName.substring(0, fileName.length - 4), fileContent);
+                    console.log(system.uploadedfile.readDataUploaded(fileName.substring(0, fileName.length - 4)));
+                    uploadListUploadedDataset(fileName.substring(0, fileName.length - 4));
+                    system.settings.initializeDBUploaded();
+
+                    document.getElementById("s-d-attr0").selected = true;
+                    document.getElementById("label-select-radviz-dim").style.display = "none";
+                    document.getElementById("label-select-radviz-classification").style.display = "none";
+
+                    document.getElementById("btn_min_disposition").style.display = "none";
+                    document.getElementById("btn_max_disposition").style.display = "none";
+                    document.getElementById("btn_dependent_da_disposition").style.display = "none";
+                    document.getElementById("btn_independent_da_disposition").style.display = "none";
+                    document.getElementById("btn_vizrank_disposition").style.display = "none";
+                    document.getElementById("btn_radviz_pp_disposition").style.display = "none";
+                    //document.getElementById("btn_distance_disposition").style.display = "none";
+                    document.getElementById("btn_t_statistic_disposition").style.display = "none";
+
+
+                } else {
+                    alert("The format " + fileName.substring(fileName.length - 4) + " of the file is not permitted");
+                }
+            });
+    </script>
+
+
+</body>
