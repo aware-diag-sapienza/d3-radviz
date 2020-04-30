@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en" class="h-100">
-  <head>
+
+<head>
     <title>On Improving RadViz Visual Effectiveness</title>
     <!-- link preview -->
     <meta name="author" content="A.WA.RE Research Group">
-    <meta property="og:site_name" content="A.WA.RE Research Group"/>
+    <meta property="og:site_name" content="A.WA.RE Research Group" />
     <meta property="og:type" content="object" />
-    <meta property="og:title" content="On Improving RadViz Visual Effectiveness"/>
+    <meta property="og:title" content="On Improving RadViz Visual Effectiveness" />
     <link rel="icon" href="https://avatars0.githubusercontent.com/u/50241094?s=400&amp;v=4">
     <!-- ./ link preview -->
     <meta charset="utf-8">
@@ -17,125 +18,139 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/1daf48f628.js" crossorigin="anonymous"></script>
     <style>
-        #github-fork{
+        #github-fork {
             position: fixed;
             top: 0px;
             left: 0px;
         }
+        
         .container {
             width: auto;
             max-width: 1000px;
             padding: 0 15px;
             text-align: center;
-            }
-
+        }
+        
         .footer {
             background-color: #f5f5f5;
         }
-
-        .footer-container{
+        
+        .footer-container {
             text-align: center;
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
             align-items: center;
         }
-        .footer-container > *{
+        
+        .footer-container>* {
             margin-left: 2em;
             margin-right: 2em;
         }
-        .footer-container .btn-link{
+        
+        .footer-container .btn-link {
             color: #6c757d!important;
         }
-        #teaser{
+        
+        #teaser {
             margin-top: 2em;
             margin-bottom: 2em;
         }
-        #buttons-row{
+        
+        #buttons-row {
             text-align: center;
         }
-        #buttons-row .btn{
+        
+        #buttons-row .btn {
             width: 200px;
         }
-        #abstract{
+        
+        #abstract {
             margin-top: 3em;
             margin-bottom: 3em;
             font-size: 0.8em;
         }
-        #abstract > *{
+        
+        #abstract>* {
             text-align: left;
             text-align: justify;
         }
     </style>
-  </head>
-  <body class="d-flex flex-column h-100">
+</head>
+
+<body class="d-flex flex-column h-100">
     <!-- https://github.blog/2008-12-19-github-ribbons/ -->
     <a id="github-fork" href="https://github.com/aware-diag-sapienza/d3-radviz" target="_blank"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
     <!-- Begin page content -->
     <main role="main" class="flex-shrink-0">
-    <div class="container">
-        <h1 id="title" class="mt-5">On Improving RadViz Visual Effectiveness</h1>
-        <p id="authors" class="lead">Marco Angelini, Graziano Blasilli, Simone Lenti, Alessia Palleschi, and Giuseppe Santucci.</p>
-        <img id="teaser" src="teaser.png" class="img-fluid" alt="Responsive image">
-        <div id="buttons-row" class="row">
-            <div class="col"> 
-                <a role="button" class="btn btn-outline-primary" href="https://github.com/aware-diag-sapienza/d3-radviz" target="_blank">
-                    <i class="fab fa-github fa-2x"></i><br>
-                    <span>RadViz<br><b>D3.js</b> Plugin</span>
-                </a>
-            </div>
-            <div class="col"> 
-                <a role="button" class="btn btn-outline-primary" href="prototype/index.html" target="_blank">
-                    <i class="far fa-window-restore fa-2x"></i><br>
-                    <span>Experimental<br>Environment</span>
-                </a>
-            </div>
-            <div class="col"> 
-                <a role="button" class="btn btn-outline-primary" href="video.mp4" target="_blank">
-                    <i class="fas fa-video fa-2x"></i><br>
-                    <span>Video</span>
-                </a>
-            </div>
-        </div>
-        <hr>
-        <div id="abstract" class="row">
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-12">
-                        <p class="lead"><b>Abstract</b></p>
-                    </div>
+        <div class="container">
+            <h1 id="title" class="mt-5">On Improving RadViz Visual Effectiveness</h1>
+            <p id="authors" class="lead">Marco Angelini, Graziano Blasilli, Simone Lenti, Alessia Palleschi, and Giuseppe Santucci.</p>
+            <img id="teaser" src="teaser.png" class="img-fluid" alt="Responsive image">
+            <div id="buttons-row" class="row">
+                <div class="col">
+                    <a role="button" class="btn btn-outline-primary" href="https://github.com/aware-diag-sapienza/d3-radviz" target="_blank">
+                        <i class="fab fa-github fa-2x"></i><br>
+                        <span>RadViz<br><b>D3.js</b> Plugin</span>
+                    </a>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <p id="abstract-content">
-                            <!---->
-                            RadViz plays a central role in multidimensional analysis because it uses familiar 2D points for encoding data elements and allows for interpreting them along the original data dimensions. 
-                            However, it is very likely that this approach will produce misleading plots that hinder the visual analysis, even while dealing with a single point. In fact, in most cases, using the dimension arrangement that comes with the data produces a plot  which leads users to make wrong conclusions about points values and data distribution, nullifying the advantage of the availability of the original dimensions. This paper attacks this problem without altering the original RadViz design: it defines, for both a single point and a set of points, the novel metric of effectiveness error, and uses it to define the objective (cost) function of a dimension arrangement: minimizing such an error reduces  wrong value judgments caused by the fact that the positions of points \emph{do not} reflect the magnitude of their attribute values.
-                            <br><br>
-                            This paper argues that minimizing the effectiveness error increases the overall RadViz isual quality and makes more effective the basic task of analyzing the RadViz data dimension reduction in the context of its original attributes. Indeed, this paper has successfully investigated the intuition that reducing the effectiveness error is beneficial also for other well-known RadViz problems, like points clumping toward the center, many-to-one plotting of non-proportional points, and cluster separation.
-                            <br><br>
-                            To deal with the intractable problem of exploring all the dimension arrangements this paper presents an algorithm that reduces to zero the effectiveness error for a single point and a heuristic that approximates the dimension arrangement minimizing the effectiveness error for an arbitrary set of points. 
-                            To support the proposed ideas and solutions, this paper presents a comprehensive set of experiments based on 23 real datasets, with the goals of a) analyzing the advantages of reducing effectiveness errors, b) comparing the paper dimension arrangement strategy with other related proposals, and c) investigating the heuristic accuracy.
-                            <br><br>
-                            According to the obtained results, it is the authors' belief that computing the dimension arrangement minimizing the effectiveness error for the whole dataset should be a preliminary step before presenting any RadViz plot to the user, in order to reduce the risk of data misinterpretations.
-                            <br><br>
-                            The Effectiveness Error metric, the algorithm, and the heuristic presented in this paper have been made available in an open-source d3.js plugin at https://aware-diag-sapienza.github.io/d3-radviz, along with an experimental environment.
-                            <!---->
-                        </p>
-                    </div>
+                <div class="col">
+                    <a role="button" class="btn btn-outline-primary" href="prototype/index.html" target="_blank">
+                        <i class="far fa-window-restore fa-2x"></i><br>
+                        <span>Experimental<br>Environment</span>
+                    </a>
+                </div>
+                <div class="col">
+                    <a role="button" class="btn btn-outline-primary" href="https://www.dropbox.com/s/n5fm4w9iw30b5la/video-radviz.mp4?dl=0" target="_blank">
+                        <i class="fas fa-video fa-2x"></i><br>
+                        <span>Demonstrative<br>Video</span>
+                    </a>
                 </div>
             </div>
+            <hr>
+            <div id="abstract" class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="lead"><b>Abstract</b></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p id="abstract-content">
+                                <!---->
+                                RadViz plays a central role in multidimensional analysis because it uses familiar 2D points for encoding data elements and allows for interpreting them along the original data dimensions. However, it is very likely that this approach will produce misleading
+                                plots that hinder the visual analysis, even while dealing with a single point. In fact, in most cases, using the dimension arrangement that comes with the data produces a plot which leads users to make wrong conclusions
+                                about points values and data distribution, nullifying the advantage of the availability of the original dimensions. This paper attacks this problem without altering the original RadViz design: it defines, for both a single
+                                point and a set of points, the novel metric of effectiveness error, and uses it to define the objective (cost) function of a dimension arrangement: minimizing such an error reduces wrong value judgments caused by the fact
+                                that the positions of points \emph{do not} reflect the magnitude of their attribute values.
+                                <br><br> This paper argues that minimizing the effectiveness error increases the overall RadViz isual quality and makes more effective the basic task of analyzing the RadViz data dimension reduction in the context of its
+                                original attributes. Indeed, this paper has successfully investigated the intuition that reducing the effectiveness error is beneficial also for other well-known RadViz problems, like points clumping toward the center,
+                                many-to-one plotting of non-proportional points, and cluster separation.
+                                <br><br> To deal with the intractable problem of exploring all the dimension arrangements this paper presents an algorithm that reduces to zero the effectiveness error for a single point and a heuristic that approximates
+                                the dimension arrangement minimizing the effectiveness error for an arbitrary set of points. To support the proposed ideas and solutions, this paper presents a comprehensive set of experiments based on 23 real datasets,
+                                with the goals of a) analyzing the advantages of reducing effectiveness errors, b) comparing the paper dimension arrangement strategy with other related proposals, and c) investigating the heuristic accuracy.
+                                <br><br> According to the obtained results, it is the authors' belief that computing the dimension arrangement minimizing the effectiveness error for the whole dataset should be a preliminary step before presenting any
+                                RadViz plot to the user, in order to reduce the risk of data misinterpretations.
+                                <br><br> The Effectiveness Error metric, the algorithm, and the heuristic presented in this paper have been made available in an open-source d3.js plugin at https://aware-diag-sapienza.github.io/d3-radviz, along with an
+                                experimental environment.
+                                <!---->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
         </div>
-        <hr>
-    </div>
-</main>
+    </main>
 
     <footer class="footer mt-auto py-3">
-    <div class="container footer-container">
-        <span class="text-muted"><b>A.WA.RE Research Group</b></span>
-        <span class="text-muted"><a class="btn btn-link" href="http://aware.diag.uniroma1.it/" target="_blank"><i class="fas fa-link"></i> A.WA.RE Web Page</a></span>
-        <span class="text-muted"><a class="btn btn-link" href="https://github.com/aware-diag-sapienza" target="_blank"><i class="fab fa-github"></i> A.WA.RE GitHub</a></span>
-    </div>
+        <div class="container footer-container">
+            <span class="text-muted"><b>A.WA.RE Research Group</b></span>
+            <span class="text-muted"><a class="btn btn-link" href="http://aware.diag.uniroma1.it/" target="_blank"><i class="fas fa-link"></i> A.WA.RE Web Page</a></span>
+            <span class="text-muted"><a class="btn btn-link" href="https://github.com/aware-diag-sapienza" target="_blank"><i class="fab fa-github"></i> A.WA.RE GitHub</a></span>
+        </div>
     </footer>
 </body>
+
 </html>
