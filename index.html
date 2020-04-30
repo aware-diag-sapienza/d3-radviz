@@ -59,6 +59,7 @@
         }
         #abstract{
             margin-top: 3em;
+            margin-bottom: 3em;
             font-size: 0.8em;
         }
         #abstract > *{
@@ -75,7 +76,7 @@
     <div class="container">
         <h1 id="title" class="mt-5">On Improving RadViz Visual Effectiveness</h1>
         <p id="authors" class="lead">Marco Angelini, Graziano Blasilli, Simone Lenti, Alessia Palleschi, and Giuseppe Santucci.</p>
-        <img id="teaser" src="https://cdn.cjr.org/wp-content/uploads/2019/07/AdobeStock_100000042-e1563305717660-1300x500.jpeg" class="img-fluid" alt="Responsive image">
+        <img id="teaser" src="teaser.png" class="img-fluid" alt="Responsive image">
         <div id="buttons-row" class="row">
             <div class="col"> 
                 <a role="button" class="btn btn-outline-primary" href="https://github.com/aware-diag-sapienza/d3-radviz" target="_blank">
@@ -107,17 +108,25 @@
                 <div class="row">
                     <div class="col-12">
                         <p id="abstract-content">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida magna vel quam vulputate porttitor in eget arcu. Suspendisse vitae erat in ex pulvinar lacinia. Duis eu aliquam tortor. Suspendisse at dapibus nisl. Suspendisse hendrerit vestibulum diam, nec egestas eros. Ut dictum finibus elit, nec efficitur dolor. Pellentesque mattis ultrices risus sit amet blandit. Etiam tempus molestie risus sed hendrerit. Praesent aliquet erat sed risus suscipit, in eleifend quam scelerisque. Nullam gravida sodales maximus. Donec efficitur sit amet arcu eu consequat. Vestibulum pulvinar massa eleifend risus bibendum posuere. Donec eget vestibulum turpis.
-
-Duis eget faucibus nulla. Etiam purus elit, convallis laoreet viverra volutpat, consequat vitae ante. Donec varius neque nec lobortis cursus. Maecenas consequat ex vel mi maximus congue. Nunc porttitor velit sed erat dictum fermentum. Sed eu fermentum erat. Donec non risus justo. Nulla quam urna, rhoncus eu risus vel, volutpat interdum justo. Donec libero tortor, sagittis scelerisque mattis sit amet, sollicitudin vitae libero. Praesent et tristique enim, id aliquam arcu.
-
-Duis eu condimentum mi. Aenean dictum velit elit, vitae luctus arcu hendrerit non. Nulla pulvinar congue dui. Sed sem lectus, mollis et auctor et, pharetra non mauris. Vestibulum at sem non nibh tristique scelerisque. Vestibulum interdum, ipsum vitae iaculis laoreet, odio est maximus libero, ac tristique neque massa nec nisi. Pellentesque scelerisque aliquet justo quis ultricies. Donec lacinia vehicula nisl non elementum. Mauris in ante finibus, feugiat nisi quis, tincidunt enim. Proin dapibus congue ipsum in vehicula. Morbi convallis ornare suscipit. In rutrum velit quis elit mollis egestas.
-
+                            <!---->
+                            RadViz plays a central role in multidimensional analysis because it uses familiar 2D points for encoding data elements and allows for interpreting them along the original data dimensions. 
+                            However, it is very likely that this approach will produce misleading plots that hinder the visual analysis, even while dealing with a single point. In fact, in most cases, using the dimension arrangement that comes with the data produces a plot  which leads users to make wrong conclusions about points values and data distribution, nullifying the advantage of the availability of the original dimensions. This paper attacks this problem without altering the original RadViz design: it defines, for both a single point and a set of points, the novel metric of effectiveness error, and uses it to define the objective (cost) function of a dimension arrangement: minimizing such an error reduces  wrong value judgments caused by the fact that the positions of points \emph{do not} reflect the magnitude of their attribute values.
+                            <br><br>
+                            This paper argues that minimizing the effectiveness error increases the overall RadViz isual quality and makes more effective the basic task of analyzing the RadViz data dimension reduction in the context of its original attributes. Indeed, this paper has successfully investigated the intuition that reducing the effectiveness error is beneficial also for other well-known RadViz problems, like points clumping toward the center, many-to-one plotting of non-proportional points, and cluster separation.
+                            <br><br>
+                            To deal with the intractable problem of exploring all the dimension arrangements this paper presents an algorithm that reduces to zero the effectiveness error for a single point and a heuristic that approximates the dimension arrangement minimizing the effectiveness error for an arbitrary set of points. 
+                            To support the proposed ideas and solutions, this paper presents a comprehensive set of experiments based on 23 real datasets, with the goals of a) analyzing the advantages of reducing effectiveness errors, b) comparing the paper dimension arrangement strategy with other related proposals, and c) investigating the heuristic accuracy.
+                            <br><br>
+                            According to the obtained results, it is the authors' belief that computing the dimension arrangement minimizing the effectiveness error for the whole dataset should be a preliminary step before presenting any RadViz plot to the user, in order to reduce the risk of data misinterpretations.
+                            <br><br>
+                            The Effectiveness Error metric, the algorithm, and the heuristic presented in this paper have been made available in an open-source d3.js plugin at https://aware-diag-sapienza.github.io/d3-radviz, along with an experimental environment.
+                            <!---->
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+        <hr>
     </div>
 </main>
 
