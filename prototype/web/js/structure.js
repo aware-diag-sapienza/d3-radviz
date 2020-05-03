@@ -82,24 +82,6 @@ system.structure = (() => {
             //.style("stroke", "black")
             //.style("stroke-width", 1)
             .style("fill", "url(#linear-gradient)");
-
-
-
-        //let yScale = d3.scaleLinear()
-        //    .range([0, height - margin.top])
-        //    .domain([0, 1]);
-
-        //let xTicks = [0, 0.10, 0.20, 0.30, 0.50, 0.75, 1];
-
-        //let xAxis = d3.axisRight(yScale)
-        //    .tickSize(barHeight * 2)
-        //    .tickValues(xTicks);
-        //g.append("g")
-        //    .attr("transform", "translate(" + 0 + "," + 0 + ")")
-        //    .call(xAxis)
-        //    .select(".domain").remove();
-
-
     }
 
 
@@ -128,11 +110,6 @@ system.structure = (() => {
             .attr("id", "g-boxplot")
             //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
             .attr("transform", "translate(" + (margin.left) + "," + (margin.top / 2) + ")");
-
-        // create dummy data
-        //let data = [0.12, 0.19, 0.11, 0.13, 0.12, 0.22, 0.13, 0.4, 0.15, 0.16, 0.18, 0.19, 0.20, 0.12, 0.11, 0.9]
-
-        // Compute summary statistics used for the box:
 
         let data_sorted = data.sort(d3.ascending)
         let q1 = d3.quantile(data_sorted, .25)
@@ -201,7 +178,7 @@ system.structure = (() => {
         $('#number-progress').html(number_selected + '/' + d3_radviz.data().entries.length)
         let progress_percentile = ((100 / d3_radviz.data().entries.length) * number_selected).toFixed(2)
         $('.progress-bar').attr('style', 'width: ' + progress_percentile + '%')
-            //console.log('number_selected', number_selected, d3_radviz.data().entries.length, progress_percentile);
+
 
     }
 
@@ -215,8 +192,7 @@ system.structure = (() => {
 
 
     this.loadMenuAttributes = (data, dime) => {
-        console.log("LE DIMENSIONI", dime)
-            //$("#label-select-radviz-dim").style("display", "block")
+
         document.getElementById("label-select-radviz-dim").style.display = "block";
 
         let dimensions_list = document.getElementById("dimensions-list");
@@ -226,6 +202,7 @@ system.structure = (() => {
 
         let lumenu = document.createElement("ul")
         dimensions_list.appendChild(lumenu)
+
         for (let i = 0; i < dime.length; i++) {
             if (!isNaN(data[0][dime[i]]) && dime[i] != system.data.cluster_label[system.data.nameDataset]) {
                 let limenu = document.createElement('LI');
@@ -254,7 +231,7 @@ system.structure = (() => {
                 lumenu.appendChild(limenu)
             }
 
-            //console.log('dim rem', dimensions_removed, 'attr rem', attr_removed)
+
             if (dimensions_removed.indexOf(dime[i]) >= 0) {
                 d3.select('#check_attr' + i).property('checked', false);
             }
@@ -292,7 +269,7 @@ system.structure = (() => {
 
             if (d3_radviz.data().attributes.length > 0) {
                 if (d3_radviz.data().attributes[0].id == dime[i]) {
-                    // console.log('ENTRO QUI DENTRO')
+
                     chk.setAttribute("checked", "checked");
                     classification_selected = dime[i]
                 }
@@ -348,7 +325,7 @@ system.structure = (() => {
 
             if (d3_radviz.data().attributes.length > 0) {
                 if (d3_radviz.data().attributes[0].id == dime[i]) {
-                    // console.log('ENTRO QUI DENTRO')
+
                     chk.setAttribute("checked", "checked");
                     classification_selected = dime[i]
                 }
@@ -497,7 +474,7 @@ system.structure = (() => {
     }
 
     this.initializeForceAxes = (DIMENSIONS) => {
-        //console.log("mi è stato passato",DIMENSIONS)
+
         system.structure.removeElementsByClass("axisforce");
 
         let axissvg = this.svgforce.selectAll(".axisforce")
@@ -603,7 +580,7 @@ system.structure = (() => {
             indice_primo = 0;
         else {
             indice_primo = lista_dimensione_attuale.indexOf(system.data.dimensions_original[0]);
-            //console.log("PRIMO VALORE -----> ", lista_dimensione_attuale,indice_primo);
+
             let indice_primo_valore;
             d3.selectAll(".attr_label")
                 .each(function(d, i) {
@@ -639,7 +616,7 @@ system.structure = (() => {
         let width = parseFloat((eleStyle.width).split('px')[0]) - margin.left - margin.right;
         let array_value = [{ 'name': '[0,0.59]', 'value': 0 }, { 'name': '[0.60,0.74]', 'value': 0 }, { 'name': '[0.75,1.00]', 'value': 0 }]
 
-        //console.log('height',height, 'width', width, 'margin', margin,"translate(" + margin.left + "," + height / 2 + ")")
+
 
         ARRAY_VALORI.forEach((da) => {
             switch (da) {
@@ -731,7 +708,8 @@ system.structure = (() => {
 
         system.radviz.calculateDBI();
 
-        //console.log('array_value[1].value + array_value[2].value',array_value[1].value + array_value[2].value);
+
+
 
         let globalquality = (array_value[1].value + array_value[2].value) / system.data.points.length
         if (system.settings.quantile_selected) {
@@ -761,7 +739,7 @@ system.structure = (() => {
 
     this.legenda_cluster = (clusters) => {
         d3.select("#legend-cluster").selectAll("*").remove();
-        //console.log('cc',clusters)
+
         if (clusters.length != 0) {
             //$('#lctitle').css('visibility', 'visible');
 
@@ -781,7 +759,7 @@ system.structure = (() => {
             let height = parseFloat((eleStyle.height).split('px')[0]) - margin.top - margin.bottom;
             let width = parseFloat((eleStyle.width).split('px')[0]) - margin.left - margin.right;
             let singlerow = posizione_height / 10;
-            // console.log('height', posizione_height, singlerow);
+
 
 
 
@@ -828,13 +806,12 @@ system.structure = (() => {
                         d3.select("#sel_cluster-" + d).style('fill', 'black');
                         d3_radviz.data().entries.forEach(
                             function(p, i) {
-                                //console.log(p.index,i,p.selected,p.attributes[d3_radviz.getAttrColor(1)],d)
+
                                 if (p.attributes[d3_radviz.getAttrColor(1)] == d) {
                                     system.radar.drawRadar(d3_radviz.data().angles, p, d3.select('#p_' + p.index))
-                                        //d3_radviz.data().entries[i].selected = true
-                                        //console.log(p.index,i,p.selected)
+
                                 }
-                                //console.log(p.index,i,p.selected)                    
+
                             })
 
                     } else {
@@ -897,15 +874,16 @@ system.structure = (() => {
         var cluster_selected_labels = [];
         d3.selectAll('.sel_cluster')
             .each(function(l) {
-                //console.log(d3.select(this).style('fill') == 'black',d3.select(this).style('fill'))
+
+
                 if (d3.select(this).style('fill') == 'black') { // quindi devo essere preso
-                    //// console.log("SONO VERA",l);Å
+
                     cluster_selected_labels.push(l);
                 }
             })
 
 
-        //// console.log("CLUSTER",CLUSTER_PRECEDENTI, cluster_selected_labels);
+
 
 
         if (cluster_selected_labels.length != 0) {
@@ -915,13 +893,13 @@ system.structure = (() => {
                 QUANTILE_SELECTED = false;
                 d3.select("#btn_quantile").attr("class", "btn_style")
             }
-            //console.log("PUNTI-CLUSTER",point_cluster);
+
             var q;
             for (q = 1; q <= 100; q++) {
                 calculatePerfectPositionBoxPlot(points, current_configuration.order_dimension, "cluster", q / 100);
-                //console.log("CONCLUSO calculatePerfectPositionBoxPlot");
+
                 perfectPosition(points, "cluster order " + q / 100, "cq" + q + "x1", "cq" + q + "x2");
-                //console.log("CONCLUSO perfectPosition");
+
                 calculateDistancefromCenter(points, "cq" + q + "x1", "cq" + q + "x2", "CQ " + q / 100 + " MEAN", "CLUSTER", "cluster order " + q / 100);
             }
             updateCluster(cluster_selected_labels);

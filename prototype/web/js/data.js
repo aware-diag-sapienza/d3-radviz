@@ -87,8 +87,6 @@ system.data = (function() {
     this.load_upload = (loadfiledataset, name) => {
         this.nameDataset = name;
 
-        console.log('lU', loadfiledataset, name)
-            //data = system.uploadedfile.readDataUploaded(name)
         data = (d3.csvParse(system.uploadedfile.readDataUploaded(name)))
         that.dime = data.columns;
 
@@ -131,7 +129,7 @@ system.data = (function() {
 
     this.continueLoading = (data, dime) => {
         this.dimensions_original = dime.slice();
-        console.log(this.dimensions_original);
+
         data.forEach(function(d, i) {
             data.columns.forEach(function(col) {
                 d[col] = +d[col]
@@ -147,7 +145,8 @@ system.data = (function() {
             d["difference"] = 0;
         });
         this.color = d3.scaleOrdinal(d3.schemeCategory10);
-        console.log('dimensions_color', this.dimensions_color);
+
+
         this.color.domain(data.map(function(d) { return d[this.dimensions_color]; }));
         this.dataset = Object.assign([], data);
         that.dimensions_current = system.radviz.assignAnglesToDimensions(dime);
@@ -156,7 +155,7 @@ system.data = (function() {
     }
 
     this.initializeScale = () => {
-        console.log('inizializzo le scale', system.radviz.radius);
+
         this.scale_x1 = d3.scaleLinear()
             .domain([-1, 1])
             .range([-system.radviz.radius, system.radviz.radius]);
@@ -167,7 +166,7 @@ system.data = (function() {
         if (this.colorQuality == null) {
             this.colorQuality = d3.scaleOrdinal(d3.schemeYlOrRd[3].reverse());
         }
-        console.log("******COLOR QUALITY", this.colorQuality(0));
+
         this.color2 = d3.scaleOrdinal(d3.schemeCategory10)
     }
 

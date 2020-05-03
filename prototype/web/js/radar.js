@@ -17,8 +17,7 @@ system.radar = (function() {
     // metodi this.nome_parametri = (variabili di input) => {}
 
     this.drawRadar = (DIMENSIONS, d, element) => {
-        //console.log("DISEGNO")
-        //console.log("DIME-->", DIMENSIONS, d);
+
 
         if (d.selected) {
             d.selected = false;
@@ -103,7 +102,7 @@ system.radar = (function() {
             })
         }
 
-        //console.log("number radar", this.numero_di_radarchart, d3_radviz.data());
+
 
     }
 

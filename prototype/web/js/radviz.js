@@ -102,7 +102,6 @@ system.radviz = (function() {
                     this.quantitativeValue = [0, max_val];
                 })
 
-            //switchDomain()
             d3.selectAll(".data_point")
                 .each(function(d) {
                     if (system.settings.color_selected) {
@@ -116,7 +115,7 @@ system.radviz = (function() {
             let x1_value = system.settings.max_cluster_quantile_label;
             let x2_value = system.settings.max_cluster_quantile_label.substring(0, system.settings.max_cluster_quantile_label.length - 1) + "2";
 
-            //console.log("CLUSTER COORDINATES", x1_value,x2_value);
+
 
             d3.selectAll(".data_point")
                 .each((d) => {
@@ -128,7 +127,7 @@ system.radviz = (function() {
                     that.quantitativeValue = [0, max_val];
                 })
 
-            //switchDomain()
+
             d3.selectAll(".data_point")
                 .each(function(d) {
                     if (system.settings.color_selected) {
@@ -253,7 +252,7 @@ system.radviz = (function() {
     this.initializeDBI = () => {
         let x1_value = system.settings.max_quantile_label;
         let x2_value = system.settings.max_quantile_label.substring(0, system.settings.max_quantile_label.length - 1) + "2";
-        //(points, xLabel, yLabel,clusterLabel)
+
         system.settings.quantile_DBI = system.optimization.DaviesBouldinIndex(system.data.points, x2_value, x1_value, system.data.cluster_label[system.data.nameDataset]);
         system.settings.indipendent_DBI = system.optimization.DaviesBouldinIndex(system.data.points, 'ix2', 'ix1', system.data.cluster_label[system.data.nameDataset]);
         system.settings.radvizplusplus_DBI = system.optimization.DaviesBouldinIndex(system.data.points, 'rx2', 'rx1', system.data.cluster_label[system.data.nameDataset]);
@@ -274,7 +273,6 @@ system.radviz = (function() {
             system.settings.value_DBI = system.optimization.DaviesBouldinIndex(system.data.points, 'x2', 'x1', system.data.cluster_label[system.data.nameDataset]);
         }
 
-        //console.log(system.settings.value_DBI);
     }
 
     this.assignAnglesToDimensions = (list_dimensions) => {
@@ -325,7 +323,7 @@ system.radviz = (function() {
             })
         });
 
-        //console.log(real_dimensions);
+
         return real_dimensions;
     }
 
@@ -346,8 +344,7 @@ system.radviz = (function() {
             const arc = d3.arc()
                 .innerRadius(function() { //(l == 0); 
                     if (l == 0) { return 0; } else {
-                        //console.log(that.radius);
-                        //console.log((that.radius * l) / that.level_grid);
+
                         return ((that.radius * l) / that.level_grid);
                     }
                 })
@@ -428,21 +425,13 @@ system.radviz = (function() {
         let sumdistance = 0;
 
         points.forEach(function(p) {
-                sumdistance = sumdistance + Math.sqrt(Math.pow(p[l1], 2) + Math.pow(p[l2], 2))
-            })
-            /*let radiusmean = document.getElementById("infovalues")
-            //var sum = document.createTextNode(radiusmean);
-            //console.log("HERE ",label, (sumdistance / (points.length)))
-            radiusmean.appendChild(document.createTextNode(label + " " + (sumdistance / (points.length))));
-            radiusmean.appendChild(document.createElement('br'));
-            if (label == "MEDIAN MEAN") {
-              radiusmean.appendChild(document.createElement('br'));
-            }*/
+            sumdistance = sumdistance + Math.sqrt(Math.pow(p[l1], 2) + Math.pow(p[l2], 2))
+        })
+
 
         let mean = sumdistance / (points.length);
         if (max == "QUANTILE") {
             if (mean > system.settings.max_quantile_value) {
-                //console.log("MEAN", mean, l1);
                 system.settings.max_quantile_value = mean;
                 system.settings.max_quantile_label = l1;
                 system.settings.max_quantile_label_dimensions = array_label;
@@ -585,7 +574,7 @@ system.radviz = (function() {
                 .on("end", system.radviz.dragended));
 
         that.visual_mean = system.radviz.calculateDistancefromCenter(system.data.points, "relx1", "relx2", "RELATIVE MEAN");
-        //console.log("VISUAL MEAN REL",that.visual_mean);
+
 
         system.spring.initializeForceAxes(system.data.perfect_dimensions);
         system.spring.initializeRadarAxes(system.data.perfect_dimensions);
@@ -593,11 +582,11 @@ system.radviz = (function() {
 
         if (system.settings.quantile_selected) {
             system.settings.quantile_selected = false;
-            //current_configuration.layout = 'normal';
+
         }
         if (system.settings.cluster_selected) {
             system.settings.cluster_selected = false;
-            //current_configuration.layout = 'normal';
+
         }
 
         system.radviz.globalQuality(system.settings.perfect_selected);
@@ -668,7 +657,7 @@ system.radviz = (function() {
         let max_values = [];
         let c;
         this.current_configuration.changed = true;
-        // J parte da 1, perchè la colonna 0 è quella della classificazione.
+        // J parte da 1, perchè la colonna 0 è quella della classificazione
         for (c = 0; c < dimensioni.length; c++) {
             min_values.push(d3.min(data_normalized, function(d) { return +d[dimensioni[c]]; }));
             max_values.push(d3.max(data_normalized, function(d) { return +d[dimensioni[c]]; }));
@@ -710,7 +699,7 @@ system.radviz = (function() {
 
     this.dragstarted = function(d) {
         d3.select(this).raise().classed("active", true);
-        //console.log(d3.select(this).attr("cx"), d3.event.x, d3.select(this).attr("cy"), d3.event.y);
+
     }
 
     this.dragged = function(d) {
@@ -723,8 +712,7 @@ system.radviz = (function() {
             d3.select(this).classed("active", false);
             d.drag = false;
             let new_angle = system.radviz.dragendangle(d3.select(this).attr("cx"), d3.select(this).attr("cy"), d3.select(this).attr("id"), d);
-            //console.log("FUNCTION DRAGENDED");
-            //console.log("°°°°",system.data.dimensions_current);
+
             system.data.dimensions_current = system.radviz.calculateDimensionsAngles(system.radviz.newOrderDimensions(new_angle, system.data.dimensions_current));
 
             system.data.points = system.radviz.updatePositionCHANGED(system.data.points, system.data.dimensions_current);
@@ -740,12 +728,12 @@ system.radviz = (function() {
                     d3.select(this).on("mouseover", (d) => {
                             if (system.settings.quantile_selected) {
                                 let quantile_array = d[system.settings.max_quantile_label_dimensions];
-                                //console.log("FUNCTION mouseover quantile");
+
                                 let angle_ordered_dimension = system.radviz.calculateDimensionsAngles(quantile_array);
                                 system.spring.drawForce(angle_ordered_dimension, d);
                             } else if (system.settings.cluster_selected) {
                                 let quantile_array = d[system.settings.max_cluster_quantile_label_dimensions];
-                                //console.log("FUNCTION mouseover clusters");
+
                                 let angle_ordered_dimension = system.radviz.calculateDimensionsAngles(quantile_array);
                                 system.spring.drawForce(angle_ordered_dimension, d);
                             } else {
@@ -807,7 +795,7 @@ system.radviz = (function() {
                                     .on("end", system.radviz.dragended));
 
                             that.visual_mean = system.radviz.calculateDistancefromCenter(system.data.points, "relx1", "relx2", "RELATIVE MEAN");
-                            // console.log("VISUAL MEAN REL",that.visual_mean);
+
 
                             system.spring.initializeForceAxes(system.data.perfect_dimensions);
                             system.spring.initializeRadarAxes(system.data.perfect_dimensions);
@@ -815,11 +803,11 @@ system.radviz = (function() {
 
                             if (system.settings.quantile_selected) {
                                 system.settings.quantile_selected = false;
-                                //current_configuration.layout = 'normal';
+
                             }
                             if (system.settings.cluster_selected) {
                                 system.settings.cluster_selected = false;
-                                //current_configuration.layout = 'normal';
+
                             }
 
                             system.radviz.globalQuality(system.settings.perfect_selected);
@@ -878,9 +866,9 @@ system.radviz = (function() {
                     .on("drag", system.radviz.dragged)
                     .on("end", system.radviz.dragended));
 
-            //this.visual_mean = system.radviz.calculateDistancefromCenter(system.data.points, "chax1", "chax2", "changed MEAN");
+
             that.visual_mean = system.radviz.calculateDistancefromCenter(system.data.points, "chax1", "chax2", "changed MEAN");
-            // console.log("VISUAL MEAN CHA",that.visual_mean);
+
 
             if (system.settings.quantile_selected) {
                 system.settings.quantile_selected = false;
@@ -968,7 +956,7 @@ system.radviz = (function() {
             .attr("class", (d) => { return "data_point cluster_" + d[system.data.cluster_label[system.data.nameDataset]] })
             .attr("id", (d) => { return "p_" + d.index; })
             .attr("r", this.circle_radius)
-            .style("fill", (d) => { console.log(d[system.data.cluster_label[system.data.nameDataset]], system.data.color(d[system.data.cluster_label[system.data.nameDataset]])); return system.data.color(d[system.data.cluster_label[system.data.nameDataset]]); })
+            .style("fill", (d) => { return system.data.color(d[system.data.cluster_label[system.data.nameDataset]]); })
             .style("opacity", 1)
             .style("stroke", "black")
             .style("stroke-width", (d) => {
@@ -1008,7 +996,7 @@ system.radviz = (function() {
 
                 system.data.perfect_dimensions = this.assignAnglesToDimensions(d.order);
                 system.data.points = this.updatePositionRelative(system.data.points, system.data.perfect_dimensions);
-                // console.log("PERFERCT DIMENSIONS", system.data.perfect_dimensions);
+
 
                 let t = d3.transition().duration(2000);
 
@@ -1057,12 +1045,12 @@ system.radviz = (function() {
 
                 if (system.settings.quantile_selected) {
                     system.settings.quantile_selected = false;
-                    //current_configuration.layout = 'normal';
+
                 }
 
                 if (system.settings.cluster_selected) {
                     system.settings.cluster_selected = false;
-                    //current_configuration.layout = 'normal';
+
                 }
                 system.radviz.globalQuality(system.settings.perfect_selected);
                 //SONO ARRIVATA QUI
@@ -1132,7 +1120,7 @@ system.radviz = (function() {
             }
         }
 
-        // console.log("!!QUANTILE", percentage, element, result,prova);
+
         system.data.points.forEach(function(p, i) {
             if (label == "median") {
                 p["order median"] = prova;
@@ -1164,7 +1152,7 @@ system.radviz = (function() {
     this.calcoloOttimoCluster = (d, risultato_selezione) => {
 
         if (risultato_selezione) {
-            //current_configuration.layout = "cluster";
+
 
             d3.selectAll('.data_point')
                 .each(function(e) {
@@ -1174,7 +1162,7 @@ system.radviz = (function() {
                     }
                 });
 
-            // console.log("PUNTI CLSUTER",that.point_cluster);
+
         } else {
             d3.selectAll('.data_point')
                 .each(function(e) {
@@ -1190,7 +1178,7 @@ system.radviz = (function() {
 
     this.perfectPosition = (D, dimensione_label, l1, l2) => {
 
-        //console.log(D,'dimensione_label',dimensione_label, l1,l2,)
+
         let points = D
         let angle_ordered_dimension;
         let data_normalized = D.slice()
@@ -1199,7 +1187,7 @@ system.radviz = (function() {
 
 
         points.forEach(function(d, j) {
-            // console.log("FUNCTION perfect position",j,dimensione_label)
+
             angle_ordered_dimension = system.radviz.calculateDimensionsAngles(d[dimensione_label]);
 
             // mi calcolo la posizione x e y
@@ -1400,7 +1388,6 @@ system.radviz = (function() {
                     d3.select("#T_" + label_text).transition(t)
                         .attr("x", function() { return ((that.radius + 30) * Math.cos(-Math.PI / 2 + (dimensione_ordinata.start))) })
                         .attr("y", function() { return ((that.radius + 30) * Math.sin(-Math.PI / 2 + (dimensione_ordinata.start))) })
-                        //d3.select("#AP_" + label_text).transition(t).attr("cx", function () { return ((radius + 5) * Math.cos(-Math.PI / 2 + (dimensione_ordinata.start))) }).attr("cy", function () { return ((radius + 5) * Math.sin(-Math.PI / 2 + (dimensione_ordinata.start))) })
 
                 })
 
@@ -1432,7 +1419,7 @@ system.radviz = (function() {
 
                     d3.selectAll(".data_point")
                         .each(function() {
-                            //d3.select(this).attr("cx",function(d){ console.log(MAX_QUANTILE_LABEL, d[MAX_QUANTILE_LABEL]); return di[MAX_QUANTILE_LABEL];
+
                             d3.select(this).transition(t)
                                 .attr("cx", function(d) { return system.data.scale_x1(d.chax2) })
                                 .attr("cy", function(d) { return system.data.scale_x2(d.chax1) })
@@ -1449,7 +1436,7 @@ system.radviz = (function() {
                 } else {
                     d3.selectAll(".data_point")
                         .each(function() {
-                            //d3.select(this).attr("cx",function(d){ console.log(MAX_QUANTILE_LABEL, d[MAX_QUANTILE_LABEL]); return di[MAX_QUANTILE_LABEL];
+
                             d3.select(this).transition(t)
                                 .attr("cx", function(d) { return system.data.scale_x1(d.x2) })
                                 .attr("cy", function(d) { return system.data.scale_x2(d.x1) })
@@ -1583,7 +1570,6 @@ system.radviz = (function() {
                 if (that.current_configuration.changed) {
                     d3.selectAll(".data_point")
                         .each(function() {
-                            //d3.select(this).attr("cx",function(d){ console.log(MAX_QUANTILE_LABEL, d[MAX_QUANTILE_LABEL]); return di[MAX_QUANTILE_LABEL];
                             d3.select(this).transition(t)
                                 .attr("cx", function(d) { return system.data.scale_x1(d.chax2) })
                                 .attr("cy", function(d) { return system.data.scale_x2(d.chax1) })
@@ -1604,7 +1590,7 @@ system.radviz = (function() {
 
                     d3.selectAll(".data_point")
                         .each(function() {
-                            //d3.select(this).attr("cx",function(d){ console.log(MAX_QUANTILE_LABEL, d[MAX_QUANTILE_LABEL]); return di[MAX_QUANTILE_LABEL];
+
                             d3.select(this).transition(t)
                                 .attr("cx", function(d) { return system.data.scale_x1(d.x2) })
                                 .attr("cy", function(d) { return system.data.scale_x2(d.x1) })
@@ -1662,9 +1648,11 @@ system.radviz = (function() {
             let q;
             for (q = 1; q <= 100; q++) {
                 system.radviz.calculatePerfectPositionBoxPlot(system.data.points, system.data.dimensions_current, "cluster", q / 100);
-                //console.log("CONCLUSO calculatePerfectPositionBoxPlot");
+
+
                 system.radviz.perfectPosition(system.data.points, "cluster order " + q / 100, "cq" + q + "x1", "cq" + q + "x2");
-                //console.log("CONCLUSO perfectPosition");
+
+
                 system.radviz.calculateDistancefromCenter(system.data.points, "cq" + q + "x1", "cq" + q + "x2", "CQ " + q / 100 + " MEAN", "CLUSTER", "cluster order " + q / 100);
             }
             system.radviz.updateCluster(cluster_selected_labels);
@@ -1680,7 +1668,7 @@ system.radviz = (function() {
     this.optimizeSelectedPoints = () => {
         let selected_points = system.data.points.filter(function(d) { return d.selected == true; });
 
-        console.log('PUNTI SELEZIONATI', selected_points)
+
 
         if (selected_points.length != 0) {
 
@@ -1692,11 +1680,11 @@ system.radviz = (function() {
             let q;
             for (q = 1; q <= 100; q++) {
                 system.radviz.calculatePerfectPositionBoxPlot(selected_points, system.data.dimensions_current, "cluster", q / 100);
-                console.log("CONCLUSO calculatePerfectPositionBoxPlot");
+
                 system.radviz.perfectPosition(system.data.points, "cluster order " + q / 100, "cq" + q + "x1", "cq" + q + "x2");
-                console.log("CONCLUSO perfectPosition");
+
                 system.radviz.calculateDistancefromCenter(system.data.points, "cq" + q + "x1", "cq" + q + "x2", "CQ " + q / 100 + " MEAN", "CLUSTER", "cluster order " + q / 100);
-                console.log("CONCLUSO perfectPosition");
+
             }
             system.radviz.updateCluster(selected_points);
 
@@ -1842,7 +1830,8 @@ system.radviz = (function() {
 
             let angle_ordered_dimension = system.radviz.calculateDimensionsAngles(system.data.dimensions_indipendentDA);
             system.data.dimensions_current = angle_ordered_dimension;
-            //console.log("INDIPENDENTDA DIMENSIONS", system.data.dimensions_current )
+
+
             angle_ordered_dimension.forEach(function(dimensione_ordinata) {
                 let label_text = dimensione_ordinata.value.replace(" ", "").replace(".", "")
 
@@ -1924,7 +1913,8 @@ system.radviz = (function() {
 
                     d3.selectAll(".data_point")
                         .each(function() {
-                            //d3.select(this).attr("cx",function(d){ console.log(MAX_QUANTILE_LABEL, d[MAX_QUANTILE_LABEL]); return di[MAX_QUANTILE_LABEL];
+
+
                             d3.select(this).transition(t)
                                 .attr("cx", function(d) { return system.data.scale_x1(d.chax2) })
                                 .attr("cy", function(d) { return systsem.data.scale_x2(d.chax1) })
@@ -1939,10 +1929,11 @@ system.radviz = (function() {
                     system.structure.initializeRadarAxes(system.data.dimensions_current);
                     system.radar.changeRadar(system.data.dimensions_current);
                 } else {
-                    console.log("*****DEVO VEDERE QUESTI")
+
                     d3.selectAll(".data_point")
                         .each(function() {
-                            //d3.select(this).attr("cx",function(d){ console.log(MAX_QUANTILE_LABEL, d[MAX_QUANTILE_LABEL]); return di[MAX_QUANTILE_LABEL];
+
+
                             d3.select(this).transition(t)
                                 .attr("cx", function(d) { return system.data.scale_x1(d.x2) })
                                 .attr("cy", function(d) { return system.data.scale_x2(d.x1) })
@@ -1983,7 +1974,7 @@ system.radviz = (function() {
 
             let angle_ordered_dimension = system.radviz.calculateDimensionsAngles(system.data.dimensions_radvizPlusPlus);
             system.data.dimensions_current = angle_ordered_dimension;
-            //console.log("radvizPlusPlus DIMENSIONS", system.data.dimensions_current )
+
             angle_ordered_dimension.forEach(function(dimensione_ordinata) {
                 let label_text = dimensione_ordinata.value.replace(" ", "").replace(".", "")
 
@@ -2065,7 +2056,7 @@ system.radviz = (function() {
 
                     d3.selectAll(".data_point")
                         .each(function() {
-                            //d3.select(this).attr("cx",function(d){ console.log(MAX_QUANTILE_LABEL, d[MAX_QUANTILE_LABEL]); return di[MAX_QUANTILE_LABEL];
+
                             d3.select(this).transition(t)
                                 .attr("cx", function(d) { return system.data.scale_x1(d.chax2) })
                                 .attr("cy", function(d) { return systsem.data.scale_x2(d.chax1) })
@@ -2080,10 +2071,10 @@ system.radviz = (function() {
                     system.structure.initializeRadarAxes(system.data.dimensions_current);
                     system.radar.changeRadar(system.data.dimensions_current);
                 } else {
-                    console.log("*****DEVO VEDERE QUESTI")
+
                     d3.selectAll(".data_point")
                         .each(function() {
-                            //d3.select(this).attr("cx",function(d){ console.log(MAX_QUANTILE_LABEL, d[MAX_QUANTILE_LABEL]); return di[MAX_QUANTILE_LABEL];
+
                             d3.select(this).transition(t)
                                 .attr("cx", function(d) { return system.data.scale_x1(d.x2) })
                                 .attr("cy", function(d) { return system.data.scale_x2(d.x1) })
@@ -2114,14 +2105,14 @@ system.radviz = (function() {
         if (!d.checked) { // quindi diventa false, devo eliminare la voce dal resto.
             for (var i = 0; i < system.data.dimensions_current.length; i++) {
                 if (system.data.dime[i] === d.value) {
-                    // console.log('primaDIME',system.data.dime);
+
                     system.data.dime.splice(i, 1);
-                    //console.log('dopoDIME',system.data.dime);
+
 
                 }
             }
             system.data.dimensions_current = system.radviz.calculateDimensionsAngles(system.data.dime);
-            //console.log('ATTUALE',system.data.dimensions_current);
+
             system.radviz.initializeGrid();
             system.radviz.disegnapuntiedimensioni();
             system.structure.initializeForceAxes(system.data.dimensions_current);
@@ -2143,7 +2134,6 @@ system.radviz = (function() {
             tot_distance = tot_distance + system.radviz.calculateDistanceDimensions(system.data.dimensions_current, p.order);
         });
 
-        //calculateDistancefromCenter(points, "px1", "px2", "PERFECT MEAN");
 
         // FARE LE FUNZIONI QUI SOTTO 
         system.radviz.calculateInformation(system.data.points, system.data.dimensions_current);
@@ -2151,7 +2141,7 @@ system.radviz = (function() {
     }
 
     this.increaseRadius = () => {
-        console.log(that.circle_radius)
+
         if (that.circle_radius < 10) {
             that.circle_radius = that.circle_radius + 0.25
             d3.selectAll(".data_point").attr('r', that.circle_radius)
@@ -2178,14 +2168,12 @@ system.radviz = (function() {
         }
         /* */
     this.updateDisposition = (butt, label) => {
-        d3.json('./data/json/min_max_effectiveness.json').then(json_data => {
+        d3.json('https://aware-diag-sapienza.github.io/d3-radviz/prototype/data/json/min_max_effectiveness.json').then(json_data => {
             let label_dataset = ''
             let namedataset = system.data.nameDataset
             let start_label = -1
             let end_label = -1
-            console.log('Ho la ( ', namedataset.indexOf('('))
-            console.log('Ho la . ', namedataset.indexOf('.'))
-            console.log('Ho la - ', namedataset.indexOf('-'))
+
 
             label_dataset = namedataset
             if (label_dataset.indexOf('-') > 0) {
@@ -2201,9 +2189,7 @@ system.radviz = (function() {
                 label_dataset = label_dataset.substring(0, end_label)
             }
 
-            console.log(start_label, end_label)
 
-            console.log('label_dataset', label_dataset)
 
             if (Object.keys(json_data).includes(label_dataset)) {
                 system.settings.updateRadviz(butt, json_data[label_dataset][label]);
@@ -2213,20 +2199,16 @@ system.radviz = (function() {
                 if (label == 'max')
                     alert('Maximum Effectiveness Error for ' + label_dataset + ' is not yet calculated')
             }
-            //system.structure.initializeForceAxes(d3_radviz.data().angles);
-            //system.structure.initializeRadarAxes(d3_radviz.data().angles);
+
         })
     }
 
     this.updateDispositionCompetitor = (butt, label) => {
-        d3.json('./data/json/competitors.json').then(json_data => {
+        d3.json('https://aware-diag-sapienza.github.io/d3-radviz/prototype/data/json/competitors.json').then(json_data => {
             let label_dataset = ''
             let namedataset = system.data.nameDataset
             let start_label = -1
             let end_label = -1
-            console.log('Ho la ( ', namedataset.indexOf('('))
-            console.log('Ho la . ', namedataset.indexOf('.'))
-            console.log('Ho la - ', namedataset.indexOf('-'))
 
             label_dataset = namedataset
             if (label_dataset.indexOf('-') > 0) {
@@ -2242,17 +2224,13 @@ system.radviz = (function() {
                 label_dataset = label_dataset.substring(0, end_label)
             }
 
-            console.log(start_label, end_label)
-
-            console.log('label_dataset', label_dataset)
 
             if (Object.keys(json_data).includes(label_dataset)) {
                 system.settings.updateRadviz(butt, json_data[label_dataset][label]);
             } else {
                 alert('The ' + label + ' dimension arragmenet for ' + label_dataset + ' is not yet calculated')
             }
-            //system.structure.initializeForceAxes(d3_radviz.data().angles);
-            //system.structure.initializeRadarAxes(d3_radviz.data().angles);
+
         })
     }
 
@@ -2285,14 +2263,10 @@ system.radviz = (function() {
 
         let subset_selected = Object.assign({}, d3_radviz.data());
         subset_selected.entries = entries_selected
-        console.log('dimensions_set', dimensions_set[0].length);
-        console.log('DIMENSION_SET', dimensions_set)
-        console.log('ENTRIES_SET', entries_selected, subset_selected)
 
         system.radar.resetNumberChart();
         if (dimensions_set[0].length == 0)
             alert('Cannot be applied "selected" dimension arrangment without choose a point or a cluster.');
-        //$().alert('Cannot be applied the selected dimension arrangment without choose a point or a cluster.')
         else
             system.settings.updateRadviz(butt, d3.radvizDA.minEffectivenessErrorHeuristic(subset_selected))
 
