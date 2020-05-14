@@ -510,6 +510,8 @@ export default function Radviz() {
             if (!arguments.length) r = 1
             if (_ > 10) r = 10
             else r = _
+
+            d3.select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).attr("r", r)
         }
         //
     radviz.increaseRadius = function() {
@@ -527,7 +529,6 @@ export default function Radviz() {
     radviz.increaseLevelGrid = function() {
             if (level_grid < 20) {
                 level_grid = level_grid + 1
-
                 drawGrid()
             }
         }
@@ -541,7 +542,6 @@ export default function Radviz() {
         //
     radviz.setQuality = function() {
             quality = !quality
-            console.log('quality', quality)
             updateData()
         }
         //
