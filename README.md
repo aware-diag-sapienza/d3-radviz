@@ -33,11 +33,6 @@ The plug-in implemented creates Radviz visualization a rectangle per dataset in 
 
 ## API Reference
 
-API DOCUMENTATION
-
-
-## API Reference
-
 <a href="#radviz" name="radviz">#</a> d3.<b>radviz</b>() [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
 
 Constructs a new radviz generator with the default settings.
