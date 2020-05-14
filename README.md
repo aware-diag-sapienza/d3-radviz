@@ -21,7 +21,7 @@ var radviz = d3.radviz();
 
 ## Content
 
-The plug-in implemented creates Radviz visualization a rectangle per dataset in [`example/data.csv`](example/data.csv) and the given width and height.
+The plug-in implemented creates Radviz visualization.
 
 - [`src/arrangement.js`](src/arrangement.js) – There are the functions that perform the DA
 - [`src/data.js`](src/data.js) – There are the functions that perform the operation on the data (es. loading of the dataset)
