@@ -1,8 +1,21 @@
-* {
-  font-family: sans-serif;
-}
-
-html, body {
-  width: 100vw;
-  height: 100vh;
-}
+    * {
+        font-family: sans-serif;
+    }
+    
+    html,
+    body {
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    #multiple {
+        display: flex;
+    }
+    
+    .text-description {
+        margin: 10px;
+    }
+    
+    #single {
+        margin: 10px;
+    }
