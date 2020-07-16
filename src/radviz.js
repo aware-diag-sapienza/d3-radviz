@@ -543,6 +543,26 @@ export default function Radviz() {
     radviz.setQuality = function() {
             quality = !quality
             updateData()
+        } //
+        //
+    radviz.setColorPoint = function(flag) {
+            // flag: 
+            // = 0 allora uso metrica
+            // = 1 allora metto il blu
+            // = 2 allora metto un altro
+            switch (flag) {
+                case (0):
+                    quality = true;
+
+                    break;
+                case (1):
+                    quality = false;
+                    break;
+                case (2):
+                    quality = false;
+                    break;
+            }
+            updateData()
         }
         //
     radviz.setFunctionDragEnd = function(ff) {
