@@ -182,6 +182,12 @@ system.settings = (function() {
                     .style("opacity", 0);
 
             }
+
+            let results1 = function(error_value) {
+                console.log('vengo chiamata')
+                    document.getElementById('menu1').innerHTML = ' <b>Effectiveness Error</b>: ' + error_value.toFixed(4)
+                }
+            d3_radviz.setFunctionUpdateResults(results1)
             d3_radviz.setFunctionClick(f_click)
             d3_radviz.setFunctionMouseOver(f_mouse_over)
             d3_radviz.setFunctionMouseOut(f_mouse_out)

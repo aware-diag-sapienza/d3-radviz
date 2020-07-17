@@ -159,6 +159,7 @@
             <!--<button type="button" class="btn btn-secondary" id="heuristic-graziano-noopt" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristicNOOPT(d3_radviz.data()))" type="button">Heu NO-OPT</button>-->
 
             <button type="button" class="btn btn-secondary" id="original" onclick="system.settings.updateRadviz(this.id)" type="button">Original</button>
+            <button type="button" class="btn btn-secondary" id="short" onclick="system.settings.updateRadviz(this.id, system.radviz.updateShortHeuristic())" type="button">SHORT</button>
             <button type="button" class="btn btn-secondary" id="selected_heuristic" onclick="system.radviz.selectedHeuristic(this.id)">Selected</button>
             <button type="button" class="btn btn-secondary" id="btn_min_disposition" onclick="system.radviz.updateDisposition(this.id,'min')">Minimum EE</button>
             <button type="button" class="btn btn-secondary" id="btn_max_disposition" onclick="system.radviz.updateDisposition(this.id,'max')">Maximum EE</button>
@@ -241,6 +242,7 @@
 
         let d3_radviz = d3.radviz()
 
+        
 
         let nd = ''
         let name_attr = null

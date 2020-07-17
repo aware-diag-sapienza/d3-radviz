@@ -2236,10 +2236,6 @@ system.radviz = (function() {
 
     this.updateShortHeuristic = () => {
 
-
-
-
-
         let dimensions_values = d3_radviz.data().dimensions.slice();
         dimensions_values.forEach((d) => {
             d.values = d.values.sort(function(a, b) { return a - b })
@@ -2275,8 +2271,9 @@ system.radviz = (function() {
             heuristic_dimensions = quantile_ordered.slice()
         }
     }
-    console.log(max_ind_val,heuristic_dimensions)
-        return;
+
+    
+        return heuristic_dimensions;
         /*let values_dimension = points.map(p => p[d.value]);
                         values_dimension.sort(function(a, b) { return a - b });
                         element[d.value] = d3.quantile(values_dimension, percentage);
