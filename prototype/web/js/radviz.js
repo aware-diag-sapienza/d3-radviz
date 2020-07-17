@@ -2241,19 +2241,23 @@ system.radviz = (function() {
             d.values = d.values.sort(function(a, b) { return a - b })
             console.log(d);
         })
-        let quantile_dim = []
+        let quantile_dim = {}
         dimensions_values.forEach((d)=>{   
-            quantile_dim.push({d.id :{d3.quantile(d.values, 0.10)}});
+            
+            quantile_dim[d.id] = d3.quantile(d.values, 0.10)
+            
         })
 
-        console.log()
+        console.log(quantile_dim)
 
-
-        console.log(quantile_dim.map(d => d.id))
+        Object.keys(quantile_dim)
         let quantile_ordered = Object.keys(quantile_dim).sort(function(a, b) {
-            return quantile_dim[a] - quantile_dim[;
+            return quantile_dim[b] - quantile_dim[a];
         });
-        console.log(quantile_ordered.map(d => d.id))
+        console.log('quantile_ordered',quantile_ordered)
+        
+        
+        console.log('MD',d3_radviz.calculateRadvizMeanDistance(quantile_ordered))
         return;
         /*let values_dimension = points.map(p => p[d.value]);
                         values_dimension.sort(function(a, b) { return a - b });
