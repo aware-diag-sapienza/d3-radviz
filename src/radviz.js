@@ -365,7 +365,6 @@ export default function Radviz() {
         })
         mean_error_e = calculateErrorE()
         mean_distance = sum_mean_distance / data.entries.length
-
     }
     let drawGrid = function() {
             d3.selectAll(".grid-" + index_radviz).remove()
@@ -618,6 +617,61 @@ export default function Radviz() {
             calculatePointPosition()
             d3.select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).data(data.entries, (d, i) => i)
             updateData()
+        }
+        //
+        radviz.calculateRadvizMeanDistance = function(order_dimensions) {
+
+            let copy_data = Object.assign({}, data);
+            let mapping_dimension = []
+            if (!arguments.length) {
+                mapping_dimension = data.dimensions.map(d => d.id)
+            } else {
+                let new_order_dimensions = order_dimensions.slice();
+                ///new_order_dimensions[0] = 0, new_order_dimensions[1] < new_order_dimensions[n-1]
+                while (new_order_dimensions[0] != 0) {
+                    let dim = new_order_dimensions.shift();
+                    new_order_dimensions.push(dim);
+                }
+                if (new_order_dimensions[1] > new_order_dimensions[new_order_dimensions.length - 1]) {
+                    let dim = new_order_dimensions.shift();
+                    new_order_dimensions.reverse();
+                    new_order_dimensions.unshift(dim);
+                }
+                new_order_dimensions.forEach(function(num) {
+                    mapping_dimension.push(data.dimensions[num].id)
+                })
+
+            }
+            
+            copy_data.angles = assignAnglestoDimensions(mapping_dimension)
+            let sum_mean_distance = 0
+            copy_data.entries.forEach(function(point) {
+            let x_1_j = { 'denominator': 0, 'numerator': 0 };
+            let x_2_j = { 'denominator': 0, 'numerator': 0 };
+            copy_data.angles.forEach(function(dim) {
+                x_1_j.numerator = x_1_j.numerator + (point.dimensions[dim.value] * Math.cos(dim.start));
+                x_1_j.denominator = x_1_j.denominator + point.dimensions[dim.value];
+                x_2_j.numerator = x_2_j.numerator + (point.dimensions[dim.value] * Math.sin(dim.start));
+                x_2_j.denominator = x_2_j.denominator + point.dimensions[dim.value];
+            })
+            if (x_1_j.numerator == 0 || x_1_j.denominator == 0) {
+                point['x1'] = 0;
+            } else {
+                point['x1'] = x_1_j.numerator / x_1_j.denominator;
+            }
+            if (x_2_j.numerator == 0 || x_2_j.denominator == 0) {
+                point['x2'] = 0;
+            } else {
+                point['x2'] = x_2_j.numerator / x_2_j.denominator;
+            }
+
+            sum_mean_distance = sum_mean_distance + Math.sqrt(Math.pow(point['x1'], 2) + Math.pow(point['x2'], 2))
+        })
+        mean_error_e = calculateErrorE()
+        mean_distance = sum_mean_distance / data.entries.length
+
+            return mean_distance
+
         }
         //
     radviz.remove = function(bool) {
