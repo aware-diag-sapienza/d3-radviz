@@ -2236,28 +2236,46 @@ system.radviz = (function() {
 
     this.updateShortHeuristic = () => {
 
+
+
+
+
         let dimensions_values = d3_radviz.data().dimensions.slice();
         dimensions_values.forEach((d) => {
             d.values = d.values.sort(function(a, b) { return a - b })
             console.log(d);
         })
+
+        let max_ind_val = [0,-1]
+        let heuristic_dimensions = []
+
+        for (var percentage = 1; percentage<=100; percentage++){
         let quantile_dim = {}
         dimensions_values.forEach((d)=>{   
-            
-            quantile_dim[d.id] = d3.quantile(d.values, 0.10)
+            quantile_dim[d.id] = d3.quantile(d.values, percentage/100)
             
         })
 
-        console.log(quantile_dim)
-
-        Object.keys(quantile_dim)
+        
         let quantile_ordered = Object.keys(quantile_dim).sort(function(a, b) {
             return quantile_dim[b] - quantile_dim[a];
         });
-        console.log('quantile_ordered',quantile_ordered)
-        
-        
-        console.log('MD',d3_radviz.calculateRadvizMeanDistance(quantile_ordered))
+        //console.log('quantile_ordered', quantile_ordered);
+
+        let original_dim = d3_radviz.data().original.map(d => d.id)
+        quantile_ordered.forEach(function(dim,i){
+            quantile_ordered[i] = original_dim.indexOf(dim);
+        })
+        //console.log('quantile_ordered',quantile_ordered);
+
+        let current_md = d3_radviz.calculateRadvizMeanDistance(quantile_ordered);
+        if (current_md > max_ind_val[1]){
+            max_ind_val[0] = percentage
+            max_ind_val[1] = current_md
+            heuristic_dimensions = quantile_ordered.slice()
+        }
+    }
+    console.log(max_ind_val,heuristic_dimensions)
         return;
         /*let values_dimension = points.map(p => p[d.value]);
                         values_dimension.sort(function(a, b) { return a - b });
