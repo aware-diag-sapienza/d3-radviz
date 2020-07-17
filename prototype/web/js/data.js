@@ -3,6 +3,9 @@ system.data = (function() {
     const that = this;
     /*
      */
+
+    this.LINK_SERVER = './' // se OFFLINE . cosi si prende i dati in locale 
+    //this.LINK_SERVER = 'https://aware-diag-sapienza.github.io/d3-radviz/prototype/' // se ONLINE inserire https://aware-diag-sapienza.github.io/d3-radviz/prototype/ 
     this.plainDataset = null
     this.dataset = null
     this.nameDataset = null

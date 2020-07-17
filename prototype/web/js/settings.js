@@ -132,7 +132,7 @@ system.settings = (function() {
                 ORIGINAL_CLASSIFIED = false
             }
 
-            system.data.load("https://aware-diag-sapienza.github.io/d3-radviz/prototype/data/" + nameDataset + ".csv", nameDataset);
+            system.data.load( system.data.LINK_SERVER + "data/" + nameDataset + ".csv", nameDataset);
             system.structure.initializeForce();
             system.structure.initializeRadar();
             system.structure.initializeForceAxes(d3_radviz.data().angles);
@@ -590,10 +590,12 @@ system.settings = (function() {
 
         d3_radviz.remove(true);
         system.data.nameDataset = name_dataset
-
-        system.settings.newDataset('https://aware-diag-sapienza.github.io/d3-radviz/prototype/data/' + name_dataset + '.csv', name_dataset);
-        d3.json('https://aware-diag-sapienza.github.io/d3-radviz/prototype/data/json/competitors.json').then(json_data => {
-            let label_dataset = ''
+        
+        system.settings.newDataset(system.data.LINK_SERVER +'data/' + name_dataset + '.csv', name_dataset);
+        d3.json(system.data.LINK_SERVER + 'data/json/competitors.json').then(json_data => {
+        
+       
+        let label_dataset = ''
             let namedataset = name_dataset
             let start_label = -1
             let end_label = -1
@@ -634,7 +636,7 @@ system.settings = (function() {
             }
         })
 
-        d3.json('https://aware-diag-sapienza.github.io/d3-radviz/prototype/data/json/min_max_effectiveness.json').then(json_data => {
+        d3.json(system.data.LINK_SERVER + 'data/json/min_max_effectiveness.json').then(json_data => {
             let label_dataset = ''
             let namedataset = name_dataset
             let start_label = -1
@@ -696,7 +698,7 @@ system.settings = (function() {
         let name_dataset = document.querySelector('#select-dataset option:checked').value;
         d3_radviz.remove(true);
         system.data.nameDataset = name_dataset
-        system.settings.choiceDimensionsNewDataset(d, 'https://aware-diag-sapienza.github.io/d3-radviz/prototype/data/' + name_dataset + '.csv', but)
+        system.settings.choiceDimensionsNewDataset(d, system.data.LINK_SERVER + 'data/' + name_dataset + '.csv', but)
     }
 
     this.removeDimDatasetUploaded = (d, but) => {

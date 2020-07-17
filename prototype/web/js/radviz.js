@@ -2168,7 +2168,7 @@ system.radviz = (function() {
         }
         /* */
     this.updateDisposition = (butt, label) => {
-        d3.json('https://aware-diag-sapienza.github.io/d3-radviz/prototype/data/json/min_max_effectiveness.json').then(json_data => {
+        d3.json( system.data.LINK_SERVER + 'data/json/min_max_effectiveness.json').then(json_data => {
             let label_dataset = ''
             let namedataset = system.data.nameDataset
             let start_label = -1
@@ -2204,7 +2204,7 @@ system.radviz = (function() {
     }
 
     this.updateDispositionCompetitor = (butt, label) => {
-        d3.json('https://aware-diag-sapienza.github.io/d3-radviz/prototype/data/json/competitors.json').then(json_data => {
+        d3.json(system.data.LINK_SERVER + 'data/json/competitors.json').then(json_data => {
             let label_dataset = ''
             let namedataset = system.data.nameDataset
             let start_label = -1
@@ -2232,6 +2232,64 @@ system.radviz = (function() {
             }
 
         })
+    }
+
+    this.updateShortHeuristic = () => {
+
+        let dimensions_values = d3_radviz.data().dimensions.slice();
+        dimensions_values.forEach((d) => {
+            d.values = d.values.sort(function(a, b) { return a - b })
+            console.log(d);
+        })
+        let quantile_dim = []
+        dimensions_values.forEach((d)=>{   
+            quantile_dim.push({d.id :{d3.quantile(d.values, 0.10)}});
+        })
+
+        console.log()
+
+
+        console.log(quantile_dim.map(d => d.id))
+        let quantile_ordered = Object.keys(quantile_dim).sort(function(a, b) {
+            return quantile_dim[a] - quantile_dim[;
+        });
+        console.log(quantile_ordered.map(d => d.id))
+        return;
+        /*let values_dimension = points.map(p => p[d.value]);
+                        values_dimension.sort(function(a, b) { return a - b });
+                        element[d.value] = d3.quantile(values_dimension, percentage);
+                  
+            let result = Object.keys(element).sort(function(a, b) {
+                return element[b] - element[a];
+            });
+    
+            let i, s, e;
+            s = 0;
+            e = result.length - 1;
+            let prova = new Array(result.length);
+            for (i = 0; i < result.length; i++) {
+                if (i % 2 == 0) {
+                    prova[s] = result[i];
+                    s++;
+                } else {
+                    prova[e] = result[i];
+                    e--;
+                }
+            }
+    
+    
+            system.data.points.forEach(function(p, i) {
+                if (label == "median") {
+                    p["order median"] = prova;
+                } else if (label == "cluster") {
+                    p["cluster order " + percentage] = prova; //cluster order quantile
+                } else {
+                    p["order quantile " + percentage] = prova;
+                }
+            });
+        */
+    
+    
     }
 
 
