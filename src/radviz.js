@@ -619,12 +619,14 @@ export default function Radviz() {
             updateData()
         }
         //
-        radviz.calculateRadvizMeanDistance = function(order_dimensions) {
+        radviz.calculateRadvizMeanDistance = function(order_dimensions) { // order _dimensions is a list of index.
 
+            console.log('entro qui');
             let copy_data = Object.assign({}, data);
+            console.log(copy_data);
             let mapping_dimension = []
             if (!arguments.length) {
-                mapping_dimension = data.dimensions.map(d => d.id)
+                mapping_dimension = copy_data.dimensions.map(d => d.id)
             } else {
                 let new_order_dimensions = order_dimensions.slice();
                 ///new_order_dimensions[0] = 0, new_order_dimensions[1] < new_order_dimensions[n-1]
@@ -638,10 +640,11 @@ export default function Radviz() {
                     new_order_dimensions.unshift(dim);
                 }
                 new_order_dimensions.forEach(function(num) {
-                    mapping_dimension.push(data.dimensions[num].id)
+                    mapping_dimension.push(copy_data.dimensions[num].id)
                 })
 
             }
+            console.log(mapping_dimension)
             
             copy_data.angles = assignAnglestoDimensions(mapping_dimension)
             let sum_mean_distance = 0
@@ -667,10 +670,8 @@ export default function Radviz() {
 
             sum_mean_distance = sum_mean_distance + Math.sqrt(Math.pow(point['x1'], 2) + Math.pow(point['x2'], 2))
         })
-        mean_error_e = calculateErrorE()
-        mean_distance = sum_mean_distance / data.entries.length
-
-            return mean_distance
+        
+            return sum_mean_distance / copy_data.entries.length;
 
         }
         //
