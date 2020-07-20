@@ -105,6 +105,9 @@ export const radvizDA = (function(){
             return result; 
         }
         ///
+
+        console.log(data)
+        console.log(data.dimensions.map(d=> d.id))
         let m = data.entries.length;
         let n = data.dimensions.length;
         if(k == null) k = 10;

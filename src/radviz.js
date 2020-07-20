@@ -644,7 +644,7 @@ export default function Radviz() {
                 })
 
             }
-            console.log(mapping_dimension)
+            ì
             
             copy_data.angles = assignAnglestoDimensions(mapping_dimension)
             let sum_mean_distance = 0
@@ -670,7 +670,7 @@ export default function Radviz() {
 
             sum_mean_distance = sum_mean_distance + Math.sqrt(Math.pow(point['x1'], 2) + Math.pow(point['x2'], 2))
         })
-        
+        console.log(copy_data);
             return sum_mean_distance / copy_data.entries.length;
 
         }
