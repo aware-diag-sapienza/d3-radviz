@@ -2239,74 +2239,61 @@ system.radviz = (function() {
         let dimensions_values = d3_radviz.data().dimensions.slice();
         dimensions_values.forEach((d) => {
             d.values = d.values.sort(function(a, b) { return a - b })
-            console.log(d);
         })
 
+        console.log(dimensions_values);
         let max_ind_val = [0,-1]
         let heuristic_dimensions = []
 
         for (var percentage = 1; percentage<=100; percentage++){
-        let quantile_dim = {}
-        dimensions_values.forEach((d)=>{   
-            quantile_dim[d.id] = d3.quantile(d.values, percentage/100)
+            let quantile_dim = {}
+            dimensions_values.forEach((d)=>{   
+                quantile_dim[d.id] = d3.quantile(d.values, percentage/100)
+            })
+            //console.log(quantile_dim);
+
             
-        })
-
-        
-        let quantile_ordered = Object.keys(quantile_dim).sort(function(a, b) {
-            return quantile_dim[b] - quantile_dim[a];
-        });
-        //console.log('quantile_ordered', quantile_ordered);
-
-        let original_dim = d3_radviz.data().original.map(d => d.id)
-        quantile_ordered.forEach(function(dim,i){
-            quantile_ordered[i] = original_dim.indexOf(dim);
-        })
-        //console.log('quantile_ordered',quantile_ordered);
-
-        let current_md = d3_radviz.calculateRadvizMeanDistance(quantile_ordered);
-        if (current_md > max_ind_val[1]){
-            max_ind_val[0] = percentage
-            max_ind_val[1] = current_md
-            heuristic_dimensions = quantile_ordered.slice()
-        }
-    }
-
-    
-        return heuristic_dimensions;
-        /*let values_dimension = points.map(p => p[d.value]);
-                        values_dimension.sort(function(a, b) { return a - b });
-                        element[d.value] = d3.quantile(values_dimension, percentage);
-                  
-            let result = Object.keys(element).sort(function(a, b) {
-                return element[b] - element[a];
+            let quantile_ordered = Object.keys(quantile_dim).sort(function(a, b) {
+                return quantile_dim[b] - quantile_dim[a];
             });
-    
+
+
+            let original_dim = d3_radviz.data().dimensions.map(d => d.id)
+            quantile_ordered.forEach(function(dim,i){
+                quantile_ordered[i] = original_dim.indexOf(dim);
+            })
+
             let i, s, e;
             s = 0;
-            e = result.length - 1;
-            let prova = new Array(result.length);
-            for (i = 0; i < result.length; i++) {
+            e = quantile_ordered.length - 1;
+            let prova = new Array(quantile_ordered.length);
+            for (i = 0; i < quantile_ordered.length; i++) {
                 if (i % 2 == 0) {
-                    prova[s] = result[i];
+                    prova[s] = quantile_ordered[i];
                     s++;
                 } else {
-                    prova[e] = result[i];
+                    prova[e] = quantile_ordered[i];
                     e--;
                 }
             }
+
+            //console.log(prova)
+
+            let current_md = d3_radviz.calculateRadvizMeanDistance(prova);
+            if (current_md > max_ind_val[1]){
+                console.log()
+                max_ind_val[0] = percentage
+                max_ind_val[1] = current_md
+                heuristic_dimensions = prova.slice()
+                console.log(percentage,current_md,heuristic_dimensions)
+                console.log(quantile_dim);
+            }
+        }
+            
     
     
-            system.data.points.forEach(function(p, i) {
-                if (label == "median") {
-                    p["order median"] = prova;
-                } else if (label == "cluster") {
-                    p["cluster order " + percentage] = prova; //cluster order quantile
-                } else {
-                    p["order quantile " + percentage] = prova;
-                }
-            });
-        */
+            return heuristic_dimensions;
+        
     
     
     }
