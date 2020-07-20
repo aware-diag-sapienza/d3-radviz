@@ -2234,20 +2234,25 @@ system.radviz = (function() {
         })
     }
 
-    this.updateShortHeuristic = () => {
+    this.updateShortHeuristic = function(data){
 
-        let dimensions_values = d3_radviz.data().dimensions.slice();
+        var copy_data = Object.assign({}, data);
+
+        let dimensions_values = copy_data.dimensions.slice();
+        let dimensions_ordered = []
         dimensions_values.forEach((d) => {
-            d.values = d.values.sort(function(a, b) { return a - b })
+            current_values = d.values.slice()            
+            dimensions_ordered.push({'id': d.id, 'values': current_values.sort(function(a, b) { return a - b })})
         })
-
+        console.log(data.dimensions)
+        console.log(copy_data.dimensions)
         console.log(dimensions_values);
         let max_ind_val = [0,-1]
         let heuristic_dimensions = []
 
         for (var percentage = 1; percentage<=100; percentage++){
             let quantile_dim = {}
-            dimensions_values.forEach((d)=>{   
+            dimensions_ordered.forEach((d)=>{   
                 quantile_dim[d.id] = d3.quantile(d.values, percentage/100)
             })
             //console.log(quantile_dim);
@@ -2258,7 +2263,7 @@ system.radviz = (function() {
             });
 
 
-            let original_dim = d3_radviz.data().dimensions.map(d => d.id)
+            let original_dim =copy_data.dimensions.map(d => d.id)
             quantile_ordered.forEach(function(dim,i){
                 quantile_ordered[i] = original_dim.indexOf(dim);
             })

@@ -745,7 +745,7 @@ function Radviz() {
             let copy_data = Object.assign({}, data);
             let mapping_dimension = [];
             if (!arguments.length) {
-                mapping_dimension = data.dimensions.map(d => d.id);
+                mapping_dimension = copy_data.dimensions.map(d => d.id);
             } else {
                 let new_order_dimensions = order_dimensions.slice();
                 ///new_order_dimensions[0] = 0, new_order_dimensions[1] < new_order_dimensions[n-1]
@@ -759,7 +759,7 @@ function Radviz() {
                     new_order_dimensions.unshift(dim);
                 }
                 new_order_dimensions.forEach(function(num) {
-                    mapping_dimension.push(data.dimensions[num].id);
+                    mapping_dimension.push(copy_data.dimensions[num].id);
                 });
 
             }
@@ -898,6 +898,7 @@ const radvizDA = (function(){
             return result; 
         }
         ///
+        console.log(data.dimensions.map(d => d.id))
         let m = data.entries.length;
         let n = data.dimensions.length;
         if(k == null) k = 10;
