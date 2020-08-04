@@ -26,7 +26,18 @@ system.radviz = (function() {
 
     // metodi this.nome_parametri = (variabili di input) => {}
 
-
+    this.changeQuality = () => {
+        
+        if (d3.select('#effectiveness-radio').property('checked')){
+            if (!d3_radviz.getQuality()){
+                d3_radviz.setQuality()
+            }
+        } else {
+            if (d3_radviz.getQuality()){
+                d3_radviz.setQuality()
+            }
+        }
+    }
 
     this.isEqual = (array1, array2) => {
         if (array1.length != array2.length) {
