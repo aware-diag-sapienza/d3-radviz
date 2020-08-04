@@ -542,7 +542,11 @@ export default function Radviz() {
     radviz.setQuality = function() {
             quality = !quality
             updateData()
-        } //
+        } 
+        //
+    radviz.getQuality = function() {
+            return quality;
+        }
         //
     radviz.setColorPoint = function(flag) {
             // flag: 
