@@ -24,7 +24,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="container">
-                        <input type="checkbox" id="oth-metrics" name="metr" value="other">
+                        <input type="checkbox" id="oth-metrics" name="metr" value="other" onchange="system.settings.addOtherMetrics()">
                         <label for="metr"> Activate other metrics</label><br>
                         <hr>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -140,6 +140,7 @@
 
             </div>
         </div>
+        <div class="other-metrics" id="metric-value"></div>
         <div class="settings">
             <hr>
             <font size="4" style="color: #4b5158;"><b>Radius:</b> </font>

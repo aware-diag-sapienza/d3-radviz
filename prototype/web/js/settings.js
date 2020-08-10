@@ -188,14 +188,9 @@ system.settings = (function() {
                     document.getElementById('menu1').innerHTML = ' <b>Effectiveness Error</b>: ' + error_value.toFixed(4)
 
                     /* TEST FUNZIONI METRICHE*/
-                    let metrics = new RadVizMetrics(d3_radviz)
-
-                    console.log("Projection Error EUC", metrics.projectionError("euclidean")) //funziona ma non mettere in versione finale del prototipo
-                    console.log("Projection Error COS", metrics.projectionError("cosine"))
-                    console.log("Clumping50", metrics.clumping50())
-                    console.log("Clumping75", metrics.clumping75()) //funziona ma non mettere in versione finale del prototipo
-                    console.log("MeanDistance", metrics.meanDistances()) //funziona ma non mettere in versione finale del prototipo
-                    console.log("dbindex", metrics.dbindex())
+                    
+                    system.settings.addOtherMetrics();
+                   
                     /* --- */
                 }
             d3_radviz.setFunctionUpdateResults(results1)
@@ -214,6 +209,22 @@ system.settings = (function() {
             system.structure.uploadProgressBar();
 
         })
+    }
+
+    this.addOtherMetrics = function(){
+        let metrics = new RadVizMetrics(d3_radviz)
+        if (d3.select("#oth-metrics").property('checked')){
+            if (isNaN(metrics.dbindex())){
+            document.getElementById('metric-value').innerHTML = "  <b>Projection Error COS</b>: " + metrics.projectionError("cosine").toFixed(4)+
+            "<br>  <b>Clumping50</b>: " + metrics.clumping50().toFixed(4)
+            } else {
+                document.getElementById('metric-value').innerHTML = "  <b>Projection Error COS</b>: " + metrics.projectionError("cosine").toFixed(4)+
+            "<br>  <b>Clumping50</b>: " + metrics.clumping50().toFixed(4)+
+            "<br>  <b>DB index</b>: " + metrics.dbindex().toFixed(4)
+            }
+        } else {
+            document.getElementById('metric-value').innerHTML = ""
+        }
     }
 
     this.newDataset_upload = function(loadfile, nameDataset) {
