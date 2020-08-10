@@ -186,6 +186,17 @@ system.settings = (function() {
             let results1 = function(error_value) {
                 console.log('vengo chiamata')
                     document.getElementById('menu1').innerHTML = ' <b>Effectiveness Error</b>: ' + error_value.toFixed(4)
+
+                    /* TEST FUNZIONI METRICHE*/
+                    let metrics = new RadVizMetrics(d3_radviz)
+
+                    console.log("Projection Error EUC", metrics.projectionError("euclidean"))
+                    console.log("Projection Error COS", metrics.projectionError("cosine"))
+                    console.log("Clumping50", metrics.clumping50())
+                    console.log("Clumping75", metrics.clumping75())
+                    console.log("MeanDistance", metrics.meanDistances())
+                    console.log("dbindex", metrics.dbindex())
+                    /* --- */
                 }
             d3_radviz.setFunctionUpdateResults(results1)
             d3_radviz.setFunctionClick(f_click)
