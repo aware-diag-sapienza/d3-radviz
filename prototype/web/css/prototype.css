@@ -231,6 +231,7 @@ i {
 #menu1 {
     font-size: 25px;
     width: 45%;
+    padding-left: 1em;
 }
 
 .progress {
