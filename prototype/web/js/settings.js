@@ -190,11 +190,11 @@ system.settings = (function() {
                     /* TEST FUNZIONI METRICHE*/
                     let metrics = new RadVizMetrics(d3_radviz)
 
-                    console.log("Projection Error EUC", metrics.projectionError("euclidean"))
+                    console.log("Projection Error EUC", metrics.projectionError("euclidean")) //funziona ma non mettere in versione finale del prototipo
                     console.log("Projection Error COS", metrics.projectionError("cosine"))
                     console.log("Clumping50", metrics.clumping50())
-                    console.log("Clumping75", metrics.clumping75())
-                    console.log("MeanDistance", metrics.meanDistances())
+                    console.log("Clumping75", metrics.clumping75()) //funziona ma non mettere in versione finale del prototipo
+                    console.log("MeanDistance", metrics.meanDistances()) //funziona ma non mettere in versione finale del prototipo
                     console.log("dbindex", metrics.dbindex())
                     /* --- */
                 }
