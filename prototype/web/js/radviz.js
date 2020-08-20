@@ -2346,7 +2346,7 @@ system.radviz = (function() {
 
         system.radar.resetNumberChart();
         if (dimensions_set[0].length == 0)
-            alert('Cannot be applied "selected" dimension arrangment without choose a point or a cluster.');
+            alert('"Selected" dimension arrangment cannot be applied without choosing a point or a cluster.');
         else
             system.settings.updateRadviz(butt, d3.radvizDA.minEffectivenessErrorHeuristic(subset_selected))
 
