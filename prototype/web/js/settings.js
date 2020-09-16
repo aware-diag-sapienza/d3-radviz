@@ -261,6 +261,8 @@ system.settings = (function() {
         let f_click = function(a, b, c) {
             system.radar.drawRadar(a, b, c);
             system.structure.uploadProgressBar();
+            
+
 
         }
 

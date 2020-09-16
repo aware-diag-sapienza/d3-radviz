@@ -174,10 +174,18 @@ system.structure = (() => {
     }
 
     this.uploadProgressBar = () => {
-        let number_selected = d3.selectAll('.data_point').filter(function(d) { return d.selected == true; })["_groups"][0].length;
+        let number_selected = d3.selectAll('.data_point-'+ d3_radviz.getIndex()).filter(function(d) { return d.selected === true; })["_groups"][0].length;
         $('#number-progress').html(number_selected + '/' + d3_radviz.data().entries.length)
         let progress_percentile = ((100 / d3_radviz.data().entries.length) * number_selected).toFixed(2)
         $('.progress-bar').attr('style', 'width: ' + progress_percentile + '%')
+        console.log('CAZZO-',number_selected)
+        if (number_selected ==0){
+            d3.select('#deselectpoint').style('visibility','hidden')
+            d3.select('#deselectpointlabel').style('visibility','hidden')
+        } else {
+            d3.select('#deselectpoint').style('visibility','visible')
+            d3.select('#deselectpointlabel').style('visibility','visible')
+        }
 
 
     }

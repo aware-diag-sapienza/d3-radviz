@@ -154,6 +154,8 @@
             <label for="effectiveness-radio ">Effectiveness Error</label>
             <input name="color-quality" type="radio" id="cluster-radio" value="Clusters" onclick="system.radviz.changeQuality()"> <!-- d3_radviz.setQuality()-->
             <label for="cluster-radio">Clusters</label>
+            <input type="checkbox" id="deselectpoint" style="visibility: hidden;" >
+            <label id="deselectpointlabel" style="visibility: hidden;" >Deselect points</label>
             <br/>
 
             <!--<button type="button" class="btn btn-secondary" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.maxMeanDistanceHeuristic(d3_radviz.data()))" type="button">Heuristic MeanDistance</button>-->
