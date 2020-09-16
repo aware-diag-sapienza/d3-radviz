@@ -80,7 +80,7 @@
         const radviz = d3.radviz()
 
         //
-        d3.csv('https://aware-diag-sapienza.github.io/d3-radviz/dev/data/12-CSM.csv').then(dataset => {
+        d3.csv('./data/12-CSM.csv').then(dataset => {
             radviz.data(dataset)
             const set = radviz.data().dimensions.map(d => d.values)
             let prova = function(_) {
