@@ -1,3 +1,5 @@
+import * as d3 from 'd3';
+
 import { checkData, checkDataset, loadDataset, assignAnglestoDimensions } from './data'
 import { responsiveSquare } from './utils'
 import { type } from 'os'
@@ -542,14 +544,14 @@ export default function Radviz() {
     radviz.setQuality = function() {
             quality = !quality
             updateData()
-        } 
+        }
         //
     radviz.getQuality = function() {
             return quality;
         }
         //
     radviz.setColorPoint = function(flag) {
-            // flag: 
+            // flag:
             // = 0 allora uso metrica
             // = 1 allora metto il blu
             // = 2 allora metto un altro
@@ -613,7 +615,7 @@ export default function Radviz() {
                 })
 
             }
-            // sono arrivata qui ad inserire -' + index_radviz) 
+            // sono arrivata qui ad inserire -' + index_radviz)
             console.log('******')
             data.angles = assignAnglestoDimensions(mapping_dimension)
             d3.selectAll('.AP_points-' + index_radviz).remove();
@@ -649,7 +651,7 @@ export default function Radviz() {
 
             }
             ì
-            
+
             copy_data.angles = assignAnglestoDimensions(mapping_dimension)
             let sum_mean_distance = 0
             copy_data.entries.forEach(function(point) {

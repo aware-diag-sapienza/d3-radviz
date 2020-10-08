@@ -1,4 +1,5 @@
 // Adapted from https://benclinkinbeard.com/d3tips/make-any-chart-responsive-with-one-function/
+import * as d3 from 'd3';
 
 export function responsiveSquare(svg) {
   const container = d3.select(svg.node().parentNode)
