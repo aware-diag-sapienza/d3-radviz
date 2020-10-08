@@ -25,6 +25,7 @@ export default function Radviz() {
 
     let r = 1;
     let mean_error_e = 0;
+    let mean_distance = 0;
     let attribute_color = null;
     let quality = true;
     let function_update_results = null;
@@ -694,6 +695,25 @@ export default function Radviz() {
         else {
             return attribute_color;
         }
+    };
+
+    radviz.scaleX = function(_) {
+        if (!arguments.legnth) return scale_x2;
+        scale_x2 = _;
+        return radviz;
+    };
+
+    radviz.scaleY = function(_) {
+        if (!arguments.legnth) return scale_x1;
+        scale_x1 = _;
+        return radviz;
+    };
+
+    radviz.center = function(_) {
+        return {
+            x: SVG_SIDE / 2,
+            y: SVG_SIDE / 2
+        };
     };
 
     return radviz;
