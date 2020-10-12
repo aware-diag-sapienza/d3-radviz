@@ -1,3 +1,4 @@
+import { ScaleLinear } from 'd3';
 import { BaseType, Selection } from 'd3-selection';
 
 /**
@@ -139,6 +140,31 @@ export type RadViz = {
    * @param customizedFunction
    */
   setFunctionUpdateResults(customizedFunction: (meanError: number) => void);
+
+  /**
+   * Returns the offset of the center of the radial layout.
+   */
+  center(): { x: number, y: number};
+
+  /**
+   * Returns the scale that sets the horizontal position based on the x2 property.
+   */
+  scaleX(): ScaleLinear<number, number>;
+  /**
+   * Set the scale that sets the horizontal position based on the x2 property.
+   * @param newScale the new scale
+   */
+  scaleX(newScale: ScaleLinear<number, number>): RadViz;
+
+  /**
+   * Returns the scale that sets the vertical position based on the x2 property.
+   */
+  scaleY(): ScaleLinear<number, number>;
+  /**
+   * Set the scale that sets the vertical position based on the x2 property.
+   * @param newScale the new scale
+   */
+  scaleY(newScale: ScaleLinear<number, number>): RadViz;
 }
 
 /**
