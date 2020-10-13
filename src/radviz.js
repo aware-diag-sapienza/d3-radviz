@@ -363,7 +363,13 @@ export default function Radviz() {
 
             sum_mean_distance = sum_mean_distance + Math.sqrt(Math.pow(point['x1'], 2) + Math.pow(point['x2'], 2))
         })
-        mean_error_e = calculateErrorE()
+
+        // only do this costly mean error calculation if necessary, i.e., when a callback has been
+        // registered that uses the metric.
+        if (function_update_results !== null) {
+            mean_error_e = calculateErrorE()
+        }
+
         mean_distance = sum_mean_distance / data.entries.length
     }
     let drawGrid = function() {
