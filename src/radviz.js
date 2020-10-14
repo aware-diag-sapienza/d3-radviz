@@ -679,6 +679,20 @@ export default function Radviz() {
 
         }
         //
+    radviz.single_point_procedure = function(d){
+            
+            d3.select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).style("stroke-width", 0.2);
+            d3.select("#" +d).style("stroke-width", 0.5);
+            data.angles = assignAnglestoDimensions(calculateSinglePointHeuristic(d3.select("#" +d).data()[0]));
+            d3.selectAll(".AP_points" + index_radviz).remove();
+            drawAnchorPoints(true);
+            calculatePointPosition();
+            d3.select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).data(data.entries, (d, i) => i);
+            updateData();
+            if (function_context_menu != null)
+                function_context_menu(data.angles);
+        };
+        //
     radviz.remove = function(bool) {
         if (!arguments.length) return
         else {
