@@ -540,6 +540,7 @@ system.radviz = (function() {
         punto["order"] = prova;
     }
     this.contextMenuFunction = (d, i) => {
+        
         system.settings.perfect_selected = true;
 
 
@@ -2347,6 +2348,10 @@ system.radviz = (function() {
         system.radar.resetNumberChart();
         if (dimensions_set[0].length == 0)
             alert('"Selected" dimension arrangment cannot be applied without choosing a point or a cluster.');
+        else if (dimensions_set[0].length == 1){
+            // SINGLE POINT OPTIMAL
+            d3_radviz.single_point_procedure(d3.selectAll('.data_point-'+ d3_radviz.getIndex()).filter(function(d) {return d.selected}).nodes()[0].id);        
+        }
         else
             system.settings.updateRadviz(butt, d3.radvizDA.minEffectivenessErrorHeuristic(subset_selected))
 

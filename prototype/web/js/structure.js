@@ -178,10 +178,11 @@ system.structure = (() => {
         $('#number-progress').html(number_selected + '/' + d3_radviz.data().entries.length)
         let progress_percentile = ((100 / d3_radviz.data().entries.length) * number_selected).toFixed(2)
         $('.progress-bar').attr('style', 'width: ' + progress_percentile + '%')
-        console.log('CAZZO-',number_selected)
+
         if (number_selected ==0){
             d3.select('#deselectpoint').style('visibility','hidden')
             d3.select('#deselectpointlabel').style('visibility','hidden')
+            d3.select('#deselectpoint').property('checked', false) 
         } else {
             d3.select('#deselectpoint').style('visibility','visible')
             d3.select('#deselectpointlabel').style('visibility','visible')
@@ -189,6 +190,9 @@ system.structure = (() => {
 
 
     }
+
+
+    
 
 
     this.removeElementsByClass = (className) => {

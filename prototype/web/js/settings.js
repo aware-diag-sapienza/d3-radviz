@@ -184,7 +184,7 @@ system.settings = (function() {
             }
 
             let results1 = function(error_value) {
-                console.log('vengo chiamata')
+                
                     document.getElementById('menu1').innerHTML = ' <b>Effectiveness Error</b>: ' + error_value.toFixed(4)
 
                     /* TEST FUNZIONI METRICHE*/
@@ -225,6 +225,17 @@ system.settings = (function() {
         } else {
             document.getElementById('metric-value').innerHTML = ""
         }
+    }
+
+    this.deselectPoints = function(){
+        
+        d3.selectAll('.data_point-'+ d3_radviz.getIndex())
+        .each(function(d){
+            d.selected = false;
+        })
+        .style("stroke-width", '0.2')
+        system.structure.uploadProgressBar();
+        d3.selectAll(".radarlevel").remove();
     }
 
     this.newDataset_upload = function(loadfile, nameDataset) {
