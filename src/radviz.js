@@ -1,4 +1,10 @@
-import * as d3 from 'd3';
+import { select, selectAll } from 'd3-selection';
+import { transition } from 'd3-transition';
+import { descending } from 'd3-array';
+import { scaleLinear, scaleOrdinal } from 'd3-scale';
+import { interpolateWarm, schemeCategory10 } from 'd3-scale-chromatic';
+import { drag } from 'd3-drag';
+import { arc } from 'd3-shape';
 
 import { checkData, checkDataset, loadDataset, assignAnglestoDimensions } from './data';
 import { responsiveSquare } from './utils';
@@ -20,8 +26,8 @@ export default function Radviz() {
     let level_grid = 10;
     let radius = (SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2))) / 2;
     //
-    let scale_x1 = d3.scaleLinear().domain([-1, 1]).range([radius, -radius]);
-    let scale_x2 = d3.scaleLinear().domain([-1, 1]).range([-radius, radius]);
+    let scale_x1 = scaleLinear().domain([-1, 1]).range([radius, -radius]);
+    let scale_x2 = scaleLinear().domain([-1, 1]).range([-radius, radius]);
 
     let r = 1;
     let mean_error_e = 0;
@@ -36,17 +42,17 @@ export default function Radviz() {
     let function_context_menu = null;
 
     let scale_color = function(x) {
-        return d3.interpolateWarm(d3.scaleLinear().domain([0, 1]).range([1, 0])(x));
+        return interpolateWarm(scaleLinear().domain([0, 1]).range([1, 0])(x));
     };
 
-    let scale_classification = d3.scaleOrdinal(d3.schemeCategory10)
+    let scale_classification = scaleOrdinal(schemeCategory10)
         .domain(new Set(data.attributes
             .filter(function(pilot) { return pilot.id === attribute_color; })
             .map(d => d.values)[0]));
     //
     let updateData = function() {
 
-        d3.select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz)
+        select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz)
             .data(data.entries, (d, i) => i)
             .join(
                 enter => enter.append("circle")
@@ -71,22 +77,22 @@ export default function Radviz() {
                     })
                     .attr("cx", function(d) { return scale_x2(d.x2); })
                     .attr("cy", function(d) { return scale_x1(d.x1); })
-                    .on("contextmenu", function(d, i) {
-                        d3.event.preventDefault();
-                        d3.select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).style("stroke-width", 0.2);
-                        d3.select(this).style("stroke-width", 0.5);
+                    .on("contextmenu", function(event, d) {
+                        event.preventDefault();
+                        select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).style("stroke-width", 0.2);
+                        select(this).style("stroke-width", 0.5);
                         data.angles = assignAnglestoDimensions(calculateSinglePointHeuristic(d));
-                        d3.selectAll(".AP_points" + index_radviz).remove();
+                        selectAll(".AP_points" + index_radviz).remove();
                         drawAnchorPoints(true);
                         calculatePointPosition();
-                        d3.select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).data(data.entries, (d, i) => i);
+                        select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).data(data.entries, (d, i) => i);
                         updateData();
                         if (function_context_menu != null)
                             function_context_menu(data.angles);
                     })
                     .on("click", function(d) {
                         if (function_click != null)
-                            function_click(data.angles, d, d3.select(this));
+                            function_click(data.angles, d, select(this));
 
                         console.log("x1", d.x1);
                         console.log("x2", d.x2);
@@ -154,7 +160,7 @@ export default function Radviz() {
                 distances.push(entry);
             });
 
-            distances = distances.slice().sort((a, b) => d3.descending(a.value, b.value));
+            distances = distances.slice().sort((a, b) => descending(a.value, b.value));
 
 
             let A = distances.map(d => d.id);
@@ -180,26 +186,26 @@ export default function Radviz() {
         return sum_error / data.entries.length;
     };
     //
-    let dragstarted = function(d) {
-        d3.select(this).raise().classed("active", true);
+    let dragstarted = function() {
+        select(this).raise().classed("active", true);
     };
     //
-    let dragged = function(d) {
-        d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+    let dragged = function(event, d) {
+        select(this).attr("cx", d.x = event.x).attr("cy", d.y = event.y);
         d.drag = true;
     };
     //
-    let dragended = function(d) {
+    let dragended = function(event, d) {
         if (d.drag == true) {
-            d3.select(this).classed("active", false);
+            select(this).classed("active", false);
             d.drag = false;
-            let new_angle = dragendangle(d3.select(this).attr("cx"), d3.select(this).attr("cy"), d3.select(this).attr("id"), d);
+            let new_angle = dragendangle(select(this).attr("cx"), select(this).attr("cy"), select(this).attr("id"), d);
             data.angles = assignAnglestoDimensions(newOrderDimensions(new_angle, data.angles));
 
-            d3.selectAll('.AP_points-' + index_radviz).remove();
+            selectAll('.AP_points-' + index_radviz).remove();
             drawAnchorPoints(true);
             calculatePointPosition();
-            d3.select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).data(data.entries, (d, i) => i);
+            select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).data(data.entries, (d, i) => i);
             updateData();
             if (function_drag_end != null)
                 function_drag_end(data.angles);
@@ -299,9 +305,9 @@ export default function Radviz() {
         }
     };
     //
-    const drawAnchorPoints = function(drag = false) {
-        if (!drag) {
-            d3.select('#grid-g-' + index_radviz).selectAll("text.label-" + index_radviz)
+    const drawAnchorPoints = function(supportDrag = false) {
+        if (!supportDrag) {
+            select('#grid-g-' + index_radviz).selectAll("text.label-" + index_radviz)
                 .data(data.angles)
                 .enter().append("text")
                 .attr("id", (d) => { return "T_" + d.value.replace(/ /g, "") + '-' + index_radviz; })
@@ -319,15 +325,15 @@ export default function Radviz() {
         } else {
             data.angles.forEach(function(dimensione_ordinata) {
                 if (dimensione_ordinata.value.length != 0) {
-                    let tdelay = d3.transition().duration(1000);
+                    let tdelay = transition().duration(1000);
                     let label_text = dimensione_ordinata.value.replace(/ /g, "");
-                    d3.select("#T_" + label_text + '-' + index_radviz).transition(tdelay)
+                    select("#T_" + label_text + '-' + index_radviz).transition(tdelay)
                         .attr("x", () => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (dimensione_ordinata.start))); })
                         .attr("y", () => { return ((radius + 6) * Math.sin(-Math.PI / 2 + (dimensione_ordinata.start))); });
                 }
             });
         }
-        d3.select('#grid-g-' + index_radviz).selectAll(".AP_points-" + index_radviz)
+        select('#grid-g-' + index_radviz).selectAll(".AP_points-" + index_radviz)
             .data(data.angles)
             .enter().append("circle")
             .attr("class", "AP_points-" + index_radviz)
@@ -336,9 +342,9 @@ export default function Radviz() {
             .style("fill", '#660000')
             .attr("cx", (d, i) => { return ((radius + 1) * Math.cos(-Math.PI / 2 + (d.start))); })
             .attr("cy", (d, i) => { return ((radius + 1) * Math.sin(-Math.PI / 2 + (d.start))); })
-            .on('mouseover', function() { d3.select(this).attr("r", '1.5'); })
-            .on('mouseout', function() { d3.select(this).attr("r", '0.7'); })
-            .call(d3.drag()
+            .on('mouseover', function() { select(this).attr("r", '1.5'); })
+            .on('mouseout', function() { select(this).attr("r", '0.7'); })
+            .call(drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
                 .on("end", dragended));
@@ -372,11 +378,11 @@ export default function Radviz() {
         mean_distance = sum_mean_distance / data.entries.length;
     };
     let drawGrid = function() {
-        d3.selectAll(".grid-" + index_radviz).remove();
+        selectAll(".grid-" + index_radviz).remove();
 
         let l;
         for (l = 0; l < level_grid; l++) {
-            const arc = d3.arc()
+            const arcPath = arc()
                 .innerRadius(function() {
                     if (l == 0) return 0;
                     else return ((((SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2))) / 2) * l) / level_grid);
@@ -388,13 +394,13 @@ export default function Radviz() {
                 .startAngle((d) => { return d.start; })
                 .endAngle((d) => { return d.end; });
 
-            d3.select('#grid-g-' + index_radviz).selectAll('mySlices')
+            select('#grid-g-' + index_radviz).selectAll('mySlices')
                 .data(data.angles)
                 .enter()
                 .append('path')
                 .attr('id', (d) => { return 'area_' + (l + 1) + '_' + (d.index + 1) + '-' + index_radviz; })
                 .attr('class', 'grid-' + index_radviz)
-                .attr('d', arc)
+                .attr('d', arcPath)
                 .attr('fill', 'white')
                 .attr("stroke", "black")
                 .style("stroke-opacity", 0.4)
@@ -435,7 +441,7 @@ export default function Radviz() {
     };
     const radviz = function(selection) {
         selection.each(function() {
-            const container = d3.select(this)
+            const container = select(this)
                 .attr('class', 'radviz-container-' + index_radviz);
             const svg = container.append('svg')
                 .attr('class', 'radviz-svg-' + index_radviz)
@@ -492,7 +498,7 @@ export default function Radviz() {
         if (!arguments.length) return null;
         if (data.attributes.map((d) => d.id).includes(_)) {
             attribute_color = _;
-            scale_classification = d3.scaleOrdinal(d3.schemeCategory10).domain(new Set(data.attributes.filter(function(pilot) { return pilot.id === attribute_color; }).map(d => d.values)[0]));
+            scale_classification = scaleOrdinal(schemeCategory10).domain(new Set(data.attributes.filter(function(pilot) { return pilot.id === attribute_color; }).map(d => d.values)[0]));
         } else
             attribute_color = null;
         console.log(data.attributes, data.dimensions);
@@ -515,18 +521,18 @@ export default function Radviz() {
         if (_ > 10) r = 10;
         else r = _;
 
-        d3.select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).attr("r", r);
+        select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).attr("r", r);
     };
     //
     radviz.increaseRadius = function() {
         if (r < 10) r = r + 0.25;
-        d3.select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).attr("r", r);
+        select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).attr("r", r);
     };
     //
     radviz.decreaseRadius = function() {
 
         if (r > 0.25) r = r - 0.25;
-        d3.select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).attr("r", r);
+        select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).attr("r", r);
 
     };
     //
@@ -621,10 +627,10 @@ export default function Radviz() {
         // sono arrivata qui ad inserire -' + index_radviz)
         console.log('******');
         data.angles = assignAnglestoDimensions(mapping_dimension);
-        d3.selectAll('.AP_points-' + index_radviz).remove();
+        selectAll('.AP_points-' + index_radviz).remove();
         drawAnchorPoints(true);
         calculatePointPosition();
-        d3.select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).data(data.entries, (d, i) => i);
+        select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).data(data.entries, (d, i) => i);
         updateData();
     };
     //
@@ -686,7 +692,7 @@ export default function Radviz() {
     radviz.remove = function(bool) {
         if (!arguments.length) return;
         else {
-            if (bool) d3.select('.radviz-svg-' + index_radviz).remove();
+            if (bool) select('.radviz-svg-' + index_radviz).remove();
         }
     };
 
@@ -709,7 +715,7 @@ export default function Radviz() {
         return radviz;
     };
 
-    radviz.center = function(_) {
+    radviz.center = function() {
         return {
             x: SVG_SIDE / 2,
             y: SVG_SIDE / 2
