@@ -19,7 +19,8 @@
   "module": "src/index.js",
   "files": [
     "dist/**/*.js",
-    "src/**/*.js"
+    "src/**/*.js",
+    "lib/**/*.d.ts"
   ],
   "homepage": "https://github.com/aware-diag-sapienza/d3-radviz",
   "repository": {
@@ -50,6 +51,7 @@
     "minimist": "^1.2.5",
     "serialize-javascript": "^3.1.0"
   },
+  "types": "./lib/index.d.ts",
   "scripts": {
     "start": "cross-env NODE_ENV=development rollup -c -w",
     "build": "cross-env NODE_ENV=production rollup -c",
