@@ -6,6 +6,7 @@ import { interpolateWarm, schemeCategory10 } from 'd3-scale-chromatic';
 import { drag } from 'd3-drag';
 import { arc } from 'd3-shape';
 import { brush } from 'd3-brush';
+import { lasso as d3Lasso } from 'd3-lasso';
 
 import { checkData, checkDataset, loadDataset, assignAnglestoDimensions } from './data';
 import { responsiveSquare } from './utils';
@@ -473,7 +474,16 @@ export default function Radviz() {
                 .attr('height', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
                 .attr('width', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
                 .attr("transform", "translate(" + SVG_SIDE / 2 + "," + SVG_SIDE / 2 + ")");
-            svg.append("g").call(brush().on("brush", () => console.log("BRUSH!!")));
+            // svg.append("g").call(brush().on("brush", () => console.log("BRUSH!!")));
+            const lasso = d3Lasso()
+              .closePathSelect(true)
+              .closePathDistance(100)
+              .items(select(`#points-g-${index_radviz}`).selectAll('circle'))
+              .targetArea(select(`#points-g-${index_radviz}`))
+              .on("start", _ => console.log("lasso start"))
+              .on("draw", _ => console.log("lasso draw"))
+              .on("end", _ => console.log("lasso end"));
+            select(`#points-g-${index_radviz}`).call(lasso);
             drawGrid();
             drawAnchorPoints();
             calculatePointPosition();
