@@ -41,6 +41,7 @@
   "dependencies": {
     "acorn": "^7.4.0",
     "d3-array": "^2.8.0",
+    "d3-brush": "^2.1.0",
     "d3-drag": "^2.0.0",
     "d3-scale": "^3.2.3",
     "d3-scale-chromatic": "^2.0.0",

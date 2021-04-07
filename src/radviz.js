@@ -5,6 +5,7 @@ import { scaleLinear, scaleOrdinal } from 'd3-scale';
 import { interpolateWarm, schemeCategory10 } from 'd3-scale-chromatic';
 import { drag } from 'd3-drag';
 import { arc } from 'd3-shape';
+import { brush } from 'd3-brush';
 
 import { checkData, checkDataset, loadDataset, assignAnglestoDimensions } from './data';
 import { responsiveSquare } from './utils';
@@ -472,7 +473,7 @@ export default function Radviz() {
                 .attr('height', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
                 .attr('width', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
                 .attr("transform", "translate(" + SVG_SIDE / 2 + "," + SVG_SIDE / 2 + ")");
-
+            svg.append("g").call(brush().on("brush", () => console.log("BRUSH!!")));
             drawGrid();
             drawAnchorPoints();
             calculatePointPosition();
