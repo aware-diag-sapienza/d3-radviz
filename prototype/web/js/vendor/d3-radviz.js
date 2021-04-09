@@ -1075,6 +1075,24 @@ const radvizDA = (function(){
             })
             return res
         }
+        //wdbc dataset
+        if(dimensions.length == 30 && dimensions[0].id == "c" && dimensions[1].id == "d"){
+            const arr = [
+                "ff", "g", "cc", "d", "e", "n", "dd", "v", "f", "gg", "z", "mm", "t", "aa",
+                "q",  "r", "u", "o", "ee", "i", "hh", "s", "p", "l", "h", "ll", "bb", "c", "ii", "m"
+        
+            ]
+            const res = []
+            arr.forEach(d => {
+                for(let i=0; i<dimensions.length; i++){
+                    if(dimensions[i].id == d){
+                        res.push(i)
+                        break
+                    }
+                }
+            })
+            return res
+        }
 
         else {
             alert("Not defined fot this dataset !!!")
@@ -1082,6 +1100,7 @@ const radvizDA = (function(){
         
         return data.dimensions.map((d, i) => i)
     };
+
 
     /** END GRAZIANO */
     /*
