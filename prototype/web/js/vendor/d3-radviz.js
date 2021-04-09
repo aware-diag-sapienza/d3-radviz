@@ -1044,6 +1044,7 @@ const radvizDA = (function(){
             resultArrangement.reverse();
             resultArrangement.unshift(dim);
         }
+        console.log("********", resultArrangement)
         return resultArrangement;
   
     };
@@ -1051,57 +1052,43 @@ const radvizDA = (function(){
     *
     */
     /** GRAZIANO */
-    this.h1Static = function(data){
-        const dimensions = data.dimensions
+    this.h1 = function(data){
         
-        //absenteism dataset
-        if(dimensions.length == 20 && dimensions[0].id == "Reason for absence" && dimensions[1].id == "Month of absence"){
-            const arr = [
-                "Hit target", "Reason for absence", "Distance from Residence to Work", "Seasons",
-                "Weight", "Body mass index", "Transportation expense", "Height",
-                "Education", "Social smoker", "Disciplinary failure", "Absenteeism time in hours",
-                "Pet", "Son", "Age", "Work load Avg day",
-                "Service time", "Day of the week", "Social drinker", "Month of absence"
-        
-            ]
+        function orologio(arr){
             const res = []
-            arr.forEach(d => {
-                for(let i=0; i<dimensions.length; i++){
-                    if(dimensions[i].id == d){
-                        res.push(i)
-                        break
-                    }
-                }
-            })
+            for(let i=0; i<arr.length; i++){
+                if(i%2 == 0) res.push(arr[i])
+                else res.unshift(arr[i])
+            }
+            // ruoto per mettere la dim 0 in alto
+            while(res[0] != 0){
+                let dim = res.shift();
+                res.push(dim);
+            }
+            if(res[1] > res[res.length-1]){
+                let dim = res.shift();
+                res.reverse();
+                res.unshift(dim);
+            }
+            //
             return res
         }
-        //wdbc dataset
-        if(dimensions.length == 30 && dimensions[0].id == "c" && dimensions[1].id == "d"){
-            const arr = [
-                "ff", "g", "cc", "d", "e", "n", "dd", "v", "f", "gg", "z", "mm", "t", "aa",
-                "q",  "r", "u", "o", "ee", "i", "hh", "s", "p", "l", "h", "ll", "bb", "c", "ii", "m"
         
-            ]
-            const res = []
-            arr.forEach(d => {
-                for(let i=0; i<dimensions.length; i++){
-                    if(dimensions[i].id == d){
-                        res.push(i)
-                        break
-                    }
-                }
-            })
-            return res
-        }
+        
+        const dimensions = data.dimensions //array [ {id: "x", values:[]} ] già normalizzate minmax e somma1
+        const dominant = dimensions.map((d,i) => {
+            return {
+                id: d.id, 
+                index: i, //indice della dimensione
+                sum: d3.sum(d.values) 
+            } 
+        })
+        dominant.sort((a,b) => b.sum - a.sum)
+        console.log("--- DOMINANT ---", dominant, "--- --- ---")
 
-        else {
-            alert("Not defined fot this dataset !!!")
-        }
-        
-        return data.dimensions.map((d, i) => i)
+        const arrangement = orologio( dominant.map(d => d.index) )
+        return arrangement
     };
-
-
     /** END GRAZIANO */
     /*
     *
