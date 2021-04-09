@@ -1050,6 +1050,43 @@ const radvizDA = (function(){
     /*
     *
     */
+    /** GRAZIANO */
+    this.h1Static = function(data){
+        const dimensions = data.dimensions
+        
+        //absenteism dataset
+        if(dimensions.length == 20 && dimensions[0].id == "Reason for absence" && dimensions[1].id == "Month of absence"){
+            const arr = [
+                "Hit target", "Reason for absence", "Distance from Residence to Work", "Seasons",
+                "Weight", "Body mass index", "Transportation expense", "Height",
+                "Education", "Social smoker", "Disciplinary failure", "Absenteeism time in hours",
+                "Pet", "Son", "Age", "Work load Avg day",
+                "Service time", "Day of the week", "Social drinker", "Month of absence"
+        
+            ]
+            const res = []
+            arr.forEach(d => {
+                for(let i=0; i<dimensions.length; i++){
+                    if(dimensions[i].id == d){
+                        res.push(i)
+                        break
+                    }
+                }
+            })
+            return res
+        }
+
+        else {
+            alert("Not defined fot this dataset !!!")
+        }
+        
+        return data.dimensions.map((d, i) => i)
+    };
+
+    /** END GRAZIANO */
+    /*
+    *
+    */
    return this;
 }).apply({});
 /*
