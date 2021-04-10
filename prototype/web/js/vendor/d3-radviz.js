@@ -755,7 +755,7 @@ function Radviz() {
 
             }
             // sono arrivata qui ad inserire -' + index_radviz) 
-            console.log('******');
+            //console.log('******');
             data.angles = assignAnglestoDimensions(mapping_dimension);
             d3.selectAll('.AP_points-' + index_radviz).remove();
             drawAnchorPoints(true);
@@ -1044,7 +1044,7 @@ const radvizDA = (function(){
             resultArrangement.reverse();
             resultArrangement.unshift(dim);
         }
-        console.log("********", resultArrangement)
+        
         return resultArrangement;
   
     };
