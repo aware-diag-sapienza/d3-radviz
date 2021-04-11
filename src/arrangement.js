@@ -219,7 +219,7 @@ export const radvizDA = (function(){
                 value: d3.sum(d.values) 
             }
         }).sort((a,b) => b.value - a.value)
-        console.log("--- Representative Point ---", representativePoint, "--- --- ---")
+        //console.log("--- Representative Point ---", representativePoint, "--- --- ---")
         
         const arrangement = []
         // clock

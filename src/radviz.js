@@ -625,7 +625,6 @@ export default function Radviz() {
 
         }
         // sono arrivata qui ad inserire -' + index_radviz)
-        console.log('******');
         data.angles = assignAnglestoDimensions(mapping_dimension);
         selectAll('.AP_points-' + index_radviz).remove();
         drawAnchorPoints(true);
