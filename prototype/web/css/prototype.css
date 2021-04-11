@@ -56,7 +56,14 @@ body {
 .other-metrics {
     width: 100%;
     height: 4%;
+    display: flex;
+    flex-direction: row;
     /*border: 1px solid black;*/
+}
+
+#additional-encodings{
+    padding-right: 10px;
+    
 }
 
 .radviz {

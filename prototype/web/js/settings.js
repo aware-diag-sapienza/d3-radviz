@@ -185,7 +185,7 @@ system.settings = (function() {
 
             let results1 = function(error_value) {
                 
-                    document.getElementById('menu1').innerHTML = ' <b>Effectiveness Error</b>: ' + error_value.toFixed(4)
+                    document.getElementById('menu1').innerHTML = ' <b>Effectiveness Error</b>: ' + error_value.toFixed(5)
 
                     /* TEST FUNZIONI METRICHE*/
                     
@@ -216,15 +216,15 @@ system.settings = (function() {
         let metrics = new RadVizMetrics(d3_radviz)
         if (d3.select("#oth-metrics").property('checked')){
             if (isNaN(metrics.dbindex())){
-            document.getElementById('metric-value').innerHTML = "  <b>Projection Error COS</b>: " + metrics.projectionError("cosine").toFixed(4)+
+            document.getElementById('additional-metrics').innerHTML = "  <b>Projection Error COS</b>: " + metrics.projectionError("cosine").toFixed(4)+
             "<br>  <b>Clumping50</b>: " + metrics.clumping50().toFixed(4)
             } else {
-                document.getElementById('metric-value').innerHTML = "  <b>Projection Error COS</b>: " + metrics.projectionError("cosine").toFixed(4)+
+                document.getElementById('additional-metrics').innerHTML = "  <b>Projection Error COS</b>: " + metrics.projectionError("cosine").toFixed(4)+
             "<br>  <b>Clumping50</b>: " + metrics.clumping50().toFixed(4)+
             "<br>  <b>DB index</b>: " + metrics.dbindex().toFixed(4)
             }
         } else {
-            document.getElementById('metric-value').innerHTML = ""
+            document.getElementById('additional-metrics').innerHTML = ""
         }
     }
 

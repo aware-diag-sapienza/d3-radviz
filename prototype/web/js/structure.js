@@ -726,25 +726,25 @@ system.structure = (() => {
         let globalquality = (array_value[1].value + array_value[2].value) / system.data.points.length
         if (system.settings.quantile_selected) {
             //'<i class="fas fa-cog dropbtn"></i> 
-            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(4);
+            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(5);
             system.settings.quantile_global_quality = globalquality;
         } else if (system.settings.cluster_selected) {
             //'<i class="fas fa-cog dropbtn"></i> 
-            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(4);
+            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(5);
         } else if (system.settings.indipendent_selected) {
             //'<i class="fas fa-cog dropbtn"></i> 
-            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(4);
+            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(5);
             system.settings.indipendent_global_quality = globalquality;
         } else if (system.settings.radvizplusplus_selected) {
             //'<i class="fas fa-cog dropbtn"></i> 
-            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(4);
+            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(5);
             system.settings.radviz_plus_plus_global_quality = globalquality;
         } else if (system.settings.perfect_selected) {
             //'<i class="fas fa-cog dropbtn"></i> 
-            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(4);
+            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(5);
         } else {
             //'<i class="fas fa-cog dropbtn"></i> 
-            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(4);
+            document.getElementById('menu1').innerHTML = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-cog"></i></button> <b>Global Quality</b>: ' + globalquality.toFixed(5);
             system.settings.value_global_quality = globalquality;
         }
     }
