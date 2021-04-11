@@ -28,12 +28,19 @@ export default function Radviz() {
     //
     let scale_x1 = scaleLinear().domain([-1, 1]).range([radius, -radius]);
     let scale_x2 = scaleLinear().domain([-1, 1]).range([-radius, radius]);
+    //
+    let defaultPointColor = '#1f78b4';
+    let outlierPointColor = 'orange';
 
     let r = 1;
     let mean_error_e = 0;
     let mean_distance = 0;
     let attribute_color = null;
+    
     let quality = true;
+    let bool_showOutliers = false;
+    let bool_showRepresentativePoint = false;
+
     let function_update_results = null;
     let function_click = null;
     let function_drag_end = null;
@@ -52,16 +59,17 @@ export default function Radviz() {
     //
     let updateData = function() {
 
-        select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz)
+        select('#points-g-' + index_radviz).selectAll(`circle.data_point-${index_radviz}`)
             .data(data.entries, (d, i) => i)
             .join(
                 enter => enter.append("circle")
-                    .attr('class', 'data_point-' + index_radviz)
+                    .attr('class', d => d.outlier ? `data_point data_point-${index_radviz} data_point_outlier` : `data_point data_point-${index_radviz}`)
                     .attr("id", (d, i) => { return "p_" + i + '-' + index_radviz; })
                     .attr("r", r)
                     .style("fill", function(d) {
-                        if (quality) return scale_color(d.errorE);
-                        else if (attribute_color == null) return '#1f78b4';
+                        if(bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
+                        else if (quality) return scale_color(d.errorE);
+                        else if (attribute_color == null) return defaultPointColor;
                         else {
                             return scale_classification(d.attributes[attribute_color]);
                         }
@@ -111,8 +119,9 @@ export default function Radviz() {
                         .transition()
                         .duration(1000)
                         .style("fill", function(d) {
-                            if (quality) return scale_color(d.errorE);
-                            else if (attribute_color == null) return '#1f78b4';
+                            if(bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor;
+                            else if (quality) return scale_color(d.errorE);
+                            else if (attribute_color == null) return defaultPointColor;
                             else {
                                 data.attributes;
                                 return scale_classification(d.attributes[attribute_color]);
@@ -125,6 +134,37 @@ export default function Radviz() {
                                 return 0.2;
                             }
                         })
+                        .attr("cx", (d) => { return scale_x2(d.x2); })
+                        .attr("cy", (d) => { return scale_x1(d.x1); }),
+                    ),
+                exit => exit
+                    .call(exit => exit
+                        .transition()
+                        .duration(650)
+                        .remove()
+                    )
+            );
+        
+        select('#points-g-' + index_radviz).selectAll(`circle.repr_point-${index_radviz}`)
+            .data([data.representativeEntry], (d, i) => i)
+            .join(
+                enter => enter.append("circle")
+                    .attr('class', `repr_point repr_point-${index_radviz}`)
+                    .attr("id", 'repr_point-' + index_radviz)
+                    .attr("r", r*3)
+                    .style("display", bool_showRepresentativePoint ? null : "none")
+                    .style("fill", "red")
+                    .style("opacity", 0.5)
+                    .style("stroke", "black")
+                    .style("stroke-width", 1)
+                    .attr("cx", function(d) { return scale_x2(d.x2); })
+                    .attr("cy", function(d) { return scale_x1(d.x1); }),
+                
+                update => update
+                    .call(update => update
+                        .transition()
+                        .duration(1000)
+                        .style("display", bool_showRepresentativePoint ? null : "none")
                         .attr("cx", (d) => { return scale_x2(d.x2); })
                         .attr("cy", (d) => { return scale_x1(d.x1); }),
                     ),
@@ -380,11 +420,11 @@ export default function Radviz() {
             point.x2 = pos.x2
         })
         mean_error_e = calculateErrorE();
-        data.representativeEntry.x1 = position(data.representativeEntry)
-        data.representativeEntry.x2 = position(data.representativeEntry)
+        data.representativeEntry.x1 = position(data.representativeEntry).x1
+        data.representativeEntry.x2 = position(data.representativeEntry).x2
     };
 
-    
+
     let drawGrid = function() {
         selectAll(".grid-" + index_radviz).remove();
 
@@ -560,6 +600,14 @@ export default function Radviz() {
     //
     radviz.setQuality = function() {
         quality = !quality;
+        updateData();
+    };
+    radviz.showOutliers = function(bool=true) {
+        bool_showOutliers = bool;
+        updateData();
+    };
+    radviz.showRepresentativePoint = function(bool=true) {
+        bool_showRepresentativePoint = bool;
         updateData();
     };
     //

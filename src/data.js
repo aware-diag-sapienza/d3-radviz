@@ -130,12 +130,13 @@ function computeDimensionsDominance(entries){
         }
     })
 
-    const dominance = dims.map((d, i) => {
+    let dominance = dims.map((d, i) => {
         return {
             id: d,
             count: freq[i]
         }
     }).sort((a, b) => b.count - a.count)
+    dominance = dominance.map((d, i) => { return {...d, dominance: i}})
     return dominance
 }
 
@@ -152,12 +153,13 @@ function computeDimensionsDominanceMean(entries){
         }
     })
 
-    const dominance = dims.map((d, i) => {
+    let dominance = dims.map((d, i) => {
         return {
             id: d,
             count: freq[i]
         }
     }).sort((a, b) => b.count - a.count)
+    dominance = dominance.map((d, i) => { return {...d, dominance: i}})
     return dominance
 }
 
