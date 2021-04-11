@@ -159,11 +159,10 @@
             <br/>
 
             <!--<button type="button" class="btn btn-secondary" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.maxMeanDistanceHeuristic(d3_radviz.data()))" type="button">Heuristic MeanDistance</button>-->
-            
-            <button type="button" class="btn btn-secondary" id="heuristic-eemh" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristic(d3_radviz.data()))" type="button"><small><b>EEMH</b></small> Heuristic</button>
-            <button type="button" class="btn btn-secondary" id="heuristic-eemh-fast" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristicFast(d3_radviz.data()))" type="button"><small><b>EEMH Fast</b></small> Heuristic</button>
-            <button type="button" class="btn btn-secondary" id="heuristic-clock" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.clockHeuristic(d3_radviz.data()))" type="button"><small><b>Clock</b></small> Heuristic</button>
-            
+
+            <button type="button" class="btn btn-secondary" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristic(d3_radviz.data()))" type="button">Heuristic</button>
+            <!--<button type="button" class="btn btn-secondary" id="heuristic-graziano-noopt" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristicNOOPT(d3_radviz.data()))" type="button">Heu NO-OPT</button>-->
+
             <button type="button" class="btn btn-secondary" id="original" onclick="system.settings.updateRadviz(this.id)" type="button">Original</button>
             <button type="button" class="btn btn-secondary" id="selected_heuristic" onclick="system.radviz.selectedHeuristic(this.id)">Selected</button>
             <button type="button" class="btn btn-secondary" id="btn_min_disposition" onclick="system.radviz.updateDisposition(this.id,'min')">Minimum EE</button>
@@ -176,6 +175,10 @@
             <button type="button" class="btn btn-secondary" id="btn_radviz_pp_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'radviz_pp')">Radviz ++</button>
             <!--<button type="button" class="btn btn-secondary" id="btn_distance_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'distance')">Distance</button>-->
             <button type="button" class="btn btn-secondary" id="btn_t_statistic_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'t_statistic')">T statistic</button>
+
+            <button type="button" class="btn btn-warning" id="btn_h1" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.h1(d3_radviz.data()))">H1</button>
+
+
 
 
         </div>
@@ -214,6 +217,7 @@
     <script src="./web/js/vendor/d3-legend.js"></script>
     <script src="./web/js/vendor/d3-radviz.js"></script>
     <script src="./web/js/metrics.js"></script>
+    <script src="./web/js/vendor/d3-lasso.min.js"></script>
 
 
     <script>
@@ -524,6 +528,68 @@
                     alert("The format " + fileName.substring(fileName.length - 4) + " of the file is not permitted");
                 }
             });
+        
+
+            function setup_lasso(){
+  // Lasso functions
+  var lasso_start = function() {
+
+    lasso.items()
+        .style("stroke-width", "0.2");
+  };
+
+  var lasso_draw = function() {
+
+    // Style the possible dots
+    lasso.possibleItems()
+        .style("stroke-width", "0.4")
+
+    // Style the not possible dot
+    lasso.notPossibleItems()
+        .style("stroke-width", "0.2")
+  };
+
+  var lasso_end = function() {
+    system.settings.deselectPoints();
+
+    // Style the selected dots
+    
+    lasso.selectedItems()
+        .each((d)=> {
+            system.radar.drawRadar(d3_radviz.data().angles, d, d3.select('#p_' + d.index+'-'+ d3_radviz.getIndex()))
+            //d.selected = true
+        })
+
+    lasso.selectedItems()
+        .style("stroke", "black")
+        .style("stroke-width", "0.4")
+
+    console.log('DIMENSIONE:',lasso.selectedItems().nodes().length)
+    // Reset the style of the not selected dots
+    lasso.notSelectedItems().each((d)=> d.selected = false)
+    lasso.notSelectedItems()
+    .style("stroke", "black")
+      .style("stroke-width", "0.2");
+      system.structure.uploadProgressBar();
+  };
+
+  
+
+  //d3.select('#chart svg').call(lasso);
+
+  var lasso = d3.lasso()
+  .closePathSelect(true)
+    .closePathDistance(100)
+    .items(d3.select(`#points-g-${d3_radviz.getIndex()}`).selectAll('circle'))
+    .targetArea(d3.select(`.radviz-svg-${d3_radviz.getIndex()}`))
+    .on("start",lasso_start)
+    .on("draw",lasso_draw)
+    .on("end",lasso_end);
+     // Sets the drag area for the lasso on the rectangle #myLassoRect
+    d3.select(`.radviz-svg-${d3_radviz.getIndex()}`).call(lasso);
+}
+            
+            //  .targetArea(select(`#points-g-${index_radviz}`))
     </script>
 
 
