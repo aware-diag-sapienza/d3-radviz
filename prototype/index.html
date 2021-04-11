@@ -137,7 +137,7 @@
 
                 </div>
                 <div class="cluster-legend" id="legend-cluster"></div>
-                <div id="avg-similarity"></div>
+                
 
             </div>
         </div>
@@ -147,12 +147,14 @@
                 <label id="dominance-check-label">Dominance</label>
                 <input type="checkbox" id="dominance-mean-check"  onclick="" >
                 <label id="dominance-mean-check-label">DominanceMean</label>
-                <input type="checkbox" id="representative-point-check"  onclick="" >
-                <label id="representative-point-check-label">Representative Point</label>
+                <input type="checkbox" id="representative-point-check"  onclick="system.settings.reprPoint()" >
+                <label id="representative-point-check-label">Repr. Point</label>
                 <input type="checkbox" id="lazoselection"  onclick="system.settings.lazoSelection()" >
-                <label id="lazoselectionlabel">Lazo Selecetion</label>
+                <label id="lazoselectionlabel">Lazo</label>
             </div>
+            <div id="avg-similarity"></div>
             <div id="additional-metrics"></div>
+            
         </div>
         <div class="settings">
             <hr>

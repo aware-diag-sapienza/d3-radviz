@@ -891,5 +891,23 @@ system.settings = (function() {
 
     }
 
+    this.reprPoint = function(){
+        
+        if(document.getElementById('representative-point-check').checked) {
+            d3_radviz.showRepresentativePoint(true)
+        } else {
+            d3_radviz.showRepresentativePoint(false)
+        }
+    }
+
+    this.updateDominance = function(){
+        
+        if(document.getElementById('representative-point-check').checked) {
+            d3_radviz.showRepresentativePoint(true)
+        } else {
+            d3_radviz.showRepresentativePoint(false)
+        }
+    }
+
     return this;
 }).call({})
