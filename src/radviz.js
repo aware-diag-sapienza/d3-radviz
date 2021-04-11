@@ -89,10 +89,11 @@ export default function Radviz() {
                         calculatePointPosition();
                         select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).data(data.entries, (d, i) => i);
                         updateData();
+                        
                         if (function_context_menu != null)
                             function_context_menu(data.angles);
                     })
-                    .on("click", function(d) {
+                    .on("click", function(e,d) {
                         if (function_click != null)
                             function_click(data.angles, d, select(this));
 
@@ -100,11 +101,11 @@ export default function Radviz() {
                         console.log("x2", d.x2);
                         console.log("errorE", d.errorE);
                     })
-                    .on('mouseover', function(d) {
+                    .on('mouseover', function(e,d) {
                         if (function_mouse_over != null)
                             function_mouse_over(data.angles, d);
                     })
-                    .on('mouseout', function(d) {
+                    .on('mouseout', function(e,d) {
                         if (function_mouse_out != null)
                             function_mouse_out(d);
                     }),
@@ -475,15 +476,15 @@ export default function Radviz() {
                 .attr('width', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
                 .attr("transform", "translate(" + SVG_SIDE / 2 + "," + SVG_SIDE / 2 + ")");
             // svg.append("g").call(brush().on("brush", () => console.log("BRUSH!!")));
-            const lasso = d3Lasso()
-              .closePathSelect(true)
-              .closePathDistance(100)
-              .items(select(`#points-g-${index_radviz}`).selectAll('circle'))
-              .targetArea(select(`#points-g-${index_radviz}`))
-              .on("start", _ => console.log("lasso start"))
-              .on("draw", _ => console.log("lasso draw"))
-              .on("end", _ => console.log("lasso end"));
-            select(`#points-g-${index_radviz}`).call(lasso);
+            // const lasso = d3Lasso()
+            //  .closePathSelect(true)
+            //  .closePathDistance(100)
+            //  .items(select(`#points-g-${index_radviz}`).selectAll('circle'))
+            //  .targetArea(select(`#points-g-${index_radviz}`))
+            //  .on("start", _ => console.log("lasso start"))
+            //  .on("draw", _ => console.log("lasso draw"))
+            //  .on("end", _ => console.log("lasso end"));
+            // select(`#points-g-${index_radviz}`).call(lasso);
             drawGrid();
             drawAnchorPoints();
             calculatePointPosition();
