@@ -182,7 +182,7 @@ export default function Radviz() {
             sum_error = sum_error + errorE;
         });
 
-        console.log('***ERROR', sum_error / data.entries.length);
+        console.log('*** EE', sum_error / data.entries.length);
         return sum_error / data.entries.length;
     };
     //

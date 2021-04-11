@@ -2,6 +2,24 @@ export const radvizDA = (function(){
     /*
     *
     */
+    this.normalizeArrangement = function (arrangement) {
+        // arrangement is in the form of array of dimension index eg. [0,3,1,4]
+        // the function rotates and reflect the arrangement to have (arrangement[0] = 0 && arrangement[1] < arrangement[-1])
+        const res = arrangement.map(d => d);
+        while(res[0] != 0){
+            let dim = res.shift();
+            res.push(dim);
+        }
+        if(res[1] > res[res.length-1]){
+            let dim = res.shift();
+            res.reverse();
+            res.unshift(dim);
+        }
+        return res;
+    };
+    /*
+    *
+    */
     this.maxMeanDistanceHeuristic = function(data){
         const set = data.dimensions.map(d => d.values);
         const entriesSum = set[0].map((_, entryIndex) =>
@@ -88,7 +106,7 @@ export const radvizDA = (function(){
     /*
     *
     */
-    this.minEffectivenessErrorHeuristic = function(data, k=null){
+    this.minEffectivenessErrorHeuristic = function(data, fast=false){
         function arrangementCost(costMatrix, arr){
             let cost = 0;
             for(let i=0; i<arr.length; i++){
@@ -105,12 +123,10 @@ export const radvizDA = (function(){
             return result;
         }
         ///
-
-        console.log(data);
-        console.log(data.dimensions.map(d=> d.id));
         let m = data.entries.length;
         let n = data.dimensions.length;
-        if(k == null) k = 10;
+        //if(k == null) k = 10;
+        const k = n*2; //max number of iterations of optimization step
         let C = Array(n).fill(null).map(()=>Array(n).fill(0));
         for(let j=0; j<n; j++) C[j][j] = Infinity; //fill diagonal with infinity
         for(let i=0; i<m; i++){
@@ -150,8 +166,8 @@ export const radvizDA = (function(){
                 }
                 if(bestPosition == -1) arrangement.unshift(bestDim);
                 else arrangement.push(bestDim);
-                ///optimize
-                if(arrangement.length > 2){
+                ///optimize if not fast version
+                if(!fast && arrangement.length > 2){
                     let A = arrangement.slice();
                     let steps = 0;
                     let improved = true;
@@ -183,19 +199,36 @@ export const radvizDA = (function(){
                 resultArrangementCost = currentCost;
             }
         }
-        /// 0 as first dimension in the arrangement
-        while(resultArrangement[0] != 0){
-            let dim = resultArrangement.shift();
-            resultArrangement.push(dim);
-        }
-        if(resultArrangement[1] > resultArrangement[resultArrangement.length-1]){
-            let dim = resultArrangement.shift();
-            resultArrangement.reverse();
-            resultArrangement.unshift(dim);
-        }
-        return resultArrangement;
-
+        return this.normalizeArrangement(resultArrangement);
     };
+    /*
+    *
+    */
+    this.minEffectivenessErrorHeuristicFast = function(data){
+        return this.minEffectivenessErrorHeuristic(data, true)
+    };
+    /*
+    *
+    */
+    this.clockHeuristic = function(data){
+        const dimensions = data.dimensions //array [ {id: "x", values:[]} ] già normalizzate minmax e somma1
+        const representativePoint = dimensions.map((d,i) => {
+            return {
+                dimensionId: d.id, 
+                dimensionIndex: i,
+                value: d3.sum(d.values) 
+            }
+        }).sort((a,b) => b.value - a.value)
+        console.log("--- Representative Point ---", representativePoint, "--- --- ---")
+        
+        const arrangement = []
+        // clock
+        representativePoint.forEach((d, i) => {
+            if(i%2 == 0) arrangement.push(d.dimensionIndex)
+            else arrangement.unshift(d.dimensionIndex)
+        });
+        return this.normalizeArrangement(arrangement)
+    }
     /*
     *
     */
