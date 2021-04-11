@@ -217,6 +217,7 @@
     <script src="./web/js/vendor/d3-legend.js"></script>
     <script src="./web/js/vendor/d3-radviz.js"></script>
     <script src="./web/js/metrics.js"></script>
+    <script src="./web/js/vendor/d3-lasso.min.js"></script>
 
 
     <script>
@@ -527,6 +528,68 @@
                     alert("The format " + fileName.substring(fileName.length - 4) + " of the file is not permitted");
                 }
             });
+        
+
+            function setup_lasso(){
+  // Lasso functions
+  var lasso_start = function() {
+
+    lasso.items()
+        .style("stroke-width", "0.2");
+  };
+
+  var lasso_draw = function() {
+
+    // Style the possible dots
+    lasso.possibleItems()
+        .style("stroke-width", "0.4")
+
+    // Style the not possible dot
+    lasso.notPossibleItems()
+        .style("stroke-width", "0.2")
+  };
+
+  var lasso_end = function() {
+    system.settings.deselectPoints();
+
+    // Style the selected dots
+    
+    lasso.selectedItems()
+        .each((d)=> {
+            system.radar.drawRadar(d3_radviz.data().angles, d, d3.select('#p_' + d.index+'-'+ d3_radviz.getIndex()))
+            //d.selected = true
+        })
+
+    lasso.selectedItems()
+        .style("stroke", "black")
+        .style("stroke-width", "0.4")
+
+    console.log('DIMENSIONE:',lasso.selectedItems().nodes().length)
+    // Reset the style of the not selected dots
+    lasso.notSelectedItems().each((d)=> d.selected = false)
+    lasso.notSelectedItems()
+    .style("stroke", "black")
+      .style("stroke-width", "0.2");
+      system.structure.uploadProgressBar();
+  };
+
+  
+
+  //d3.select('#chart svg').call(lasso);
+
+  var lasso = d3.lasso()
+  .closePathSelect(true)
+    .closePathDistance(100)
+    .items(d3.select(`#points-g-${d3_radviz.getIndex()}`).selectAll('circle'))
+    .targetArea(d3.select(`.radviz-svg-${d3_radviz.getIndex()}`))
+    .on("start",lasso_start)
+    .on("draw",lasso_draw)
+    .on("end",lasso_end);
+     // Sets the drag area for the lasso on the rectangle #myLassoRect
+    d3.select(`.radviz-svg-${d3_radviz.getIndex()}`).call(lasso);
+}
+            
+            //  .targetArea(select(`#points-g-${index_radviz}`))
     </script>
 
 

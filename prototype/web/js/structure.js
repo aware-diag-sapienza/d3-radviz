@@ -818,14 +818,10 @@ system.structure = (() => {
                         d3.select("#sel_cluster-" + d).style('fill', 'black');
                         d3_radviz.data().entries.forEach(
                             function(p, i) {
-
                                 if (p.attributes[d3_radviz.getAttrColor(1)] == d) {
-                                    system.radar.drawRadar(d3_radviz.data().angles, p, d3.select('#p_' + p.index))
-
+                                    system.radar.drawRadar(d3_radviz.data().angles, p, d3.select('#p_' + p.index+'-'+ d3_radviz.getIndex()))
                                 }
-
                             })
-
                     } else {
                         d3.select("#sel_cluster-" + d).style('fill', 'white');
                         d3_radviz.data().entries.forEach(
@@ -833,8 +829,6 @@ system.structure = (() => {
                                 if (p.attributes[d3_radviz.getAttrColor(1)] == d) {
                                     d3_radviz.data().entries[i].selected = false
                                     d3.select("#radar_" + p.index).remove()
-
-
                                 }
                             })
                     }
