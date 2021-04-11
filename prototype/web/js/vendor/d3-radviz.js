@@ -1,9 +1,10 @@
-// https://github.com/aware-diag-sapienza/d3-radviz v0.0.2 Copyright 2021 A.WA.RE Research Group (http://aware.diag.uniroma1.it/)
+// https://github.com/aware-diag-sapienza/d3-radviz v0.0.1 Copyright 2021 A.WA.RE Research Group (http://aware.diag.uniroma1.it/)
+(function(l, r) { if (l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (window.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(window.document);
 (function (global, factory) {
-typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-selection'), require('d3-transition'), require('d3-array'), require('d3-scale'), require('d3-scale-chromatic'), require('d3-drag'), require('d3-shape')) :
-typeof define === 'function' && define.amd ? define(['exports', 'd3-selection', 'd3-transition', 'd3-array', 'd3-scale', 'd3-scale-chromatic', 'd3-drag', 'd3-shape'], factory) :
-(global = global || self, factory(global.d3 = global.d3 || {}, global.d3, global.d3, global.d3, global.d3, global.d3, global.d3, global.d3));
-}(this, (function (exports, d3Selection, d3Transition, d3Array, d3Scale, d3ScaleChromatic, d3Drag, d3Shape) { 'use strict';
+typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-selection'), require('d3-transition'), require('d3-array'), require('d3-scale'), require('d3-scale-chromatic'), require('d3-drag'), require('d3-shape'), require('d3-brush'), require('d3-lasso')) :
+typeof define === 'function' && define.amd ? define(['exports', 'd3-selection', 'd3-transition', 'd3-array', 'd3-scale', 'd3-scale-chromatic', 'd3-drag', 'd3-shape', 'd3-brush', 'd3-lasso'], factory) :
+(global = global || self, factory(global.d3 = global.d3 || {}, global.d3, global.d3, global.d3, global.d3, global.d3, global.d3, global.d3, global.d3, global.d3));
+}(this, (function (exports, d3Selection, d3Transition, d3Array, d3Scale, d3ScaleChromatic, d3Drag, d3Shape, d3Brush, d3Lasso) { 'use strict';
 
 const getDimensionValues = (dimension, entries) => {
     const values = entries.map(e => +e[dimension]);
@@ -16,6 +17,7 @@ const getDimensionValues = (dimension, entries) => {
 const minMaxNormalization = (values) => {
     const min = Math.min(...values);
     const max = Math.max(...values);
+    console.log("min", min, "max", max);
     let checkDivision = function(v, mi, ma) {
         if ((v - mi) == 0 || (ma - mi) == 0) return 0;
         else return (v - mi) / (ma - mi);
@@ -218,15 +220,19 @@ function Radviz() {
                         calculatePointPosition();
                         d3Selection.select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).data(data.entries, (d, i) => i);
                         updateData();
+                        
                         if (function_context_menu != null)
                             function_context_menu(data.angles);
                     })
                     .on("click", function(d) {
                         if (function_click != null)
                             function_click(data.angles, d, d3Selection.select(this));
+
+        
                     })
                     .on('mouseover', function(d) {
                         if (function_mouse_over != null)
+                            console.log('event',e,'d',d)
                             function_mouse_over(data.angles, d);
                     })
                     .on('mouseout', function(d) {
@@ -308,6 +314,8 @@ function Radviz() {
             V.errorE = errorE;
             sum_error = sum_error + errorE;
         });
+
+        console.log('***ERROR', sum_error / data.entries.length);
         return sum_error / data.entries.length;
     };
     //
@@ -324,7 +332,7 @@ function Radviz() {
         if (d.drag == true) {
             d3Selection.select(this).classed("active", false);
             d.drag = false;
-            let new_angle = dragendangle(d3Selection.select(this).attr("cx"), d3Selection.select(this).attr("cy"), d3Selection.select(this).attr("id"));
+            let new_angle = dragendangle(d3Selection.select(this).attr("cx"), d3Selection.select(this).attr("cy"), d3Selection.select(this).attr("id"), d);
             data.angles = assignAnglestoDimensions(newOrderDimensions(new_angle, data.angles));
 
             d3Selection.selectAll('.AP_points-' + index_radviz).remove();
@@ -339,6 +347,10 @@ function Radviz() {
     };
     //
     let dragendangle = function(x, y, id, d) {
+        console.log('x', x);
+        console.log('y', y);
+        console.log('id', id);
+        console.log('d', d);
         let distance = Math.sqrt((Math.pow(x, 2) + Math.pow(y, 2)));
         let cosangolo = x / distance;
         let sinangolo = y / distance;
@@ -352,13 +364,18 @@ function Radviz() {
         } else {
             angle = Math.acos(cosangolo) + (Math.PI / 2);
         }
+        console.log('angle', angle);
+        console.log('id', id);
         return [angle, id];
     };
     //
     let newOrderDimensions = function(angle, dimensions) {
+        console.log(angle, dimensions);
         let new_dimensions = [];
         let dimension_changed = angle[1].replace("AP_", '');
         dimension_changed = dimension_changed.replace("-" + index_radviz, '');
+        console.log('dimension_changed', dimension_changed);
+        console.log('dimensions', dimensions);
 
         let founded = false;
         let founded_angle = false;
@@ -368,6 +385,7 @@ function Radviz() {
         let i;
 
         for (i = 0; i < dimensions.length; i++) {
+            console.log(i, ')', dimensions[i].value.replace(/ /g, ""), dimension_changed);
             if (dimensions[i].value.replace(/ /g, "") == dimension_changed) {
 
                 index_changed = i;
@@ -587,7 +605,16 @@ function Radviz() {
                 .attr('height', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
                 .attr('width', SVG_SIDE - ((SVG_SIDE * (margin_percentage / 100) * 2)))
                 .attr("transform", "translate(" + SVG_SIDE / 2 + "," + SVG_SIDE / 2 + ")");
-
+            // svg.append("g").call(brush().on("brush", () => console.log("BRUSH!!")));
+            // const lasso = d3Lasso()
+            //  .closePathSelect(true)
+            //  .closePathDistance(100)
+            //  .items(select(`#points-g-${index_radviz}`).selectAll('circle'))
+            //  .targetArea(select(`#points-g-${index_radviz}`))
+            //  .on("start", _ => console.log("lasso start"))
+            //  .on("draw", _ => console.log("lasso draw"))
+            //  .on("end", _ => console.log("lasso end"));
+            // select(`#points-g-${index_radviz}`).call(lasso);
             drawGrid();
             drawAnchorPoints();
             calculatePointPosition();
@@ -616,6 +643,7 @@ function Radviz() {
             scale_classification = d3Scale.scaleOrdinal(d3ScaleChromatic.schemeCategory10).domain(new Set(data.attributes.filter(function(pilot) { return pilot.id === attribute_color; }).map(d => d.values)[0]));
         } else
             attribute_color = null;
+        console.log(data.attributes, data.dimensions);
     };
     //
     radviz.setMargin = function(_) {
@@ -739,6 +767,7 @@ function Radviz() {
 
         }
         // sono arrivata qui ad inserire -' + index_radviz)
+        console.log('******');
         data.angles = assignAnglestoDimensions(mapping_dimension);
         d3Selection.selectAll('.AP_points-' + index_radviz).remove();
         drawAnchorPoints(true);
@@ -748,7 +777,10 @@ function Radviz() {
     };
     //
     radviz.calculateRadvizMeanDistance = function(order_dimensions) { // order _dimensions is a list of index.
+
+        console.log('entro qui');
         let copy_data = Object.assign({}, data);
+        console.log(copy_data);
         let mapping_dimension = [];
         if (!arguments.length) {
             mapping_dimension = copy_data.dimensions.map(d => d.id);
@@ -794,6 +826,7 @@ function Radviz() {
 
             sum_mean_distance = sum_mean_distance + Math.sqrt(Math.pow(point['x1'], 2) + Math.pow(point['x2'], 2));
         });
+        console.log(copy_data);
         return sum_mean_distance / copy_data.entries.length;
 
 
@@ -854,24 +887,6 @@ const radvizDA = (function(){
     /*
     *
     */
-    this.normalizeArrangement = function (arrangement) {
-        // arrangement is in the form of array of dimension index eg. [0,3,1,4]
-        // the function rotates and reflect the arrangement to have (arrangement[0] = 0 && arrangement[1] < arrangement[-1])
-        const res = arrangement.map(d => d);
-        while(res[0] != 0){
-            let dim = res.shift();
-            res.push(dim);
-        }
-        if(res[1] > res[res.length-1]){
-            let dim = res.shift();
-            res.reverse();
-            res.unshift(dim);
-        }
-        return res;
-    };
-    /*
-    *
-    */
     this.maxMeanDistanceHeuristic = function(data){
         const set = data.dimensions.map(d => d.values);
         const entriesSum = set[0].map((_, entryIndex) =>
@@ -879,10 +894,17 @@ const radvizDA = (function(){
                 set[dimensionIndex][entryIndex]
             )
         ).map(valueDimensions => valueDimensions.reduce((sumValues, currentValue) => sumValues + currentValue));
+        console.log('set', set);
+        console.log('entriesSum', entriesSum);
         const dimensionsSum = set.map(dimension => dimension.reduce((a, b) => a + b, 0));
         const dimensionsByRank = dimensionsSum.map((sum, i) => ({i, sum})).sort((a,b) => a.sum <= b.sum ? 1 : -1).map(o => o.i);
         const normalizedSet = set.map(dimensionValues => dimensionValues.map((entryValue, entryIndex) => entriesSum[entryIndex] > 0 ? entryValue / entriesSum[entryIndex] : 0));
         let availablePositions = [...new Array(set.length)].map((_, i) => i);
+        console.log('dimensionsSum', dimensionsSum);
+        console.log('dimensionsByRank', dimensionsByRank);
+        console.log('normalizedSet', normalizedSet);
+        console.log('availablePositions', availablePositions);
+        console.log('--- END INIT ---');
         let pointsAssignedPositions = [...new Array(set[0].length)].map(_ => [0, 0]);
         const arrangement = [...new Array(set.length)].fill(null);
         for (const [rankIndex, dimensionIndex] of dimensionsByRank.entries()) {
@@ -904,9 +926,15 @@ const radvizDA = (function(){
                 ).map(valueDimensions => valueDimensions.reduce((sumValues, currentValue) =>
                     sumValues + currentValue) / othersDimensionsByRank.length
                 );
+                console.log('currentDimensionValues', currentDimensionValues);
+                console.log('othersDimensionsByRank', othersDimensionsByRank);
+                console.log('othersDimensionsValues', othersDimensionsValues);
+                console.log('othersMeanValues', othersMeanValues);
                 let currentMagnitude = -Infinity;
                 for (const possiblePosition of availablePositions) {
+                    console.log('possiblePosition', possiblePosition);
                     let otherPositions = availablePositions.filter(pos => pos !== possiblePosition);
+                    console.log('otherPositions', otherPositions);
                     let pointsPossiblePositions = pointsAssignedPositions.map(point => point.slice());
                     pointsPossiblePositions = pointsPossiblePositions.map(([x1, x2], entryIndex) => [
                         x1 + normalizedSet[dimensionIndex][entryIndex] * Math.cos(2 * Math.PI * possiblePosition / set.length),
@@ -918,12 +946,15 @@ const radvizDA = (function(){
                             x2 + othersMeanValues[entryIndex] * Math.sin(2 * Math.PI * otherPosition / set.length)
                         ]);
                     }
+                    console.log('pointsPossiblePositions', pointsPossiblePositions);
                     let possibleMagnitude = pointsPossiblePositions.map(([x1, x2]) => Math.sqrt(Math.pow(x1, 2) + Math.pow(x2, 2))).reduce((p, c) => p + c, 0) / pointsPossiblePositions.length;
+                    console.log('possibleMagnitude', possibleMagnitude);
                     if (possibleMagnitude > currentMagnitude) {
                         currentPosition = possiblePosition;
                         currentMagnitude = possibleMagnitude;
                     }
                 }
+                console.log('currentPosition', currentPosition);
             }
             arrangement[currentPosition] = dimensionIndex;
             availablePositions.splice(availablePositions.indexOf(currentPosition), 1);
@@ -931,13 +962,16 @@ const radvizDA = (function(){
                 x1 + normalizedSet[dimensionIndex][entryIndex] * Math.cos(2 * Math.PI * currentPosition / set.length),
                 x2 + normalizedSet[dimensionIndex][entryIndex] * Math.sin(2 * Math.PI * currentPosition / set.length)
             ]);
+            console.log('availablePositions', availablePositions);
+            console.log('pointsAssignedPositions', pointsAssignedPositions);
+            console.log('arrangement', arrangement);
         }
         return arrangement;
     };
     /*
     *
     */
-    this.minEffectivenessErrorHeuristic = function(data, fast=false){
+    this.minEffectivenessErrorHeuristic = function(data, k=null){
         function arrangementCost(costMatrix, arr){
             let cost = 0;
             for(let i=0; i<arr.length; i++){
@@ -954,10 +988,12 @@ const radvizDA = (function(){
             return result;
         }
         ///
+
+        console.log(data);
+        console.log(data.dimensions.map(d=> d.id));
         let m = data.entries.length;
         let n = data.dimensions.length;
-        //if(k == null) k = 10;
-        const k = n*2; //max number of iterations of optimization step
+        if(k == null) k = 10;
         let C = Array(n).fill(null).map(()=>Array(n).fill(0));
         for(let j=0; j<n; j++) C[j][j] = Infinity; //fill diagonal with infinity
         for(let i=0; i<m; i++){
@@ -997,8 +1033,8 @@ const radvizDA = (function(){
                 }
                 if(bestPosition == -1) arrangement.unshift(bestDim);
                 else arrangement.push(bestDim);
-                ///optimize if not fast version
-                if(!fast && arrangement.length > 2){
+                ///optimize
+                if(arrangement.length > 2){
                     let A = arrangement.slice();
                     let steps = 0;
                     let improved = true;
@@ -1030,34 +1066,18 @@ const radvizDA = (function(){
                 resultArrangementCost = currentCost;
             }
         }
-        return this.normalizeArrangement(resultArrangement);
-    };
-    /*
-    *
-    */
-    this.minEffectivenessErrorHeuristicFast = function(data){
-        return this.minEffectivenessErrorHeuristic(data, true)
-    };
-    /*
-    *
-    */
-    this.clockHeuristic = function(data){
-        const dimensions = data.dimensions; //array [ {id: "x", values:[]} ] già normalizzate minmax e somma1
-        const representativePoint = dimensions.map((d,i) => {
-            return {
-                dimensionId: d.id, 
-                dimensionIndex: i,
-                value: d3.sum(d.values) 
-            }
-        }).sort((a,b) => b.value - a.value);
-        
-        const arrangement = [];
-        // clock
-        representativePoint.forEach((d, i) => {
-            if(i%2 == 0) arrangement.push(d.dimensionIndex);
-            else arrangement.unshift(d.dimensionIndex);
-        });
-        return this.normalizeArrangement(arrangement)
+        /// 0 as first dimension in the arrangement
+        while(resultArrangement[0] != 0){
+            let dim = resultArrangement.shift();
+            resultArrangement.push(dim);
+        }
+        if(resultArrangement[1] > resultArrangement[resultArrangement.length-1]){
+            let dim = resultArrangement.shift();
+            resultArrangement.reverse();
+            resultArrangement.unshift(dim);
+        }
+        return resultArrangement;
+
     };
     /*
     *
