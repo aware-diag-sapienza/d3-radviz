@@ -101,7 +101,7 @@ system.settings = (function() {
 
     this.newDataset = function(loadfile, nameDataset) {
 
-
+        document.getElementById('lazoselection').checked = false
         d3_radviz = d3.radviz()
 
         d3.csv(loadfile).then(dataset => {
@@ -209,6 +209,7 @@ system.settings = (function() {
             system.structure.uploadProgressBar();
 
         })
+        
     }
 
     this.addOtherMetrics = function(){
@@ -236,12 +237,13 @@ system.settings = (function() {
         .style("stroke-width", '0.2')
         system.structure.uploadProgressBar();
         d3.selectAll(".radarlevel").remove();
+
+        d3.selectAll(".sel_cluster").style('fill','white')
     }
 
     this.newDataset_upload = function(loadfile, nameDataset) {
         d3_radviz = d3.radviz()
-
-
+        document.getElementById('lazoselection').checked = false
 
         let dataset = d3.csvParse(system.uploadedfile.readDataUploaded(nameDataset))
         DATASET_NAME = nameDataset
@@ -321,6 +323,8 @@ system.settings = (function() {
         d3.select('#container').call(d3_radviz);
         system.structure.drawboxplot(d3_radviz.data().entries.map(d => d.errorE));
         system.structure.uploadProgressBar();
+       
+        
     }
 
     this.choiceDimensionsNewDataset = function(d, dat, but) {
@@ -469,6 +473,7 @@ system.settings = (function() {
             system.structure.uploadProgressBar();
 
         })
+
     }
 
     this.choiceDimensionsNewDataset_upload = function(d, dat, but) {
@@ -810,6 +815,77 @@ system.settings = (function() {
         system.structure.initializeRadarAxes(d3_radviz.data().angles);
         system.radar.changeRadar(d3_radviz.data().angles);
         system.structure.drawboxplot(d3_radviz.data().entries.map(d => d.errorE));
+    }
+
+    function setup_lasso(){
+        console.log('AGGIUNGO SETUP LASSO')
+        // Lasso functions
+        var lasso_start = function() {
+
+            lasso.items()
+                .style("stroke-width", "0.2");
+        };
+
+        var lasso_draw = function() {
+
+            // Style the possible dots
+            lasso.possibleItems()
+                .style("stroke-width", "0.4")
+
+            // Style the not possible dot
+            lasso.notPossibleItems()
+                .style("stroke-width", "0.2")
+        };
+
+        var lasso_end = function() {
+            system.settings.deselectPoints();
+
+            // Style the selected dots
+            
+            lasso.selectedItems()
+                .each((d)=> {
+                    system.radar.drawRadar(d3_radviz.data().angles, d, d3.select('#p_' + d.index+'-'+ d3_radviz.getIndex()))
+                    //d.selected = true
+                })
+
+            lasso.selectedItems()
+                .style("stroke", "black")
+                .style("stroke-width", "0.4")
+
+            console.log('DIMENSIONE:',lasso.selectedItems().nodes().length)
+            // Reset the style of the not selected dots
+            lasso.notSelectedItems().each((d)=> d.selected = false)
+            lasso.notSelectedItems()
+            .style("stroke", "black")
+            .style("stroke-width", "0.2");
+            system.structure.uploadProgressBar();
+        };
+
+        
+
+        //d3.select('#chart svg').call(lasso);
+
+        var lasso = d3.lasso()
+        .closePathSelect(true)
+            .closePathDistance(100)
+            .items(d3.select(`#points-g-${d3_radviz.getIndex()}`).selectAll('circle'))
+            .targetArea(d3.select(`.radviz-svg-${d3_radviz.getIndex()}`))
+            .on("start",lasso_start)
+            .on("draw",lasso_draw)
+            .on("end",lasso_end);
+            // Sets the drag area for the lasso on the rectangle #myLassoRect
+            d3.select(`.radviz-svg-${d3_radviz.getIndex()}`).call(lasso);
+    }
+
+    this.lazoSelection = function () {
+        console.log('selezione della checkbox',document.getElementById('lazoselection').checked)
+
+    if(document.getElementById('lazoselection').checked) {
+        setup_lasso();
+    } else {
+        d3.select('.lasso').remove();
+    }
+
     }
 
     return this;
