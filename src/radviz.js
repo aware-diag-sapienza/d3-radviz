@@ -351,10 +351,10 @@ export default function Radviz() {
     };
     //
     let calculatePointPosition = function() {
-        let sum_mean_distance = 0;
-        data.entries.forEach(function(point) {
+        function position(point){
             let x_1_j = { 'denominator': 0, 'numerator': 0 };
             let x_2_j = { 'denominator': 0, 'numerator': 0 };
+            let pos = { x1: null, x2: null}
             data.angles.forEach(function(dim) {
                 x_1_j.numerator = x_1_j.numerator + (point.dimensions[dim.value] * Math.cos(dim.start));
                 x_1_j.denominator = x_1_j.denominator + point.dimensions[dim.value];
@@ -362,21 +362,29 @@ export default function Radviz() {
                 x_2_j.denominator = x_2_j.denominator + point.dimensions[dim.value];
             });
             if (x_1_j.numerator == 0 || x_1_j.denominator == 0) {
-                point['x1'] = 0;
+                pos.x1 = 0;
             } else {
-                point['x1'] = x_1_j.numerator / x_1_j.denominator;
+                pos.x1 = x_1_j.numerator / x_1_j.denominator;
             }
             if (x_2_j.numerator == 0 || x_2_j.denominator == 0) {
-                point['x2'] = 0;
+                pos.x2 = 0;
             } else {
-                point['x2'] = x_2_j.numerator / x_2_j.denominator;
+                pos.x2 = x_2_j.numerator / x_2_j.denominator;
             }
-
-            sum_mean_distance = sum_mean_distance + Math.sqrt(Math.pow(point['x1'], 2) + Math.pow(point['x2'], 2));
-        });
+            return pos
+        }
+        //
+        data.entries.forEach(point => {
+            const pos = position(point)
+            point.x1 = pos.x1
+            point.x2 = pos.x2
+        })
         mean_error_e = calculateErrorE();
-        mean_distance = sum_mean_distance / data.entries.length;
+        data.representativeEntry.x1 = position(data.representativeEntry)
+        data.representativeEntry.x2 = position(data.representativeEntry)
     };
+
+    
     let drawGrid = function() {
         selectAll(".grid-" + index_radviz).remove();
 
