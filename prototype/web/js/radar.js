@@ -17,13 +17,17 @@ system.radar = (function() {
     // metodi this.nome_parametri = (variabili di input) => {}
 
     this.drawRadar = (DIMENSIONS, d, element) => {
+
+
         if (d.selected) {
             d.selected = false;
             this.numero_di_radarchart--;
+
             d3.selectAll(".lineradar_" + d.index).remove();
             d3.selectAll(".pointradar_" + d.index).remove();
             element.style("stroke-width", 0.2);
         } else {
+
             d.selected = true;
             this.numero_di_radarchart++;
 
@@ -103,7 +107,7 @@ system.radar = (function() {
     }
 
     this.changeRadar = (DIMENSIONS) => {
-        d3.selectAll(".data_point-"+d3_radviz.getIndex()).each(function(d, i) {
+        d3.selectAll(".data_point").each(function(d, i) {
             d3.selectAll(".lineradar_" + d.index).remove();
             d3.selectAll(".pointradar_" + d.index).remove();
             if (d.selected) {

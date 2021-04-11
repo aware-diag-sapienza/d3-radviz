@@ -570,19 +570,3 @@ div.tooltip {
     border-radius: 8px;
     pointer-events: none;
 }
-
-.lasso path {
-    stroke: rgb(80,80,80);
-    stroke-width:0.5px;
-}
-.lasso .drawn {
-    fill-opacity:.05 ;
-}
-.lasso .loop_close {
-    fill:none;
-    stroke-dasharray: 4,4;
-}
-.lasso .origin {
-    fill:#3399FF;
-    fill-opacity:.5;
-}
