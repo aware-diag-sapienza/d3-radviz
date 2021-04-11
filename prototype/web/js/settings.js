@@ -132,6 +132,9 @@ system.settings = (function() {
                 ORIGINAL_CLASSIFIED = false
             }
 
+            document.getElementById('avg-similarity').innerHTML = `<b>Avg ReprSimilarity: ${d3.mean(d3_radviz.data().entries, d => d.representativeSimilarity).toFixed(4)}</b>`
+    
+            console.log()
             system.data.load( system.data.LINK_SERVER + "data/" + nameDataset + ".csv", nameDataset);
             system.structure.initializeForce();
             system.structure.initializeRadar();

@@ -137,6 +137,7 @@
 
                 </div>
                 <div class="cluster-legend" id="legend-cluster"></div>
+                <div id="avg-similarity"></div>
 
             </div>
         </div>
@@ -161,11 +162,13 @@
             <font size="4" style="color: #4b5158;"><b>Level Grid:</b> </font>
             <button type="button" class="btn btn-secondary-circle" id="btn_levelgrid_plus" onclick="d3_radviz.increaseLevelGrid()"><i class="fas fa-plus"></i></button>
             <button type="button" class="btn btn-secondary-circle" id="btn_levelgrid_minus" onclick="d3_radviz.decreaseLevelGrid()"><i class="fas fa-minus"></i></button>
+            
             <font size="4" style="color: #4b5158;"><b>Color:</b> </font>
             <input name="color-quality" type="radio" id="effectiveness-radio" value="EffERROR" onclick="system.radviz.changeQuality()" checked>
             <label for="effectiveness-radio ">Effectiveness Error</label>
             <input name="color-quality" type="radio" id="cluster-radio" value="Clusters" onclick="system.radviz.changeQuality()"> <!-- d3_radviz.setQuality()-->
             <label for="cluster-radio">Clusters</label>
+
             <input name="color-quality" type="radio" id="outliers-radio" value="Outliers" onclick="system.radviz.changeQuality()"> <!-- d3_radviz.setQuality()-->
             <label for="outliers-radio">Outliers</label>
             <input type="checkbox" id="deselectpoint" style="visibility: hidden;" onclick="system.settings.deselectPoints()" >
