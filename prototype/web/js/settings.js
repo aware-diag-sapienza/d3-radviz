@@ -162,6 +162,7 @@ system.settings = (function() {
             }
 
             let f_mouse_over = function(a, b) {
+                
                 system.spring.drawForce(a, b);
 
                 var div = d3.select(".tooltip")
@@ -170,7 +171,7 @@ system.settings = (function() {
                     .style("opacity", .9)
 
                 .delay(500);
-                div.html("(" + b.x1.toFixed(2) + "," + b.x2.toFixed(2) + ")<br> EE: " + b.errorE.toFixed(2))
+                div.html('(' + b.x1.toFixed(2) + ',' + b.x2.toFixed(2) + ')<br> EE: ' + b.errorE.toFixed(2) + '<br> <font size="1">PR: '+ b.representativeSimilarity.toFixed(3)+'</font>')
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 50) + "px")
                     .style("color", "white")
@@ -290,6 +291,7 @@ system.settings = (function() {
         }
 
         let f_mouse_over = function(a, b) {
+            
             system.spring.drawForce(a, b);
 
             var div = d3.select(".tooltip")
@@ -298,7 +300,7 @@ system.settings = (function() {
                 .style("opacity", .9)
 
             .delay(500);
-            div.html("(" + b.x1.toFixed(2) + "," + b.x2.toFixed(2) + ")<br> EE: " + b.errorE.toFixed(2))
+            div.html('(' + b.x1.toFixed(2) + ',' + b.x2.toFixed(2) + ')<br> EE: ' + b.errorE.toFixed(2) + '<br> <font size="1">PR: '+ b.representativeSimilarity.toFixed(3)+'</font>')
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 50) + "px")
                 .style("color", "white")
@@ -439,6 +441,7 @@ system.settings = (function() {
             }
 
             let f_mouse_over = function(a, b) {
+                
                 system.spring.drawForce(a, b);
 
                 var div = d3.select(".tooltip")
@@ -447,7 +450,7 @@ system.settings = (function() {
                     .style("opacity", .9)
 
                 .delay(500);
-                div.html("(" + b.x1.toFixed(2) + "," + b.x2.toFixed(2) + ")<br> EE: " + b.errorE.toFixed(2))
+                div.html('(' + b.x1.toFixed(2) + ',' + b.x2.toFixed(2) + ')<br> EE: ' + b.errorE.toFixed(2) + '<br> <font size="1">PR: '+ b.representativeSimilarity.toFixed(3)+'</font>')
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 50) + "px")
                     .style("color", "white")
@@ -584,6 +587,7 @@ system.settings = (function() {
         }
 
         let f_mouse_over = function(a, b) {
+            
             system.spring.drawForce(a, b);
 
             var div = d3.select(".tooltip")
@@ -592,11 +596,11 @@ system.settings = (function() {
                 .style("opacity", .9)
 
             .delay(500);
-            div.html("(" + b.x1.toFixed(2) + "," + b.x2.toFixed(2) + ")<br> EE: " + b.errorE.toFixed(2))
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 50) + "px")
-                .style("color", "white")
-                .style("background", "black")
+            div.html('(' + b.x1.toFixed(2) + ',' + b.x2.toFixed(2) + ')<br> EE: ' + b.errorE.toFixed(2) + '<br> <font size="1">PR: '+ b.representativeSimilarity.toFixed(3)+'</font>')
+                .style('left', (d3.event.pageX) + 'px')
+                .style('top', (d3.event.pageY - 50) + 'px')
+                .style('color', 'white')
+                .style('background', 'black')
         }
 
         let f_mouse_out = function() {
