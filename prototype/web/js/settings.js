@@ -182,11 +182,16 @@ system.settings = (function() {
                 div.transition()
                     .duration(200)
                     .style("opacity", .9)
-
-                .delay(500);
-                div.html('(' + b.x1.toFixed(2) + ',' + b.x2.toFixed(2) + ')<br> EE: ' + b.errorE.toFixed(2) + '<br> <font size="1">PR: '+ b.representativeSimilarity.toFixed(3)+'</font>')
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 50) + "px")
+                    .delay(500);
+                
+                let str = `Point #${b.id.replace('p', '')}`
+                    + `<br><small>[ ${b.x1.toFixed(2)} , ${b.x2.toFixed(2)} ]</small>`
+                    + `<br><small>EE ${b.errorE.toFixed(2)}</small>`
+                    + `<br><small>RPSim ${b.representativeSimilarity.toFixed(3)}</small>`
+                //div.html('(' + b.x1.toFixed(2) + ',' + b.x2.toFixed(2) + ')<br> EE: ' +  + '<br> <font size="1">PR: '+ b.representativeSimilarity.toFixed(3)+'</font>')
+                div.html(str)
+                .style("left", (d3.event.pageX + 20) + "px")
+                    .style("top", (d3.event.pageY - 40) + "px")
                     .style("color", "white")
                     .style("background", "black")
             }
