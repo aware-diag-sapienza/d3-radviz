@@ -186,7 +186,7 @@ function computeDimensionsDominanceMean(entries){
         const vector = entries[i].vector;
         const vMax = d3Array.max(vector);
         const discountedMean = (d3Array.sum(vector) - vMax) / vector.length;
-        const increment = vMax / discountedMean; //max/media altri
+        const increment = vMax / discountedMean; // max/media altri
         for(let j=0; j<vector.length; j++){
             if(vector[j] == vMax) freq[j] += increment;
         }
