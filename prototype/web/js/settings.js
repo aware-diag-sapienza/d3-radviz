@@ -147,7 +147,6 @@ system.settings = (function() {
 
             document.getElementById('avg-similarity').innerHTML = `<b>Avg ReprSimilarity: ${d3.mean(d3_radviz.data().entries, d => d.representativeSimilarity).toFixed(4)}</b>`
     
-            console.log()
             system.data.load( system.data.LINK_SERVER + "data/" + nameDataset + ".csv", nameDataset);
             system.structure.initializeForce();
             system.structure.initializeRadar();
@@ -838,7 +837,7 @@ system.settings = (function() {
     }
 
     function setup_lasso(){
-        console.log('AGGIUNGO SETUP LASSO')
+
         // Lasso functions
         var lasso_start = function() {
 
@@ -872,7 +871,6 @@ system.settings = (function() {
                 .style("stroke", "black")
                 .style("stroke-width", "0.4")
 
-            console.log('DIMENSIONE:',lasso.selectedItems().nodes().length)
             // Reset the style of the not selected dots
             lasso.notSelectedItems().each((d)=> d.selected = false)
             lasso.notSelectedItems()
@@ -898,7 +896,6 @@ system.settings = (function() {
     }
 
     this.lazoSelection = function () {
-        console.log('selezione della checkbox',document.getElementById('lazoselection').checked)
 
     if(document.getElementById('lazoselection').checked) {
         setup_lasso();
@@ -922,7 +919,7 @@ system.settings = (function() {
         document.getElementById('dominance-mean-check').checked = false
         if(document.getElementById('dominance-check').checked) {
             d3.select('#grid-g-' + d3_radviz.getIndex()).selectAll("text.attr_label-" + d3_radviz.getIndex())
-            .text((d)=> {console.log(d.labeldominance);
+            .text((d)=> {
                 return d.labeldominance.substring(0,10);}
             )
         } else {
@@ -940,7 +937,7 @@ system.settings = (function() {
         // 
         if(document.getElementById('dominance-mean-check').checked) {
             d3.select('#grid-g-' + d3_radviz.getIndex()).selectAll("text.attr_label-" + d3_radviz.getIndex())
-            .text((d)=> {console.log(d.labelmeandominance);
+            .text((d)=> {
                 return d.labelmeandominance.substring(0,10);}
             )
         } else {
