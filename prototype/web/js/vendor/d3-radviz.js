@@ -256,7 +256,7 @@ function assignAnglestoDimensions(dimensions,data) {
 
         let lab_dom = function(dom,nam){
             if (dom>5) return nam;
-            else return (dom+1) + ' - ' + nam
+            else return (dom+1) + '-' + nam
         };
 
         real_dimensions.push({
