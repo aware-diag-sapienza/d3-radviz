@@ -18,6 +18,28 @@ const minMaxNormalization = (values) => {
     return values.map(v => checkDivision(v, min, max));
 };
 
+const normalizeVector = (v) => {
+    const vSum = sum(v);
+    const vLen = Math.sqrt(sum(v.map(d => d*d)));
+    //return v.map(d => d / vSum); //sum 1
+    return v.map(d => d / vLen); // len 1
+}
+
+const cosinesim = (A,B) => {
+    var dotproduct=0;
+    var mA=0;
+    var mB=0;
+    for(let i = 0; i < A.length; i++){
+        dotproduct += (A[i] * B[i]);
+        mA += (A[i]*A[i]);
+        mB += (B[i]*B[i]);
+    }
+    mA = Math.sqrt(mA);
+    mB = Math.sqrt(mB);
+    var similarity = (dotproduct)/((mA)*(mB))
+    return similarity;
+}
+
 export function checkData(data) {
     // TODO: update checkData
     return 'entries' in data && 'dimensions' in data && 'attributes' in data;
@@ -65,9 +87,11 @@ export function loadDataset(dataset, name) {
 
     for (let i = 0; i < dataset.length; i++) {
         let entry = {
+            id: `p${i}`,
             dimensions: {},
             attributes: {},
             original: {},
+            vector: [],
             x1: 0,
             x2: 0,
             selected: false,
@@ -79,11 +103,12 @@ export function loadDataset(dataset, name) {
         for (const d of data.dimensions) entry.dimensions[d.id] = d.values[i];
         for (const a of data.attributes) entry.attributes[a.id] = a.values[i];
         for (const o of data.original) entry.original[o.id] = o.values[i];
+        entry.vector = normalizeVector(Object.values(entry.dimensions));
         data.entries.push(entry);
     }
     
     // Representative Entry
-    data.representativeEntry = computeRepresentativeEntry(data.dimensions) 
+    data.representativeEntry = computeRepresentativeEntry(data.entries) 
     // Dimensions Dominanice
     data.dimensionsDominance = computeDimensionsDominance(data.entries)
     data.dimensionsDominanceMean = computeDimensionsDominanceMean(data.entries)
@@ -101,97 +126,82 @@ export function loadDataset(dataset, name) {
     return data
 }
 
-function computeRepresentativeEntry(dimensions){
+
+function computeRepresentativeEntry(entries){
+    const dims = Object.keys(entries[0].dimensions)
+    let rv = Array(dims.length).fill(0)
+    for(let i=0; i<entries.length; i++){
+        for(let j=0; j<dims.length; j++){
+            rv[j] += entries[i].vector[j]
+        }
+    }
+    rv = rv.map(v => v / dims.length)
+    rv = normalizeVector(rv)
+
     const representativeEntry = {
+        id: `rp`,
         dimensions: {},
-        attributes: {},
-        original: {},
+        vector: rv,
         x1: 0,
-        x2: 0,
-        selected: false,
-        errorE: 0,
-        index: null
+        x2: 0
     };
-    dimensions.forEach(d => {
-        representativeEntry.dimensions[d.id] = sum(d.values)
-    })
-    dimensions.forEach(d => {
-        representativeEntry.dimensions[d.id] /= sum(Object.keys(representativeEntry.dimensions), d => representativeEntry.dimensions[d])
+    dims.forEach((d, j) => {
+        representativeEntry.dimensions[d] = representativeEntry.vector[j]
     })
     return representativeEntry
 }
 
 function computeDimensionsDominance(entries){
     const dims = Object.keys(entries[0].dimensions)
-    const freq = dims.map(d => 0)
-    
-    entries.forEach(e => {
-        const values = dims.map(d => e.dimensions[d])
-        const vMax = max(values)
-        for(let i=0; i<values.length; i++){
-            if(values[i] == vMax) freq[i]++
+    const freq = Array(dims.length).fill(0)
+    for(let i=0; i<entries.length; i++){
+        const vector = entries[i].vector
+        const vMax = max(vector)
+        const increment = 1
+        for(let j=0; j<vector.length; j++){
+            if(vector[j] == vMax) freq[j] += increment
         }
-    })
-
-    let dominance = dims.map((d, i) => {
+    }
+    
+    const dominance = dims.map((d, i) => {
         return {
             id: d,
             count: freq[i]
         }
-    }).sort((a, b) => b.count - a.count)
-    dominance = dominance.map((d, i) => { return {...d, dominance: i}})
+    })
+    .sort((a, b) => b.count - a.count)
+    .map((d, i) => { return {...d, dominance: i}});
     return dominance
 }
 
 function computeDimensionsDominanceMean(entries){
     const dims = Object.keys(entries[0].dimensions)
-    const freq = dims.map(d => 0)
-    
-    entries.forEach(e => {
-        const values = dims.map(d => e.dimensions[d])
-        const vMax = max(values)
-        const discountedMean = (sum(values) - vMax) / values.length
-        for(let i=0; i<values.length; i++){
-            if(values[i] == vMax) freq[i] += vMax / discountedMean //max/media altri
+    const freq = Array(dims.length).fill(0)
+    for(let i=0; i<entries.length; i++){
+        const vector = entries[i].vector
+        const vMax = max(vector)
+        const discountedMean = (sum(vector) - vMax) / vector.length
+        const increment = vMax / discountedMean //max/media altri
+        for(let j=0; j<vector.length; j++){
+            if(vector[j] == vMax) freq[j] += increment
         }
-    })
-
-    let dominance = dims.map((d, i) => {
+    }
+    
+    const dominance = dims.map((d, i) => {
         return {
             id: d,
             count: freq[i]
         }
-    }).sort((a, b) => b.count - a.count)
-    dominance = dominance.map((d, i) => { return {...d, dominance: i}})
+    })
+    .sort((a, b) => b.count - a.count)
+    .map((d, i) => { return {...d, dominance: i}});
     return dominance
 }
 
+
 function computeSimilarities(entries, representativeEntry){
-    function cosinesim(A,B){
-        var dotproduct=0;
-        var mA=0;
-        var mB=0;
-        for(let i = 0; i < A.length; i++){
-            dotproduct += (A[i] * B[i]);
-            mA += (A[i]*A[i]);
-            mB += (B[i]*B[i]);
-        }
-        mA = Math.sqrt(mA);
-        mB = Math.sqrt(mB);
-        var similarity = (dotproduct)/((mA)*(mB))
-        return similarity;
-    }
-
-    const similarities = Array(entries.length).fill(0)
-    const dims = Object.keys(entries[0].dimensions)
-    const vr = dims.map(d => representativeEntry.dimensions[d])
-    for(let i=0; i<entries.length; i++){
-        const v = dims.map(d => entries[i].dimensions[d])
-        similarities[i] = cosinesim(v, vr)
-    }
+    const similarities = entries.map(e => cosinesim(e.vector, representativeEntry.vector))
     return similarities
-    
-
 }
 
 function computeOutliers(similarities){
@@ -210,7 +220,7 @@ function computeOutliers(similarities){
     distribution.wMin = Math.max(distribution.q1 - (1.5 * distribution.iqr), distribution.min)
     distribution.wMax =  Math.min(distribution.q3 + (1.5 * distribution.iqr), distribution.max)
     
-    const outliers = similarities.map(s => (s<=distribution.wMin || s>=distribution.wMax))
+    const outliers = similarities.map(s => (s < distribution.wMin || s > distribution.wMax))
     return outliers
 }
 
