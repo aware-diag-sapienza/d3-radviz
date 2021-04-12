@@ -81,7 +81,7 @@ export function loadDataset(dataset, name) {
         for (const o of data.original) entry.original[o.id] = o.values[i];
         data.entries.push(entry);
     }
-    data.angles = assignAnglestoDimensions(data.dimensions.map((d) => d.id));
+    
     // Representative Entry
     data.representativeEntry = computeRepresentativeEntry(data.dimensions) 
     // Dimensions Dominanice
@@ -94,6 +94,9 @@ export function loadDataset(dataset, name) {
         data.entries[i].representativeSimilarity = sim[i]
         data.entries[i].outlier = outliers[i]
     }
+
+    // generate angles for the visualization
+    data.angles = assignAnglestoDimensions(data.dimensions.map((d) => d.id),data);
     //
     return data
 }
@@ -258,11 +261,13 @@ export function reloadDataset(dataset, attr) {
         data.entries.push(entry);
     }
 
-    data.angles = assignAnglestoDimensions(data.dimensions.map((d) => d.id));
+    data.angles = assignAnglestoDimensions(data.dimensions.map((d) => d.id),data);
     return data;
 }
 
-export function assignAnglestoDimensions(dimensions) {
+export function assignAnglestoDimensions(dimensions,data) {
+    console.log(data)
+    
     let real_dimensions = [];
     dimensions.forEach(function(d, i) {
         let start_a = -1;
@@ -286,6 +291,20 @@ export function assignAnglestoDimensions(dimensions) {
             }
         }
 
+        let index_dominance = data.dimensionsDominance.findIndex(function(post, index) {
+            if(post.id == d)
+                return true;
+        });
+
+        let index_dominance_mean = data.dimensionsDominanceMean.findIndex(function(post, index) {
+            if(post.id == d)
+                return true;
+        });
+
+        let lab_dom = function(dom,nam){
+            if (dom>5) return nam;
+            else return (dom+1) + ' - ' + nam
+        }
 
         real_dimensions.push({
             'value': d,
@@ -295,6 +314,10 @@ export function assignAnglestoDimensions(dimensions) {
             'drag': false,
             'x1': x1,
             'x2': x2,
+            'dominance':index_dominance,
+            'meandomincance':index_dominance_mean,
+            'labeldominance':lab_dom(index_dominance,d),
+            'labelmeandominance':lab_dom(index_dominance_mean,d),
         });
     });
 

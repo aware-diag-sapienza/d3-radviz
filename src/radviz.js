@@ -90,7 +90,7 @@ export default function Radviz() {
                         event.preventDefault();
                         select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).style("stroke-width", 0.2);
                         select(this).style("stroke-width", 0.5);
-                        data.angles = assignAnglestoDimensions(calculateSinglePointHeuristic(d));
+                        data.angles = assignAnglestoDimensions(calculateSinglePointHeuristic(d),data);
                         selectAll(".AP_points" + index_radviz).remove();
                         drawAnchorPoints(true);
                         calculatePointPosition();
@@ -232,7 +232,6 @@ export default function Radviz() {
     };
     //
     let dragged = function(d) {
-        console.log('evento',event, 'd',d)
         select(this).attr("cx", d.x = event.x).attr("cy", d.y = event.y);
         d.drag = true;
     };
@@ -242,7 +241,7 @@ export default function Radviz() {
             select(this).classed("active", false);
             d.drag = false;
             let new_angle = dragendangle(select(this).attr("cx"), select(this).attr("cy"), select(this).attr("id"), d);
-            data.angles = assignAnglestoDimensions(newOrderDimensions(new_angle, data.angles));
+            data.angles = assignAnglestoDimensions(newOrderDimensions(new_angle, data.angles),data);
 
             selectAll('.AP_points-' + index_radviz).remove();
             drawAnchorPoints(true);
@@ -683,7 +682,7 @@ export default function Radviz() {
 
         }
         // sono arrivata qui ad inserire -' + index_radviz)
-        data.angles = assignAnglestoDimensions(mapping_dimension);
+        data.angles = assignAnglestoDimensions(mapping_dimension,data);
         selectAll('.AP_points-' + index_radviz).remove();
         drawAnchorPoints(true);
         calculatePointPosition();
@@ -717,7 +716,7 @@ export default function Radviz() {
 
         }
 
-        copy_data.angles = assignAnglestoDimensions(mapping_dimension);
+        copy_data.angles = assignAnglestoDimensions(mapping_dimension,copy_data);
         let sum_mean_distance = 0;
         copy_data.entries.forEach(function(point) {
             let x_1_j = { 'denominator': 0, 'numerator': 0 };
@@ -751,7 +750,7 @@ export default function Radviz() {
             
             d3.select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).style("stroke-width", 0.2);
             d3.select("#" +d).style("stroke-width", 0.5);
-            data.angles = assignAnglestoDimensions(calculateSinglePointHeuristic(d3.select("#" +d).data()[0]));
+            data.angles = assignAnglestoDimensions(calculateSinglePointHeuristic(d3.select("#" +d).data()[0]),data);
             d3.selectAll(".AP_points" + index_radviz).remove();
             drawAnchorPoints(true);
             calculatePointPosition();

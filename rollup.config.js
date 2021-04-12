@@ -26,7 +26,8 @@ export default
         ...config,
         plugins: [
           ...config.plugins,
-          strip()
+          strip({functions: [ 'console.log', 'assert.*', 'debug', 'alert' ]}
+          )
         ]
       },
       {
@@ -37,7 +38,7 @@ export default
         },
         plugins: [
           ...config.plugins,
-          strip(),
+          strip({functions: [ 'console.log', 'assert.*', 'debug', 'alert' ]}),
           terser({
             output: {
               preamble: config.output.banner
