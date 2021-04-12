@@ -206,14 +206,14 @@ function computeOutliers(similarities){
         median: d3Array.quantile(sortedSim, 0.5),
         q3: d3Array.quantile(sortedSim, 0.75),
         max: d3Array.max(sortedSim),
-        wMin: null,
-        wMax: null
+        wMin: d3Array.quantile(sortedSim, 0.02), //null,
+        wMax: d3Array.quantile(sortedSim, 0.98) //
     };
-    distribution.iqr = distribution.q3 - distribution.q1;
-    distribution.wMin = Math.max(distribution.q1 - (1.5 * distribution.iqr), distribution.min);
-    distribution.wMax =  Math.min(distribution.q3 + (1.5 * distribution.iqr), distribution.max);
+    //distribution.iqr = distribution.q3 - distribution.q1;
+    //distribution.wMin = Math.max(distribution.q1 - (1.5 * distribution.iqr), distribution.min);
+    //distribution.wMax =  Math.min(distribution.q3 + (1.5 * distribution.iqr), distribution.max);
     
-    const outliers = similarities.map(s => (s<=distribution.wMin || s>=distribution.wMax));
+    const outliers = similarities.map(s => (s<distribution.wMin || s>distribution.wMax));
     return outliers
 }
 
