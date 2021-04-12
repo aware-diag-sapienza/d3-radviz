@@ -46,6 +46,14 @@ system.settings = (function() {
         system.structure.removeElementsByClass("axisforce");
         d3.select("#btn_quantile").attr("class", "btn_style");
         d3.select("#btn_cluster").attr("class", "btn_style");
+        document.getElementById('dominance-check').checked = false
+        document.getElementById('dominance-mean-check').checked = false
+
+        system.settings.lazoSelection()
+        system.settings.reprPoint()
+        system.settings.updateDominanceMean()
+        system.settings.updateDominance()
+
 
     };
 
@@ -58,6 +66,11 @@ system.settings = (function() {
 
         $('button').removeClass('active');
         $('#effectiveness-radio').prop('checked', true)
+        document.getElementById('dominance-check').checked = false
+        document.getElementById('dominance-mean-check').checked = false
+        document.getElementById('representative-point-check').checked = false
+        document.getElementById('lazoselection').checked = false
+        
 
     }
 
@@ -905,11 +918,38 @@ system.settings = (function() {
     }
 
     this.updateDominance = function(){
-        // select('#grid-g-' + index_radviz).selectAll("text.label-" + index_radviz)
+        // 
+        document.getElementById('dominance-mean-check').checked = false
         if(document.getElementById('dominance-check').checked) {
-            d3_radviz.showRepresentativePoint(true)
+            d3.select('#grid-g-' + d3_radviz.getIndex()).selectAll("text.attr_label-" + d3_radviz.getIndex())
+            .text((d)=> {console.log(d.labeldominance);
+                return d.labeldominance.substring(0,10);}
+            )
         } else {
-            d3_radviz.showRepresentativePoint(false)
+            d3.select('#grid-g-' + d3_radviz.getIndex()).selectAll("text.attr_label-" + d3_radviz.getIndex())
+            .text(d=>{
+                if (d.value.includes(' ')) return d.value.substring(0, d.value.indexOf(' '));
+                    else return d.value;
+                }
+            )
+        }
+    }
+
+    this.updateDominanceMean = function(){
+        document.getElementById('dominance-check').checked = false
+        // 
+        if(document.getElementById('dominance-mean-check').checked) {
+            d3.select('#grid-g-' + d3_radviz.getIndex()).selectAll("text.attr_label-" + d3_radviz.getIndex())
+            .text((d)=> {console.log(d.labelmeandominance);
+                return d.labelmeandominance.substring(0,10);}
+            )
+        } else {
+            d3.select('#grid-g-' + d3_radviz.getIndex()).selectAll("text.attr_label-" + d3_radviz.getIndex())
+            .text(d=>{
+                if (d.value.includes(' ')) return d.value.substring(0, d.value.indexOf(' '));
+                    else return d.value;
+                }
+            )
         }
     }
 
