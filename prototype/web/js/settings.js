@@ -905,8 +905,8 @@ system.settings = (function() {
     }
 
     this.updateDominance = function(){
-        
-        if(document.getElementById('representative-point-check').checked) {
+        // select('#grid-g-' + index_radviz).selectAll("text.label-" + index_radviz)
+        if(document.getElementById('dominance-check').checked) {
             d3_radviz.showRepresentativePoint(true)
         } else {
             d3_radviz.showRepresentativePoint(false)
