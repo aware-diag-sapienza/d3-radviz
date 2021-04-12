@@ -1,4 +1,4 @@
-import { select, selectAll } from 'd3-selection';
+import { select, selectAll, event } from 'd3-selection';
 import { transition } from 'd3-transition';
 import { descending } from 'd3-array';
 import { scaleLinear, scaleOrdinal } from 'd3-scale';
@@ -85,7 +85,8 @@ export default function Radviz() {
                     })
                     .attr("cx", function(d) { return scale_x2(d.x2); })
                     .attr("cy", function(d) { return scale_x1(d.x1); })
-                    .on("contextmenu", function(event, d) {
+                    .on("contextmenu", function(d) {
+                        
                         event.preventDefault();
                         select('#points-g-' + index_radviz).selectAll("circle.data_point-" + index_radviz).style("stroke-width", 0.2);
                         select(this).style("stroke-width", 0.5);
@@ -230,12 +231,13 @@ export default function Radviz() {
         select(this).raise().classed("active", true);
     };
     //
-    let dragged = function(event, d) {
+    let dragged = function(d) {
+        console.log('evento',event, 'd',d)
         select(this).attr("cx", d.x = event.x).attr("cy", d.y = event.y);
         d.drag = true;
     };
     //
-    let dragended = function(event, d) {
+    let dragended = function(d) {
         if (d.drag == true) {
             select(this).classed("active", false);
             d.drag = false;
