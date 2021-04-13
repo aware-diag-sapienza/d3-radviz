@@ -115,16 +115,14 @@ function loadDataset(dataset, name) {
     // Representative Entry
     data.representativeEntry = computeRepresentativeEntry(data.entries); 
     // Dimensions Dominanice
-    data.dimensionsDominance = computeDimensionsDominance(data.entries);
-    data.dimensionsDominanceMean = computeDimensionsDominanceMean(data.entries);
+    data.dimensionsDominance = computeDimensionsDominance(data.representativeEntry);
     // Similarities & Outliers 
-    const sim = computeSimilarities(data.entries, data.representativeEntry);
-    const outliers = computeOutliers(sim);
+    const similarities = computeSimilarities(data.entries, data.representativeEntry);
+    const outliers = computeOutliers(similarities);
     for(let i=0; i<data.entries.length; i++){
-        data.entries[i].representativeSimilarity = sim[i];
+        data.entries[i].representativeSimilarity = similarities[i];
         data.entries[i].outlier = outliers[i];
     }
-
     // generate angles for the visualization
     data.angles = assignAnglestoDimensions(data.dimensions.map((d) => d.id),data);
     //
@@ -140,11 +138,11 @@ function computeRepresentativeEntry(entries){
             rv[j] += entries[i].vector[j];
         }
     }
-    rv = rv.map(v => v / dims.length);
-    rv = normalizeVector(rv);
+    rv = rv.map(v => v / entries.length);
+    //rv = normalizeVector(rv)
 
     const representativeEntry = {
-        id: `rp`,
+        id: 'rp',
         dimensions: {},
         vector: rv,
         x1: 0,
@@ -156,49 +154,15 @@ function computeRepresentativeEntry(entries){
     return representativeEntry
 }
 
-function computeDimensionsDominance(entries){
-    const dims = Object.keys(entries[0].dimensions);
-    const freq = Array(dims.length).fill(0);
-    for(let i=0; i<entries.length; i++){
-        const vector = entries[i].vector;
-        const vMax = d3Array.max(vector);
-        const increment = 1;
-        for(let j=0; j<vector.length; j++){
-            if(vector[j] == vMax) freq[j] += increment;
-        }
-    }
-    
-    const dominance = dims.map((d, i) => {
-        return {
-            id: d,
-            count: freq[i]
-        }
+function computeDimensionsDominance(representativeEntry){
+    const dims = Object.keys(representativeEntry.dimensions);
+    const dominance = representativeEntry.vector.map((v, i) => {
+      return {
+          id: dims[i],
+          val: v
+      }
     })
-    .sort((a, b) => b.count - a.count)
-    .map((d, i) => { return {...d, dominance: i}});
-    return dominance
-}
-
-function computeDimensionsDominanceMean(entries){
-    const dims = Object.keys(entries[0].dimensions);
-    const freq = Array(dims.length).fill(0);
-    for(let i=0; i<entries.length; i++){
-        const vector = entries[i].vector;
-        const vMax = d3Array.max(vector);
-        const discountedMean = (d3Array.sum(vector) - vMax) / vector.length;
-        const increment = vMax / discountedMean; //max/media altri
-        for(let j=0; j<vector.length; j++){
-            if(vector[j] == vMax) freq[j] += increment;
-        }
-    }
-    
-    const dominance = dims.map((d, i) => {
-        return {
-            id: d,
-            count: freq[i]
-        }
-    })
-    .sort((a, b) => b.count - a.count)
+    .sort((a, b) => b.val - a.val)
     .map((d, i) => { return {...d, dominance: i}});
     return dominance
 }
@@ -322,8 +286,8 @@ function Radviz () {
   let scale_x1 = d3Scale.scaleLinear().domain([-1, 1]).range([radius, -radius]);
   let scale_x2 = d3Scale.scaleLinear().domain([-1, 1]).range([-radius, radius]);
   //
-  let defaultPointColor = 'steelblue';//'#56C766' // #1f78b4' // 'steelblue' //
-  const outlierPointColor = 'orange';
+  let defaultPointColor = '#67a9cf';//'#56C766' // #1f78b4' // 'steelblue' //
+  let outlierPointColor = '#ef8a62';
 
   let r = 1;
   let mean_error_e = 0;
@@ -1018,7 +982,7 @@ function Radviz () {
 
   radviz.setDefaultColorPoints = function (_) {
     if (!arguments.length) {
-      defaultPointColor = 'steelblue';
+      defaultPointColor = '#67a9cf';
       return
     }
     else {
@@ -1246,21 +1210,17 @@ const radvizDA = (function(){
     *
     */
     this.clockHeuristic = function(data){
-        const dimensions = data.dimensions; //array [ {id: "x", values:[]} ] già normalizzate minmax e somma1
-        const representativePoint = dimensions.map((d,i) => {
+        const vec = data.representativeEntry.vector.map((v, i) => {
             return {
-                dimensionId: d.id, 
                 dimensionIndex: i,
-                value: d3.sum(d.values) 
-            }
-        }).sort((a,b) => b.value - a.value);
-        //console.log("--- Representative Point ---", representativePoint, "--- --- ---")
-        
+                val: v
+              }
+        }).sort((a, b) => b.val - a.val);
+
         const arrangement = [];
-        // clock
-        representativePoint.forEach((d, i) => {
-            if(i%2 == 0) arrangement.push(d.dimensionIndex);
-            else arrangement.unshift(d.dimensionIndex);
+        vec.forEach((d, i) => {
+            if(i%2 == 0) arrangement.unshift(d.dimensionIndex);
+            else arrangement.push(d.dimensionIndex);
         });
         return this.normalizeArrangement(arrangement)
     };
