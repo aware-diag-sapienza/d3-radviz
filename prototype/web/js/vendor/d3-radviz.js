@@ -186,7 +186,7 @@ function computeDimensionsDominanceMean(entries){
         const vector = entries[i].vector;
         const vMax = d3Array.max(vector);
         const discountedMean = (d3Array.sum(vector) - vMax) / vector.length;
-        const increment = vMax / discountedMean; // max/media altri
+        const increment = vMax / discountedMean; //max/media altri
         for(let j=0; j<vector.length; j++){
             if(vector[j] == vMax) freq[j] += increment;
         }
@@ -322,7 +322,7 @@ function Radviz () {
   let scale_x1 = d3Scale.scaleLinear().domain([-1, 1]).range([radius, -radius]);
   let scale_x2 = d3Scale.scaleLinear().domain([-1, 1]).range([-radius, radius]);
   //
-  const defaultPointColor = '#56C766'; // #1f78b4' // 'steelblue' //
+  let defaultPointColor = 'steelblue';//'#56C766' // #1f78b4' // 'steelblue' //
   const outlierPointColor = 'orange';
 
   let r = 1;
@@ -331,6 +331,7 @@ function Radviz () {
 
   let quality = true;
   let bool_showOutliers = false;
+  let bool_showDefaultColor = false;
   let bool_showRepresentativePoint = false;
 
   let function_update_results = null;
@@ -358,7 +359,8 @@ function Radviz () {
           .attr('id', (d, i) => { return 'p_' + i + '-' + index_radviz })
           .attr('r', r)
           .style('fill', function (d) {
-            if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
+            if (bool_showDefaultColor) return defaultPointColor
+            else if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
             else if (quality) return scale_color(d.errorE)
             else if (attribute_color == null) return defaultPointColor
             else {
@@ -402,7 +404,8 @@ function Radviz () {
             .transition()
             .duration(1000)
             .style('fill', function (d) {
-              if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
+              if (bool_showDefaultColor) return defaultPointColor
+              else if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
               else if (quality) return scale_color(d.errorE)
               else if (attribute_color == null) return defaultPointColor
               else {
@@ -461,9 +464,7 @@ function Radviz () {
     // updateResults()
     if (function_update_results != null) { function_update_results(mean_error_e); }
   };
-
   //
-
   const distance2points = function (P, AP) {
     return Math.sqrt(Math.pow((P.x1 - AP.x1), 2) + Math.pow((P.x2 - AP.x2), 2))
   };
@@ -852,12 +853,16 @@ function Radviz () {
     }
   };
   //
-  radviz.setQuality = function () {
-    quality = !quality;
+  radviz.setQuality = function (bool=true) {
+    quality = bool;
     updateData();
   };
   radviz.showOutliers = function (bool = true) {
     bool_showOutliers = bool;
+    updateData();
+  };
+  radviz.showDefaultColor = function (bool = true) {
+    bool_showDefaultColor = bool;
     updateData();
   };
   radviz.showRepresentativePoint = function (bool = true) {
@@ -1011,6 +1016,15 @@ function Radviz () {
     }
   };
 
+  radviz.setDefaultColorPoints = function (_) {
+    if (!arguments.length) {
+      defaultPointColor = 'steelblue';
+      return
+    }
+    else {
+      defaultPointColor = _;
+    }
+  };
   radviz.getAttrColor = function () {
     if (!arguments.length) return
     else {

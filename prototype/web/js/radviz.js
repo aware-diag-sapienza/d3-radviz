@@ -29,19 +29,19 @@ system.radviz = (function() {
     this.changeQuality = () => {
         
         if (d3.select('#effectiveness-radio').property('checked')){
+            d3_radviz.showDefaultColor(false)
             d3_radviz.showOutliers(false)
-            if (!d3_radviz.getQuality()){
-                d3_radviz.setQuality()
-            }
+            d3_radviz.setQuality(true)
+            
         } 
-        if (d3.select('#cluster-radio').property('checked')) {
+        else if (d3.select('#cluster-radio').property('checked')) {
+            d3_radviz.showDefaultColor(false)
             d3_radviz.showOutliers(false)
-            if (d3_radviz.getQuality()){
-                d3_radviz.setQuality()
-            }
+            d3_radviz.setQuality(false)
+            
         }
-
-        if (d3.select('#outliers-radio').property('checked')) {
+        else if (d3.select('#outliers-radio').property('checked')) {
+            d3_radviz.showDefaultColor(false)
             d3_radviz.showOutliers(true)
         }
         //d3_radviz.showOutliers(true)
