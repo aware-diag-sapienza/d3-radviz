@@ -50,6 +50,7 @@ export default function Radviz () {
   let function_context_menu = null
 
   let right_click = true 
+  let disable_drag_anchor = false 
 
   const scale_color = function (x) {
     return interpolateWarm(scaleLinear().domain([0, 1]).range([1, 0])(x))
@@ -361,7 +362,7 @@ export default function Radviz () {
         }
       })
     }
-    select('#grid-g-' + index_radviz).selectAll('.AP_points-' + index_radviz)
+    let anchors_sel = select('#grid-g-' + index_radviz).selectAll('.AP_points-' + index_radviz)
       .data(data.angles)
       .enter().append('circle')
       .attr('class', 'AP_points-' + index_radviz)
@@ -372,10 +373,14 @@ export default function Radviz () {
       .attr('cy', (d, i) => { return ((radius + 1) * Math.sin(-Math.PI / 2 + (d.start))) })
       .on('mouseover', function () { select(this).attr('r', '1.5') })
       .on('mouseout', function () { select(this).attr('r', '0.7') })
-      .call(drag()
+
+      if (!disable_drag_anchor){
+        anchors_sel.call(drag()
         .on('start', dragstarted)
         .on('drag', dragged)
         .on('end', dragended))
+      }
+      
   }
   //
   const calculatePointPosition = function () {
@@ -783,6 +788,10 @@ export default function Radviz () {
 
   radviz.setRightClick = function (bool) {
     right_click = bool
+  }
+
+  radviz.disableDraggableAnchors = function (bool) {
+    disable_drag_anchor = bool
   }
 
   return radviz
