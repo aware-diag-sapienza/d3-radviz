@@ -270,15 +270,7 @@ export function assignAnglestoDimensions(dimensions,data) {
                 return true;
         });
 
-        let index_dominance_mean = data.dimensionsDominanceMean.findIndex(function(post, index) {
-            if(post.id == d)
-                return true;
-        });
-
-        let lab_dom = function(dom,nam){
-            if (dom>5) return nam;
-            else return (dom+1) + '-' + nam
-        }
+        let lab_dom = (dom, nam) => `${dom+1}-${nam}`
 
         real_dimensions.push({
             'value': d,
@@ -289,10 +281,9 @@ export function assignAnglestoDimensions(dimensions,data) {
             'x1': x1,
             'x2': x2,
             'dominance':index_dominance,
-            'meandomincance':index_dominance_mean,
             'labeldominance':lab_dom(index_dominance,d),
-            'labelmeandominance':lab_dom(index_dominance_mean,d),
         });
+        console.log(real_dimensions)
     });
 
     return real_dimensions;
