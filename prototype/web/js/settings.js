@@ -922,8 +922,7 @@ system.settings = (function() {
         if(document.getElementById('dominance-check').checked) {
             d3.select('#grid-g-' + d3_radviz.getIndex()).selectAll("text.attr_label-" + d3_radviz.getIndex())
             .text((d)=> {
-                console.log(d)
-                return d.labelmeandominance.substring(0,10);}
+                return d.labeldominance.substring(0,10);}
             )
         } else {
             d3.select('#grid-g-' + d3_radviz.getIndex()).selectAll("text.attr_label-" + d3_radviz.getIndex())
