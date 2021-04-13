@@ -211,21 +211,17 @@ export const radvizDA = (function(){
     *
     */
     this.clockHeuristic = function(data){
-        const dimensions = data.dimensions //array [ {id: "x", values:[]} ] già normalizzate minmax e somma1
-        const representativePoint = dimensions.map((d,i) => {
+        const vec = data.representativeEntry.vector.map((v, i) => {
             return {
-                dimensionId: d.id, 
                 dimensionIndex: i,
-                value: d3.sum(d.values) 
-            }
-        }).sort((a,b) => b.value - a.value)
-        //console.log("--- Representative Point ---", representativePoint, "--- --- ---")
-        
+                val: v
+              }
+        }).sort((a, b) => b.val - a.val)
+
         const arrangement = []
-        // clock
-        representativePoint.forEach((d, i) => {
-            if(i%2 == 0) arrangement.push(d.dimensionIndex)
-            else arrangement.unshift(d.dimensionIndex)
+        vec.forEach((d, i) => {
+            if(i%2 == 0) arrangement.unshift(d.dimensionIndex)
+            else arrangement.push(d.dimensionIndex)
         });
         return this.normalizeArrangement(arrangement)
     }

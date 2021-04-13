@@ -29,8 +29,8 @@ export default function Radviz () {
   let scale_x1 = scaleLinear().domain([-1, 1]).range([radius, -radius])
   let scale_x2 = scaleLinear().domain([-1, 1]).range([-radius, radius])
   //
-  let defaultPointColor = 'steelblue'//'#56C766' // #1f78b4' // 'steelblue' //
-  const outlierPointColor = 'orange'
+  let defaultPointColor = '#67a9cf'//'#56C766' // #1f78b4' // 'steelblue' //
+  let outlierPointColor = '#ef8a62'
 
   let r = 1
   let mean_error_e = 0
@@ -744,7 +744,7 @@ export default function Radviz () {
 
   radviz.setDefaultColorPoints = function (_) {
     if (!arguments.length) {
-      defaultPointColor = 'steelblue'
+      defaultPointColor = '#67a9cf'
       return
     }
     else {
