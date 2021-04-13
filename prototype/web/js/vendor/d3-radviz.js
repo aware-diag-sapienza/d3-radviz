@@ -295,6 +295,9 @@ function Radviz () {
   let function_mouse_out = null;
   let function_context_menu = null;
 
+  let right_click = true; 
+  let disable_drag_anchor = false; 
+
   const scale_color = function (x) {
     return d3ScaleChromatic.interpolateWarm(d3Scale.scaleLinear().domain([0, 1]).range([1, 0])(x))
   };
@@ -333,6 +336,7 @@ function Radviz () {
           .attr('cx', function (d) { return scale_x2(d.x2) })
           .attr('cy', function (d) { return scale_x1(d.x1) })
           .on('contextmenu', function (d) {
+            if (right_click){
             d3Selection.event.preventDefault();
             d3Selection.select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).style('stroke-width', 0.2);
             d3Selection.select(this).style('stroke-width', 0.5);
@@ -343,6 +347,7 @@ function Radviz () {
             d3Selection.select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).data(data.entries, (d, i) => i);
             updateData();
             if (function_context_menu != null) { function_context_menu(data.angles); }
+          }
           })
           .on('click', function (d) {
             if (function_click != null) { function_click(data.angles, d, d3Selection.select(this)); }
@@ -589,7 +594,7 @@ function Radviz () {
         }
       });
     }
-    d3Selection.select('#grid-g-' + index_radviz).selectAll('.AP_points-' + index_radviz)
+    let anchors_sel = d3Selection.select('#grid-g-' + index_radviz).selectAll('.AP_points-' + index_radviz)
       .data(data.angles)
       .enter().append('circle')
       .attr('class', 'AP_points-' + index_radviz)
@@ -599,11 +604,15 @@ function Radviz () {
       .attr('cx', (d, i) => { return ((radius + 1) * Math.cos(-Math.PI / 2 + (d.start))) })
       .attr('cy', (d, i) => { return ((radius + 1) * Math.sin(-Math.PI / 2 + (d.start))) })
       .on('mouseover', function () { d3Selection.select(this).attr('r', '1.5'); })
-      .on('mouseout', function () { d3Selection.select(this).attr('r', '0.7'); })
-      .call(d3Drag.drag()
+      .on('mouseout', function () { d3Selection.select(this).attr('r', '0.7'); });
+
+      if (!disable_drag_anchor){
+        anchors_sel.call(d3Drag.drag()
         .on('start', dragstarted)
         .on('drag', dragged)
         .on('end', dragended));
+      }
+      
   };
   //
   const calculatePointPosition = function () {
@@ -1003,6 +1012,14 @@ function Radviz () {
       x: SVG_SIDE / 2,
       y: SVG_SIDE / 2
     }
+  };
+
+  radviz.setRightClick = function (bool) {
+    right_click = bool;
+  };
+
+  radviz.disableDraggableAnchors = function (bool) {
+    disable_drag_anchor = bool;
   };
 
   return radviz

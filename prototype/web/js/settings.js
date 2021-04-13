@@ -842,6 +842,19 @@ system.settings = (function() {
         system.radar.changeRadar(d3_radviz.data().angles);
         system.structure.drawboxplot(d3_radviz.data().entries.map(d => d.errorE));
     }
+function remove_lasso(){
+    console.log('sono qui ')
+    var lasso = d3.lasso()
+        .closePathSelect(true)
+            .closePathDistance(100)
+            .items(d3.selectAll('rect'))
+            .targetArea(d3.select(`.radviz-svg-${d3_radviz.getIndex()}`))
+            .on("start",() => {})
+            .on("draw",() => {})
+            .on("end",() => {});
+            // Sets the drag area for the lasso on the rectangle #myLassoRect
+            d3.select(`.radviz-svg-${d3_radviz.getIndex()}`).call(lasso);
+}
 
     function setup_lasso(){
 
@@ -907,7 +920,8 @@ system.settings = (function() {
     if(document.getElementById('lazoselection').checked) {
         setup_lasso();
     } else {
-        d3.select('.lasso').remove();
+        remove_lasso();
+        d3.selectAll('.lasso').remove();
     }
 
     }
