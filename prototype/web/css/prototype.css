@@ -593,3 +593,22 @@ div.tooltip {
     fill:#3399FF;
     fill-opacity:.5;
 }
+
+
+/** BLINK OUTLIERS **/
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+  
+@-webkit-keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
+
+.data_point_outlier {
+    animation: blink-animation 0.75s steps(5, start) infinite;
+}
+/** -- BLINK OUTLIERS **/
