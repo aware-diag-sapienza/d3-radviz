@@ -49,6 +49,8 @@ export default function Radviz () {
   let function_mouse_out = null
   let function_context_menu = null
 
+  let right_click = true 
+
   const scale_color = function (x) {
     return interpolateWarm(scaleLinear().domain([0, 1]).range([1, 0])(x))
   }
@@ -87,6 +89,7 @@ export default function Radviz () {
           .attr('cx', function (d) { return scale_x2(d.x2) })
           .attr('cy', function (d) { return scale_x1(d.x1) })
           .on('contextmenu', function (d) {
+            if (right_click){
             event.preventDefault()
             select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).style('stroke-width', 0.2)
             select(this).style('stroke-width', 0.5)
@@ -97,6 +100,7 @@ export default function Radviz () {
             select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).data(data.entries, (d, i) => i)
             updateData()
             if (function_context_menu != null) { function_context_menu(data.angles) }
+          }
           })
           .on('click', function (d) {
             if (function_click != null) { function_click(data.angles, d, select(this)) }
@@ -775,6 +779,10 @@ export default function Radviz () {
       x: SVG_SIDE / 2,
       y: SVG_SIDE / 2
     }
+  }
+
+  radviz.setRightClick = function (bool) {
+    right_click = bool
   }
 
   return radviz

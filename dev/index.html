@@ -94,6 +94,7 @@
                 document.getElementById('menu1').innerHTML = ' <b>Effectiveness Error</b>: ' + error_value.toFixed(4)
             }
             radviz.setFunctionUpdateResults(results1)
+            radviz.setRightClick(false)
             //radviz.setDefaultColorPoints('purple')
             d3.select('#container').call(radviz)
 
