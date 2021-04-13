@@ -29,7 +29,7 @@ export default function Radviz () {
   let scale_x1 = scaleLinear().domain([-1, 1]).range([radius, -radius])
   let scale_x2 = scaleLinear().domain([-1, 1]).range([-radius, radius])
   //
-  const defaultPointColor = '#56C766' // #1f78b4' // 'steelblue' //
+  let defaultPointColor = 'steelblue'//'#56C766' // #1f78b4' // 'steelblue' //
   const outlierPointColor = 'orange'
 
   let r = 1
@@ -39,6 +39,7 @@ export default function Radviz () {
 
   let quality = true
   let bool_showOutliers = false
+  let bool_showDefaultColor = false
   let bool_showRepresentativePoint = false
 
   let function_update_results = null
@@ -66,7 +67,8 @@ export default function Radviz () {
           .attr('id', (d, i) => { return 'p_' + i + '-' + index_radviz })
           .attr('r', r)
           .style('fill', function (d) {
-            if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
+            if (bool_showDefaultColor) return defaultPointColor
+            else if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
             else if (quality) return scale_color(d.errorE)
             else if (attribute_color == null) return defaultPointColor
             else {
@@ -114,7 +116,8 @@ export default function Radviz () {
             .transition()
             .duration(1000)
             .style('fill', function (d) {
-              if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
+              if (bool_showDefaultColor) return defaultPointColor
+              else if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
               else if (quality) return scale_color(d.errorE)
               else if (attribute_color == null) return defaultPointColor
               else {
@@ -173,9 +176,7 @@ export default function Radviz () {
     // updateResults()
     if (function_update_results != null) { function_update_results(mean_error_e) }
   }
-
   //
-
   const distance2points = function (P, AP) {
     return Math.sqrt(Math.pow((P.x1 - AP.x1), 2) + Math.pow((P.x2 - AP.x2), 2))
   }
@@ -575,12 +576,16 @@ export default function Radviz () {
     }
   }
   //
-  radviz.setQuality = function () {
-    quality = !quality
+  radviz.setQuality = function (bool=true) {
+    quality = bool
     updateData()
   }
   radviz.showOutliers = function (bool = true) {
     bool_showOutliers = bool
+    updateData()
+  }
+  radviz.showDefaultColor = function (bool = true) {
+    bool_showDefaultColor = bool
     updateData()
   }
   radviz.showRepresentativePoint = function (bool = true) {
@@ -737,6 +742,15 @@ export default function Radviz () {
     }
   }
 
+  radviz.setDefaultColorPoints = function (_) {
+    if (!arguments.length) {
+      defaultPointColor = 'steelblue'
+      return
+    }
+    else {
+      defaultPointColor = _
+    }
+  }
   radviz.getAttrColor = function () {
     if (!arguments.length) return
     else {
