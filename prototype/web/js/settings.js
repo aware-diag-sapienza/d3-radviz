@@ -2,6 +2,7 @@ if (window.system == undefined) window.system = {}
 system.settings = (function() {
     const that = this;
 
+    const RADIUS = 0.5;
 
     this.perfect_selected = false;
     this.quantile_selected = false;
@@ -222,6 +223,7 @@ system.settings = (function() {
                 return pilot.id === name_attr
             }).map(d => d.values)[0])))
             const set = d3_radviz.data().dimensions.map(d => d.values)
+            d3_radviz.setRadiusPoints(RADIUS)
             d3.select('#container').call(d3_radviz);
             system.structure.drawboxplot(d3_radviz.data().entries.map(d => d.errorE));
             system.structure.uploadProgressBar();
@@ -339,6 +341,7 @@ system.settings = (function() {
             return pilot.id === name_attr
         }).map(d => d.values)[0])))
         const set = d3_radviz.data().dimensions.map(d => d.values)
+        d3_radviz.setRadiusPoints(RADIUS)
         d3.select('#container').call(d3_radviz);
         system.structure.drawboxplot(d3_radviz.data().entries.map(d => d.errorE));
         system.structure.uploadProgressBar();
@@ -489,6 +492,7 @@ system.settings = (function() {
                 return pilot.id === name_attr
             }).map(d => d.values)[0])))
             const set = d3_radviz.data().dimensions.map(d => d.values)
+            d3_radviz.setRadiusPoints(RADIUS)
             d3.select('#container').call(d3_radviz);
             system.structure.uploadProgressBar();
 
@@ -634,6 +638,7 @@ system.settings = (function() {
             return pilot.id === name_attr
         }).map(d => d.values)[0])))
         const set = d3_radviz.data().dimensions.map(d => d.values)
+        d3_radviz.setRadiusPoints(RADIUS)
         d3.select('#container').call(d3_radviz);
         system.structure.uploadProgressBar();
         document.getElementById("btn_min_disposition").style.display = "none";
