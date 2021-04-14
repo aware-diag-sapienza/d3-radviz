@@ -365,7 +365,7 @@ export default function Radviz () {
     let anchors_sel = select('#grid-g-' + index_radviz).selectAll('.AP_points-' + index_radviz)
       .data(data.angles)
       .enter().append('circle')
-      .attr('class', 'AP_points-' + index_radviz)
+      .attr('class', 'anchor-points AP_points-' + index_radviz)
       .attr('id', (d) => { return 'AP_' + d.value.replace(/ /g, '') + '-' + index_radviz })
       .attr('r', '0.7')
       .style('fill', '#660000')
