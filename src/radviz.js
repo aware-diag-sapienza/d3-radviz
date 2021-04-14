@@ -340,7 +340,7 @@ export default function Radviz () {
         .data(data.angles)
         .enter().append('text')
         .attr('id', (d) => { return 'T_' + d.value.replace(/ /g, '') + '-' + index_radviz })
-        .attr('class', 'attr_label-' + index_radviz)
+        .attr('class', 'anchor-points attr_label-' + index_radviz)
         .attr('x', (d, i) => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (d.start))) })
         .attr('y', (d, i) => { return ((radius + 6) * Math.sin(-Math.PI / 2 + (d.start))) })
         .attr('fill', 'black')
