@@ -308,11 +308,23 @@ system.settings = (function() {
                 .duration(50)
                 .style("opacity", 0);
         }
+
+        let results1 = function(error_value) {
+                
+            document.getElementById('menu1').innerHTML = ' <b>Effectiveness Error</b>: ' + error_value.toFixed(4)
+
+            /* TEST FUNZIONI METRICHE*/
+            
+            system.settings.addOtherMetrics();
+           
+            /* --- */
+        }
         d3_radviz.setFunctionClick(f_click)
         d3_radviz.setFunctionMouseOver(f_mouse_over)
         d3_radviz.setFunctionMouseOut(f_mouse_out)
         d3_radviz.setFunctionDragEnd(f_drag_end)
         d3_radviz.setFunctionContextMenu(f_context_menu)
+        d3_radviz.setFunctionUpdateResults(results1)
 
         system.structure.legenda_cluster(Array.from(new Set(d3_radviz.data().attributes.filter(function(pilot) {
             return pilot.id === name_attr
