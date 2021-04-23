@@ -2,7 +2,7 @@ import { select, selectAll, event } from 'd3-selection'
 import { transition } from 'd3-transition'
 import { descending } from 'd3-array'
 import { scaleLinear, scaleOrdinal } from 'd3-scale'
-import { interpolateWarm, schemeCategory10 } from 'd3-scale-chromatic'
+import { interpolateWarm, schemeCategory10,interpolatePiYG } from 'd3-scale-chromatic'
 import { drag } from 'd3-drag'
 import { arc } from 'd3-shape'
 
@@ -51,9 +51,14 @@ export default function Radviz () {
 
   let right_click = true 
   let disable_drag_anchor = false 
+  let colorBlind = false
 
   const scale_color = function (x) {
     return interpolateWarm(scaleLinear().domain([0, 1]).range([1, 0])(x))
+  }
+
+  let scale_color_blind = function (x) {
+    return interpolatePiYG(scaleLinear().domain([0, 1]).range([1,0])(x))
   }
 
   let scale_classification = scaleOrdinal(schemeCategory10)
@@ -70,7 +75,8 @@ export default function Radviz () {
           .attr('id', (d, i) => { return 'p_' + i + '-' + index_radviz })
           .attr('r', r)
           .style('fill', function (d) {
-            if (bool_showDefaultColor) return defaultPointColor
+            if (colorBlind) return scale_color_blind(d.errorE)
+            else if (bool_showDefaultColor) return defaultPointColor
             else if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
             else if (quality) return scale_color(d.errorE)
             else if (attribute_color == null) return defaultPointColor
@@ -121,7 +127,8 @@ export default function Radviz () {
             .transition()
             .duration(1000)
             .style('fill', function (d) {
-              if (bool_showDefaultColor) return defaultPointColor
+              if (colorBlind) return scale_color_blind(d.errorE)
+              else if (bool_showDefaultColor) return defaultPointColor
               else if (bool_showOutliers) return d.outlier ? outlierPointColor : defaultPointColor
               else if (quality) return scale_color(d.errorE)
               else if (attribute_color == null) return defaultPointColor
@@ -614,7 +621,6 @@ export default function Radviz () {
     switch (flag) {
       case (0):
         quality = true
-
         break
       case (1):
         quality = false
@@ -624,6 +630,11 @@ export default function Radviz () {
         break
     }
     updateData()
+  }
+  // 
+  radviz.setColorblindSafe = function(bool){
+    colorBlind = bool
+    updateData() 
   }
   //
   radviz.setFunctionDragEnd = function (ff) {
