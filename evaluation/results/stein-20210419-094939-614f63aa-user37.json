@@ -1,0 +1,3905 @@
+{
+  "id": "20210419-094939-614f63aa",
+  "date": "2021-04-19T09:49:39.162Z",
+  "useragent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36 Edg/89.0.774.77",
+  "publicIp": "37.117.210.91",
+  "privateIp": null,
+  "totalTime": 1358,
+  "startTime": 1618825779,
+  "endTime": 1618827137,
+  "totalSystemQuestionsTime": 474,
+  "totalSystemQuestionsReadingTime": 474,
+  "totalSystemQuestionsAnsweringTime": 0,
+  "totalSystemQuestionsEventsNumber": 290,
+  "userConfiguration": {
+    "user": 37,
+    "Q1": {
+      "dataset": "08-shuttle(class)",
+      "technique": "independent_da",
+      "point": "",
+      "fn": "(function(){ questions.Q1('08-shuttle(class)', 'independent_da', '') })"
+    },
+    "Q3": {
+      "dataset": "08-shuttle(class)",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q3('08-shuttle(class)', 'uci', '') })"
+    },
+    "Q5": {
+      "dataset": "07-seeds_dataset(group)",
+      "technique": "effectiveness_error_heuristic",
+      "point": "",
+      "fn": "(function(){ questions.Q5('07-seeds_dataset(group)', 'effectiveness_error_heuristic', '') })"
+    },
+    "Q7": {
+      "dataset": "07-seeds_dataset(group)",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q7('07-seeds_dataset(group)', 'uci', '') })"
+    },
+    "Q9": {
+      "dataset": "11-forestfires",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q9('11-forestfires', 'uci', '') })"
+    },
+    "Q11": {
+      "dataset": "11-forestfires",
+      "technique": "effectiveness_error_heuristic",
+      "point": "",
+      "fn": "(function(){ questions.Q11('11-forestfires', 'effectiveness_error_heuristic', '') })"
+    },
+    "Q13": {
+      "dataset": "11-winequality-white(quality)",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q13('11-winequality-white(quality)', 'uci', '') })"
+    },
+    "Q15": {
+      "dataset": "11-winequality-white(quality)",
+      "technique": "independent_da",
+      "point": "",
+      "fn": "(function(){ questions.Q15('11-winequality-white(quality)', 'independent_da', '') })"
+    },
+    "Q17": {
+      "dataset": "09-elnino",
+      "technique": "dependent_da",
+      "point": "",
+      "fn": "(function(){ questions.Q17('09-elnino', 'dependent_da', '') })"
+    },
+    "Q19": {
+      "dataset": "09-elnino",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q19('09-elnino', 'uci', '') })"
+    },
+    "Q21": {
+      "dataset": "09-Live",
+      "technique": "effectiveness_error_heuristic",
+      "point": "",
+      "fn": "(function(){ questions.Q21('09-Live', 'effectiveness_error_heuristic', '') })"
+    },
+    "Q23": {
+      "dataset": "09-Live",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q23('09-Live', 'uci', '') })"
+    },
+    "Q25": {
+      "dataset": "10-slump_test",
+      "technique": "uci",
+      "point": 4,
+      "fn": "(function(){ questions.Q25('10-slump_test', 'uci', '4') })"
+    },
+    "Q27": {
+      "dataset": "10-slump_test",
+      "technique": "effectiveness_error_heuristic",
+      "point": 4,
+      "fn": "(function(){ questions.Q27('10-slump_test', 'effectiveness_error_heuristic', '4') })"
+    },
+    "Q29": {
+      "dataset": "11-winequality-red(quality)",
+      "technique": "uci",
+      "point": 1292,
+      "fn": "(function(){ questions.Q29('11-winequality-red(quality)', 'uci', '1292') })"
+    },
+    "Q31": {
+      "dataset": "11-winequality-red(quality)",
+      "technique": "dependent_da",
+      "point": 1292,
+      "fn": "(function(){ questions.Q31('11-winequality-red(quality)', 'dependent_da', '1292') })"
+    },
+    "Q33": {
+      "dataset": "10-tripadvisor_review",
+      "technique": "independent_da",
+      "point": 378,
+      "fn": "(function(){ questions.Q33('10-tripadvisor_review', 'independent_da', '378') })"
+    },
+    "Q35": {
+      "dataset": "10-tripadvisor_review",
+      "technique": "uci",
+      "point": 378,
+      "fn": "(function(){ questions.Q35('10-tripadvisor_review', 'uci', '378') })"
+    },
+    "Q37": {
+      "dataset": "08-diabetes(Diabetes)",
+      "technique": "effectiveness_error_heuristic",
+      "point": 448,
+      "fn": "(function(){ questions.Q37('08-diabetes(Diabetes)', 'effectiveness_error_heuristic', '448') })"
+    },
+    "Q39": {
+      "dataset": "08-diabetes(Diabetes)",
+      "technique": "uci",
+      "point": 448,
+      "fn": "(function(){ questions.Q39('08-diabetes(Diabetes)', 'uci', '448') })"
+    },
+    "Q41": {
+      "dataset": "09-breast-cancer-wisconsin(quality)",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q41('09-breast-cancer-wisconsin(quality)', 'uci', '') })"
+    },
+    "Q43": {
+      "dataset": "09-breast-cancer-wisconsin(quality)",
+      "technique": "effectiveness_error_heuristic",
+      "point": "",
+      "fn": "(function(){ questions.Q43('09-breast-cancer-wisconsin(quality)', 'effectiveness_error_heuristic', '') })"
+    },
+    "Q45": {
+      "dataset": "05-user_modeling(UNS)",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q45('05-user_modeling(UNS)', 'uci', '') })"
+    },
+    "Q47": {
+      "dataset": "05-user_modeling(UNS)",
+      "technique": "radviz_pp",
+      "point": "",
+      "fn": "(function(){ questions.Q47('05-user_modeling(UNS)', 'radviz_pp', '') })"
+    },
+    "Q49": {
+      "dataset": "07-ecoli(class)",
+      "technique": "radviz_pp",
+      "point": "",
+      "fn": "(function(){ questions.Q49('07-ecoli(class)', 'radviz_pp', '') })"
+    },
+    "Q51": {
+      "dataset": "07-ecoli(class)",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q51('07-ecoli(class)', 'uci', '') })"
+    },
+    "Q53": {
+      "dataset": "09-dataR2(Classification)",
+      "technique": "effectiveness_error_heuristic",
+      "point": "",
+      "fn": "(function(){ questions.Q53('09-dataR2(Classification)', 'effectiveness_error_heuristic', '') })"
+    },
+    "Q55": {
+      "dataset": "09-dataR2(Classification)",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q55('09-dataR2(Classification)', 'uci', '') })"
+    },
+    "Q57": {
+      "dataset": "11-page-blocks",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q57('11-page-blocks', 'uci', '') })"
+    },
+    "Q59": {
+      "dataset": "11-page-blocks",
+      "technique": "effectiveness_error_heuristic",
+      "point": "",
+      "fn": "(function(){ questions.Q59('11-page-blocks', 'effectiveness_error_heuristic', '') })"
+    },
+    "Q61": {
+      "dataset": "12-CSM",
+      "technique": "uci",
+      "point": "",
+      "fn": "(function(){ questions.Q61('12-CSM', 'uci', '') })"
+    },
+    "Q63": {
+      "dataset": "12-CSM",
+      "technique": "dependent_da",
+      "point": "",
+      "fn": "(function(){ questions.Q63('12-CSM', 'dependent_da', '') })"
+    },
+    "Q65": {
+      "dataset": "13-wine(Wine)",
+      "technique": "dependent_da",
+      "point": 136,
+      "fn": "(function(){ questions.Q65('13-wine(Wine)', 'dependent_da', '136') })"
+    },
+    "Q67": {
+      "dataset": "13-wine(Wine)",
+      "technique": "uci",
+      "point": 136,
+      "fn": "(function(){ questions.Q67('13-wine(Wine)', 'uci', '136') })"
+    },
+    "Q69": {
+      "dataset": "09-BreastTissue(Class)",
+      "technique": "effectiveness_error_heuristic",
+      "point": 48,
+      "fn": "(function(){ questions.Q69('09-BreastTissue(Class)', 'effectiveness_error_heuristic', '48') })"
+    },
+    "Q71": {
+      "dataset": "09-BreastTissue(Class)",
+      "technique": "uci",
+      "point": 48,
+      "fn": "(function(){ questions.Q71('09-BreastTissue(Class)', 'uci', '48') })"
+    }
+  },
+  "urlParams": {
+    "user": "37"
+  },
+  "initialQuestions": [
+    {
+      "id": 1,
+      "responseType": "multiple-choice",
+      "response": "Male"
+    },
+    {
+      "id": 2,
+      "responseType": "small-text",
+      "response": "25"
+    },
+    {
+      "id": 3,
+      "responseType": "multiple-choice",
+      "response": "Industry"
+    },
+    {
+      "id": 4,
+      "responseType": "small-text",
+      "response": null
+    },
+    {
+      "id": 5,
+      "responseType": "checkboxes",
+      "response": [
+        "Databases",
+        "Information Visualization",
+        "Visual Analytics"
+      ]
+    },
+    {
+      "id": 6,
+      "responseType": "multiple-choice",
+      "response": "Knowledgeable"
+    },
+    {
+      "id": 7,
+      "responseType": "multiple-choice",
+      "response": "Yes"
+    },
+    {
+      "id": 8,
+      "responseType": "multiple-choice",
+      "response": "I moderately know it"
+    },
+    {
+      "id": 9,
+      "responseType": "multiple-choice",
+      "response": "I moderately use it"
+    },
+    {
+      "id": 10,
+      "responseType": "checkboxes",
+      "response": [
+        "Data overview",
+        "Clustering visualization",
+        "Dominant dimension analysis"
+      ]
+    },
+    {
+      "id": 11,
+      "responseType": "large-text",
+      "response": null
+    }
+  ],
+  "systemQuestions": [
+    {
+      "id": 1,
+      "responseType": "auto-computed-list",
+      "response": [],
+      "confidence": null,
+      "totalTime": 4,
+      "readingTime": 4,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618825813,
+          1618825817
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": null,
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 2,
+      "responseType": "auto-computed-list",
+      "response": [],
+      "confidence": null,
+      "totalTime": 3,
+      "readingTime": 3,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618825817,
+          1618825820
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": null,
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 3,
+      "responseType": "auto-computed-list",
+      "response": [],
+      "confidence": null,
+      "totalTime": 1,
+      "readingTime": 1,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618825820,
+          1618825821
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": null,
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 4,
+      "responseType": "auto-computed-list",
+      "response": [],
+      "confidence": null,
+      "totalTime": 64,
+      "readingTime": 61,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618825821,
+          1618825885
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "05-user_modeling(UNS)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "all",
+          "dimensions": "all"
+        },
+        "selectedPoints": [
+          "p12"
+        ],
+        "selectedDimensions": [
+          "SCG",
+          "STG",
+          "LPR"
+        ],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 5,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p16"
+      ],
+      "confidence": "4 - Completely confident",
+      "totalTime": 28,
+      "readingTime": 21,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618825885,
+          1618825913
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "05-user_modeling(UNS)",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "1",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p16"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 6,
+      "responseType": "user-interaction-exclusive-list",
+      "response": [
+        "g"
+      ],
+      "confidence": "1 - Poorly confident",
+      "totalTime": 125,
+      "readingTime": 55,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618825913,
+          1618826038
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "08-shuttle(class)",
+          "technique": "independent_da",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "1"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [
+          "g"
+        ],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 7,
+      "responseType": "user-interaction-exclusive-list",
+      "response": [
+        "g"
+      ],
+      "confidence": "3 - Very confident",
+      "totalTime": 72,
+      "readingTime": 15,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826038,
+          1618826110
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "08-shuttle(class)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "1"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [
+          "g"
+        ],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 8,
+      "responseType": "user-interaction-exclusive-list",
+      "response": [
+        "perimeter"
+      ],
+      "confidence": "1 - Poorly confident",
+      "totalTime": 31,
+      "readingTime": 9,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826110,
+          1618826141
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "07-seeds_dataset(group)",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "1"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [
+          "perimeter"
+        ],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 9,
+      "responseType": "user-interaction-exclusive-list",
+      "response": [
+        "compactness"
+      ],
+      "confidence": "4 - Completely confident",
+      "totalTime": 12,
+      "readingTime": 7,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826141,
+          1618826153
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "07-seeds_dataset(group)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "1"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [
+          "compactness"
+        ],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 10,
+      "responseType": "auto-computed-list",
+      "response": [
+        "DC",
+        "DMC"
+      ],
+      "confidence": "3 - Very confident",
+      "totalTime": 29,
+      "readingTime": 23,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826153,
+          1618826182
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "11-forestfires",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "all"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [
+          "DC",
+          "DMC"
+        ],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 11,
+      "responseType": "auto-computed-list",
+      "response": [
+        "FFMC"
+      ],
+      "confidence": "2 - Averagely confident",
+      "totalTime": 13,
+      "readingTime": 4,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826182,
+          1618826195
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "11-forestfires",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "all"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [
+          "FFMC"
+        ],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 12,
+      "responseType": "auto-computed-list",
+      "response": [
+        "alcohol",
+        "sulphates"
+      ],
+      "confidence": "3 - Very confident",
+      "totalTime": 19,
+      "readingTime": 5,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826195,
+          1618826214
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "11-winequality-white(quality)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "all"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [
+          "alcohol",
+          "sulphates"
+        ],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 13,
+      "responseType": "auto-computed-list",
+      "response": [
+        "alcohol",
+        "pH"
+      ],
+      "confidence": "3 - Very confident",
+      "totalTime": 17,
+      "readingTime": 5,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826214,
+          1618826231
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "11-winequality-white(quality)",
+          "technique": "independent_da",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "all"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [
+          "alcohol",
+          "pH"
+        ],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 14,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p116",
+        "p117"
+      ],
+      "confidence": null,
+      "totalTime": 51,
+      "readingTime": 39,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826231,
+          1618826282
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-elnino",
+          "technique": "dependent_da",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "2",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p116",
+          "p117"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 15,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p370",
+        "p351"
+      ],
+      "confidence": null,
+      "totalTime": 17,
+      "readingTime": 8,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826282,
+          1618826299
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-elnino",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "2",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p370",
+          "p351"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 16,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p6285",
+        "p6194"
+      ],
+      "confidence": null,
+      "totalTime": 23,
+      "readingTime": 2,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826299,
+          1618826322
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-Live",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "2",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p6285",
+          "p6194"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 17,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p702",
+        "p6489"
+      ],
+      "confidence": null,
+      "totalTime": 43,
+      "readingTime": 9,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826322,
+          1618826365
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-Live",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "2",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p702",
+          "p6489"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 18,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p7",
+        "p15",
+        "p19",
+        "p21",
+        "p55",
+        "p58",
+        "p86",
+        "p4"
+      ],
+      "confidence": "2 - Averagely confident",
+      "totalTime": 53,
+      "readingTime": 43,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826365,
+          1618826418
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "10-slump_test",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "4",
+          "interaction": "all",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p7",
+          "p15",
+          "p19",
+          "p21",
+          "p55",
+          "p58",
+          "p86",
+          "p4"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 19,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p20",
+        "p35",
+        "p41",
+        "p52",
+        "p56",
+        "p58",
+        "p67",
+        "p74",
+        "p75",
+        "p79",
+        "p80",
+        "p85",
+        "p86",
+        "p4"
+      ],
+      "confidence": null,
+      "totalTime": 15,
+      "readingTime": 1,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826418,
+          1618826433
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "10-slump_test",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": false,
+          "selectedpoint": "4",
+          "interaction": "all",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p20",
+          "p35",
+          "p41",
+          "p52",
+          "p56",
+          "p58",
+          "p67",
+          "p74",
+          "p75",
+          "p79",
+          "p80",
+          "p85",
+          "p86",
+          "p4"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 20,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p29",
+        "p36",
+        "p44",
+        "p45",
+        "p67",
+        "p69",
+        "p142",
+        "p144",
+        "p161",
+        "p198",
+        "p222",
+        "p245",
+        "p249",
+        "p334",
+        "p346",
+        "p355",
+        "p390",
+        "p530",
+        "p535",
+        "p588",
+        "p658",
+        "p660",
+        "p688",
+        "p727",
+        "p728",
+        "p762",
+        "p793",
+        "p802",
+        "p829",
+        "p831",
+        "p876",
+        "p907",
+        "p939",
+        "p985",
+        "p1022",
+        "p1030",
+        "p1031",
+        "p1052",
+        "p1092",
+        "p1110",
+        "p1121",
+        "p1122",
+        "p1124",
+        "p1157",
+        "p1178",
+        "p1210",
+        "p1212",
+        "p1236",
+        "p1253",
+        "p1269",
+        "p1270",
+        "p1277",
+        "p1300",
+        "p1335",
+        "p1346",
+        "p1364",
+        "p1390",
+        "p1399",
+        "p1438",
+        "p1461",
+        "p1475",
+        "p1477",
+        "p1480",
+        "p1487",
+        "p1495",
+        "p1505",
+        "p1512",
+        "p1530",
+        "p1538",
+        "p1569",
+        "p1571",
+        "p1591",
+        "p1292"
+      ],
+      "confidence": null,
+      "totalTime": 13,
+      "readingTime": 8,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826433,
+          1618826446
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "11-winequality-red(quality)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "1292",
+          "interaction": "all",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p29",
+          "p36",
+          "p44",
+          "p45",
+          "p67",
+          "p69",
+          "p142",
+          "p144",
+          "p161",
+          "p198",
+          "p222",
+          "p245",
+          "p249",
+          "p334",
+          "p346",
+          "p355",
+          "p390",
+          "p530",
+          "p535",
+          "p588",
+          "p658",
+          "p660",
+          "p688",
+          "p727",
+          "p728",
+          "p762",
+          "p793",
+          "p802",
+          "p829",
+          "p831",
+          "p876",
+          "p907",
+          "p939",
+          "p985",
+          "p1022",
+          "p1030",
+          "p1031",
+          "p1052",
+          "p1092",
+          "p1110",
+          "p1121",
+          "p1122",
+          "p1124",
+          "p1157",
+          "p1178",
+          "p1210",
+          "p1212",
+          "p1236",
+          "p1253",
+          "p1269",
+          "p1270",
+          "p1277",
+          "p1300",
+          "p1335",
+          "p1346",
+          "p1364",
+          "p1390",
+          "p1399",
+          "p1438",
+          "p1461",
+          "p1475",
+          "p1477",
+          "p1480",
+          "p1487",
+          "p1495",
+          "p1505",
+          "p1512",
+          "p1530",
+          "p1538",
+          "p1569",
+          "p1571",
+          "p1591",
+          "p1292"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 21,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p1177"
+      ],
+      "confidence": null,
+      "totalTime": 11,
+      "readingTime": 4,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826446,
+          1618826457
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "11-winequality-red(quality)",
+          "technique": "dependent_da",
+          "cluster": false,
+          "selectedpoint": "1292",
+          "interaction": "all",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p1177"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 22,
+      "responseType": "multiple-choice",
+      "response": "Not so much correct",
+      "confidence": null,
+      "totalTime": 34,
+      "readingTime": 21,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826457,
+          1618826491
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "10-tripadvisor_review",
+          "technique": "independent_da",
+          "cluster": false,
+          "selectedpoint": "378",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 23,
+      "responseType": "multiple-choice",
+      "response": "Not correct at all",
+      "confidence": null,
+      "totalTime": 23,
+      "readingTime": 12,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826491,
+          1618826514
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "10-tripadvisor_review",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "378",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 24,
+      "responseType": "multiple-choice",
+      "response": [],
+      "confidence": null,
+      "totalTime": 22,
+      "readingTime": 5,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826514,
+          1618826536
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "08-diabetes(Diabetes)",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": false,
+          "selectedpoint": "448",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 25,
+      "responseType": "multiple-choice",
+      "response": [],
+      "confidence": null,
+      "totalTime": 22,
+      "readingTime": 5,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826536,
+          1618826558
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "08-diabetes(Diabetes)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "448",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 26,
+      "responseType": "multiple-choice",
+      "response": "Not so much separated",
+      "confidence": null,
+      "totalTime": 27,
+      "readingTime": 27,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826558,
+          1618826585
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-breast-cancer-wisconsin(quality)",
+          "technique": "uci",
+          "cluster": true,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 27,
+      "responseType": "multiple-choice",
+      "response": "Averagely separated",
+      "confidence": null,
+      "totalTime": 21,
+      "readingTime": 21,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826585,
+          1618826606
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-breast-cancer-wisconsin(quality)",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": true,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 28,
+      "responseType": "multiple-choice",
+      "response": "Not separated at all",
+      "confidence": null,
+      "totalTime": 23,
+      "readingTime": 23,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826606,
+          1618826629
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "05-user_modeling(UNS)",
+          "technique": "uci",
+          "cluster": true,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 29,
+      "responseType": "multiple-choice",
+      "response": "Not so much separated",
+      "confidence": null,
+      "totalTime": 32,
+      "readingTime": 32,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826629,
+          1618826661
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "05-user_modeling(UNS)",
+          "technique": "radviz_pp",
+          "cluster": true,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 30,
+      "responseType": "small-text",
+      "response": "1 or 2",
+      "confidence": "1 - Poorly confident",
+      "totalTime": 49,
+      "readingTime": 49,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826661,
+          1618826710
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "07-ecoli(class)",
+          "technique": "radviz_pp",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 31,
+      "responseType": "small-text",
+      "response": "1",
+      "confidence": null,
+      "totalTime": 21,
+      "readingTime": 8,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826710,
+          1618826731
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "07-ecoli(class)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 32,
+      "responseType": "small-text",
+      "response": null,
+      "confidence": "0 - Not confident at all",
+      "totalTime": 22,
+      "readingTime": 22,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826731,
+          1618826753
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-dataR2(Classification)",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 33,
+      "responseType": "small-text",
+      "response": "2",
+      "confidence": "1 - Poorly confident",
+      "totalTime": 27,
+      "readingTime": 27,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826753,
+          1618826780
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-dataR2(Classification)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 34,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p829",
+        "p924"
+      ],
+      "confidence": null,
+      "totalTime": 53,
+      "readingTime": 18,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826780,
+          1618826833
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "11-page-blocks",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "2",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p829",
+          "p924"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 35,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p1498",
+        "p5085"
+      ],
+      "confidence": null,
+      "totalTime": 26,
+      "readingTime": 4,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826833,
+          1618826859
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "11-page-blocks",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "2",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p1498",
+          "p5085"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 36,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p141",
+        "p34"
+      ],
+      "confidence": null,
+      "totalTime": 20,
+      "readingTime": 7,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826859,
+          1618826879
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "12-CSM",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "2",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p141",
+          "p34"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 37,
+      "responseType": "auto-computed-list",
+      "response": [
+        "p141",
+        "p88"
+      ],
+      "confidence": null,
+      "totalTime": 23,
+      "readingTime": 7,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826879,
+          1618826902
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "12-CSM",
+          "technique": "dependent_da",
+          "cluster": false,
+          "selectedpoint": "",
+          "interaction": "2",
+          "dimensions": "none"
+        },
+        "selectedPoints": [
+          "p141",
+          "p88"
+        ],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 38,
+      "responseType": "multiple-choice",
+      "response": "Not an outlier at all",
+      "confidence": null,
+      "totalTime": 46,
+      "readingTime": 46,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826902,
+          1618826948
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "13-wine(Wine)",
+          "technique": "dependent_da",
+          "cluster": false,
+          "selectedpoint": "136",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 39,
+      "responseType": "multiple-choice",
+      "response": "Not so much an outlier",
+      "confidence": null,
+      "totalTime": 93,
+      "readingTime": 93,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618826948,
+          1618827041
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "13-wine(Wine)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "136",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 40,
+      "responseType": "multiple-choice",
+      "response": "Averagely an outlier",
+      "confidence": null,
+      "totalTime": 50,
+      "readingTime": 50,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618827041,
+          1618827091
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-BreastTissue(Class)",
+          "technique": "effectiveness_error_heuristic",
+          "cluster": false,
+          "selectedpoint": "48",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    },
+    {
+      "id": 41,
+      "responseType": "multiple-choice",
+      "response": "Not so much an outlier",
+      "confidence": null,
+      "totalTime": 46,
+      "readingTime": 46,
+      "answeringTime": 0,
+      "timestamps": [
+        [
+          1618827091,
+          1618827137
+        ]
+      ],
+      "afterResult": {
+        "question": null,
+        "configuration": {
+          "dataset": "09-BreastTissue(Class)",
+          "technique": "uci",
+          "cluster": false,
+          "selectedpoint": "48",
+          "interaction": "none",
+          "dimensions": "none"
+        },
+        "selectedPoints": [],
+        "selectedDimensions": [],
+        "arrangment": []
+      }
+    }
+  ],
+  "finalQuestions": [],
+  "systemQuestionsEvents": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825824402,
+        "dataType": "data_point",
+        "data": "p240"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825824437,
+        "dataType": "data_point",
+        "data": "p103"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825824454,
+        "dataType": "data_point",
+        "data": "p205"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825824485,
+        "dataType": "data_point",
+        "data": "p177"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825824845,
+        "dataType": "data_point",
+        "data": "p35"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825824860,
+        "dataType": "data_point",
+        "data": "p139"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825826630,
+        "dataType": "data_point",
+        "data": "p9"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825827263,
+        "dataType": "data_point",
+        "data": [
+          "p4"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825831773,
+        "dataType": "data_point",
+        "data": [
+          "p4",
+          "p12"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825831921,
+        "dataType": "data_point",
+        "data": "p12"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825834415,
+        "dataType": "data_point",
+        "data": "p11"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825834603,
+        "dataType": "data_point",
+        "data": [
+          "p4",
+          "p12",
+          "p11"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825838256,
+        "dataType": "data_point",
+        "data": "p4"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825838280,
+        "dataType": "data_point",
+        "data": [
+          "p12",
+          "p11"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825845026,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825845028,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825845032,
+        "dataType": "data_point",
+        "data": [
+          "p4"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825845093,
+        "dataType": "data_point",
+        "data": "p4"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825846851,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825846852,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825846855,
+        "dataType": "data_point",
+        "data": [
+          "p32"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825847161,
+        "dataType": "data_point",
+        "data": "p32"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825851676,
+        "dataType": "data_point",
+        "data": "p32"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825851704,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825851705,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825851710,
+        "dataType": "data_point",
+        "data": [
+          "p32"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825853515,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825853516,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825853520,
+        "dataType": "data_point",
+        "data": [
+          "p4"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825853780,
+        "dataType": "data_point",
+        "data": "p4"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825854477,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825854477,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825854482,
+        "dataType": "data_point",
+        "data": [
+          "p4"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825855521,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825855522,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825860029,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825860030,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618825860034,
+        "dataType": "anchor_point",
+        "data": [
+          "STR"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825862424,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825862427,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618825862432,
+        "dataType": "anchor_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825863889,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825863891,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618825863896,
+        "dataType": "anchor_point",
+        "data": [
+          "SCG"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825865165,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825865166,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825867806,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825867807,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618825867810,
+        "dataType": "anchor_point",
+        "data": [
+          "SCG",
+          "STR"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825871524,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825871525,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618825871528,
+        "dataType": "anchor_point",
+        "data": [
+          "SCG",
+          "STR",
+          "STG"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825873403,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825873404,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618825873408,
+        "dataType": "anchor_point",
+        "data": [
+          "SCG",
+          "STG"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825875256,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825875257,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825875261,
+        "dataType": "data_point",
+        "data": [
+          "p7"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825875485,
+        "dataType": "data_point",
+        "data": "p7"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825877705,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618825881386,
+        "dataType": "anchor_point",
+        "data": [
+          "SCG",
+          "STG",
+          "LPR"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825882606,
+        "dataType": "data_point",
+        "data": "p24"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825882838,
+        "dataType": "data_point",
+        "data": "p11"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825882965,
+        "dataType": "data_point",
+        "data": [
+          "p12"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825883088,
+        "dataType": "data_point",
+        "data": "p12"
+      }
+    ],
+    "5": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825892641,
+        "dataType": "data_point",
+        "data": "p16"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618825892673,
+        "dataType": "data_point",
+        "data": [
+          "p16"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825897874,
+        "dataType": "data_point",
+        "data": "p11"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825902258,
+        "dataType": "data_point",
+        "data": "p4"
+      }
+    ],
+    "6": [
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618825983391,
+        "dataType": "anchor_point",
+        "data": [
+          "a"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825985733,
+        "dataType": "data_point",
+        "data": "p7964"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618825985783,
+        "dataType": "data_point",
+        "data": "p14058"
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826003918,
+        "dataType": "anchor_point",
+        "data": []
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826018655,
+        "dataType": "data_point",
+        "data": "p14465"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826018686,
+        "dataType": "data_point",
+        "data": "p14293"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826019088,
+        "dataType": "data_point",
+        "data": "p7044"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826019244,
+        "dataType": "data_point",
+        "data": "p14457"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826019386,
+        "dataType": "data_point",
+        "data": "p14491"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826021180,
+        "dataType": "data_point",
+        "data": "p14432"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826021364,
+        "dataType": "data_point",
+        "data": "p10945"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826021568,
+        "dataType": "data_point",
+        "data": "p12216"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826023713,
+        "dataType": "data_point",
+        "data": "p10587"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826023728,
+        "dataType": "data_point",
+        "data": "p14432"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826028805,
+        "dataType": "data_point",
+        "data": "p14250"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826028836,
+        "dataType": "data_point",
+        "data": "p9904"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826028868,
+        "dataType": "data_point",
+        "data": "p12673"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826029120,
+        "dataType": "data_point",
+        "data": "p14260"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826029274,
+        "dataType": "data_point",
+        "data": "p14355"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826029405,
+        "dataType": "data_point",
+        "data": "p14465"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826029819,
+        "dataType": "data_point",
+        "data": "p14314"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826029990,
+        "dataType": "data_point",
+        "data": "p14480"
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826033361,
+        "dataType": "anchor_point",
+        "data": [
+          "g"
+        ]
+      }
+    ],
+    "7": [
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826095810,
+        "dataType": "anchor_point",
+        "data": [
+          "g"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826105646,
+        "dataType": "data_point",
+        "data": "p6540"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826105721,
+        "dataType": "data_point",
+        "data": "p14495"
+      }
+    ],
+    "8": [
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826132003,
+        "dataType": "anchor_point",
+        "data": [
+          "perimeter"
+        ]
+      }
+    ],
+    "9": [
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826146590,
+        "dataType": "anchor_point",
+        "data": [
+          "compactness"
+        ]
+      }
+    ],
+    "10": [
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826159853,
+        "dataType": "anchor_point",
+        "data": [
+          "DC"
+        ]
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826171164,
+        "dataType": "anchor_point",
+        "data": [
+          "DC",
+          "DMC"
+        ]
+      }
+    ],
+    "11": [
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826191649,
+        "dataType": "anchor_point",
+        "data": [
+          "FFMC"
+        ]
+      }
+    ],
+    "12": [
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826209863,
+        "dataType": "anchor_point",
+        "data": [
+          "alcohol"
+        ]
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826210964,
+        "dataType": "anchor_point",
+        "data": [
+          "alcohol",
+          "sulphates"
+        ]
+      }
+    ],
+    "13": [
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826226431,
+        "dataType": "anchor_point",
+        "data": [
+          "alcohol"
+        ]
+      },
+      {
+        "name": "anchors_selection",
+        "timestamp": 1618826227838,
+        "dataType": "anchor_point",
+        "data": [
+          "alcohol",
+          "pH"
+        ]
+      }
+    ],
+    "14": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826243819,
+        "dataType": "data_point",
+        "data": "p117"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826244431,
+        "dataType": "data_point",
+        "data": "p8"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826244435,
+        "dataType": "data_point",
+        "data": "p342"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826244642,
+        "dataType": "data_point",
+        "data": "p424"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826244972,
+        "dataType": "data_point",
+        "data": "p532"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826244989,
+        "dataType": "data_point",
+        "data": "p403"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826245005,
+        "dataType": "data_point",
+        "data": "p476"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826245041,
+        "dataType": "data_point",
+        "data": "p460"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826245137,
+        "dataType": "data_point",
+        "data": "p402"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826245156,
+        "dataType": "data_point",
+        "data": "p455"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826245221,
+        "dataType": "data_point",
+        "data": "p402"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826245356,
+        "dataType": "data_point",
+        "data": "p467"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826247116,
+        "dataType": "data_point",
+        "data": "p116"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826247259,
+        "dataType": "data_point",
+        "data": "p117"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826248826,
+        "dataType": "data_point",
+        "data": "p116"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826251915,
+        "dataType": "data_point",
+        "data": "p171"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826251932,
+        "dataType": "data_point",
+        "data": "p291"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826252369,
+        "dataType": "data_point",
+        "data": "p499"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826252403,
+        "dataType": "data_point",
+        "data": "p3"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826252680,
+        "dataType": "data_point",
+        "data": "p311"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826252898,
+        "dataType": "data_point",
+        "data": "p335"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826252990,
+        "dataType": "data_point",
+        "data": "p424"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826253014,
+        "dataType": "data_point",
+        "data": "p532"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826254386,
+        "dataType": "data_point",
+        "data": [
+          "p117"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826254409,
+        "dataType": "data_point",
+        "data": "p117"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826255771,
+        "dataType": "data_point",
+        "data": [
+          "p117",
+          "p116"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826255912,
+        "dataType": "data_point",
+        "data": "p116"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826261713,
+        "dataType": "data_point",
+        "data": "p116"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826261778,
+        "dataType": "data_point",
+        "data": [
+          "p116"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826261944,
+        "dataType": "data_point",
+        "data": "p117"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826262716,
+        "dataType": "data_point",
+        "data": "p116"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826262832,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826264950,
+        "dataType": "data_point",
+        "data": "p117"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826267903,
+        "dataType": "data_point",
+        "data": "p116"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826271108,
+        "dataType": "data_point",
+        "data": "p372"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826274189,
+        "dataType": "data_point",
+        "data": "p68"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826279110,
+        "dataType": "data_point",
+        "data": [
+          "p116"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826279200,
+        "dataType": "data_point",
+        "data": "p116"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826280414,
+        "dataType": "data_point",
+        "data": [
+          "p116",
+          "p117"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826280470,
+        "dataType": "data_point",
+        "data": "p117"
+      }
+    ],
+    "15": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826291167,
+        "dataType": "data_point",
+        "data": "p169"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826291171,
+        "dataType": "data_point",
+        "data": "p181"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826291191,
+        "dataType": "data_point",
+        "data": "p519"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826291207,
+        "dataType": "data_point",
+        "data": "p412"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826291225,
+        "dataType": "data_point",
+        "data": "p237"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826291877,
+        "dataType": "data_point",
+        "data": "p357"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826291906,
+        "dataType": "data_point",
+        "data": "p353"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826292091,
+        "dataType": "data_point",
+        "data": "p354"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826292488,
+        "dataType": "data_point",
+        "data": "p370"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826292530,
+        "dataType": "data_point",
+        "data": "p269"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826292557,
+        "dataType": "data_point",
+        "data": "p268"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826292869,
+        "dataType": "data_point",
+        "data": "p325"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826292893,
+        "dataType": "data_point",
+        "data": "p325"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826292941,
+        "dataType": "data_point",
+        "data": "p351"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826292975,
+        "dataType": "data_point",
+        "data": "p370"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826293025,
+        "dataType": "data_point",
+        "data": "p269"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826293109,
+        "dataType": "data_point",
+        "data": "p370"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826293589,
+        "dataType": "data_point",
+        "data": [
+          "p370"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826295300,
+        "dataType": "data_point",
+        "data": [
+          "p370",
+          "p351"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826295314,
+        "dataType": "data_point",
+        "data": "p351"
+      }
+    ],
+    "16": [
+      {
+        "name": "points_selection",
+        "timestamp": 1618826320020,
+        "dataType": "data_point",
+        "data": [
+          "p6285"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826320143,
+        "dataType": "data_point",
+        "data": "p6285"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826321042,
+        "dataType": "data_point",
+        "data": [
+          "p6285",
+          "p6194"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826321067,
+        "dataType": "data_point",
+        "data": "p6194"
+      }
+    ],
+    "17": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826356620,
+        "dataType": "data_point",
+        "data": "p5382"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826356637,
+        "dataType": "data_point",
+        "data": "p6874"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826356658,
+        "dataType": "data_point",
+        "data": "p6370"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826357048,
+        "dataType": "data_point",
+        "data": "p702"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826357390,
+        "dataType": "data_point",
+        "data": "p702"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826357405,
+        "dataType": "data_point",
+        "data": "p6489"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826357445,
+        "dataType": "data_point",
+        "data": [
+          "p702"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826357868,
+        "dataType": "data_point",
+        "data": "p702"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826358216,
+        "dataType": "data_point",
+        "data": "p6489"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826358356,
+        "dataType": "data_point",
+        "data": [
+          "p702",
+          "p6489"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826360034,
+        "dataType": "data_point",
+        "data": "p702"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826362304,
+        "dataType": "data_point",
+        "data": "p6489"
+      }
+    ],
+    "18": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826375803,
+        "dataType": "data_point",
+        "data": "p3"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826376134,
+        "dataType": "data_point",
+        "data": "p4"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826377860,
+        "dataType": "data_point",
+        "data": "p86"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826394898,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826394908,
+        "dataType": "data_point",
+        "data": [
+          "p16",
+          "p19",
+          "p21",
+          "p22",
+          "p41",
+          "p44",
+          "p58",
+          "p59",
+          "p86",
+          "p88",
+          "p89",
+          "p90",
+          "p4"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826395432,
+        "dataType": "data_point",
+        "data": "p7"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826397208,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826397216,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826398470,
+        "dataType": "data_point",
+        "data": "p89"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826407307,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826407310,
+        "dataType": "data_point",
+        "data": [
+          "p5",
+          "p7",
+          "p8",
+          "p9",
+          "p10",
+          "p11",
+          "p12",
+          "p13",
+          "p14",
+          "p15",
+          "p16",
+          "p20",
+          "p23",
+          "p24",
+          "p25",
+          "p36",
+          "p38",
+          "p39",
+          "p42",
+          "p44",
+          "p46",
+          "p53",
+          "p55",
+          "p56",
+          "p57",
+          "p60",
+          "p62",
+          "p63",
+          "p65",
+          "p66",
+          "p67",
+          "p71",
+          "p74",
+          "p75",
+          "p77",
+          "p80",
+          "p81",
+          "p82",
+          "p83",
+          "p84",
+          "p85",
+          "p86",
+          "p87",
+          "p88",
+          "p90",
+          "p97",
+          "p4"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826407558,
+        "dataType": "data_point",
+        "data": "p46"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826408240,
+        "dataType": "data_point",
+        "data": "p89"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826408652,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826408659,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826408666,
+        "dataType": "data_point",
+        "data": [
+          "p15"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826408677,
+        "dataType": "data_point",
+        "data": "p4"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826408683,
+        "dataType": "data_point",
+        "data": "p86"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826408733,
+        "dataType": "data_point",
+        "data": "p7"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826408799,
+        "dataType": "data_point",
+        "data": "p15"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826412125,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826412129,
+        "dataType": "data_point",
+        "data": [
+          "p7",
+          "p15",
+          "p19",
+          "p21",
+          "p55",
+          "p58",
+          "p86",
+          "p4"
+        ]
+      }
+    ],
+    "19": [
+      {
+        "name": "points_selection",
+        "timestamp": 1618826432223,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826432229,
+        "dataType": "data_point",
+        "data": [
+          "p20",
+          "p35",
+          "p41",
+          "p52",
+          "p56",
+          "p58",
+          "p67",
+          "p74",
+          "p75",
+          "p79",
+          "p80",
+          "p85",
+          "p86",
+          "p4"
+        ]
+      }
+    ],
+    "20": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826438371,
+        "dataType": "data_point",
+        "data": "p1090"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826438389,
+        "dataType": "data_point",
+        "data": "p1043"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826438408,
+        "dataType": "data_point",
+        "data": "p1207"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826438438,
+        "dataType": "data_point",
+        "data": "p1570"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826438699,
+        "dataType": "data_point",
+        "data": "p1481"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826438721,
+        "dataType": "data_point",
+        "data": "p1584"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826438731,
+        "dataType": "data_point",
+        "data": "p1590"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826438785,
+        "dataType": "data_point",
+        "data": "p1178"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826442279,
+        "dataType": "data_point",
+        "data": "p1177"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826442283,
+        "dataType": "data_point",
+        "data": "p1126"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826442700,
+        "dataType": "data_point",
+        "data": "p1119"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826444826,
+        "dataType": "data_point",
+        "data": []
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826444829,
+        "dataType": "data_point",
+        "data": [
+          "p29",
+          "p36",
+          "p44",
+          "p45",
+          "p67",
+          "p69",
+          "p142",
+          "p144",
+          "p161",
+          "p198",
+          "p222",
+          "p245",
+          "p249",
+          "p334",
+          "p346",
+          "p355",
+          "p390",
+          "p530",
+          "p535",
+          "p588",
+          "p658",
+          "p660",
+          "p688",
+          "p727",
+          "p728",
+          "p762",
+          "p793",
+          "p802",
+          "p829",
+          "p831",
+          "p876",
+          "p907",
+          "p939",
+          "p985",
+          "p1022",
+          "p1030",
+          "p1031",
+          "p1052",
+          "p1092",
+          "p1110",
+          "p1121",
+          "p1122",
+          "p1124",
+          "p1157",
+          "p1178",
+          "p1210",
+          "p1212",
+          "p1236",
+          "p1253",
+          "p1269",
+          "p1270",
+          "p1277",
+          "p1300",
+          "p1335",
+          "p1346",
+          "p1364",
+          "p1390",
+          "p1399",
+          "p1438",
+          "p1461",
+          "p1475",
+          "p1477",
+          "p1480",
+          "p1487",
+          "p1495",
+          "p1505",
+          "p1512",
+          "p1530",
+          "p1538",
+          "p1569",
+          "p1571",
+          "p1591",
+          "p1292"
+        ]
+      }
+    ],
+    "21": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826453635,
+        "dataType": "data_point",
+        "data": "p997"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826453800,
+        "dataType": "data_point",
+        "data": "p907"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826453978,
+        "dataType": "data_point",
+        "data": [
+          "p1177"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826454000,
+        "dataType": "data_point",
+        "data": "p1177"
+      }
+    ],
+    "22": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470033,
+        "dataType": "data_point",
+        "data": "p507"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470052,
+        "dataType": "data_point",
+        "data": "p966"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470246,
+        "dataType": "data_point",
+        "data": "p627"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470261,
+        "dataType": "data_point",
+        "data": "p851"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470278,
+        "dataType": "data_point",
+        "data": "p866"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470312,
+        "dataType": "data_point",
+        "data": "p823"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470328,
+        "dataType": "data_point",
+        "data": "p836"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470345,
+        "dataType": "data_point",
+        "data": "p872"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470379,
+        "dataType": "data_point",
+        "data": "p875"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470386,
+        "dataType": "data_point",
+        "data": "p922"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470428,
+        "dataType": "data_point",
+        "data": "p841"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470512,
+        "dataType": "data_point",
+        "data": "p607"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470547,
+        "dataType": "data_point",
+        "data": "p753"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470589,
+        "dataType": "data_point",
+        "data": "p680"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470594,
+        "dataType": "data_point",
+        "data": "p690"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470610,
+        "dataType": "data_point",
+        "data": "p680"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470644,
+        "dataType": "data_point",
+        "data": "p339"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826470677,
+        "dataType": "data_point",
+        "data": "p959"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826471064,
+        "dataType": "data_point",
+        "data": "p278"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826471079,
+        "dataType": "data_point",
+        "data": "p378"
+      }
+    ],
+    "23": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502582,
+        "dataType": "data_point",
+        "data": "p422"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502595,
+        "dataType": "data_point",
+        "data": "p926"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502617,
+        "dataType": "data_point",
+        "data": "p956"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502681,
+        "dataType": "data_point",
+        "data": "p862"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502738,
+        "dataType": "data_point",
+        "data": "p786"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502756,
+        "dataType": "data_point",
+        "data": "p845"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502816,
+        "dataType": "data_point",
+        "data": "p839"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502842,
+        "dataType": "data_point",
+        "data": "p973"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502960,
+        "dataType": "data_point",
+        "data": "p564"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502978,
+        "dataType": "data_point",
+        "data": "p940"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826502992,
+        "dataType": "data_point",
+        "data": "p870"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826503009,
+        "dataType": "data_point",
+        "data": "p968"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826503074,
+        "dataType": "data_point",
+        "data": "p574"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826503109,
+        "dataType": "data_point",
+        "data": "p299"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826503124,
+        "dataType": "data_point",
+        "data": "p574"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826503209,
+        "dataType": "data_point",
+        "data": "p873"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826503309,
+        "dataType": "data_point",
+        "data": "p964"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826503360,
+        "dataType": "data_point",
+        "data": "p378"
+      }
+    ],
+    "24": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826531344,
+        "dataType": "data_point",
+        "data": "p53"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826531352,
+        "dataType": "data_point",
+        "data": "p188"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826531406,
+        "dataType": "data_point",
+        "data": "p250"
+      }
+    ],
+    "25": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826553497,
+        "dataType": "data_point",
+        "data": "p61"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826553602,
+        "dataType": "data_point",
+        "data": "p105"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826553684,
+        "dataType": "data_point",
+        "data": "p51"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826554905,
+        "dataType": "data_point",
+        "data": "p228"
+      }
+    ],
+    "26": [],
+    "27": [],
+    "28": [],
+    "29": [],
+    "30": [],
+    "31": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826723290,
+        "dataType": "data_point",
+        "data": "p297"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826723426,
+        "dataType": "data_point",
+        "data": "p313"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826723557,
+        "dataType": "data_point",
+        "data": "p98"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826723575,
+        "dataType": "data_point",
+        "data": "p222"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826723591,
+        "dataType": "data_point",
+        "data": "p295"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826723742,
+        "dataType": "data_point",
+        "data": "p322"
+      }
+    ],
+    "32": [],
+    "33": [],
+    "34": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826815481,
+        "dataType": "data_point",
+        "data": "p835"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826816903,
+        "dataType": "data_point",
+        "data": [
+          "p829"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826817026,
+        "dataType": "data_point",
+        "data": "p829"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826821410,
+        "dataType": "data_point",
+        "data": "p4529"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826830880,
+        "dataType": "data_point",
+        "data": [
+          "p829",
+          "p924"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826830949,
+        "dataType": "data_point",
+        "data": "p924"
+      }
+    ],
+    "35": [
+      {
+        "name": "points_selection",
+        "timestamp": 1618826855963,
+        "dataType": "data_point",
+        "data": [
+          "p1498"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826856269,
+        "dataType": "data_point",
+        "data": "p1498"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826858029,
+        "dataType": "data_point",
+        "data": [
+          "p1498",
+          "p5085"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826858431,
+        "dataType": "data_point",
+        "data": "p5085"
+      }
+    ],
+    "36": [
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826872745,
+        "dataType": "data_point",
+        "data": "p141"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826872792,
+        "dataType": "data_point",
+        "data": [
+          "p141"
+        ]
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826876174,
+        "dataType": "data_point",
+        "data": [
+          "p141",
+          "p34"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826876239,
+        "dataType": "data_point",
+        "data": "p34"
+      }
+    ],
+    "37": [
+      {
+        "name": "points_selection",
+        "timestamp": 1618826895871,
+        "dataType": "data_point",
+        "data": [
+          "p141"
+        ]
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826896102,
+        "dataType": "data_point",
+        "data": "p141"
+      },
+      {
+        "name": "point_tooltip",
+        "timestamp": 1618826899719,
+        "dataType": "data_point",
+        "data": "p88"
+      },
+      {
+        "name": "points_selection",
+        "timestamp": 1618826899963,
+        "dataType": "data_point",
+        "data": [
+          "p141",
+          "p88"
+        ]
+      }
+    ],
+    "38": [],
+    "39": [],
+    "40": [],
+    "41": []
+  },
+  "systemQuestionsMousemove": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [],
+    "5": [],
+    "6": [],
+    "7": [],
+    "8": [],
+    "9": [],
+    "10": [],
+    "11": [],
+    "12": [],
+    "13": [],
+    "14": [],
+    "15": [],
+    "16": [],
+    "17": [],
+    "18": [],
+    "19": [],
+    "20": [],
+    "21": [],
+    "22": [],
+    "23": [],
+    "24": [],
+    "25": [],
+    "26": [],
+    "27": [],
+    "28": [],
+    "29": [],
+    "30": [],
+    "31": [],
+    "32": [],
+    "33": [],
+    "34": [],
+    "35": [],
+    "36": [],
+    "37": [],
+    "38": [],
+    "39": [],
+    "40": [],
+    "41": []
+  }
+}

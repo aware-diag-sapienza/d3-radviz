@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 
+    <title>STEIN Evaluation</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/stein-evaluation.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand text-white">STEIN</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <small id="evaluation-id"></small>
+    </nav>
+
+    <main role="main">
+    
+    <!-- start-page -->
+    <div id="start-page" class="page">
+      <div class="container" style="padding-top: 5rem">
+        <div class="row justify-content-center">
+          <div class="col-8 text-center">
+            <h1 id="title">STEIN</h1>
+            <p id="description" class="lead"></p>
+            <p id="resume-message" style="padding-top: 3em; display:none">You have already started the evaluation. Click on resume to continue.</p>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" style="padding-top:3em">
+          <div class="col-8 text-center">
+            <button id="button-start" type="button" class="btn btn-outline-secondary">Start New</button>
+            &nbsp;&nbsp;&nbsp;
+            <button id="button-resume" type="button" class="btn btn-primary">Resume</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.start-page -->
+
+  
+    <!-- initial-questions-page -->
+    <div id="initial-questions-page" class="page">
+      <div class="container"></div>
+    </div><!-- /.initial-questions-page -->
+
+    <!-- system-questions-page -->
+    <div id="system-questions-page" class="page">
+      <div class="container-left">
+        <div class="aspect-full">
+          <iframe id="system-iframe"></iframe>
+        </div>
+      </div>
+      
+
+      <div class="container-right">
+          <h5 id="question-name"></h5>
+          <div id="question-text" style="padding-bottom: 1em;"></div>
+          <div id="question-confidence-up" style="padding-bottom: 2em;"></div>
+          <div id="question-response" class="row"></div>
+          <div id="question-confidence-down" style="padding-top: 2em;"></div>
+      </div>
+
+      <div id="system-loading">
+          <p class="spinner"></p>
+      </div>
+
+    </div><!-- /.system-questions-page -->
+
+    <!-- final-questions-page -->
+    <div id="final-questions-page" class="page">
+      <div class="container"></div>
+    </div><!-- /.final-questions-page -->
+
+
+    <!-- survey-completed-page -->
+    <div id="survey-completed-page" class="page">
+        <div class="container" style="padding-top: 5rem">
+            <div class="row justify-content-center">
+              <div class="col-8 text-center">
+                <p class="lead">The evaluation has been completed.</p>
+                <p>
+                  <button id="save-btn" class="btn btn-primary">Save</button>
+                </p>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <!-- survey-saved-page -->
+    <div id="survey-saved-page" class="page">
+        <div class="container" style="padding-top: 5rem">
+            <div class="row justify-content-center">
+              <div class="col-8 text-center">
+                <p class="lead">The evaluation has been correctly saved.</p>
+              </div>
+            </div>
+            <div class="row justify-content-center" style="margin-top: 10px;">
+              <div class="col-8 text-center">
+                <p class="lead">This evaluation has been conducted by using STEIN.</p>
+                <p>
+                  STEIN: speeding up evaluation activities with a seamless testing environment INtegrator.<br>
+                  <a href="https://dl.acm.org/doi/10.5555/3290776.3290794" target="_blank">https://dl.acm.org/doi/10.5555/3290776.3290794</a>
+                </p>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    
+
+    <div id="bottom-bar"></div>
+
+    <!-- loading-page -->
+    <div id="loading-page" class="page">
+      <p class="spinner"></p>
+    </div><!-- /.loading-page -->
+
+
+
+    </main>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/fontawesome-all.min.js"></script>
+    <script src="js/d3.v4.min.js"></script>
+    <script src="js/sortable.min.js"></script>
+    <script src="js/stein.js"></script>
+    <script>
+    $(function(){
+      Stein.evaluation.start();
+    });
+    </script>
+  </body>
+</html>

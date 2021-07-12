@@ -1,0 +1,831 @@
+{
+  "stein": "This is a Stein configuration file",
+  "steinVersion": 7,
+  "creation": "20210414-103054",
+  "export": "20210414-105615",
+  "systemUrl": "./system",
+  "uploadUrl": "",
+  "title": "RadViz Effectiveness Test",
+  "description": "This is a user evaluation of RadViz Visual Effectiveness optimization techniques.",
+  "lastEditedFileName": "",
+  "dataTypes": [
+    {
+      "name": "data_point",
+      "toStringFunction": "(function(d){return d.toString()})"
+    },
+    {
+      "name": "anchor_point",
+      "toStringFunction": "(function(d){return d.toString()})"
+    }
+  ],
+  "events": [
+    {
+      "type": "points_selection",
+      "name": "points_selection",
+      "dataType": "data_point",
+      "contributeToAnswer": "Yes",
+      "specializeEvent": "(function(event){ return (event.type == 'points_selection' && event.dataType == 'data_point')})",
+      "traceData": "(function(event){ return event.eventDatum })",
+      "generator": ""
+    },
+    {
+      "type": "anchors_selection",
+      "name": "anchors_selection",
+      "dataType": "anchor_point",
+      "contributeToAnswer": "Yes",
+      "specializeEvent": "(function(event){ return (event.type == 'anchors_selection' && event.dataType == 'anchor_point')})",
+      "traceData": "(function(event){ return event.eventDatum })",
+      "generator": ""
+    },
+    {
+      "type": "point_tooltip",
+      "name": "point_tooltip",
+      "dataType": "data_point",
+      "contributeToAnswer": "No",
+      "specializeEvent": "(function(event){ return (event.type == 'point_tooltip' && event.dataType == 'data_point')})",
+      "traceData": "(function(event){ return event.eventDatum })",
+      "generator": ""
+    }
+  ],  
+  "initialQuestions": [
+    {
+      "id": 1,
+      "text": "Please, insert your gender or skip the question.",
+      "responseType": "multiple-choice",
+      "options": [
+        "Male",
+        "Female"
+      ],
+      "images": [],
+      "mandatory": false
+    },
+    {
+      "id": 2,
+      "text": "Please, insert your age or skip the question.",
+      "responseType": "small-text",
+      "options": [],
+      "images": [],
+      "mandatory": false
+    },
+    {
+      "id": 3,
+      "text": "Please, insert your current position.",
+      "responseType": "multiple-choice",
+      "options": [
+        "M.Sc. student",
+        "Ph.D. student",
+        "Post-Doc",
+        "Academic",
+        "Industry"
+      ],
+      "images": [],
+      "mandatory": true
+    },
+    {
+      "id": 4,
+      "text": "Please, report the company name for which you work or skip the question.",
+      "responseType": "small-text",
+      "options": [],
+      "images": [],
+      "mandatory": false
+    },
+    {
+      "id": 5,
+      "text": "Please, insert your background.",
+      "responseType": "checkboxes",
+      "options": [
+        "Databases",
+        "Data Science",
+        "Machine Learning",
+        "Information Visualization",
+        "Visual Analytics",
+        "Information Retrieval"
+      ],
+      "images": [],
+      "mandatory": false
+    },
+    {
+      "id": 6,
+      "text": "How much do you consider yourself expert in visualization?",
+      "responseType": "multiple-choice",
+      "options": [
+        "Expert",
+        "Knowledgeable",
+        "Passing knowledge",
+        "No knowledge at all"
+      ],
+      "images": [],
+      "mandatory": true
+    },
+    {
+      "id": 7,
+      "text": "Do you know the RadViz visual paradigm?",
+      "responseType": "multiple-choice",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "images": [],
+      "mandatory": true
+    },
+    {
+      "id": 8,
+      "text": "How much do you consider yourself expert in understanding RadViz? (Skip the question if you do not know RadViz.)",
+      "responseType": "multiple-choice",
+      "options": [
+        "I know it very well",
+        "I know it quite well",
+        "I moderately know it",
+        "I do not know it so well",
+        "I do not know it at all"
+      ],
+      "images": [],
+      "mandatory": false
+    },
+    {
+      "id": 9,
+      "text": "How much do you use RadViz as data visualization in your analyses? (Skip the question if you do not know RadViz.)",
+      "responseType": "multiple-choice",
+      "options": [
+        "I use it a lot",
+        "I use it a good amount of times",
+        "I moderately use it",
+        "I do not use it a lot",
+        "I do not use it at all"
+      ],
+      "images": [],
+      "mandatory": false
+    },
+    {
+      "id": 10,
+      "text": "For which tasks do you use Radviz? (Skip the question if you do not know RadViz.)",
+      "responseType": "checkboxes",
+      "options": [
+        "Data overview",
+        "Clustering visualization",
+        "Outliers detection",
+        "Inspecting points similarity",
+        "Dominant dimension analysis"
+      ],
+      "images": [],
+      "mandatory": false
+    },
+    {
+      "id": 11,
+      "text": "Are there any additional tasks, beyond those mentioned in the previous question, for which you use RadViz? Please, specify them. (Skip the question if you do not know RadViz.)",
+      "responseType": "large-text",
+      "options": [],
+      "images": [],
+      "mandatory": false
+    }
+  ],
+  "systemQuestions": [
+    {
+        "id": 1,
+        "text": null,
+        "responseType": "auto-computed-list",
+        "dataType": "",
+        "options": [],
+        "images": [],
+        "beforeFunction": "(function(){tutorial1()})",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": false
+    },
+    {
+        "id": 2,
+        "text": null,
+        "responseType": "auto-computed-list",
+        "dataType": "",
+        "options": [],
+        "images": [],
+        "beforeFunction": "(function(){tutorial2()})",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": false
+    },
+    {
+        "id": 3,
+        "text": null,
+        "responseType": "auto-computed-list",
+        "dataType": "",
+        "options": [],
+        "images": [],
+        "beforeFunction": "(function(){tutorial3()})",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": false
+    },
+    {
+        "id": 4,
+        "text": "Please familiarize yourself with the RadViz environment for 5 minutes and get a custom with the chart and its interaction: <ul><li>lazo selection</li><li>point selection (click on point)</li><li>mouse hovering on point</li><li>selection of the dimension (click on text)</li><li>deselection of the points</li></ul>",
+        "responseType": "auto-computed-list",
+        "dataType": "",
+        "options": [],
+        "images": [],
+        "beforeFunction": "(function(){customization()})",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": false
+    },
+    {
+        "id": 5,
+        "text": "Please select the nearest point to the 'STR' dimension",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "(function(){testquestion()})",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 6,
+        "text": "Please, select the most dominant dimension, only one (by clicking on the dimension label).",
+        "responseType": "user-interaction-exclusive-list",
+        "dataType": "anchor_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q1***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 7,
+        "text": "Please, select the most dominant dimension, only one (by clicking on the dimension label).",
+        "responseType": "user-interaction-exclusive-list",
+        "dataType": "anchor_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q3***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 8,
+        "text": "Please, select the most dominant dimension, only one (by clicking on the dimension label).",
+        "responseType": "user-interaction-exclusive-list",
+        "dataType": "anchor_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q5***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 9,
+        "text": "Please, select the most dominant dimension, only one (by clicking on the dimension label).",
+        "responseType": "user-interaction-exclusive-list",
+        "dataType": "anchor_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q7***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 10,
+        "text": "Please, select the most dominant dimensions, as many as you want (by clicking on the dimensions label).",
+        "responseType": "auto-computed-list",
+        "dataType": "anchor_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q9***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 11,
+        "text": "Please, select the most dominant dimensions, as many as you want (by clicking on the dimensions label).",
+        "responseType": "auto-computed-list",
+        "dataType": "anchor_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q11***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 12,
+        "text": "Please, select the most dominant dimensions, as many as you want (by clicking on the dimensions label).",
+        "responseType": "auto-computed-list",
+        "dataType": "anchor_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q13***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 13,
+        "text": "Please, select the most dominant dimensions, as many as you want (by clicking on the dimensions label).",
+        "responseType": "auto-computed-list",
+        "dataType": "anchor_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q15***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 14,
+        "text": "Please, select 2 points that you consider similar to each other (by clicking on the points).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q17***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 15,
+        "text": "Please, select 2 points that you consider similar to each other (by clicking on the points).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q19***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 16,
+        "text": "Please, select 2 points that you consider similar to each other (by clicking on the points).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q21***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 17,
+        "text": "Please, select 2 points that you consider similar to each other (by clicking on the points).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q23***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 18,
+        "text": "Please, select the points similar to the orange one (by clicking on the points or using the lasso selection).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q25***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 19,
+        "text": "Please, select the points similar to the orange one (by clicking on the points or using the lasso selection).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q27***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 20,
+        "text": "Please, select the points similar to the orange one (by clicking on the points or using the lasso selection).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q29***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 21,
+        "text": "Please, select the points similar to the orange one (by clicking on the points or using the lasso selection).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q31***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 22,
+        "text": "How correct do you think the position of the orange point is? (Mouseover on a point shows its dimension values)",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Completely correct",
+            "Almost correct",
+            "Averagely correct",
+            "Not so much correct",
+            "Not correct at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q33***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 23,
+        "text": "How correct do you think the position of the orange point is?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Completely correct",
+            "Almost correct",
+            "Averagely correct",
+            "Not so much correct",
+            "Not correct at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q35***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 24,
+        "text": "How correct do you think the position of the orange point is?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Completely correct",
+            "Almost correct",
+            "Averagely correct",
+            "Not so much correct",
+            "Not correct at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q37***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 25,
+        "text": "How correct do you think the position of the orange point is?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Completely correct",
+            "Almost correct",
+            "Averagely correct",
+            "Not so much correct",
+            "Not correct at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q39***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 26,
+        "text": "How much are the clusters separated from each other?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Completely separated",
+            "Almost separated",
+            "Averagely separated",
+            "Not so much separated",
+            "Not separated at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q41***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 27,
+        "text": "How much are the clusters separated from each other?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Completely separated",
+            "Almost separated",
+            "Averagely separated",
+            "Not so much separated",
+            "Not separated at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q43***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 28,
+        "text": "How much are the clusters separated from each other?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Completely separated",
+            "Almost separated",
+            "Averagely separated",
+            "Not so much separated",
+            "Not separated at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q45***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 29,
+        "text": "How much are the clusters separated from each other?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Completely separated",
+            "Almost separated",
+            "Averagely separated",
+            "Not so much separated",
+            "Not separated at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q47***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 30,
+        "text": "How many clusters are there in the RadViz?",
+        "responseType": "small-text",
+        "dataType": "",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q49***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 31,
+        "text": "How many clusters are there in the RadViz?",
+        "responseType": "small-text",
+        "dataType": "",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q51***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 32,
+        "text": "How many clusters are there in the RadViz?",
+        "responseType": "small-text",
+        "dataType": "",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q53***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 33,
+        "text": "How many clusters are there in the RadViz?",
+        "responseType": "small-text",
+        "dataType": "",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q55***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 34,
+        "text": "Please, select 2 points that you consider outliers (by clicking on the points).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q57***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 35,
+        "text": "Please, select 2 points that you consider outliers (by clicking on the points).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q59***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 36,
+        "text": "Please, select 2 points that you consider outliers (by clicking on the points).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q61***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 37,
+        "text": "Please, select 2 points that you consider outliers (by clicking on the points).",
+        "responseType": "auto-computed-list",
+        "dataType": "data_point",
+        "options": [],
+        "images": [],
+        "beforeFunction": "***Q63***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 38,
+        "text": "Is the orange point an outlier?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Definitely an outlier",
+            "Almost an outlier",
+            "Averagely an outlier",
+            "Not so much an outlier",
+            "Not an outlier at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q65***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 39,
+        "text": "Is the orange point an outlier?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Definitely an outlier",
+            "Almost an outlier",
+            "Averagely an outlier",
+            "Not so much an outlier",
+            "Not an outlier at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q67***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 40,
+        "text": "Is the orange point an outlier?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Definitely an outlier",
+            "Almost an outlier",
+            "Averagely an outlier",
+            "Not so much an outlier",
+            "Not an outlier at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q69***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    },
+    {
+        "id": 41,
+        "text": "Is the orange point an outlier?",
+        "responseType": "multiple-choice",
+        "dataType": "",
+        "options": [
+            "Definitely an outlier",
+            "Almost an outlier",
+            "Averagely an outlier",
+            "Not so much an outlier",
+            "Not an outlier at all"
+        ],
+        "images": [],
+        "beforeFunction": "***Q71***",
+        "afterFunction": "(function(){return status})",
+        "mandatory": true,
+        "trackMouse": false,
+        "trackMouseInterval": 200,
+        "askForConfidence": true
+    }
+],
+  "finalQuestions": []
+}

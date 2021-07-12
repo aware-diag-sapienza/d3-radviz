@@ -1,0 +1,165 @@
+iframe{
+    box-sizing: border-box;
+    border: 0px;
+    overflow: auto;
+}
+
+.navbar{
+    height: 56px;
+}
+
+.container {
+    padding-top: 56px;
+    padding-bottom: 40px;
+}
+
+.page{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 56px;
+    bottom: 56px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background: white;
+    //visibility: hidden;
+}
+
+#bottom-bar{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 56px;
+    box-sizing: border-box;
+    background: whitesmoke;
+    border-top: solid darkgrey 1px;
+    padding: 9px;
+    text-align: center;
+}
+
+#bottom-bar > button{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#start-page{
+    z-index: 1050;
+}
+
+.container-left{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 350px;
+    background: white;
+}
+
+.container-right{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 350px;
+    box-sizing: border-box;
+    padding: 1rem;
+    overflow-y: auto;
+    border-left: solid darkgrey 1px;
+    background: white;
+}
+
+.container-right > div > div.row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.aspect-4-3 {
+    position: relative;
+    overflow: hidden;
+}
+  
+.aspect-16-9 {
+    position: relative;
+    overflow: hidden;
+}
+
+.aspect-full {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#loading-page{
+    top: 0;
+    bottom: 0;
+    z-index: 1050;
+    overflow: hidden;
+}
+
+#system-loading{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffffee;
+}
+
+
+@keyframes spin {
+    to {transform: rotate(360deg);}
+}
+   
+.spinner{
+    display: inline-block; 
+    box-sizing: border-box; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    width: 60px; 
+    height: 60px; 
+    margin-top: -30px; 
+    margin-left: -30px; 
+    border-radius: 50%; 
+    border-width: 3px; 
+    border-style: solid; 
+    border-color: rgb(0, 123, 255) rgb(170, 170, 170) rgb(170, 170, 170); 
+    border-image: initial; 
+    animation: spin 1s linear infinite;
+}
+
+.font-weight-500{
+    font-weight: 500;
+}
+
+#initial-questions-page > .container > .row{
+    padding-bottom: 3em;
+}
+#final-questions-page > .container > .row{
+    padding-bottom: 3em;
+}
+
+ul.sortable-list{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sortable-list li { 
+  cursor: move;
+}
+
+#evaluation-id{
+    color: whitesmoke;
+    font-family: monospace;
+}
+
+#question-confidence-up {
+    font-size: small;
+}
+
+#question-confidence-down {
+    font-size: small;
+}

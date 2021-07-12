@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+    <title>D3-RadViz</title>
+    <link rel="stylesheet" href="./web/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="./web/css/vendor/style-dark.css">
+    <link rel="stylesheet" href="./web/css/vendor/crosswidget.css">
+    <link rel="stylesheet" href="./web/css/prototype.css">
+</head>
+
+<body>
+    <div id="__blockdiv__"; style="position: absolute; top: 0; bottom: 0; right: 0; left: 0; background: black; opacity: 0.1; z-index: 10000;"></div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    </div>
+    <!-- END modal-->
+    <div class="left light" id="div-left">
+        <div class="visualization">
+            <div id="container">
+            </div>
+        </div>
+        <div class="other-metrics" id="metric-value">
+            <input type="checkbox" class='lazobuttons' id="lazoselection" style="visibility: hidden;" onclick="system.settings.lazoSelection()" >
+                <label id="lazoselectionlabel" class='lazobuttons'style="visibility: hidden;" >Lazo</label>
+                <input type="checkbox"  id="deselectpoint" style="visibility: hidden;" onclick="system.settings.deselectPoints()" >
+                <label id="deselectpointlabel" style="visibility: hidden;" >Deselect points</label>
+            <br/>
+            
+            
+        </div>
+    </div>
+
+    <script defer src="./web/js/vendor/js/brands.js"></script>
+    <script defer src="./web/js/vendor/js/solid.js"></script>
+    <script defer src="./web/js/vendor/js/fontawesome.js"></script>
+    
+
+    <script src="./web/js/uploadedfile.js"></script>
+    <script src="./web/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="./web/js/vendor/bootstrap.min.js"></script>
+    <script src="./web/js/vendor/popper.min.js"></script>
+
+    <script src="./web/js/vendor/d3.v5.min.js"></script>
+    <script src="./web/js/vendor/d3-scale-chromatic.v1.min.js"></script>
+    <script src="./web/js/vendor/crossfilter.v2.min.js"></script>
+    <script src="./web/js/vendor/crosswidget.js"></script>
+
+
+    <script src="./web/js/optimization.js"></script>
+    <script src="./web/js/slider.js"></script>
+    <script src="./web/js/spring.js"></script>
+    <script src="./web/js/radar.js"></script>
+    <script src="./web/js/structure.js"></script>
+
+    <script src="./web/js/settings.js"></script>
+    <script src="./web/js/radviz.js"></script>
+
+    <script src="./web/js/data.js"></script>
+    <script src="./web/js/main.js"></script>
+    <script src="./web/js/vendor/d3-legend.js"></script>
+    <script src="./web/js/vendor/d3-radviz.js"></script>
+    <script src="./web/js/metrics.js"></script>
+    <script src="./web/js/vendor/d3-lasso.min.js"></script>
+
+
+    <script src="./steinlib.js"></script>
+    <script src="./questions.js"></script>
+
+
+
+    <script>
+        let DATASET = "12-CSM"
+
+        let ORIGINAL_CLASSIFIED = false
+        let lista_datatsets = ['05-user_modeling(UNS)',
+            '07-ecoli(class)',
+            '07-seeds_dataset(group)',
+            '08-diabetes(Diabetes)',
+            '09-BreastTissue(Class)',
+            '09-Live',
+            '09-breast-cancer-wisconsin(quality)',
+            '09-dataR2(Classification)',
+            '09-elnino',
+            '09-glass(Type)',
+            '10-cloud',
+            '10-slump_test',
+            '10-tripadvisor_review',
+            '11-forestfires',
+            '11-page-blocks',
+            '11-winequality-red(quality)',
+            '11-winequality-white(quality)',
+            '12-CSM',
+            '13-wine(Wine)',
+            '20-absenteeism_at_work(ID)',
+            '30-wdbc(b)'
+        ]
+        let classification_selected = null
+
+        let d3_radviz = d3.radviz()
+
+        document.getElementById('lazoselection').checked = false
+        
+
+        let nd = ''
+        let name_attr = null
+        let dimensions_removed = []
+        let attr_removed = []
+
+     
+        let div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        let fileNames = new Array();
+
+
+        function information_hover() {
+            var div = d3.select(".tooltip")
+
+            div.transition()
+                .duration(200)
+                .style("display", "block");
+            div.html("The dataset must contains only number for the dimensions that you want visualiza on the radviz. the classification attributes must be a caterogical data or a litteral data.")
+                .style("width", '50%')
+                .style("left", (event.clientX - 150) + "px")
+                .style("top", (event.clientY - 100) + "px")
+                .style("background", '#767E98')
+                .style("color", 'white')
+                .style("padding", '5px')
+
+        }
+
+        function information_leave() {
+            var div = d3.select(".tooltip")
+            div.transition()
+                .duration(500)
+                .style("display", "none")
+
+        }
+
+        let LABEL_DATASET = {
+            '05-user_modeling(UNS)': 'User Modeling',
+            '07-ecoli(class)': 'Ecoli',
+            '07-seeds_dataset(group)': 'Seeds dataset',
+            '08-diabetes(Diabetes)': 'Pima Indians Diabetes',
+            '08-shuttle(class)': 'Shuttle',
+            '09-BreastTissue(Class)': 'Breast Tissue',
+            '09-Live': 'Live',
+            '09-breast-cancer-wisconsin(quality)': 'Breast Cancer Wisconsin',
+            '09-dataR2(Classification)': 'Breast Cancer Coimbra',
+            '09-elnino': 'El Nino',
+            '09-glass(Type)': 'Glass Identification',
+            '10-CASP': 'PTS',
+            '10-cloud': 'Cloud',
+            '10-slump_test': 'Concrete Slump Test',
+            '10-tripadvisor_review': 'Travel Reviews',
+            '11-forestfires': 'Forest Fires',
+            '11-page-blocks': 'Page Blocks Classification',
+            '11-winequality-red(quality)': 'Wine Quality Red',
+            '11-winequality-white(quality)': 'Wine Quality White',
+            '12-CSM': 'CSM',
+            '13-wine(Wine)': 'Wine',
+            '20-absenteeism_at_work(ID)': 'Absenteeism at work',
+            '30-wdbc(b)': 'Breast Cancer Wisconsin (Diagnostic)'
+        }
+
+        let DATASET_NAME = '12-CSM';
+
+        let status = {
+            question: null,
+            configuration: null,
+            selectedPoints:[],
+            selectedDimensions:[],
+            arrangment: []
+        }
+
+        function blockSystem(bool, sendSystemLoad=true){
+            d3.select("#__blockdiv__").style("display", bool ? "block" : "none")
+            if(sendSystemLoad) SteinLib.systemLoaded()
+        }
+
+        // Technique: uci - dependent_da - independent_da - radviz_pp - effectiveness_error_heuristic
+        // interaction : none(no function click), 2 (max 3 number selected), all ( no limit in the selection)
+        let LAST_CALL = null
+        async function generatePrototypeForQuestion(dataset, technique, cluster, selectedpoint, interaction, dimensions){
+            const promise = new Promise((resolve, reject) => {
+                const CURRENT_CALL = `${dataset}#${technique}#${cluster}#${selectedpoint}#${interaction}#${dimensions}`
+                if(LAST_CALL == CURRENT_CALL) return
+                else LAST_CALL = CURRENT_CALL
+                
+                status.configuration = {
+                    dataset: dataset,
+                    technique: technique,
+                    cluster: cluster,
+                    selectedpoint: selectedpoint,
+                    interaction: interaction,
+                    dimensions: dimensions
+                }
+
+                if (interaction === 'all'){
+                    d3.selectAll('.lazobuttons').style('visibility','visible')
+                } else {
+                    d3.selectAll('.lazobuttons').style('visibility','hidden')
+                }
+                system.settings.initializeDB(dataset,technique,cluster,selectedpoint,interaction,dimensions, () => {
+                    blockSystem(false, false)
+                    resolve()
+                });
+                //// da chiamare quando è tutto disegnato (o almeno dopo che si è letto il dataset)
+            })  
+            return promise   
+        }
+
+        //generatePrototypeForQuestion('05-user_modeling(UNS)','uci',false,'10','all','none')
+
+        function onPointsSelectionChange(points){
+             //points = [] se nessuno è selezionato, altrimenti id dei punti
+            //console.log("-- onPointsSelectionChange --", points)
+            SteinLib.dispatchEvent("points_selection", "data_point", points)
+        }
+
+        function onAnchorsSelectionChange(anchors){
+            //console.log("-- onAnchorsSelectionChange --", anchors)
+            SteinLib.dispatchEvent("anchors_selection", "anchor_point", anchors)
+        }
+
+        function onPointTooltip(point){
+            SteinLib.dispatchEvent("point_tooltip", "data_point", point)
+        }
+
+        function tutorial1(){
+            if (d3.select('#container img').nodes().length != 0)
+                d3.select('#container').selectAll("*").remove();    
+            var elem = document.createElement("img");
+            elem.setAttribute("src", "./images/tutorial-image-1.png");
+            elem.setAttribute("width", "100%");
+            document.getElementById("container").appendChild(elem);
+            blockSystem(false, false);
+            SteinLib.systemLoaded();
+        }
+        
+        function tutorial2(){
+            if (d3.select('#container img').nodes().length != 0)
+                d3.select('#container').selectAll("*").remove(); 
+            var elem = document.createElement("img");
+            elem.setAttribute("src", "./images/tutorial-image-2.png");
+            elem.setAttribute("width", "100%");
+            document.getElementById("container").appendChild(elem);
+            blockSystem(false, false);
+            SteinLib.systemLoaded();
+        }
+        function tutorial3(){
+            if (d3.select('#container img').nodes().length != 0)
+                d3.select('#container').selectAll("*").remove(); 
+            var elem = document.createElement("img");
+            elem.setAttribute("src", "./images/tutorial-image-3.png");
+            elem.setAttribute("width", "100%");
+            document.getElementById("container").appendChild(elem);
+            blockSystem(false, false);
+            SteinLib.systemLoaded();
+        }
+
+        function customization(){
+            
+            generatePrototypeForQuestion('05-user_modeling(UNS)', "uci",	false,	'',	'all',	'all')
+            blockSystem(false, false);
+            SteinLib.systemLoaded()
+        }
+
+        function testquestion(){
+            
+            generatePrototypeForQuestion('05-user_modeling(UNS)', "effectiveness_error_heuristic",	false,	'',	'1',	'none')
+            blockSystem(false, false);
+            SteinLib.systemLoaded()
+        }
+
+        
+    </script>
+
+
+</body>
