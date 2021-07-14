@@ -52,11 +52,12 @@
         <button id="levelplus" onclick="radviz.increaseLevelGrid()" type="button">Level +</button>
         <button id="levelminus" onclick="radviz.decreaseLevelGrid()" type="button">Level -</button>
         <button id="eemh" onclick="radviz.updateRadviz(d3.radvizDA.minEffectivenessErrorHeuristic(radviz.data()))" type="button"><small><b>EEMH</b></small> Heuristic</button>
-        <button id="eemh-fast" onclick="radviz.updateRadviz(d3.radvizDA.minEffectivenessErrorHeuristicFast(radviz.data()))" type="button"><small><b>EEMH Fast</b></small> Heuristic</button>
-        <button id="clock" onclick="radviz.updateRadviz(d3.radvizDA.clockHeuristic(radviz.data()))" type="button"><small><b>Clock</b></small> Heuristic</button>
+        <!--<button id="eemh-fast" onclick="radviz.updateRadviz(d3.radvizDA.minEffectivenessErrorHeuristicFast(radviz.data()))" type="button"><small><b>EEMH Fast</b></small> Heuristic</button>
+        <button id="clock" onclick="radviz.updateRadviz(d3.radvizDA.clockHeuristic(radviz.data()))" type="button"><small><b>Clock</b></small> Heuristic</button>-->
         <button id="original" onclick="radviz.updateRadviz()" type="button">Original</button>
-        <button id="original" onclick="radviz.setQuality(false)" type="button">Color</button>
-        <button id="original" onclick="radviz.setQuality(true)" type="button">Effectiveness</button>
+        <button id="original" onclick="radviz.setColorPoint(0)" type="button">Color</button>
+        <button id="original" onclick="radviz.setColorPoint(1)" type="button">Effectiveness</button>
+        <button id="original" onclick="radviz.setColorblindSafe(true)" type="button">Colorblind Safe</button>
 
     </div>
     <hr/>

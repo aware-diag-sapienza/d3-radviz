@@ -564,7 +564,6 @@ export default function Radviz () {
     if (!arguments.length) r = 1
     if (_ > 10) r = 10
     else r = _
-
     select('#points-g-' + index_radviz).selectAll('circle.data_point-' + index_radviz).attr('r', r)
   }
   //
@@ -618,6 +617,7 @@ export default function Radviz () {
     // = 0 allora uso metrica
     // = 1 allora metto il blu
     // = 2 allora metto un altro
+    colorBlind = false
     switch (flag) {
       case (0):
         quality = true
@@ -635,6 +635,10 @@ export default function Radviz () {
   radviz.setColorblindSafe = function(bool){
     colorBlind = bool
     updateData() 
+  }
+  //
+  radviz.getColorblindSafe = function(bool){
+    return colorBlind
   }
   //
   radviz.setFunctionDragEnd = function (ff) {
@@ -659,6 +663,10 @@ export default function Radviz () {
   //
   radviz.setFunctionUpdateResults = function (ff) {
     function_update_results = ff
+  }
+  //
+  radviz.setRightClick = function (bool) {
+    right_click = bool
   }
   //
   radviz.updateRadviz = function (order_dimensions) {
@@ -754,14 +762,13 @@ export default function Radviz () {
     if (function_context_menu != null) { function_context_menu(data.angles) }
   }
   //
-
   radviz.remove = function (bool) {
     if (!arguments.length) return
     else {
       if (bool) select('.radviz-svg-' + index_radviz).remove()
     }
   }
-
+  //
   radviz.setDefaultColorPoints = function (_) {
     if (!arguments.length) {
       defaultPointColor = '#67a9cf'
@@ -771,36 +778,33 @@ export default function Radviz () {
       defaultPointColor = _
     }
   }
+  //
   radviz.getAttrColor = function () {
     if (!arguments.length) return
     else {
       return attribute_color
     }
   }
-
+  //
   radviz.scaleX = function (_) {
     if (!arguments.legnth) return scale_x2
     scale_x2 = _
     return radviz
   }
-
+  //
   radviz.scaleY = function (_) {
     if (!arguments.legnth) return scale_x1
     scale_x1 = _
     return radviz
   }
-
+  //
   radviz.center = function () {
     return {
       x: SVG_SIDE / 2,
       y: SVG_SIDE / 2
     }
   }
-
-  radviz.setRightClick = function (bool) {
-    right_click = bool
-  }
-
+  //
   radviz.disableDraggableAnchors = function (bool) {
     disable_drag_anchor = bool
   }
