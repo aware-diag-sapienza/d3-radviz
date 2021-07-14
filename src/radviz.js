@@ -637,7 +637,7 @@ export default function Radviz () {
     updateData() 
   }
   //
-  radviz.getColorblindSafe = function(bool){
+  radviz.getColorblindSafe = function(){
     return colorBlind
   }
   //
