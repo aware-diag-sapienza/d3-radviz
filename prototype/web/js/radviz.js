@@ -33,6 +33,7 @@ system.radviz = (function() {
             d3_radviz.showDefaultColor(false)
             d3_radviz.showOutliers(false)
             d3_radviz.setQuality(true)
+            system.structure.createGradient();
             
         } 
         else if (d3.select('#cluster-radio').property('checked')) {
@@ -43,10 +44,12 @@ system.radviz = (function() {
             
         }
         else if (d3.select('#colorblind-radio').property('checked')) {
+            
             d3_radviz.setColorblindSafe(true)
             d3_radviz.showDefaultColor(false)
             d3_radviz.showOutliers(false)
             d3_radviz.setQuality(true)
+            system.structure.createGradient();
         }
     }
 

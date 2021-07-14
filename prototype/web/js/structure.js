@@ -16,6 +16,7 @@ system.structure = (() => {
     // metodi this.nome_parametri = (letiabili di input) => {}
 
     this.gradientLegend = function() {
+        
         let ele = document.getElementById("legend-value"),
             eleStyle = window.getComputedStyle(ele);
         let posizione_height = ele.getBoundingClientRect().height;
@@ -34,54 +35,86 @@ system.structure = (() => {
         let width = parseFloat((eleStyle.width).split('px')[0]) - margin.left - margin.right;
         var colorRange = ['#C0D9CC', '#F6F6F4', '#925D60', '#B74F55', '#969943']
 
-        var color = function(x) { return d3.interpolateWarm(d3.scaleLinear().domain([0, 1]).range([1, 0])(x)) };
+        
         $("#legend-value").html('<p id="name-dataset-prototype"></p><hr><h6>Effectiveness Error</h6>')
+
         let svg = d3.select("#legend-value")
-
-        .append("svg")
-            .attr("id", "legend-value-svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            //.attr("transform", "translate(" + (margin.left) + "," + (margin.top) + ")");
-
+            .append("svg")
+                .attr("id", "legend-value-svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                //.attr("transform", "translate(" + (margin.left) + "," + (margin.top) + ")");
+        
 
         let g = svg.append("g")
-            .attr("transform", "translate(" + (margin.left) + "," + (margin.top / 2) + ")");
-
+                .attr("transform", "translate(" + (margin.left) + "," + (margin.top / 2) + ")");
+        
         var linearGradient = g.append("defs")
-            .append("linearGradient")
-            .attr("id", "linear-gradient")
-            .attr("gradientTransform", "rotate(90)");;
+                .append("linearGradient")
+                .attr("id", "linear-gradient")
+                .attr("gradientTransform", "rotate(90)");
+        
+                g.append("rect")
+                .attr("id","rect-gradient")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", barHeight * 2)
+                .attr("height", (height - margin.top))
+
+        this.createGradient();
+    }
+
+    this.createGradient = () => {
+        let ele = document.getElementById("legend-value"),
+            eleStyle = window.getComputedStyle(ele);
+        let posizione_height = ele.getBoundingClientRect().height;
+        let posizione_width = ele.getBoundingClientRect().width;
+        let margin = {
+            top: (posizione_height / 100) * 12,
+            right: (posizione_width / 100) * 10,
+            bottom: (posizione_height / 100) * 10,
+            left: (posizione_width / 100) * 10
+        };
+        var padding = 9;
+
+        var barHeight = 8;
+
+        let height = parseFloat((eleStyle.height).split('px')[0]) - margin.top - margin.bottom;
+        let width = parseFloat((eleStyle.width).split('px')[0]) - margin.left - margin.right;
+
+        d3.select("#linear-gradient").selectAll("*").remove();
+        let color = function(x) { return d3.interpolateWarm(d3.scaleLinear().domain([0, 1]).range([1, 0])(x)) };
+        let colorblind = function(x) { return d3.interpolatePiYG(d3.scaleLinear().domain([0, 1]).range([1,0])(x))};
+
+        var linearGradient = d3.select('#linear-gradient')
 
 
         linearGradient.append("stop")
             .attr("offset", "0%")
-            .attr("stop-color", color(0));
+            .attr("stop-color", ()=>{ if (d3_radviz.getColorblindSafe()) return colorblind(0); else return color(0)});
 
         linearGradient.append("stop")
             .attr("offset", "25%")
-            .attr("stop-color", color(0.25));
+            .attr("stop-color", ()=>{ if (d3_radviz.getColorblindSafe()) return colorblind(0.25); else return color(0.25)});
 
         linearGradient.append("stop")
             .attr("offset", "50%")
-            .attr("stop-color", color(0.50));
+            .attr("stop-color", ()=>{ if (d3_radviz.getColorblindSafe()) return colorblind(0.50); else return color(0.50)});
 
         linearGradient.append("stop")
             .attr("offset", "75%")
-            .attr("stop-color", color(0.75));
+            .attr("stop-color", ()=>{ if (d3_radviz.getColorblindSafe()) return colorblind(0.75); else return color(0.75)});
 
         linearGradient.append("stop")
             .attr("offset", "100%")
-            .attr("stop-color", color(1));
+            .attr("stop-color", ()=>{ if (d3_radviz.getColorblindSafe()) return colorblind(1); else return color(1)});
 
-        g.append("rect")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("width", barHeight * 2)
-            .attr("height", (height - margin.top))
+        
             //.style("stroke", "black")
             //.style("stroke-width", 1)
-            .style("fill", "url(#linear-gradient)");
+            d3.select("#rect-gradient").style("fill", "url(#linear-gradient)");
+
+        
     }
 
 
