@@ -11,6 +11,17 @@ Source: [CSM Dataset](https://archive.ics.uci.edu/ml/datasets/CSM+%28Conventiona
  If you use this work in your research, please cite: 
 > M. Angelini, G. Blasilli, S. Lenti, A. Palleschi and G. Santucci, "Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness," in IEEE Transactions on Visualization and Computer Graphics, 
  DOI: [10.1109/TVCG.2021.3104879](https://doi.org/10.1109/TVCG.2021.3104879).
+```
+@ARTICLE{9514468,
+  author={Angelini, Marco and Blasilli, Graziano and Lenti, Simone and Palleschi, Alessia and Santucci, Giuseppe},
+  journal={IEEE Transactions on Visualization and Computer Graphics}, 
+  title={Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={1-1},
+  doi={10.1109/TVCG.2021.3104879}}
+```
 
 ## Installing
 
@@ -133,7 +144,7 @@ Set the *customized_function* to update the result of the Effectiveness Error fo
 > M. Angelini, G. Blasilli, S. Lenti, A. Palleschi and G. Santucci, "Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness," in IEEE Transactions on Visualization and Computer Graphics, 
  DOI: [10.1109/TVCG.2021.3104879](https://doi.org/10.1109/TVCG.2021.3104879).
 
-```bibtex
+```
 @ARTICLE{9514468,
   author={Angelini, Marco and Blasilli, Graziano and Lenti, Simone and Palleschi, Alessia and Santucci, Giuseppe},
   journal={IEEE Transactions on Visualization and Computer Graphics}, 
