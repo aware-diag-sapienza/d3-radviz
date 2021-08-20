@@ -6,6 +6,12 @@ An example of the application can be seen in the [Demo](https://aware-diag-sapie
 <img alt="radviz" src="https://github.com/aware-diag-sapienza/d3-radviz/blob/master/dev/d3-radviz.png" width="960">
 
 Source: [CSM Dataset](https://archive.ics.uci.edu/ml/datasets/CSM+%28Conventional+and+Social+Media+Movies%29+Dataset+2014+and+2015).
+
+## Citation Policy
+ If you use this work in your research, please cite: 
+> M. Angelini, G. Blasilli, S. Lenti, A. Palleschi and G. Santucci, "Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness," in IEEE Transactions on Visualization and Computer Graphics, 
+ DOI: [10.1109/TVCG.2021.3104879](https://doi.org/10.1109/TVCG.2021.3104879).
+
 ## Installing
 
 If you use NPM, `npm install d3-radviz`. Otherwise, download the [latest release](https://github.com/aware-diag-sapienza/d3-radviz/releases/latest).
@@ -121,3 +127,20 @@ Set the *customized_function* to the contect menu event of the points.
 <a href="#radviz_setFunctionUpdateResults" name="radviz_setFunctionUpdateResults">#</a> <i>radviz</i>.<b>setFunctionUpdateResults</b>(<i>customized_function </i>) [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
 
 Set the *customized_function* to update the result of the Effectiveness Error for the current Dimension Arrangement. 
+
+## Credits
+ If you use this work in your research, please cite: 
+> M. Angelini, G. Blasilli, S. Lenti, A. Palleschi and G. Santucci, "Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness," in IEEE Transactions on Visualization and Computer Graphics, 
+ DOI: [10.1109/TVCG.2021.3104879](https://doi.org/10.1109/TVCG.2021.3104879).
+
+```bibtex
+@ARTICLE{9514468,
+  author={Angelini, Marco and Blasilli, Graziano and Lenti, Simone and Palleschi, Alessia and Santucci, Giuseppe},
+  journal={IEEE Transactions on Visualization and Computer Graphics}, 
+  title={Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={1-1},
+  doi={10.1109/TVCG.2021.3104879}}
+```
