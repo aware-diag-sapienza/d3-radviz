@@ -12,6 +12,7 @@ Source: [CSM Dataset](https://archive.ics.uci.edu/ml/datasets/CSM+%28Conventiona
 > M. Angelini, G. Blasilli, S. Lenti, A. Palleschi and G. Santucci, "Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness," in IEEE Transactions on Visualization and Computer Graphics, 
  DOI: [10.1109/TVCG.2021.3104879](https://doi.org/10.1109/TVCG.2021.3104879).
 ```
+BibTex:
 @ARTICLE{9514468,
   author={Angelini, Marco and Blasilli, Graziano and Lenti, Simone and Palleschi, Alessia and Santucci, Giuseppe},
   journal={IEEE Transactions on Visualization and Computer Graphics}, 
