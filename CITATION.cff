@@ -1,0 +1,55 @@
+cff-version: 1.0.0
+message: If you use this software, please cite it as below.
+references:
+  - type: software
+    authors:
+      - family-names: Angelini
+        given-names: Marco
+        orcid: 0000-0001-9051-6972
+        affiliation: "Sapienza University of Rome"
+        email: angelini@diag.uniroma1.it
+        website: sites.google.com/dis.uniroma1.it/angelini
+      - family-names: Blasilli
+        given-names: Graziano
+        orcid: 0000-0003-3339-6403
+        affiliation: "Sapienza University of Rome"
+        email: blasilli@diag.uniroma1.it
+        website: https://phd.uniroma1.it/web/GRAZIANO-BLASILLI_nP1252348_EN.aspx
+      - family-names: Lenti
+        given-names: Simone
+        orcid: 0000-0001-8281-3723
+        affiliation: "Sapienza University of Rome"
+        email: lenti@diag.uniroma1.it
+        website: https://phd.uniroma1.it/web/SIMONE-LENTI_nP1156945_EN.aspx
+      - family-names: Palleschi
+        given-names: Alessia
+        orcid: 0000-0002-1444-3959
+        affiliation: "Sapienza University of Rome"
+        email: palleschi@diag.uniroma1.it
+        website: http://aware.diag.uniroma1.it/palleschi/
+      - family-names: Santucci
+        given-names: Giuseppe
+        orcid: 0000-0003-4350-1123
+        affiliation: "Sapienza University of Rome"
+        email: santucci@diag.uniroma1.it
+        website: http://www.diag.uniroma1.it/~santucci
+    title: "Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness"
+    version: 1.0.0
+    doi: 10.1109/TVCG.2021.3104879
+    repository-code: https://github.com/sdruskat/my-research-tool
+    repository-artifact: https://github.com/aware-diag-sapienza
+    date-published: 2021-08-14
+    keywords:
+      - Visualization
+      - Linear programming
+      - Image color analysis
+      - Heuristic algorithms
+      - Statistical analysis
+      - Springs
+      - Proposals
+      - Dimensionality reduction
+      - RadViz
+      - dimension arrangement
+      - visual quality metrics
+    license: Apache-2.0LGPL-3.0 License
+    url: https://aware-diag-sapienza.github.io/d3-radviz/
