@@ -19,6 +19,7 @@ authors:
 title: "Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness"
 version: 1.0.0
 doi: 10.1109/TVCG.2021.3104879
+journal: "IEEE Transactions on Visualization and Computer Graphics"
 repository-code: "https://github.com/aware-diag-sapienza/d3-radviz"
 date-published: 2021-08-14
 keywords:
@@ -33,5 +34,5 @@ keywords:
   - RadViz
   - dimension arrangement
   - visual quality metrics
-license: Apache-2.0LGPL-3.0 License
+license: LGPL-3.0 License
 url: "https://aware-diag-sapienza.github.io/d3-radviz/"
