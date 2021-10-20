@@ -9,30 +9,6 @@ references:
         affiliation: "Sapienza University of Rome"
         email: angelini@diag.uniroma1.it
         website: sites.google.com/dis.uniroma1.it/angelini
-      - family-names: Blasilli
-        given-names: Graziano
-        orcid: 0000-0003-3339-6403
-        affiliation: "Sapienza University of Rome"
-        email: blasilli@diag.uniroma1.it
-        website: https://phd.uniroma1.it/web/GRAZIANO-BLASILLI_nP1252348_EN.aspx
-      - family-names: Lenti
-        given-names: Simone
-        orcid: 0000-0001-8281-3723
-        affiliation: "Sapienza University of Rome"
-        email: lenti@diag.uniroma1.it
-        website: https://phd.uniroma1.it/web/SIMONE-LENTI_nP1156945_EN.aspx
-      - family-names: Palleschi
-        given-names: Alessia
-        orcid: 0000-0002-1444-3959
-        affiliation: "Sapienza University of Rome"
-        email: palleschi@diag.uniroma1.it
-        website: http://aware.diag.uniroma1.it/palleschi/
-      - family-names: Santucci
-        given-names: Giuseppe
-        orcid: 0000-0003-4350-1123
-        affiliation: "Sapienza University of Rome"
-        email: santucci@diag.uniroma1.it
-        website: http://www.diag.uniroma1.it/~santucci
     title: "Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness"
     version: 1.0.0
     doi: 10.1109/TVCG.2021.3104879
