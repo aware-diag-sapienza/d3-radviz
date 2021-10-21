@@ -14,7 +14,7 @@
     "Graziano Blasilli <blasilli@diag.uniroma1.it>"
   ],
   "license": "LGPL-3.0",
-  "private": true,
+  "private": false,
   "main": "dist/d3-radviz.js",
   "unpkg": "dist/d3-radviz.min.js",
   "module": "src/index.js",
