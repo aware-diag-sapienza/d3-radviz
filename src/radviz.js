@@ -277,14 +277,15 @@ export default function Radviz () {
     }
     console.log('angle', angle)
     console.log('id', id)
-    return [angle, id]
+    return [angle, d.id_label]
   }
   //
   const newOrderDimensions = function (angle, dimensions) {
-    console.log(angle, dimensions)
+    console.log('--->',angle, dimensions)
     const new_dimensions = []
-    let dimension_changed = angle[1].replace('AP_', '')
-    dimension_changed = dimension_changed.replace('-' + index_radviz, '')
+    //let dimension_changed = angle[1].replace('AP_', '')
+    //dimension_changed = dimension_changed.replace('-' + index_radviz, '')
+    const dimension_changed = angle[1]
     console.log('dimension_changed', dimension_changed)
     console.log('dimensions', dimensions)
 
@@ -296,8 +297,8 @@ export default function Radviz () {
     let i
 
     for (i = 0; i < dimensions.length; i++) {
-      console.log(i, ')', dimensions[i].value.replace(/ /g, ''), dimension_changed)
-      if (dimensions[i].value.replace(/ /g, '') == dimension_changed) {
+      //console.log(i, ')', dimensions[i].value.replace(/ /g, ''), dimension_changed)
+      if (dimensions[i].id_label == dimension_changed) {
         index_changed = i
         founded = true
 
@@ -346,7 +347,8 @@ export default function Radviz () {
       select('#grid-g-' + index_radviz).selectAll('text.label-' + index_radviz)
         .data(data.angles)
         .enter().append('text')
-        .attr('id', (d) => { return 'T_' + d.value.replace(/ /g, '') + '-' + index_radviz })
+        //.attr('id', (d) => { return 'T_' + d.value.replace(/ /g, '') + '-' + index_radviz })
+        .attr('id', (d) => { return 'T_' + d.id_label + '-' + index_radviz })
         .attr('class', 'anchor-points attr_label-' + index_radviz)
         .attr('x', (d, i) => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (d.start))) })
         .attr('y', (d, i) => { return ((radius + 6) * Math.sin(-Math.PI / 2 + (d.start))) })
@@ -363,7 +365,7 @@ export default function Radviz () {
         if (dimensione_ordinata.value.length != 0) {
           const tdelay = transition().duration(1000)
           const label_text = dimensione_ordinata.value.replace(/ /g, '')
-          select('#T_' + label_text + '-' + index_radviz).transition(tdelay)
+          select('#T_' + dimensione_ordinata.id_label + '-' + index_radviz).transition(tdelay)
             .attr('x', () => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (dimensione_ordinata.start))) })
             .attr('y', () => { return ((radius + 6) * Math.sin(-Math.PI / 2 + (dimensione_ordinata.start))) })
         }
@@ -373,7 +375,8 @@ export default function Radviz () {
       .data(data.angles)
       .enter().append('circle')
       .attr('class', 'anchor-points AP_points-' + index_radviz)
-      .attr('id', (d) => { return 'AP_' + d.value.replace(/ /g, '') + '-' + index_radviz })
+      //.attr('id', (d) => { return 'AP_' + d.value.replace(/ /g, '') + '-' + index_radviz })
+      .attr('id', (d) => { return 'AP_' + d.id_label + '-' + index_radviz })
       .attr('r', '0.7')
       .style('fill', '#660000')
       .attr('cx', (d, i) => { return ((radius + 1) * Math.cos(-Math.PI / 2 + (d.start))) })

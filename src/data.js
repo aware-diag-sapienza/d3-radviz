@@ -68,7 +68,8 @@ export function loadDataset(dataset, name) {
         let { numeric, values } = getDimensionValues(k, dataset);
         data['original'].push({
             id: k,
-            values: values
+            values: values,
+            id_label: k
         });
         if (classification != k) {
             data[numeric ? 'dimensions' : 'attributes'].push({
@@ -272,6 +273,7 @@ export function assignAnglestoDimensions(dimensions,data) {
 
         let lab_dom = (dom, nam) => `${dom+1}-${nam}`
 
+        console.log('DIMENSIONE',d,'POSIZIONE', data.original.map(f=>f.id).indexOf(d))
         real_dimensions.push({
             'value': d,
             'index': i,
@@ -282,6 +284,7 @@ export function assignAnglestoDimensions(dimensions,data) {
             'x2': x2,
             'dominance':index_dominance,
             'labeldominance':lab_dom(index_dominance,d),
+            'id_label': 'label_'+ data.original.map(f=>f.id).indexOf(d),
         });
         console.log(real_dimensions)
     });
