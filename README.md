@@ -117,6 +117,15 @@ Remove one level to the grid.
 
 Change the color of the points, by default each point encodes the value of Effectiveness Error, but it is possible to encodes the classification attribute of the dataset.
 
+From now on there are all the functions that can enrich the RadViz with custom functions related to the principal interaction that the user can perform on the RadViz chart like: 
+- *DragEnd* of anchors
+- *Click* of points inside RadViz
+- *MouseOver* of points inside RadViz
+- *MouseOut* of points inside RadViz
+- *ContextMenu* of points inside RadViz
+- *UpdateResults* after the application of a Dimension Arrangement to RadViz 
+
+
 <a href="#radviz_setFunctionDragEnd" name="radviz_setFunctionDragEnd">#</a> <i>radviz</i>.<b>setFunctionDragEnd</b>(<i>customized_function </i>) [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
 
 Set the *customized_function* to the drag-and-drop event of the anchor points. 

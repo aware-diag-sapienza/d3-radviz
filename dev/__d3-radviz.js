@@ -315,8 +315,10 @@ function Radviz() {
         d3Selection.select(this).raise().classed("active", true);
     };
     //
-    let dragged = function(event, d) {
-        d3Selection.select(this).attr("cx", d.x = event.x).attr("cy", d.y = event.y);
+    let dragged = function( d) {
+        
+        
+        d3Selection.select(this).attr('cx', d.x = d3Selection.event.x).attr('cy', d.y = d3Selection.event.y);
         d.drag = true;
     };
     //
@@ -324,7 +326,7 @@ function Radviz() {
         if (d.drag == true) {
             d3Selection.select(this).classed("active", false);
             d.drag = false;
-            let new_angle = dragendangle(d3Selection.select(this).attr("cx"), d3Selection.select(this).attr("cy"), d3Selection.select(this).attr("id"));
+            const new_angle = dragendangle(d3Selection.select(this).attr("cx"), d3Selection.select(this).attr("cy"), d3Selection.select(this).attr("id"));
             data.angles = assignAnglestoDimensions(newOrderDimensions(new_angle, data.angles));
 
             d3Selection.selectAll('.AP_points-' + index_radviz).remove();
@@ -420,12 +422,13 @@ function Radviz() {
         }
     };
     //
+    
     const drawAnchorPoints = function(supportDrag = false) {
         if (!supportDrag) {
             d3Selection.select('#grid-g-' + index_radviz).selectAll("text.label-" + index_radviz)
                 .data(data.angles)
                 .enter().append("text")
-                .attr("id", (d) => { return "T_" + d.value.replace(/ /g, "") + '-' + index_radviz; })
+                .attr("id", (d,i) => { return "T_" + d.value.replace(/ /g, "") + '-' + index_radviz; })
                 .attr("class", "attr_label-" + index_radviz)
                 .attr("x", (d, i) => { return ((radius + 8) * Math.cos(-Math.PI / 2 + (d.start))); })
                 .attr("y", (d, i) => { return ((radius + 6) * Math.sin(-Math.PI / 2 + (d.start))); })
