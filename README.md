@@ -117,6 +117,40 @@ Remove one level to the grid.
 
 Change the color of the points, by default each point encodes the value of Effectiveness Error, but it is possible to encodes the classification attribute of the dataset.
 
+setDefaultColorPoints
+<a href="#setDefaultColorPoints(color)" name="setDefaultColorPoints">#</a> <i>radviz</i>.<b>setDefaultColorPoints</b>(HTMLcolor) [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
+
+Set HTMLcolor as the *default color*, by default the color is '#67a9cf'
+
+<a href="#radviz_showDefaultColor(bool)" name="radviz_showDefaultColor">#</a> <i>radviz</i>.<b>showDefaultColor</b>(bool) [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
+
+Change the color of the points to the default color.
+
+<a href="#setColorblindSafe(bool)" name="setColorblindSafe">#</a> <i>radviz</i>.<b>setColorblindSafe</b>(bool) [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
+
+Change the color of the points to the d3.<b>interpolatePiYG</b> scale [<>](https://github.com/d3/d3-scale-chromatic/blob/master/src/diverging/PiYG.js "Source") that is color blind safe.
+
+<a href="#getColorblindSafe()" name="getColorblindSafe">#</a> <i>radviz</i>.<b>getColorblindSafe</b>() [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
+
+Return the value of the bool related to the *colorBlind* variable, previously setted and by defualt false. 
+
+<a href="#radviz_setColorPoint(flag)" name="radviz_setColorPoint">#</a> <i>radviz</i>.<b>setColorPoint</b>(flag) [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
+
+Change the color of points following these *flag* rules:
+- = 0 encodes ErrorEffectiveness Metric
+- = 1 encodes the default color 
+- = 2 encodes another color
+
+<a href="#radviz_disableDraggableAnchors(bool)" name="radviz_disableDraggableAnchors">#</a> <i>radviz</i>.<b>disableDraggableAnchors</b>(bool) [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
+
+Disable the Draggable action on the Anchors if the bool is True. By default the drag action is activeted.
+
+<a href="#radviz_remove()" name="radviz_remove">#</a> <i>radviz</i>.<b>remove</b>() [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
+
+Delete the radviz. 
+
+---
+
 From now on there are all the functions that can enrich the RadViz with custom functions related to the principal interaction that the user can perform on the RadViz chart like: 
 - *DragEnd* of anchors
 - *Click* of points inside RadViz
@@ -149,6 +183,7 @@ Set the *customized_function* to the contect menu event of the points.
 <a href="#radviz_setFunctionUpdateResults" name="radviz_setFunctionUpdateResults">#</a> <i>radviz</i>.<b>setFunctionUpdateResults</b>(<i>customized_function </i>) [<>](https://github.com/d3/d3-radviz/src/radviz.js "Source")
 
 Set the *customized_function* to update the result of the Effectiveness Error for the current Dimension Arrangement. 
+
 
 ## Credits
  If you use this work in your research, please cite: 
