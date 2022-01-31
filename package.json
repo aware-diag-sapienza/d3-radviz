@@ -1,6 +1,6 @@
 {
   "name": "d3-radviz",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Radviz visualization for multivariate data",
   "keywords": [
     "d3",
