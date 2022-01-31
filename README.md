@@ -27,7 +27,7 @@ BibTex:
 
 ## Installing
 
-If you use NPM, `npm install d3-radviz`. Otherwise, download the [latest release](https://github.com/aware-diag-sapienza/d3-radviz/releases/latest).
+If you use NPM, `npm install d3-radviz`, here the [d3-radvix NPM page](https://www.npmjs.com/package/d3-radviz). Otherwise, download the [latest release](https://github.com/aware-diag-sapienza/d3-radviz/releases/latest).
 
 ```html
 <script src="d3-radviz.js"></script>
