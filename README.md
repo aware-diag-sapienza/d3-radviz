@@ -14,7 +14,7 @@ Source: [CSM Dataset](https://archive.ics.uci.edu/ml/datasets/CSM+%28Conventiona
 
 BibTex:
 ```
-@ARTICLE{9514468,
+  @ARTICLE{9514468,
   author={Angelini, Marco and Blasilli, Graziano and Lenti, Simone and Palleschi, Alessia and Santucci, Giuseppe},
   journal={IEEE Transactions on Visualization and Computer Graphics}, 
   title={Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness}, 
