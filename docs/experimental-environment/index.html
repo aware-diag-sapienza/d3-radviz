@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+    <title>D3-RadViz</title>
+    <link rel="stylesheet" href="./web/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="./web/css/vendor/style-dark.css">
+    <link rel="stylesheet" href="./web/css/vendor/crosswidget.css">
+    <link rel="stylesheet" href="./web/css/prototype.css">
+</head>
+
+<body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Settings Panel</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <input type="checkbox" id="oth-metrics" name="metr" value="other" onchange="system.settings.addOtherMetrics()">
+                        <label for="metr"> Activate other metrics</label><br>
+                        <hr>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item data-menu"><a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Datasets</a></li>
+                            <li class="nav-item data-menu"><a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Upload your dataset</a></li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane p-4 fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                                <h6>Choose a default dataset</h6>
+                                <select class="custom-select mr-sm-2" id="select-dataset"></select>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 id="label-select-radviz-dim">Radviz dimensions</h6>
+                                        <div id="dimensions-list">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 id="label-select-radviz-classification">Classification dimension</h6>
+                                        <div id="classification-list">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-4 fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                                <h6>
+                                    Insert your dataset
+                                    <!--<i class="fas fa-info-circle" onmouseover="information_hover()" onmouseout="information_leave()"></i>-->
+                                </h6>
+                                <div class="btn btn-primary btn-sm float-left" id="choose-file-button" onclick="importPanel.__openPopup()">
+                                    <span>Choose file</span>
+                                </div>
+                                <div class="file-path-wrapper" id="name-dataset-uploaded">
+                                </div>
+                                <div id="uploaded-dataset-list">
+                                    <select class="custom-select mr-sm-2" id="uploaded-dataset">
+                                        <option value="" id = "u-d-attr0"></option>
+                                    </select>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 id="label-radviz-dim">Radviz dimensions</h6>
+                                        <div id="dimensions-list-uploaded">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6 id="label-upload-radviz-classification">Classification dimension</h6>
+                                        <div id="classification-list-uploaded">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--IMPORT FILE PANEL -->
+                                <div id="import-panel">
+
+                                    <form enctype="multipart/form-data" , target="_blank">
+                                        <div id="import-container">
+                                            <div id="close-icon">
+                                                <button type="button" class="close" onclick="importPanel.__closePopup()" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <input id="import-file" type="file" name="file" />
+                                            <div id="import-icon"> <i class="fas fa-file-upload"></i> </div>
+                                            <div id="import-text">
+
+                                                <label id="import-choose-button" for="import-file">Choose a CSV file</label> or drag it here.
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END modal-->
+    <div class="left light" id="div-left">
+        <div id="menu">
+            <div id="menubutton">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+          <i class="fas fa-cog"></i>
+      </button>
+            </div>
+            <div id="menu1"></div>
+
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div>
+            </div>
+            <div id="number-progress"></div>
+
+
+        </div>
+        <div class="visualization">
+            <!--<div class="radviz" id = "rviz"></div>-->
+            <div id="container">
+            </div>
+            <div class="setting-legend">
+                <div class="values-legend" id="legend-value">
+
+                </div>
+                <div class="cluster-legend" id="legend-cluster"></div>
+
+            </div>
+        </div>
+        <div class="other-metrics" id="metric-value"></div>
+        <div class="settings">
+            <hr>
+            <font size="4" style="color: #4b5158;"><b>Radius:</b> </font>
+            <button type="button" class="btn btn-secondary-circle" id="btn_radius_plus" onclick="d3_radviz.increaseRadius()"><i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-secondary-circle" id="btn_radius_minus" onclick="d3_radviz.decreaseRadius()"><i class="fas fa-minus"></i></button>
+            <font size="4" style="color: #4b5158;"><b>Level Grid:</b> </font>
+            <button type="button" class="btn btn-secondary-circle" id="btn_levelgrid_plus" onclick="d3_radviz.increaseLevelGrid()"><i class="fas fa-plus"></i></button>
+            <button type="button" class="btn btn-secondary-circle" id="btn_levelgrid_minus" onclick="d3_radviz.decreaseLevelGrid()"><i class="fas fa-minus"></i></button>
+            <font size="4" style="color: #4b5158;"><b>Color:</b> </font>
+            <input name="color-quality" type="radio" id="effectiveness-radio" value="EffERROR" onclick="system.radviz.changeQuality()" checked>
+            <label for="effectiveness-radio ">Effectiveness Error</label>
+            <input name="color-quality" type="radio" id="cluster-radio" value="Clusters" onclick="system.radviz.changeQuality()"> <!-- d3_radviz.setQuality()-->
+            <label for="cluster-radio">Clusters</label>
+            <input name="color-quality" type="radio" id="colorblind-radio" value="EffERROR" onclick="system.radviz.changeQuality()">
+            <label for="effectiveness-radio ">Colorblind Safe</label>
+            <input type="checkbox" id="deselectpoint" style="visibility: hidden;" onclick="system.settings.deselectPoints()" >
+            <label id="deselectpointlabel" style="visibility: hidden;" >Deselect points</label>
+            <br/>
+
+            <!--<button type="button" class="btn btn-secondary" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.maxMeanDistanceHeuristic(d3_radviz.data()))" type="button">Heuristic MeanDistance</button>-->
+
+            <button type="button" class="btn btn-secondary" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristic(d3_radviz.data()))" type="button">Heuristic</button>
+            <!--<button type="button" class="btn btn-secondary" id="heuristic-graziano-noopt" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristicNOOPT(d3_radviz.data()))" type="button">Heu NO-OPT</button>-->
+
+            <button type="button" class="btn btn-secondary" id="original" onclick="system.settings.updateRadviz(this.id)" type="button">Original</button>
+            <button type="button" class="btn btn-secondary" id="selected_heuristic" onclick="system.radviz.selectedHeuristic(this.id)">Selected</button>
+            <button type="button" class="btn btn-secondary" id="btn_min_disposition" onclick="system.radviz.updateDisposition(this.id,'min')">Minimum EE</button>
+            <button type="button" class="btn btn-secondary" id="btn_max_disposition" onclick="system.radviz.updateDisposition(this.id,'max')">Maximum EE</button>
+            <button type="button" class="btn btn-secondary" id="btn_levelgrid_minus" onclick="system.settings.resetVisualization()">Reset</button> <br>
+
+            <button type="button" class="btn btn-secondary" id="btn_dependent_da_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'dependent_da')">Dependent DA</button>
+            <button type="button" class="btn btn-secondary" id="btn_independent_da_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'independent_da')">Independent DA</button>
+            <button type="button" class="btn btn-secondary" id="btn_vizrank_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'vizrank')">VizRank</button>
+            <button type="button" class="btn btn-secondary" id="btn_radviz_pp_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'radviz_pp')">Radviz ++</button>
+            <!--<button type="button" class="btn btn-secondary" id="btn_distance_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'distance')">Distance</button>-->
+            <button type="button" class="btn btn-secondary" id="btn_t_statistic_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'t_statistic')">T statistic</button>
+
+
+
+
+        </div>
+    </div>
+    <div class="right light" id="div-right">
+        <div class="referencepoint" id="pointforce"></div>
+
+        <div class="radarpoints" id="radar"></div>
+
+    </div>
+
+    <script src="./web/js/uploadedfile.js"></script>
+    <script src="./web/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="./web/js/vendor/bootstrap.min.js"></script>
+    <script src="./web/js/vendor/popper.min.js"></script>
+    <script defer src="./web/js/vendor/js/brands.js"></script>
+    <script defer src="./web/js/vendor/js/solid.js"></script>
+    <script defer src="./web/js/vendor/js/fontawesome.js"></script>
+    <script src="./web/js/vendor/d3.v5.min.js"></script>
+    <script src="./web/js/vendor/d3-scale-chromatic.v1.min.js"></script>
+    <script src="./web/js/vendor/crossfilter.v2.min.js"></script>
+    <script src="./web/js/vendor/crosswidget.js"></script>
+
+
+    <script src="./web/js/optimization.js"></script>
+    <script src="./web/js/slider.js"></script>
+    <script src="./web/js/spring.js"></script>
+    <script src="./web/js/radar.js"></script>
+    <script src="./web/js/structure.js"></script>
+
+    <script src="./web/js/settings.js"></script>
+    <script src="./web/js/radviz.js"></script>
+
+    <script src="./web/js/data.js"></script>
+    <script src="./web/js/main.js"></script>
+    <script src="./web/js/vendor/d3-legend.js"></script>
+    <script src="./web/js/vendor/d3-radviz.js"></script>
+    <script src="./web/js/metrics.js"></script>
+
+
+    <script>
+        let DATASET = "12-CSM"
+
+        let ORIGINAL_CLASSIFIED = false
+        let lista_datatsets = ['05-user_modeling(UNS)',
+            '07-ecoli(class)',
+            '07-seeds_dataset(group)',
+            '08-diabetes(Diabetes)',
+            '09-BreastTissue(Class)',
+            '09-Live',
+            '09-breast-cancer-wisconsin(quality)',
+            '09-dataR2(Classification)',
+            '09-elnino',
+            '09-glass(Type)',
+            '10-cloud',
+            '10-slump_test',
+            '10-tripadvisor_review',
+            '11-forestfires',
+            '11-page-blocks',
+            '11-winequality-red(quality)',
+            '11-winequality-white(quality)',
+            '12-CSM',
+            '13-wine(Wine)',
+            '20-absenteeism_at_work(ID)',
+            '30-wdbc(b)'
+        ]
+        let classification_selected = null
+
+        let d3_radviz = d3.radviz()
+
+        let nd = ''
+        let name_attr = null
+        let dimensions_removed = []
+        let attr_removed = []
+
+        $('#myModal').on('shown.bs.modal', function() {
+            $('#myInput').trigger('focus')
+        })
+
+        let div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        let fileNames = new Array();
+
+
+        function information_hover() {
+            var div = d3.select(".tooltip")
+
+            div.transition()
+                .duration(200)
+                .style("display", "block");
+            div.html("The dataset must contains only number for the dimensions that you want visualiza on the radviz. the classification attributes must be a caterogical data or a litteral data.")
+                .style("width", '50%')
+                .style("left", (event.clientX - 150) + "px")
+                .style("top", (event.clientY - 100) + "px")
+                .style("background", '#767E98')
+                .style("color", 'white')
+                .style("padding", '5px')
+
+        }
+
+        function information_leave() {
+            var div = d3.select(".tooltip")
+            div.transition()
+                .duration(500)
+                .style("display", "none")
+
+
+
+        }
+
+        let LABEL_DATASET = {
+            '05-user_modeling(UNS)': 'User Modeling',
+            '07-ecoli(class)': 'Ecoli',
+            '07-seeds_dataset(group)': 'Seeds dataset',
+            '08-diabetes(Diabetes)': 'Pima Indians Diabetes',
+            '08-shuttle(class)': 'Shuttle',
+            '09-BreastTissue(Class)': 'Breast Tissue',
+            '09-Live': 'Live',
+            '09-breast-cancer-wisconsin(quality)': 'Breast Cancer Wisconsin',
+            '09-dataR2(Classification)': 'Breast Cancer Coimbra',
+            '09-elnino': 'El Nino',
+            '09-glass(Type)': 'Glass Identification',
+            '10-CASP': 'PTS',
+            '10-cloud': 'Cloud',
+            '10-slump_test': 'Concrete Slump Test',
+            '10-tripadvisor_review': 'Travel Reviews',
+            '11-forestfires': 'Forest Fires',
+            '11-page-blocks': 'Page Blocks Classification',
+            '11-winequality-red(quality)': 'Wine Quality Red',
+            '11-winequality-white(quality)': 'Wine Quality White',
+            '12-CSM': 'CSM',
+            '13-wine(Wine)': 'Wine',
+            '20-absenteeism_at_work(ID)': 'Absenteeism at work',
+            '30-wdbc(b)': 'Breast Cancer Wisconsin (Diagnostic)'
+        }
+
+
+        function uploadMenu(lista) {
+
+
+            // here we upload the menu for the dimensions list
+
+            let selection_list = document.getElementById("select-dataset");
+            document.getElementById("label-select-radviz-dim").style.display = "block"
+            document.getElementById("label-select-radviz-classification").style.display = "block"
+            let optionnull = document.createElement("option");
+            let testo = ''
+            optionnull.text = testo
+            optionnull.id = "s-d-attr" + 0
+            optionnull.value = ''
+            selection_list.add(optionnull);
+            lista.forEach(function(l, i) {
+
+                let option = document.createElement("option");
+                let testo = ''
+                if (l.includes('(')) {
+                    let start = l.indexOf('-') + 1
+                    let end = l.indexOf('(') - 3
+                    testo = l.substr(start, end);
+                } else if (l.includes('-')) {
+                    let start = l.indexOf('-') + 1
+                    let end = l.indexOf('.') - 3
+                    testo = l.substr(start, end);
+                } else {
+                    let end = l.indexOf('.')
+                    testo = l.substr(0, end);
+                }
+
+                if (testo.includes('-')) {
+                    testo = testo.replace('-', ' ');
+                }
+                if (testo.includes('_')) {
+                    testo = testo.replace('_', ' ');
+                }
+                option.id = "s-d-attr" + (i + 1)
+                option.text = LABEL_DATASET[l]
+                option.value = l //l.substring(0, l.indexOf('.'))
+                if (l == DATASET) {
+                    option.selected = true;
+                }
+
+                selection_list.add(option);
+            })
+
+            $('#select-dataset').on('change', function() {
+                if (this.value != '') {
+                    system.settings.initializeDB(this.value)
+                    system.settings.selected_dataset_option = this.value
+
+                    document.getElementById("u-d-attr0").selected = true
+                    document.getElementById("label-radviz-dim").style.display = "none";
+                    document.getElementById("label-upload-radviz-classification").style.display = "none";
+                    d3.select("#ul-upload-menu").remove('*');
+                    d3.select("#ul-classification-upload").remove('*');
+                }
+            });
+
+            // here we upload the menu for the classification list
+            system.settings.initializeDB();
+
+        }
+
+        uploadMenu(lista_datatsets);
+
+
+        system.structure.gradientLegend();
+
+        let DATASET_NAME = ''
+
+
+        function uploadListUploadedDataset(fileup) {
+
+            let selection_list = document.getElementById("uploaded-dataset");
+            let list_options = Array.from(document.querySelectorAll('#uploaded-dataset option')).map(d => d.value)
+            let testo = fileup
+            document.getElementById("label-radviz-dim").style.display = "block";
+            document.getElementById("label-upload-radviz-classification").style.display = "block";
+            if (!list_options.includes(fileup)) {
+                let option = document.createElement("option");
+                option.id = "u-d-attr" + list_options.length
+                option.text = testo
+                option.value = fileup
+                option.selected = true;
+                selection_list.add(option);
+
+                $('#uploaded-dataset').on('change', function() {
+                    if (this.value != '') {
+                        system.settings.initializeDBUploaded();
+                        system.settings.selected_dataset_option = this.value
+                            // devo annullare quello dell'altro tab, cosi che non si creino inconsistenze
+                        document.getElementById("s-d-attr0").selected = true
+                        document.getElementById("label-select-radviz-dim").style.display = "none"
+                        document.getElementById("label-select-radviz-classification").style.display = "none"
+                        d3.select("#dimensions-list").selectAll('ul').remove('*');
+                        d3.select("#classification-list").selectAll('ul').remove('*');
+
+                        system.structure.legenda_cluster(Array.from(new Set(d3_radviz.data().attributes.filter(function(pilot) {
+                            return pilot.id === name_attr
+                        }).map(d => d.values)[0])))
+
+                    }
+                });
+
+            }
+
+
+
+
+        }
+
+
+        /********  IMPORT PANEL  ********/
+
+        class ImportPanel {
+            constructor(div) {
+                this.div = div;
+                this.form = this.div.select("form").attr("action", this.formUrl);
+                this.container = this.div.select("#import-container");
+                this.div.on("click", () => this.closePopup());
+                this.container.on("click", () => d3.event.stopPropagation());
+                this.onRead_fn = null;
+                $(this.form.node()).on("drag dragstart dragend dragover dragenter dragleave drop", (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    })
+                    .on("dragover dragenter", () => {
+                        this.container.classed("is-dragover", true);
+                    })
+                    .on("dragleave dragend drop", () => {
+                        this.container.classed("is-dragover", false);
+                    })
+                    .on("drop", (e) => {
+                        $(this.form.node()).find('input[type="file"]').prop("files", e.originalEvent.dataTransfer.files);
+                        this.__readFile();
+                    });
+                this.form.select("input").on("change", () => this.__readFile());
+            }
+            __openPopup() {
+                this.div
+                    .style("opacity", 0)
+                    .style("display", "block")
+                    .transition()
+                    .style("opacity", 1);
+                return this;
+            }
+            __closePopup() {
+                this.div
+                    .style("opacity", 1)
+                    .transition()
+                    .style("opacity", 0)
+                    .style("display", "none");
+                return this;
+            }
+            __readFile() {
+                this.__closePopup();
+                let file = new FormData($(this.form.node()).get(0)).get("file");
+                var reader = new FileReader();
+                reader.onload = ((f) => {
+                    return (e) => {
+                        let fileName = f.name;
+                        let fileContent = e.target.result;
+                        if (this.onRead_fn != null) this.onRead_fn(fileName, fileContent);
+                    };
+                })(file);
+                reader.readAsText(file);
+            }
+            onRead(fn) {
+                this.onRead_fn = fn;
+                return this;
+            }
+        }
+
+        /********  IMPORT PANEL END  ********/
+
+        let importPanel = new ImportPanel(d3.select("#import-panel"))
+            .onRead((fileName, fileContent) => { //eseguita quando il file è stato letto. chiude in automatico il popup
+
+                if (fileName.substring(fileName.length - 4) == '.csv') {
+
+                    //$("#test-file").html(fileContent);
+                    $('#name-dataset-uploaded').html(fileName)
+                    system.uploadedfile.insertDataUploaded(fileName.substring(0, fileName.length - 4), fileContent);
+
+                    uploadListUploadedDataset(fileName.substring(0, fileName.length - 4));
+                    system.settings.initializeDBUploaded();
+
+                    document.getElementById("s-d-attr0").selected = true;
+                    document.getElementById("label-select-radviz-dim").style.display = "none";
+                    document.getElementById("label-select-radviz-classification").style.display = "none";
+
+                    document.getElementById("btn_min_disposition").style.display = "none";
+                    document.getElementById("btn_max_disposition").style.display = "none";
+                    document.getElementById("btn_dependent_da_disposition").style.display = "none";
+                    document.getElementById("btn_independent_da_disposition").style.display = "none";
+                    document.getElementById("btn_vizrank_disposition").style.display = "none";
+                    document.getElementById("btn_radviz_pp_disposition").style.display = "none";
+
+                    document.getElementById("btn_t_statistic_disposition").style.display = "none";
+
+
+                } else {
+                    alert("The format " + fileName.substring(fileName.length - 4) + " of the file is not permitted");
+                }
+            });
+    </script>
+
+
+</body>

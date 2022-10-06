@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <title>Effectiveness Error: Measuring and Improving RadViz Visual Effectiveness</title>
+    <!-- link preview -->
+    <meta name="author" content="A.WA.RE Research Group">
+    <meta property="og:site_name" content="A.WA.RE Research Group" />
+    <meta property="og:type" content="object" />
+    <link rel="icon" href="https://avatars0.githubusercontent.com/u/50241094?s=400&amp;v=4">
+    <!-- ./ link preview -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1daf48f628.js" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="./createPage.js" ></script>
+    <style>
+        #github-fork {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+        }
+        
+        .container {
+            width: auto;
+            max-width: 1000px;
+            padding: 0 15px;
+            text-align: center;
+        }
+        
+        .footer {
+            background-color: #f5f5f5;
+        }
+        
+        .footer-container {
+            text-align: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        
+        .footer-container>* {
+            margin-left: 2em;
+            margin-right: 2em;
+        }
+        
+        .footer-container .btn-link {
+            color: #6c757d!important;
+        }
+        
+        #teaser {
+            margin-top: 2em;
+            margin-bottom: 2em;
+        }
+        
+        #buttons-row {
+            text-align: center;
+        }
+        
+        #buttons-row .btn {
+            width: 200px;
+        }
+        
+        #abstract {
+            margin-top: 3em;
+            margin-bottom: 3em;
+            font-size: 0.8em;
+        }
+        
+        #abstract>* {
+            text-align: left;
+            text-align: justify;
+        }
+        #venue{
+            font-style: italic;
+            font-weight: 200;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <!-- https://github.blog/2008-12-19-github-ribbons/ -->
+    <a id="github-fork" ></a>
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            <h1 id="title" class="mt-5"></h1>
+            <p id="authors" class="lead"></p>
+            <p id="venue"></p>
+            <p id="doi"></p>
+            <p id="researchGate"></p>
+            <img id="teaser" class="img-fluid" alt="Teaser">
+            <div id="buttons-row" class="row"></div>
+            <hr>
+            <div id="abstract" class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <p id='label-abstract'class="lead"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p id="abstract-content">
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </main>
+
+    <footer class="footer mt-auto py-3">
+        <div class="container footer-container">
+            <span class="text-muted"><a class="btn btn-link" href="https://twitter.com/AWARE_sapienza" target="_blank"> <i class="fab fa-twitter"></i>A.WA.RE Research Group </a></span>
+            <span class="text-muted"><a class="btn btn-link" href="http://aware.diag.uniroma1.it/" target="_blank"><i class="fas fa-link"></i> A.WA.RE Web Page</a></span>
+            <span class="text-muted"><a class="btn btn-link" href="https://github.com/aware-diag-sapienza" target="_blank"><i class="fab fa-github"></i> A.WA.RE GitHub</a></span>
+        </div>
+    </footer>
+</body>
+<script>createPage();</script>
+</html>
