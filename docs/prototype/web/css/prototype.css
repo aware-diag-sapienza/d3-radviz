@@ -70,12 +70,20 @@ body {
     color: white;
 }
 
+.settings {
+    padding-left: 10px;
+}
+
 .setting-legend {
     width: 25%;
     height: 100%;
     box-sizing: border-box;
     color: #4b5158;
     /*border: 1px solid black;*/
+}
+
+.precomputed-label {
+    display: block;
 }
 
 .values-mean {

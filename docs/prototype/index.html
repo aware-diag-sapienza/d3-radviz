@@ -161,22 +161,28 @@
             <br/>
 
             <!--<button type="button" class="btn btn-secondary" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.maxMeanDistanceHeuristic(d3_radviz.data()))" type="button">Heuristic MeanDistance</button>-->
+            <hr>
 
-            <button type="button" class="btn btn-secondary" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristic(d3_radviz.data()))" type="button">Heuristic</button>
-            <!--<button type="button" class="btn btn-secondary" id="heuristic-graziano-noopt" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristicNOOPT(d3_radviz.data()))" type="button">Heu NO-OPT</button>-->
+            <button type="button" class="btn btn-secondary" id="original" onclick="system.settings.updateRadviz(this.id)" type="button"><b>Original DA</b><br><small>&nbsp;</small></button>
 
-            <button type="button" class="btn btn-secondary" id="original" onclick="system.settings.updateRadviz(this.id)" type="button">Original</button>
-            <button type="button" class="btn btn-secondary" id="selected_heuristic" onclick="system.radviz.selectedHeuristic(this.id)">Selected</button>
-            <button type="button" class="btn btn-secondary" id="btn_min_disposition" onclick="system.radviz.updateDisposition(this.id,'min')">Minimum EE</button>
-            <button type="button" class="btn btn-secondary" id="btn_max_disposition" onclick="system.radviz.updateDisposition(this.id,'max')">Maximum EE</button>
-            <button type="button" class="btn btn-secondary" id="btn_levelgrid_minus" onclick="system.settings.resetVisualization()">Reset</button> <br>
+            <button type="button" class="btn btn-info" id="heuristic" onclick="system.settings.updateRadviz(this.id,d3.radvizDA.minEffectivenessErrorHeuristic(d3_radviz.data()))" type="button"><b>EEMH Heuristic</b><br><small>Whole Dataset</small></button>
+            
+            <button type="button" class="btn btn-info" id="selected_heuristic" onclick="system.radviz.selectedHeuristic(this.id)"><b>EEMH Heuristic</b><br><small>Selected Points</small></button>
+            
+            <button type="button" class="btn btn-secondary" style="margin-left: 30px;"onclick="system.settings.resetVisualization()">Reset</button>
+
+            <hr>
+            <div class="precomputed-label"><b>Precomputed</b> O[(n-1)!/2]</div>
+            <button type="button" class="btn btn-secondary" id="btn_min_disposition" onclick="system.radviz.updateDisposition(this.id,'min')">Min. EE DA</button>
+            <button type="button" class="btn btn-secondary" id="btn_max_disposition" onclick="system.radviz.updateDisposition(this.id,'max')">Max. EE DA</button>
+            
 
             <button type="button" class="btn btn-secondary" id="btn_dependent_da_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'dependent_da')">Dependent DA</button>
             <button type="button" class="btn btn-secondary" id="btn_independent_da_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'independent_da')">Independent DA</button>
-            <button type="button" class="btn btn-secondary" id="btn_vizrank_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'vizrank')">VizRank</button>
-            <button type="button" class="btn btn-secondary" id="btn_radviz_pp_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'radviz_pp')">Radviz ++</button>
+            <button type="button" class="btn btn-secondary" id="btn_vizrank_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'vizrank')">VizRank DA</button>
+            <button type="button" class="btn btn-secondary" id="btn_radviz_pp_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'radviz_pp')">Radviz ++ DA</button>
             <!--<button type="button" class="btn btn-secondary" id="btn_distance_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'distance')">Distance</button>-->
-            <button type="button" class="btn btn-secondary" id="btn_t_statistic_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'t_statistic')">T statistic</button>
+            <button type="button" class="btn btn-secondary" id="btn_t_statistic_disposition" onclick="system.radviz.updateDispositionCompetitor(this.id,'t_statistic')">T statistic DA</button>
 
 
 
