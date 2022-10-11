@@ -2,9 +2,13 @@
  
 The d3-radviz is a d3.js plugin that implements RadViz plots. The dimension arrangement (DA) follows the heuristic described in the paper which minimizes the effectiveness error that degradates the visualization of the radviz. In addition, functions are provided to customize dimension arrangement, interaction and design of the visualization.
 
-An example of the its application can be seen in the [Experimental Environment](https://aware-diag-sapienza.github.io/d3-radviz/prototype/index.html),  whose source code is in `/docs/prototype`.
+- The [Observable Notebook](https://observablehq.com/@aware/d3-radviz) shows a simple application of the plugin.
 
-The [Plugin Demo](https://aware-diag-sapienza.github.io/d3-radviz/dev/index.html), source code in `/dev`, shows a basic usage of the d3-radviz plugin.
+- The [Experimental Environment](https://aware-diag-sapienza.github.io/d3-radviz/prototype/index.html), whose source code is in `/docs/prototype`, shows the plugin application in a Visual Analytics system.
+
+- The [Plugin Demo](https://aware-diag-sapienza.github.io/d3-radviz/dev/index.html), source code in `/dev`, shows a basic usage of the d3-radviz plugin.
+
+
 
 <img alt="radviz" src="https://github.com/aware-diag-sapienza/d3-radviz/blob/master/dev/d3-radviz.png" width="960">
 
